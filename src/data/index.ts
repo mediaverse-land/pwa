@@ -1,0 +1,26 @@
+export const navbar = [
+    {
+        title:"Home",
+        href:"/"
+    },
+    {
+        title:"Blog",
+        href:"/"
+    },
+    {
+        title:"Terms",
+        href:"/"
+    },
+    {
+        title:"API",
+        href:"/"
+    },
+    {
+        title:"FAQ",
+        href:"/"
+    },
+    {
+        title:"About",
+        href:"/"
+    },
+]
