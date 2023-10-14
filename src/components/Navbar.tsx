@@ -5,9 +5,9 @@ import Image from "next/image";
 
 const Navbar = () => {
     return (
-        <nav className="nav">
+        <nav className="nav ">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="#" className="flex items-center">
+                <a className="flex items-center">
                     <Image src="/images/media-verse-logo.png" quality={100} width={30} height={40} className="h-8 mr-3" alt="MediaVerse Logo" />
                     <div className="flex flex-col">
                         <span className="self-center text-lg font-semibold whitespace-nowrap text-white">MediaVerse</span>

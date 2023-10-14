@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: linear-gradient(355deg, #030340 0%, #0F0F66 100%);
+}
+
+.nav {
+  background: rgba(3, 3, 64, 0.15);
+  backdrop-filter: blur(15px);
+  z-index: 50;
+}
+
+.app-store-container {
+  background: rgba(14, 14, 18, 0.50);
+  border-radius: 8px;
+  border: 1px #353542 solid;
+}
+
+.phone-animate-1 {
+  animation: animate1 5s infinite;
+}
+
+.phone-animate-2 {
+  animation: animate2 5s infinite;
+}
+
+@keyframes animate1 {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+
+  50% {
+    left: 0px;
+    top: 35px;
+  }
+
+  100% {
+    left: 0px;
+    top: 0px;
+  }
+}
+
+@keyframes animate2 {
+  0% {
+    left: 0px;
+    bottom: 0px;
+  }
+
+  50% {
+    left: 0px;
+    bottom: 35px;
+  }
+
+  100% {
+    left: 0px;
+    bottom: 0px;
+  }
+}
+
+.t-10 {
+  width: 400px;
+}
+
+.animate-icon {
+  animation: animate-icon 3s infinite;
+}
+
+@keyframes animate-icon {
+  0% {
+    left: 0px;
+    bottom: 0px;
+  }
+
+  50% {
+    left: 0px;
+    bottom: 7px;
+  }
+
+  100% {
+    left: 0px;
+    bottom: 0px;
+  }
+}
+
+.text-mini{
+  font-size: 10px;
+}
+
+@mixin white-gradient {
+	background: linear-gradient(to right,  #030340 0%,rgba(0,0,0,0) 100%);
+}
+
+$animationSpeed: 20s;
+
+// Animation
+@keyframes scroll {
+	0% { transform: translateX(0); }
+	100% { transform: translateX(calc(-158px * 3))}
+}
+
+
+// Styling
+.slider {
+	box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
+	overflow:hidden;
+	position: relative;
+	width: 960px;
+  border-radius: 6px;
+	
+	&::before,
+	&::after {
+		@include white-gradient;
+		content: "";
+		height: 100px;
+		position: absolute;
+		width: 200px;
+		z-index: 2;
+	}
+	
+	&::after {
+		right: 0;
+		top: 0;
+		transform: rotateZ(180deg);
+	}
+
+	&::before {
+		left: 0;
+		top: 0;
+	}
+	
+	.slide-track {
+		animation: scroll $animationSpeed linear infinite;
+		display: flex;
+		width: calc(154px * 9);
+	}
+}
+
+.animate-container:hover{
+  .phone-animate-1{
+    animation: none;
+    transform: rotate(8deg);
+    transition: 0.5s;
+  }
+  .phone-animate-2{
+    animation: none;
+    transform: rotate(-8deg);
+    transition: 0.5s;
+  }
+}
+
+
+
+.swiper {
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
+  width: 960px;
+  position: relative !important;
+  border-radius: 6px !important;
+  &::before,
+	&::after {
+		@include white-gradient;
+		content: "";
+		height: 200px;
+		position: absolute;
+		width: 200px;
+		z-index: 2;
+	}
+  &::after {
+		right: 0;
+		top: 0;
+		transform: rotateZ(180deg);
+	}
+
+	&::before {
+		left: 0;
+		top: 0;
+	}
+}
+
+.swiper-slide {
+  width: 150px !important;
+  height: 190px !important;
+  border-radius: 1rem;
+  cursor: pointer;
+
+  /* Center slide text vertically */
+}
