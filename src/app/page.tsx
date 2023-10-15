@@ -72,7 +72,7 @@ const Home = () => {
       <p className="text-white text-sm ">Best videos</p>
     </div>
     <VideoSlider />
-    <div className="flex w-full mt-16 justify-evenly flex-col items-center sm:flex-row">
+    <div className="flex w-full mt-16 justify-evenly flex-col items-center sm:flex-row sm:px-0 px-2">
       <div className="flex flex-col">
         <div className=" flex space-x-2 ml-1 w-full">
           <Image src="/icons/gallery.png" quality={100} width={18} height={10} alt="galery" />
@@ -96,66 +96,73 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col">
-      <div className=" flex space-x-2 ml-1">
+      <div className="flex flex-col w-ultra sm">
+        <div className=" flex space-x-2 ml-1 mt-8 sm:mt-0">
           <Image src="/icons/text.png" quality={100} width={18} height={10} alt="galery" />
           <p className="text-white text-sm ">Top texts</p>
         </div>
-      <div className="flex flex-wrap w-ultra justify-between mt-8">
-        <div className="flex flex-col px-10 py-10 rounded-xl w-64 h-64 bg-card ">
-          <p className="text-white text-lg">My thoughts</p>
-          <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
-          <div className="flex mt-4 space-x-2">
-            <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-            <p className="text-xs text-gray-500">Dianne Russell</p>
+        <div className="flex flex-wrap w-full justify-between mt-6">
+          <div className="flex flex-col px-10 py-10 rounded-xl w-full sm:w-64 h-64 bg-card mt-2 ">
+            <p className="text-white text-lg">My thoughts</p>
+            <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
+            <div className="flex mt-4 space-x-2">
+              <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+              <p className="text-xs text-gray-500">Dianne Russell</p>
+            </div>
           </div>
-        </div>
-        {/* next */}
-        <div className="flex flex-col px-10 py-10 rounded-xl w-64 h-64 bg-card ">
-          <p className="text-white text-lg">My thoughts</p>
-          <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
-          <div className="flex mt-4 space-x-2">
-            <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-            <p className="text-xs text-gray-500">Dianne Russell</p>
+          {/* next */}
+          <div className="flex flex-col px-10 py-10 rounded-xl w-full sm:w-64 h-64 bg-card mt-2 ">
+            <p className="text-white text-lg">My thoughts</p>
+            <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
+            <div className="flex mt-4 space-x-2">
+              <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+              <p className="text-xs text-gray-500">Dianne Russell</p>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col px-10 py-10 rounded-xl w-64 h-64 bg-card">
-          <p className="text-white text-lg">My thoughts</p>
-          <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
-          <div className="flex mt-4 space-x-2">
-            <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-            <p className="text-xs text-gray-500">Dianne Russell</p>
+          <div className="flex flex-col px-10 py-10 rounded-xl w-full sm:w-64 h-64 bg-card mt-2 ">
+            <p className="text-white text-lg">My thoughts</p>
+            <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
+            <div className="flex mt-4 space-x-2">
+              <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+              <p className="text-xs text-gray-500">Dianne Russell</p>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col px-10 py-10 rounded-xl w-64 h-64 bg-card mt-2">
-          <p className="text-white text-lg">My thoughts</p>
-          <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
-          <div className="flex mt-4 space-x-2">
-            <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-            <p className="text-xs text-gray-500">Dianne Russell</p>
+          <div className="flex flex-col px-10 py-10 rounded-xl w-full sm:w-64 h-64 bg-card mt-2 ">
+            <p className="text-white text-lg">My thoughts</p>
+            <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
+            <div className="flex mt-4 space-x-2">
+              <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+              <p className="text-xs text-gray-500">Dianne Russell</p>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col px-10 py-10 rounded-xl w-64 h-64 bg-card mt-2">
-          <p className="text-white text-lg">My thoughts</p>
-          <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
-          <div className="flex mt-4 space-x-2">
-            <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-            <p className="text-xs text-gray-500">Dianne Russell</p>
+          <div className="flex flex-col px-10 py-10 rounded-xl w-full sm:w-64 h-64 bg-card mt-2 ">
+            <p className="text-white text-lg">My thoughts</p>
+            <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
+            <div className="flex mt-4 space-x-2">
+              <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+              <p className="text-xs text-gray-500">Dianne Russell</p>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col px-10 py-10 rounded-xl w-64 h-64 bg-card mt-2">
-          <p className="text-white text-lg">My thoughts</p>
-          <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
-          <div className="flex mt-4 space-x-2">
-            <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-            <p className="text-xs text-gray-500">Dianne Russell</p>
+          <div className="flex flex-col px-10 py-10 rounded-xl w-full sm:w-64 h-64 bg-card mt-2 ">
+            <p className="text-white text-lg">My thoughts</p>
+            <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
+            <div className="flex mt-4 space-x-2">
+              <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+              <p className="text-xs text-gray-500">Dianne Russell</p>
+            </div>
           </div>
+
+
         </div>
 
-      </div>
       </div>
 
     </div>
+    <div className="w-full flex items-center justify-center mt-16 space-x-1">
+      <Image src="/icons/songs.png" quality={100} width={16} height={16} alt="camera icon" />
+      <p className="text-white text-sm ">Best songs</p>
+    </div>
+    <VideoSlider />
   </div>
 
   );

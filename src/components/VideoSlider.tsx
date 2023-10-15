@@ -22,7 +22,7 @@ const VideoSlider = () => {
             <Image src="/icons/prev.png" alt="arrow" width={24} height={24} quality={100} />
         </button>
         <Swiper
-            slidesPerView={7}
+            slidesPerView={8.5}
             spaceBetween={2}
             onSwiper={setSwiperRef}
            

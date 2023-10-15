@@ -112,7 +112,7 @@ $animationSpeed: 7s;
   box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
   overflow: hidden;
   position: relative;
-  width: 65rem;
+  width: 80rem;
   border-radius: 6px;
 
   &::before,
@@ -161,7 +161,7 @@ $animationSpeed: 7s;
 
 .swiper {
   box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
-  width: 65rem;
+  width: 80rem;
   position: relative !important;
   border-radius: 6px !important;
 
@@ -201,5 +201,11 @@ $animationSpeed: 7s;
 }
 
 .w-ultra{
-  width: 800px;
+  width: 100%;
+}
+
+@media (min-width : 640px){
+  .w-ultra{
+    width: 53%;
+  }
 }
