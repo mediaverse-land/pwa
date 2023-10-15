@@ -1,88 +1,133 @@
 "use client"
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide, } from "swiper/react";
 import 'swiper/css';
-import 'swiper/css/pagination';
-
+import { Swiper as SwiperClass } from 'swiper/types';
 import Image from "next/image";
-import { Navigation,  } from "swiper/modules";
+import { useCallback, useMemo, useState } from "react";
 
 const VideoSlider = () => {
+    const [swiperRef, setSwiperRef] = useState<SwiperClass>();
 
-    const swiper = useSwiper();
-    return (<div className="w-full flex items-center mt-8 ">
-            <Swiper
-                slidesPerView={6.15}
-                spaceBetween={10}
-                modules={[Navigation]}
-            >
-                <SwiperSlide>
-                    <Image src="/images/room.png" alt="girl" height={120} quality={100} width={140}/>
-                    <p className="mt-2 ml-1 text-gray-600 text-base">Old tree in old...</p>
-                    <div className="flex ml-1 mt-1 space-x-1">
-                        <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100}/>
-                        <p className="text-mini text-gray-500">Dianne Russell</p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image src="/images/room.png" alt="girl" height={120} quality={100} width={140}/>
-                    <p className="mt-2 ml-1 text-gray-600 text-xs">Old tree in old...</p>
-                    <div className="flex ml-1 mt-1 space-x-1">
-                        <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100}/>
-                        <p className="text-mini text-gray-500">Dianne Russell</p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image src="/images/room.png" alt="girl" height={120} quality={100} width={140}/>
-                    <p className="mt-2 ml-1 text-gray-600 text-xs">Old tree in old...</p>
-                    <div className="flex ml-1 mt-1 space-x-1">
-                        <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100}/>
-                        <p className="text-mini text-gray-500">Dianne Russell</p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image src="/images/room.png" alt="girl" height={120} quality={100} width={140}/>
-                    <p className="mt-2 ml-1 text-gray-600 text-xs">Old tree in old...</p>
-                    <div className="flex ml-1 mt-1 space-x-1">
-                        <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100}/>
-                        <p className="text-mini text-gray-500">Dianne Russell</p>
-                    </div>
-                </SwiperSlide>
-                
-                <SwiperSlide>
-                    <Image src="/images/room.png" alt="girl" height={120} quality={100} width={140}/>
-                    <p className="mt-2 ml-1 text-gray-600 text-xs">Old tree in old...</p>
-                    <div className="flex ml-1 mt-1 space-x-1">
-                        <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100}/>
-                        <p className="text-mini text-gray-500">Dianne Russell</p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image src="/images/room.png" alt="girl" height={120} quality={100} width={140}/>
-                    <p className="mt-2 ml-1 text-gray-600 text-xs">Old tree in old...</p>
-                    <div className="flex ml-1 mt-1 space-x-1">
-                        <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100}/>
-                        <p className="text-mini text-gray-500">Dianne Russell</p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image src="/images/room.png" alt="girl" height={120} quality={100} width={140}/>
-                    <p className="mt-2 ml-1 text-gray-600 text-xs">Old tree in old...</p>
-                    <div className="flex ml-1 mt-1 space-x-1">
-                        <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100}/>
-                        <p className="text-mini text-gray-500">Dianne Russell</p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image src="/images/room.png" alt="girl" height={120} quality={100} width={140}/>
-                    <p className="mt-2 ml-1 text-gray-600 text-xs">Old tree in old...</p>
-                    <div className="flex ml-1 mt-1 space-x-1">
-                        <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100}/>
-                        <p className="text-mini text-gray-500">Dianne Russell</p>
-                    </div>
-                </SwiperSlide>
-            
-            </Swiper>
+    const theSlides = useMemo(() => ['slide one', 'slide two'], [])
 
+    const handlePrevious = useCallback(() => {
+        swiperRef?.slidePrev();
+    }, [swiperRef]);
+
+    const handleNext = useCallback(() => {
+        swiperRef?.slideNext();
+    }, [swiperRef]);
+    return (<div className=" flex space-x-0 sm:space-x-4 justify-center items-center mt-10 ">
+        <button className=" hidden sm:block " onClick={handleNext}>
+            <Image src="/icons/prev.png" alt="arrow" width={24} height={24} quality={100} />
+        </button>
+        <Swiper
+            slidesPerView={7}
+            spaceBetween={2}
+            onSwiper={setSwiperRef}
+           
+        >
+
+            <SwiperSlide>
+                <Image src="/images/girl.png" className="rounded-xl" alt="girl" height={120} quality={100} width={140} />
+                <p className="mt-2 ml-1 text-gray-600 text-sm">Old tree in old...</p>
+                <div className="flex ml-1 mt-1 space-x-2">
+                    <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                    <p className="text-xs text-gray-500">Dianne Russell</p>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide>
+                <Image src="/images/car.png" className="rounded-xl" alt="girl" height={120} quality={100} width={140} />
+                <p className="mt-2 ml-1 text-gray-600 text-sm">Old tree in old...</p>
+                <div className="flex ml-1 mt-1 space-x-2">
+                    <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                    <p className="text-xs text-gray-500">Dianne Russell</p>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide>
+                <Image src="/images/room.png" alt="girl" height={120} quality={100} width={140} />
+                <p className="mt-2 ml-1 text-gray-600 text-sm">Old tree in old...</p>
+                <div className="flex ml-1 mt-1 space-x-2">
+                    <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                    <p className="text-xs text-gray-500">Dianne Russell</p>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide>
+                <Image src="/images/girl.png" className="rounded-xl" alt="girl" height={120} quality={100} width={140} />
+                <p className="mt-2 ml-1 text-gray-600 text-sm">Old tree in old...</p>
+                <div className="flex ml-1 mt-1 space-x-2">
+                    <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                    <p className="text-xs text-gray-500">Dianne Russell</p>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide>
+                <Image src="/images/car.png" className="rounded-xl" alt="girl" height={120} quality={100} width={140} />
+                <p className="mt-2 ml-1 text-gray-600 text-sm">Old tree in old...</p>
+                <div className="flex ml-1 mt-1 space-x-2">
+                    <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                    <p className="text-xs text-gray-500">Dianne Russell</p>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide>
+                <Image src="/images/room.png" alt="girl" height={120} quality={100} width={140} />
+                <p className="mt-2 ml-1 text-gray-600 text-sm">Old tree in old...</p>
+                <div className="flex ml-1 mt-1 space-x-2">
+                    <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                    <p className="text-xs text-gray-500">Dianne Russell</p>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide>
+                <Image src="/images/girl.png" className="rounded-xl" alt="girl" height={120} quality={100} width={140} />
+                <p className="mt-2 ml-1 text-gray-600 text-sm">Old tree in old...</p>
+                <div className="flex ml-1 mt-1 space-x-2">
+                    <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                    <p className="text-xs text-gray-500">Dianne Russell</p>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide>
+                <Image src="/images/car.png" className="rounded-xl" alt="girl" height={120} quality={100} width={140} />
+                <p className="mt-2 ml-1 text-gray-600 text-sm">Old tree in old...</p>
+                <div className="flex ml-1 mt-1 space-x-2">
+                    <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                    <p className="text-xs text-gray-500">Dianne Russell</p>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide>
+                <Image src="/images/room.png" alt="girl" height={120} quality={100} width={140} />
+                <p className="mt-2 ml-1 text-gray-600 text-sm">Old tree in old...</p>
+                <div className="flex ml-1 mt-1 space-x-2">
+                    <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                    <p className="text-xs text-gray-500">Dianne Russell</p>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide>
+                <Image src="/images/girl.png" className="rounded-xl" alt="girl" height={120} quality={100} width={140} />
+                <p className="mt-2 ml-1 text-gray-600 text-sm">Old tree in old...</p>
+                <div className="flex ml-1 mt-1 space-x-2">
+                    <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                    <p className="text-xs text-gray-500">Dianne Russell</p>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide>
+                <Image src="/images/car.png" className="rounded-xl" alt="girl" height={120} quality={100} width={140} />
+                <p className="mt-2 ml-1 text-gray-600 text-sm">Old tree in old...</p>
+                <div className="flex ml-1 mt-1 space-x-2">
+                    <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                    <p className="text-xs text-gray-500">Dianne Russell</p>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide>
+                <Image src="/images/room.png" alt="girl" height={120} quality={100} width={140} />
+                <p className="mt-2 ml-1 text-gray-600 text-sm">Old tree in old...</p>
+                <div className="flex ml-1 mt-1 space-x-2">
+                    <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                    <p className="text-xs text-gray-500">Dianne Russell</p>
+                </div>
+            </SwiperSlide>
+        </Swiper>
+        <button className="hidden sm:block" onClick={handlePrevious}>
+            <Image src="/icons/next.png" alt="arrow" width={24} height={24} quality={100} />
+        </button>
 
     </div>);
 }

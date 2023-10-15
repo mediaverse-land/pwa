@@ -6,5 +6,4 @@ export{
     Navbar,
     Footer,
     VideoSlider,
-    
 }
