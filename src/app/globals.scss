@@ -6,6 +6,10 @@ body {
   background: linear-gradient( #030340 100%, #0F0F66 100%);
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
 .nav {
   background: rgba(3, 3, 64, 0.15);
   backdrop-filter: blur(15px);
@@ -102,7 +106,7 @@ $animationSpeed: 7s;
   }
 
   100% {
-    transform: translateX(calc(-115px * 3))
+    transform: translateX(calc(-120px * 3))
   }
 }
 
