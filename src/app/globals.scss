@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background: linear-gradient(355deg, #030340 0%, #0F0F66 100%);
+  background: linear-gradient( #030340 100%, #0F0F66 100%);
 }
 
 .nav {
@@ -102,7 +102,7 @@ $animationSpeed: 7s;
   }
 
   100% {
-    transform: translateX(calc(-158px * 3))
+    transform: translateX(calc(-115px * 3))
   }
 }
 
@@ -198,6 +198,7 @@ $animationSpeed: 7s;
 
 .bg-card{
   background: rgba(78, 78, 97, 0.30);
+  border: 1px rgba(207, 207, 252, 0.30) solid;
 }
 
 .w-ultra{

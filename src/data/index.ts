@@ -5,22 +5,22 @@ export const navbar = [
     },
     {
         title:"Blog",
-        href:"/"
+        href:"/blogs"
     },
     {
         title:"Terms",
-        href:"/"
+        href:"/terms"
     },
     {
         title:"API",
-        href:"/"
+        href:"/api"
     },
     {
         title:"FAQ",
-        href:"/"
+        href:"/faq"
     },
     {
         title:"About",
-        href:"/"
+        href:"/about"
     },
 ]

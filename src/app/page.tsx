@@ -2,7 +2,7 @@ import { VideoSlider } from "@/components";
 import Image from "next/image";
 
 const Home = () => {
-  return (<div className=" mt-10">
+  return (<div className=" mt-28">
     <Image src="/images/media-verse-background-image.png"
       height={1000}
       width={460}
@@ -10,7 +10,7 @@ const Home = () => {
       className="absolute top-4 -z-10 "
       quality={100}
     />
-    <div className="w-full flex justify-evenly flex-wrap px-4">
+    <div className=" max-w-screen-2xl mx-auto  flex justify-evenly flex-wrap px-4">
       <div className="flex flex-col t-10">
         <h1 className="text-3xl font-semibold whitespace-nowrap text-white mt-16">
           What is MediaVerse?
@@ -29,13 +29,13 @@ const Home = () => {
         <button type="submit" className="w-1/2 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm  py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-4">Web App</button>
       </div>
       <div className="flex space-x-4 mt-8 sm:mt-0 animate-container">
-        <Image src="/images/phone-image-1.png" className="phone-animate-2 relative z-50 " width={170} height={500} quality={100} alt="phone photo" />
+        <Image src="/images/phone-image-1.png" className="phone-animate-2 relative z-20 " width={170} height={500} quality={100} alt="phone photo" />
         <Image src="/images/phone-image-2.png" className="phone-animate-1 relative" width={170} height={500} quality={100} alt="phone photo" />
       </div>
     </div>
     <div className="w-full flex items-center justify-center mt-20">
       <button className=" flex flex-col items-center justify-center">
-        <p className="text-white text-2xl font-semibold">Explore limitless!</p>
+        <a className="text-white text-2xl font-semibold">Explore limitless!</a>
         <Image src="/icons/down-icon.png" className="mt-2 animate-icon relative" alt="down" width={15} height={15} quality={100} />
       </button>
     </div>
@@ -43,27 +43,19 @@ const Home = () => {
       <Image src="/icons/live-icon.png" quality={100} width={20} height={20} alt="camera icon" />
       <p className="text-white text-sm ">live channel</p>
     </div>
-    <div className="w-full flex items-center justify-center">
+    <div className=" max-w-screen-2xl mx-auto flex items-center justify-center" id="live">
       <div className="slider mt-8">
         <div className="slide-track space-x-2">
           <img src="/images/netflix.png" alt="" />
-
           <img src="/images/nasa.png" alt="" />
-
           <img src="/images/cnn.png" alt="" />
-
           <img src="/images/netflix.png" alt="" />
-
           <img src="/images/nasa.png" alt="" />
-
           <img src="/images/cnn.png" alt="" />
-
           <img src="/images/netflix.png" alt="" />
-
           <img src="/images/nasa.png" alt="" />
-
           <img src="/images/cnn.png" alt="" />
-
+          <img src="/images/netflix.png" alt="" />
         </div>
       </div>
     </div>
@@ -72,37 +64,31 @@ const Home = () => {
       <p className="text-white text-sm ">Best videos</p>
     </div>
     <VideoSlider />
-    <div className="flex w-full mt-16 justify-evenly flex-col items-center sm:flex-row sm:px-0 px-2">
+    <div className="flex  max-w-screen-2xl mx-auto mt-16 justify-evenly flex-col items-center sm:flex-row sm:px-0 px-2">
       <div className="flex flex-col">
         <div className=" flex space-x-2 ml-1 w-full">
           <Image src="/icons/gallery.png" quality={100} width={18} height={10} alt="galery" />
           <p className="text-white text-sm ">Most viewed</p>
         </div>
-        <div className="flex space-x-4 mt-4">
-          <div className="flex flex-col">
-            <Image className="rounded-xl mt-3" src="/images/Rectangle-34.png" alt="photo" width={119} height={119} quality={100} />
-            <Image className="rounded-xl mt-3" src="/images/Rectangle-35.png" alt="photo" width={119} height={119} quality={100} />
-            <Image className="rounded-xl mt-3" src="/images/Rectangle-33.png" alt="photo" width={119} height={119} quality={100} />
-            <Image className="rounded-xl mt-3" src="/images/Rectangle-31.png" alt="photo" width={119} height={119} quality={100} />
-          </div>
-          <div className="flex flex-col">
-            <Image className="rounded-xl mt-3" src="/images/Rectangle-36.png" alt="photo" width={254} height={256} quality={100} />
-            <div className="flex flex-wrap w-64 h-64 justify-between">
-              <Image className="rounded-xl mt-3" src="/images/Rectangle-32.png" alt="photo" width={119} height={119} quality={100} />
-              <Image className="rounded-xl mt-3" src="/images/Rectangle-35.png" alt="photo" width={119} height={119} quality={100} />
-              <Image className="rounded-xl mt-3" src="/images/Rectangle-34.png" alt="photo" width={119} height={119} quality={100} />
-              <Image className="rounded-xl mt-3" src="/images/Rectangle-39.png" alt="photo" width={119} height={119} quality={100} />
-            </div>
-          </div>
+        <div className="grid grid-rows-4 grid-flow-col gap-2 mt-10">
+          <Image className="rounded-xl" src="/images/Rectangle-34.png" alt="photo" width={119} height={119} quality={100} />
+          <Image className="rounded-xl" src="/images/Rectangle-35.png" alt="photo" width={119} height={119} quality={100} />
+          <Image className="rounded-xl" src="/images/Rectangle-33.png" alt="photo" width={119} height={119} quality={100} />
+          <Image className="rounded-xl" src="/images/Rectangle-31.png" alt="photo" width={119} height={119} quality={100} />
+          <Image className="rounded-xl col-span-2 row-span-2" src="/images/Rectangle-36.png" alt="photo" width={254} height={256} quality={100} />
+          <Image className="rounded-xl" src="/images/Rectangle-32.png" alt="photo" width={119} height={119} quality={100} />
+          <Image className="rounded-xl" src="/images/Rectangle-35.png" alt="photo" width={119} height={119} quality={100} />
+          <Image className="rounded-xl" src="/images/Rectangle-34.png" alt="photo" width={119} height={119} quality={100} />
+          <Image className="rounded-xl" src="/images/Rectangle-39.png" alt="photo" width={119} height={119} quality={100} />
         </div>
       </div>
-      <div className="flex flex-col w-ultra sm">
-        <div className=" flex space-x-2 ml-1 mt-8 sm:mt-0">
+      <div className="flex flex-col w-ultra">
+        <div className=" flex space-x-2 ml-1 sm:mt-0">
           <Image src="/icons/text.png" quality={100} width={18} height={10} alt="galery" />
           <p className="text-white text-sm ">Top texts</p>
         </div>
-        <div className="flex flex-wrap w-full justify-between mt-6">
-          <div className="flex flex-col px-10 py-10 rounded-xl w-full sm:w-64 h-64 bg-card mt-2 ">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 mt-10">
+          <div className="flex flex-col px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
             <p className="text-white text-lg">My thoughts</p>
             <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
             <div className="flex mt-4 space-x-2">
@@ -111,7 +97,7 @@ const Home = () => {
             </div>
           </div>
           {/* next */}
-          <div className="flex flex-col px-10 py-10 rounded-xl w-full sm:w-64 h-64 bg-card mt-2 ">
+          <div className="flex flex-col px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
             <p className="text-white text-lg">My thoughts</p>
             <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
             <div className="flex mt-4 space-x-2">
@@ -119,7 +105,7 @@ const Home = () => {
               <p className="text-xs text-gray-500">Dianne Russell</p>
             </div>
           </div>
-          <div className="flex flex-col px-10 py-10 rounded-xl w-full sm:w-64 h-64 bg-card mt-2 ">
+          <div className="flex flex-col px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
             <p className="text-white text-lg">My thoughts</p>
             <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
             <div className="flex mt-4 space-x-2">
@@ -127,7 +113,7 @@ const Home = () => {
               <p className="text-xs text-gray-500">Dianne Russell</p>
             </div>
           </div>
-          <div className="flex flex-col px-10 py-10 rounded-xl w-full sm:w-64 h-64 bg-card mt-2 ">
+          <div className="flex flex-col px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
             <p className="text-white text-lg">My thoughts</p>
             <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
             <div className="flex mt-4 space-x-2">
@@ -135,7 +121,7 @@ const Home = () => {
               <p className="text-xs text-gray-500">Dianne Russell</p>
             </div>
           </div>
-          <div className="flex flex-col px-10 py-10 rounded-xl w-full sm:w-64 h-64 bg-card mt-2 ">
+          <div className="flex flex-col px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
             <p className="text-white text-lg">My thoughts</p>
             <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
             <div className="flex mt-4 space-x-2">
@@ -143,7 +129,7 @@ const Home = () => {
               <p className="text-xs text-gray-500">Dianne Russell</p>
             </div>
           </div>
-          <div className="flex flex-col px-10 py-10 rounded-xl w-full sm:w-64 h-64 bg-card mt-2 ">
+          <div className="flex flex-col px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
             <p className="text-white text-lg">My thoughts</p>
             <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
             <div className="flex mt-4 space-x-2">

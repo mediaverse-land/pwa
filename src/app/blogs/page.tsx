@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const Blogs = () => {
-    return (<div className=" mt-10 flex flex-col items-center">
+    return (<div className=" mt-28 flex flex-col items-center">
 
         <div className="w-full flex flex-col items-center justify-center">
             <h1 className="text-2xl font-semibold  text-white">
