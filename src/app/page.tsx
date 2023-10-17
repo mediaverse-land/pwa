@@ -1,7 +1,9 @@
 import { VideoSlider } from "@/components";
+import { getMostViewedImages } from "@/services/contactService";
 import Image from "next/image";
 
 const Home = () => {
+  console.log("IMAGES")
   return (<div className=" mt-28">
     <Image src="/images/media-verse-background-image.png"
       height={1000}
@@ -71,15 +73,19 @@ const Home = () => {
           <p className="text-white text-sm ">Most viewed</p>
         </div>
         <div className="grid grid-rows-4 grid-flow-col gap-2 mt-10">
-          <Image className="rounded-xl" src="/images/Rectangle-34.png" alt="photo" width={119} height={119} quality={100} />
-          <Image className="rounded-xl" src="/images/Rectangle-35.png" alt="photo" width={119} height={119} quality={100} />
+          {/* {getMostViewedImages.map((items : any, index : number) => (
+
+            <Image className="rounded-xl" src="/images/Rectangle-34.png" alt="photo" width={119} height={119} quality={100} />
+
+          ))} */}
+          {/* <Image className="rounded-xl" src="/images/Rectangle-35.png" alt="photo" width={119} height={119} quality={100} />
           <Image className="rounded-xl" src="/images/Rectangle-33.png" alt="photo" width={119} height={119} quality={100} />
           <Image className="rounded-xl" src="/images/Rectangle-31.png" alt="photo" width={119} height={119} quality={100} />
           <Image className="rounded-xl col-span-2 row-span-2" src="/images/Rectangle-36.png" alt="photo" width={254} height={256} quality={100} />
           <Image className="rounded-xl" src="/images/Rectangle-32.png" alt="photo" width={119} height={119} quality={100} />
           <Image className="rounded-xl" src="/images/Rectangle-35.png" alt="photo" width={119} height={119} quality={100} />
           <Image className="rounded-xl" src="/images/Rectangle-34.png" alt="photo" width={119} height={119} quality={100} />
-          <Image className="rounded-xl" src="/images/Rectangle-39.png" alt="photo" width={119} height={119} quality={100} />
+          <Image className="rounded-xl" src="/images/Rectangle-39.png" alt="photo" width={119} height={119} quality={100} /> */}
         </div>
       </div>
       <div className="flex flex-col w-ultra">
