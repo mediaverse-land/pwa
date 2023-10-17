@@ -1,9 +1,22 @@
+'use client'
 import { VideoSlider } from "@/components";
 import { getMostViewedImages } from "@/services/contactService";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+
 
 const Home = () => {
-  console.log("IMAGES")
+
+  const [imageData, setImageData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getMostViewedImages();
+      setImageData(data.data);
+    };
+    getData();
+  }, []);
+
   return (<div className=" mt-28">
     <Image src="/images/media-verse-background-image.png"
       height={1000}
@@ -73,11 +86,9 @@ const Home = () => {
           <p className="text-white text-sm ">Most viewed</p>
         </div>
         <div className="grid grid-rows-4 grid-flow-col gap-2 mt-10">
-          {/* {getMostViewedImages.map((items : any, index : number) => (
-
-            <Image className="rounded-xl" src="/images/Rectangle-34.png" alt="photo" width={119} height={119} quality={100} />
-
-          ))} */}
+          {imageData.map((items : any, index) => {
+            return <img className={index === 4 ? "rounded-xl w-64 h-64 col-span-2 row-span-2" : "rounded-xl w-32 h-32 "} src={items.asset.thumbnails["336x366"]} alt="photo" />
+})}
           {/* <Image className="rounded-xl" src="/images/Rectangle-35.png" alt="photo" width={119} height={119} quality={100} />
           <Image className="rounded-xl" src="/images/Rectangle-33.png" alt="photo" width={119} height={119} quality={100} />
           <Image className="rounded-xl" src="/images/Rectangle-31.png" alt="photo" width={119} height={119} quality={100} />
@@ -159,5 +170,4 @@ const Home = () => {
 
   );
 }
-
 export default Home;
