@@ -1,6 +1,6 @@
 'use client'
-import { VideoSlider } from "@/components";
-import { getMostViewedImages } from "@/services/contactService";
+import { SongSlider, VideoSlider } from "@/components";
+import { getMostViewedImages, getMostViewedText } from "@/services/contactService";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -8,11 +8,14 @@ import { useEffect, useState } from "react";
 const Home = () => {
 
   const [imageData, setImageData] = useState([]);
+  const [textData, setTextData] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
-      const data = await getMostViewedImages();
-      setImageData(data.data);
+      const imagesData = await getMostViewedImages();
+      const textData = await getMostViewedText();
+      setImageData(imagesData.data);
+      setTextData(textData.data);
     };
     getData();
   }, []);
@@ -105,57 +108,16 @@ const Home = () => {
           <p className="text-white text-sm ">Top texts</p>
         </div>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 mt-10">
-          <div className="flex flex-col px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
-            <p className="text-white text-lg">My thoughts</p>
-            <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
+          {textData.slice(0,6).map((items : any, index) =>{
+            return <div key={index} className="flex flex-col aspect-square px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
+            <p className="text-white text-lg">{items.name}</p>
+            <p className="text-gray-500 mt-4">{items.description?.slice(0,65)}</p>
             <div className="flex mt-4 space-x-2">
               <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-              <p className="text-xs text-gray-500">Dianne Russell</p>
+              <p className="text-xs text-gray-500">{items.asset.user.username}</p>
             </div>
           </div>
-          {/* next */}
-          <div className="flex flex-col px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
-            <p className="text-white text-lg">My thoughts</p>
-            <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
-            <div className="flex mt-4 space-x-2">
-              <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-              <p className="text-xs text-gray-500">Dianne Russell</p>
-            </div>
-          </div>
-          <div className="flex flex-col px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
-            <p className="text-white text-lg">My thoughts</p>
-            <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
-            <div className="flex mt-4 space-x-2">
-              <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-              <p className="text-xs text-gray-500">Dianne Russell</p>
-            </div>
-          </div>
-          <div className="flex flex-col px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
-            <p className="text-white text-lg">My thoughts</p>
-            <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
-            <div className="flex mt-4 space-x-2">
-              <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-              <p className="text-xs text-gray-500">Dianne Russell</p>
-            </div>
-          </div>
-          <div className="flex flex-col px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
-            <p className="text-white text-lg">My thoughts</p>
-            <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
-            <div className="flex mt-4 space-x-2">
-              <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-              <p className="text-xs text-gray-500">Dianne Russell</p>
-            </div>
-          </div>
-          <div className="flex flex-col px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
-            <p className="text-white text-lg">My thoughts</p>
-            <p className="text-gray-500 mt-4">Amet minim mollit non deserunt ullamco est sit. Amet minim mollit non deserunt ullamco est sit...</p>
-            <div className="flex mt-4 space-x-2">
-              <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-              <p className="text-xs text-gray-500">Dianne Russell</p>
-            </div>
-          </div>
-
-
+          })}
         </div>
 
       </div>
@@ -165,7 +127,7 @@ const Home = () => {
       <Image src="/icons/songs.png" quality={100} width={16} height={16} alt="camera icon" />
       <p className="text-white text-sm ">Best songs</p>
     </div>
-    <VideoSlider />
+    <SongSlider />
   </div>
 
   );

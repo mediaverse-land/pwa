@@ -161,12 +161,15 @@ $animationSpeed: 7s;
   }
 }
 
-
+.swiper-wrapper{
+  align-items: center !important;
+  justify-content: center !important;
+  display: flex !important;
+}
 
 .swiper {
   box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
   width: 80rem;
-  position: relative !important;
   border-radius: 6px !important;
 
   &::before,
