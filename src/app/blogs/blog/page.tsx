@@ -1,14 +1,15 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const Blog = () => {
     return (<div className="w-full flex justify-center flex-col items-center sm:items-start sm:flex-row mt-36 space-x-0 px-4  sm:space-x-10">
         <div className="flex flex-col">
             <div className="w-80 h-80 bg-cover bg-[url('/images/image-room.png')]">
             </div>
-            <button className="flex items-center justify-center py-2 rounded-3xl w-80 bg-card mt-6 space-x-2">
+            <Link href={'./'} className="flex items-center justify-center py-2 rounded-3xl w-80 bg-card mt-6 space-x-2">
                 <Image src='/icons/back.png' alt="back" quality={100} width={20} height={20} />
                 <p className="text-white">Back To Blog</p>
-            </button>
+            </Link>
         </div>
         <div>
             <h1 className="text-white text-4xl mt-8 sm:mt-0">My thoughts</h1>

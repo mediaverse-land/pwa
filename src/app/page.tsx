@@ -5,28 +5,28 @@ import Image from "next/image";
 
 async function getImageData() {
   const image = await getMostViewedImages();
-  console.info('image',image)
-  if (!image.data) {
-   // throw new Error("Failed to fetch data");
+
+  if (!image.ok) {
+    // throw new Error("Failed to fetch data");
   }
-  return image.data;
+  return image.json();
 }
 
 async function getTextData() {
   const text = await getMostViewedText();
-  console.info('image',text)
-  if (!text.data) {
+
+  if (!text.ok) {
     //throw new Error("Failed to fetch data");
   }
-  return text.data;
+  return text.json();
 }
 
 const Home = async () => {
 
   const imageData = await getImageData();
   const textData = await getTextData();
-
-
+  console.info('________________________________________________')
+  console.info(textData, imageData)
 
   return (<div className=" mt-28">
     <Image src="/images/media-verse-background-image.png"
@@ -97,10 +97,10 @@ const Home = async () => {
           <p className="text-white text-sm ">Most viewed</p>
         </div>
         <div className="grid grid-rows-4 grid-flow-col gap-2 mt-10">
-          {imageData.map((items : any, index : number) => {
+          {imageData.map((items: any, index: number) => {
             return <img className={index === 4 ? "rounded-xl w-64 h-64 col-span-2 row-span-2" : "rounded-xl w-32 h-32 "} src={items.asset.thumbnails["336x366"]} alt="photo" />
-})}
-       
+          })}
+
         </div>
       </div>
       <div className="flex flex-col w-ultra">
@@ -109,15 +109,15 @@ const Home = async () => {
           <p className="text-white text-sm ">Top texts</p>
         </div>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 mt-10">
-          {textData.slice(0,6).map((items : any, index : number) =>{
+          {textData.slice(0, 6).map((items: any, index: number) => {
             return <div key={index} className="flex flex-col aspect-square px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
-            <p className="text-white text-lg">{items.name}</p>
-            <p className="text-gray-500 mt-4">{items.description?.slice(0,65)}</p>
-            <div className="flex mt-4 space-x-2">
-              <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-              <p className="text-xs text-gray-500">{items.asset.user.username}</p>
+              <p className="text-white text-lg">{items.name}</p>
+              <p className="text-gray-500 mt-4">{items.description?.slice(0, 65)}</p>
+              <div className="flex mt-4 space-x-2">
+                <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                <p className="text-xs text-gray-500">{items.asset.user.username}</p>
+              </div>
             </div>
-          </div>
           })}
         </div>
 

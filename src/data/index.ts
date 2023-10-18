@@ -13,7 +13,7 @@ export const navbar = [
     },
     {
         title:"API",
-        href:"/api"
+        href:"https://docs.mediaverse.land/"
     },
     {
         title:"FAQ",

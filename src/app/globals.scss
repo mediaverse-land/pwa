@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background: linear-gradient( #030340 100%, #0F0F66 100%);
+  background: linear-gradient(#030340 100%, #0F0F66 100%);
 }
 
 *::-webkit-scrollbar {
@@ -14,6 +14,23 @@ body {
   background: rgba(3, 3, 64, 0.15);
   backdrop-filter: blur(15px);
   z-index: 50;
+
+  a {
+    &.active {
+      color: white;
+      &:after {
+        content: " ";
+        height: 2px;
+        background-color: #597AFF;
+        width: 24px;
+        display: block;
+        margin: 0 auto;
+        border-radius: 2px;
+        top: 8px;
+        position: relative;
+      }
+    }
+  }
 }
 
 .app-store-container {
@@ -90,7 +107,7 @@ body {
 }
 
 .text-mini {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 @mixin white-gradient {
@@ -161,7 +178,7 @@ $animationSpeed: 7s;
   }
 }
 
-.swiper-wrapper{
+.swiper-wrapper {
   align-items: center !important;
   justify-content: center !important;
   display: flex !important;
@@ -203,17 +220,17 @@ $animationSpeed: 7s;
   /* Center slide text vertically */
 }
 
-.bg-card{
+.bg-card {
   background: rgba(78, 78, 97, 0.30);
   border: 2px rgba(207, 207, 252, 0.30) solid;
 }
 
-.w-ultra{
+.w-ultra {
   width: 100%;
 }
 
-@media (min-width : 640px){
-  .w-ultra{
+@media (min-width : 640px) {
+  .w-ultra {
     width: 53%;
   }
 }
