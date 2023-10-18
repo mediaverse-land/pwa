@@ -1,24 +1,32 @@
-'use client'
+
 import { SongSlider, VideoSlider } from "@/components";
 import { getMostViewedImages, getMostViewedText } from "@/services/contactService";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+
+async function getImageData() {
+  const image = await getMostViewedImages();
+  console.info('image',image)
+  if (!image.data) {
+   // throw new Error("Failed to fetch data");
+  }
+  return image.data;
+}
+
+async function getTextData() {
+  const text = await getMostViewedText();
+  console.info('image',text)
+  if (!text.data) {
+    //throw new Error("Failed to fetch data");
+  }
+  return text.data;
+}
+
+const Home = async () => {
+
+  const imageData = await getImageData();
+  const textData = await getTextData();
 
 
-const Home = () => {
-
-  const [imageData, setImageData] = useState([]);
-  const [textData, setTextData] = useState([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      const imagesData = await getMostViewedImages();
-      const textData = await getMostViewedText();
-      setImageData(imagesData.data);
-      setTextData(textData.data);
-    };
-    getData();
-  }, []);
 
   return (<div className=" mt-28">
     <Image src="/images/media-verse-background-image.png"
@@ -38,13 +46,13 @@ const Home = () => {
         </p>
         <div className="flex space-x-2 mt-4">
           <div className="app-store-container px-2 py-1 cursor-pointer">
-            <Image src="/images/apple-app-store-logo.png" quality={100} width={70} height={40} alt="google play store logo" />
+            <Image src="/images/apple-app-store-logo.png" quality={100} width={104} height={40} alt="google play store logo" />
           </div>
           <div className="app-store-container px-2 py-1 cursor-pointer ">
-            <Image src="/images/google-play-store-logo.png" quality={100} width={70} height={40} alt="google play store logo" />
+            <Image src="/images/google-play-store-logo.png" quality={100} width={104} height={40} alt="google play store logo" />
           </div>
         </div>
-        <button type="submit" className="w-1/2 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm  py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-4">Web App</button>
+        <button type="submit" className="w-64 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm  py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-4">Web App</button>
       </div>
       <div className="flex space-x-4 mt-8 sm:mt-0 animate-container">
         <Image src="/images/phone-image-1.png" className="phone-animate-2 relative z-20 " width={170} height={500} quality={100} alt="phone photo" />
@@ -89,17 +97,10 @@ const Home = () => {
           <p className="text-white text-sm ">Most viewed</p>
         </div>
         <div className="grid grid-rows-4 grid-flow-col gap-2 mt-10">
-          {imageData.map((items : any, index) => {
+          {imageData.map((items : any, index : number) => {
             return <img className={index === 4 ? "rounded-xl w-64 h-64 col-span-2 row-span-2" : "rounded-xl w-32 h-32 "} src={items.asset.thumbnails["336x366"]} alt="photo" />
 })}
-          {/* <Image className="rounded-xl" src="/images/Rectangle-35.png" alt="photo" width={119} height={119} quality={100} />
-          <Image className="rounded-xl" src="/images/Rectangle-33.png" alt="photo" width={119} height={119} quality={100} />
-          <Image className="rounded-xl" src="/images/Rectangle-31.png" alt="photo" width={119} height={119} quality={100} />
-          <Image className="rounded-xl col-span-2 row-span-2" src="/images/Rectangle-36.png" alt="photo" width={254} height={256} quality={100} />
-          <Image className="rounded-xl" src="/images/Rectangle-32.png" alt="photo" width={119} height={119} quality={100} />
-          <Image className="rounded-xl" src="/images/Rectangle-35.png" alt="photo" width={119} height={119} quality={100} />
-          <Image className="rounded-xl" src="/images/Rectangle-34.png" alt="photo" width={119} height={119} quality={100} />
-          <Image className="rounded-xl" src="/images/Rectangle-39.png" alt="photo" width={119} height={119} quality={100} /> */}
+       
         </div>
       </div>
       <div className="flex flex-col w-ultra">
@@ -108,7 +109,7 @@ const Home = () => {
           <p className="text-white text-sm ">Top texts</p>
         </div>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 mt-10">
-          {textData.slice(0,6).map((items : any, index) =>{
+          {textData.slice(0,6).map((items : any, index : number) =>{
             return <div key={index} className="flex flex-col aspect-square px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
             <p className="text-white text-lg">{items.name}</p>
             <p className="text-gray-500 mt-4">{items.description?.slice(0,65)}</p>

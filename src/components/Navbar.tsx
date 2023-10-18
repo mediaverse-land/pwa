@@ -24,7 +24,7 @@ const Navbar = () => {
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
                     <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
                         {navbar.map((item, index) => (
-                            <li >
+                            <li key={index}>
                                 <Link href={item.href} key={index} className="text-gray-400 hover:text-white border-blue-600 md:bg-transparent md:p-0 hover:border-b-2">{item.title}</Link>
                             </li>
                         ))}

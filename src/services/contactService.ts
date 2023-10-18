@@ -1,14 +1,20 @@
+import axios from "axios";
 import http from "./http";
 
 export const URL = "https://api.mediaverse.land/v2"
 
-export const getMostViewedImages = () =>{
+export const getMostViewedImages = async() =>{
     const url = `${URL}/images/most-viewed`;
-    return http.get(url);
+    console.info(url)
+    const data =  await axios.get(url,{timeout:50000});
+    return data
 };
-export const getMostViewedText = () =>{
+export const getMostViewedText = async() =>{
+    console.info(`${URL}/texts/most-viewed`)
     const url = `${URL}/texts/most-viewed`;
-    return http.get(url);
+    const data = await axios.get(url,{timeout:50000});
+    return data
+
 };
 
 export const getMostViewedVideos = () =>{

@@ -1,6 +1,5 @@
 
-
-const Terms = () => {
+const Faq = () => {
     return (<div className="w-full flex mt-36 pb-16 justify-center px-4">
         <div className="sm:w-6/12 w-full flex flex-col">
             <h1 className="text-white text-2xl">
@@ -39,4 +38,4 @@ const Terms = () => {
     </div>);
 }
 
-export default Terms;
+export default Faq;
