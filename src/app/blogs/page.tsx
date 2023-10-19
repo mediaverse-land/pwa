@@ -18,9 +18,9 @@ const Blogs = () => {
         <div className="grid grid-cols-5 gap-6 w-full justify-center sm:justify-between sm:w-8/12 items-center mt-6">
             <Link href={`/blogs/blog`} className="flex flex-col py-4 px-4 border border-[#262699] rounded-[24px] aspect-[302/477] ">
                 <Image src="/images/room.png" alt="image" quality={100} height={200} width={200} className="rounded-[16px] aspect-square mx-auto" />
-                <p className="text-[#CCCCFF] text-base mt-6 px-2" style={{fontSize:'16px'}}>My thoughts</p>
-                <p className="mt-1 text-[#666680] text-xs px-2" style={{ lineHeight: '19px',  }}>Amet minim mollit non deserunt ullamco mollit ...</p>
-                <div className="flex justify-between w-full mt-4 text-[#666680] px-2 pb-2">
+                <p className="text-[#CCCCFF] text-sm mt-6 px-2">My thoughts</p>
+                <p className="mt-1 text-[#666680] text-xs px-2" style={{ lineHeight: '19px', }}>Amet minim mollit non deserunt ullamco mollit  non deserunt ullamco mollit  non deserunt ullamco mollit ...</p>
+                <div className="flex justify-between w-full mt-4 text-[#666680] px-2 ">
                     <div className="flex space-x-1">
                         <Image src="/images/mini-avatar.png" alt="avatar" quality={100} width={15} height={15} />
                         <p className="text-xs">Ralph Edwards</p>
