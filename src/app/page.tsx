@@ -7,7 +7,7 @@ async function getImageData() {
   const image = await getMostViewedImages();
 
   if (!image.ok) {
-    // throw new Error("Failed to fetch data");
+    throw new Error("Failed to fetch data");
   }
   return image.json();
 }
@@ -16,7 +16,7 @@ async function getTextData() {
   const text = await getMostViewedText();
 
   if (!text.ok) {
-    //throw new Error("Failed to fetch data");
+    throw new Error("Failed to fetch data");
   }
   return text.json();
 }
@@ -25,7 +25,6 @@ const Home = async () => {
 
   const imageData = await getImageData();
   const textData = await getTextData();
-  
   return (<div className=" mt-28">
     <Image src="/images/media-verse-background-image.png"
       height={1000}

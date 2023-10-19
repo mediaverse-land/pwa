@@ -12,6 +12,10 @@ export const navbar = [
         href:"/terms"
     },
     {
+        title:"Privacy",
+        href:"/privacy"
+    },
+    {
         title:"API",
         href:"https://docs.mediaverse.land/"
     },
@@ -21,6 +25,6 @@ export const navbar = [
     },
     {
         title:"About",
-        href:"/about"
+        href:"/about-us"
     },
 ]
