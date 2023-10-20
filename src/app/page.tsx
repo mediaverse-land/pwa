@@ -25,7 +25,6 @@ const Home = async () => {
 
   const imageData = await getImageData();
   const textData = await getTextData();
-
   return (<div className=" mt-28">
     <Image src="/images/media-verse-background-image.png"
       height={1000}
@@ -42,15 +41,15 @@ const Home = async () => {
         <p className="text-gray-500 mt-4 self-center">
           MediaVerse is funded under the Horizon2020 scheme of the European Commission. The goal of this project is to set up a decentralised network of content management nodes through which content owners and creators can easily exchange content.
         </p>
-        <div className="flex space-x-2 mt-4">
-          <div className="app-store-container px-2 py-1 cursor-pointer">
-            <Image src="/images/apple-app-store-logo.png" quality={100} width={104} height={40} alt="google play store logo" />
+        <div className="flex space-x-2 mt-[28px]">
+          <div className="app-store-container cursor-pointer py-[4px] px-[19px]">
+            <Image src="/images/apple-app-store-logo.png" quality={100} width={97} height={40} alt="google play store logo" />
           </div>
-          <div className="app-store-container px-2 py-1 cursor-pointer ">
-            <Image src="/images/google-play-store-logo.png" quality={100} width={104} height={40} alt="google play store logo" />
+          <div className="app-store-container cursor-pointer py-[4px] px-[12px] ">
+            <Image src="/images/google-play-store-logo.png" quality={100} width={110} height={40} alt="google play store logo" />
           </div>
         </div>
-        <button type="submit" className="w-64 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm  py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-4">Web App</button>
+        <button type="submit" className="w-64 h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm  py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]">Web App</button>
       </div>
       <div className="flex space-x-4 mt-8 sm:mt-0 animate-container">
         <Image src="/images/phone-image-1.png" className="phone-animate-2 relative z-20 " width={170} height={500} quality={100} alt="phone photo" />
