@@ -11,7 +11,6 @@ const Navbar = () => {
 
     return (
         <nav className="nav fixed top-0 w-full z-50 ">
-
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a className="flex items-center">
                     <Image src="/images/media-verse-logo.png" quality={100} width={30} height={40} className=" mr-3" alt="MediaVerse Logo" />
