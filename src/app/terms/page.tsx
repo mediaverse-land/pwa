@@ -14,14 +14,20 @@ const Terms = async () => {
     const termsData = await getTermsData();
     return (<div className="w-full flex mt-36 pb-16 justify-center px-4">
         <div className="sm:w-6/12 w-full flex flex-col">
-            {termsData.map((item: any, index: number) => {
-                return <> <h1 key={index} className="text-white text-2xl">
-                    {item.name}
-                </h1>
+            {/* {termsData.map((item: any, index: number) => {
+                return <>
+                    <h1 key={index} className="text-white text-2xl">
+                        {item.name}
+                    </h1>
                     <p className="text-base text-white">
                         {item.content}
-                    </p></>
-            })}
+                    </p>
+                </>
+
+            })} */}
+            <p className="text-base text-white">
+                {termsData.content}
+            </p>
         </div>
     </div>);
 }
