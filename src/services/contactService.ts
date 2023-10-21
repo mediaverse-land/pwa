@@ -25,3 +25,8 @@ export const getTerms = () => {
     const url = `${URL}/terms`;
     return http.get(url);
 }
+
+export const getPrivacy = () => {
+    const url = `${URL}/privacy`;
+    return http.get(url);
+}

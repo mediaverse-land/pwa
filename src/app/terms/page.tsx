@@ -9,7 +9,6 @@ async function getTermsData() {
     return terms.data;
 }
 
-
 const Terms = async () => {
 
     const termsData = await getTermsData();
