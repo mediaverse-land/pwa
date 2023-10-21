@@ -9,7 +9,6 @@ async function getTermsData() {
     return terms.data;
 }
 
-
 const Terms = async () => {
 
     const termsData = await getTermsData();
@@ -22,7 +21,6 @@ const Terms = async () => {
                     <p className="text-base text-white">
                         {item.content}
                     </p></>
-
             })}
         </div>
     </div>);
