@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 async function getBlogsData() {
-    const blogs = await fetch("https://blog.mediaverse.land/api/posts");
+    const blogs = await fetch("https://blog.mediaverse.land/api/posts", { cache: 'no-store' });
 
     if (!blogs.ok) {
         throw new Error("Failed to fetch data");
