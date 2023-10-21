@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.19.2",
     "axios": "^1.5.1",
+    "google-map-react": "^2.2.1",
     "next": "^13.5.6-canary.6",
     "react": "^18",
     "react-dom": "^18",
+    "react-leaflet": "^4.2.1",
     "sass": "^1.69.3",
     "swiper": "^10.3.1"
   },

@@ -1,8 +1,22 @@
+'use client'
+
+import { useState, useRef } from 'react'
+
+import { MapContainer, TileLayer, Marker } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css'
 
 const AboutUs = () => {
+
+    const location = "V8F8+6M Paris, France";
+
+    const [center, setCenter] = useState({ lat: -4.043477, lng: 39.668205 })
+    const ZOOM_LEVEL = 9
+    const mapRef = useRef()
+
     return (<div className="w-full flex justify-center flex-col items-center sm:items-start sm:flex-row mt-36 space-x-0 px-4  sm:space-x-10">
         <div className="flex flex-col">
-            <div className="w-80 h-80 bg-cover bg-[url('/images/map.png')]">
+            <div className="w-80 h-80 ">
+            <iframe className='w-80 h-80 rounded-xl' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.2189364946053!2d2.3144302419797746!3d48.87310274252804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x66ae4097ff6609bd!2sV8F8%2B6M!5e0!3m2!1str!2suk!4v1697876240547!5m2!1str!2suk" allowFullScreen={false} loading="lazy" ></iframe>
             </div>
             <div className="flex justify-between px-3 py-3 mt-10 rounded-lg">
                 <p className="text-gray-400 text-xs">Office</p>
