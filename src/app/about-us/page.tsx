@@ -5,24 +5,28 @@ const AboutUs = () => {
             <div className="w-80 h-80 bg-cover bg-[url('/images/map.png')]">
             </div>
                 <div className="flex justify-between px-3 py-3 mt-10 rounded-lg">
-                    <p className="text-gray-400 text-sm">Office 1</p>
-                    <p className="text-white text-base">021-4789561</p>
+                    <p className="text-gray-400 text-xs">Office</p>
+                    <p className="text-white text-xs">10 Rue de Penthièvre, 75008 Paris</p>
                 </div>
                 <div className="flex justify-between px-3 py-3 bg-[#0F0F66] rounded-lg">
-                    <p className="text-gray-400 text-sm">Office 2</p>
-                    <p className="text-white text-base">025-9874561</p>
+                    <p className="text-gray-400 text-xs">Phone</p>
+                    <p className="text-white text-xs">+33 6 52 76 43 50</p>
                 </div>
                 <div className="flex justify-between px-3 py-3 rounded-lg">
-                    <p className="text-gray-400 text-sm">Phone</p>
-                    <p className="text-white text-base">091005874981</p>
+                    <p className="text-gray-400 text-xs">Email</p>
+                    <p className="text-white text-xs">info@mediaverse.land</p>
                 </div>
                 <div className="flex justify-between px-3 py-3 bg-[#0F0F66] rounded-lg">
-                    <p className="text-gray-400 text-sm">Email</p>
-                    <p className="text-white text-base">example@gmail.com</p>
+                    <p className="text-gray-400 text-xs">Gmail</p>
+                    <p className="text-white text-xs">Mediaverse.land@gmail.com</p>
                 </div>
                 <div className="flex justify-between px-3 py-3 rounded-lg">
-                    <p className="text-gray-400 text-sm">Instagram</p>
-                    <p className="text-white text-base">instagram.com/Iraneziba</p>
+                    <p className="text-gray-400 text-xs">X</p>
+                    <p className="text-white text-xs">@Mediaverseland</p>
+                </div>
+                <div className="flex justify-between px-3 py-3 bg-[#0F0F66] rounded-lg">
+                    <p className="text-gray-400 text-xs">Youtube</p>
+                    <p className="text-white text-xs">@mediaverseland</p>
                 </div>
         </div>
         <div>

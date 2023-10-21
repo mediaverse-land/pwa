@@ -1,4 +1,3 @@
-import axios from "axios";
 import http from "./http";
 
 export const URL = "https://api.mediaverse.land/v2"
@@ -21,3 +20,8 @@ export const getMostViewedSongs = () => {
     const url = `${URL}/audios/most-viewed`;
     return http.get(url);
 };
+
+export const getTerms = () => {
+    const url = `${URL}/terms`;
+    return http.get(url);
+}

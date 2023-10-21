@@ -39,7 +39,7 @@ const Home = async () => {
           What is MediaVerse?
         </h1>
         <p className="text-gray-500 mt-4 self-center">
-          MediaVerse is funded under the Horizon2020 scheme of the European Commission. The goal of this project is to set up a decentralised network of content management nodes through which content owners and creators can easily exchange content.
+        Mediaverse Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.
         </p>
         <div className="flex space-x-2 mt-[28px]">
           <div className="app-store-container cursor-pointer py-[4px] px-[19px]">
