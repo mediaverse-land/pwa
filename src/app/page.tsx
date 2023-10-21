@@ -1,5 +1,6 @@
 
 import { SongSlider, VideoSlider } from "@/components";
+import LiveSlider from "@/components/LiveSlider";
 import { getMostViewedImages, getMostViewedText } from "@/services/contactService";
 import Image from "next/image";
 
@@ -39,7 +40,7 @@ const Home = async () => {
           What is MediaVerse?
         </h1>
         <p className="text-gray-500 mt-4 self-center">
-        Mediaverse Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.
+          Mediaverse Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.
         </p>
         <div className="flex space-x-2 mt-[28px]">
           <div className="app-store-container cursor-pointer py-[4px] px-[19px]">
@@ -67,20 +68,7 @@ const Home = async () => {
       <p className="text-white text-sm ">live channel</p>
     </div>
     <div className=" max-w-screen-2xl mx-auto flex items-center justify-center" id="live">
-      <div className="slider mt-8">
-        <div className="slide-track space-x-2">
-          <img src="/images/netflix.png" alt="" />
-          <img src="/images/nasa.png" alt="" />
-          <img src="/images/cnn.png" alt="" />
-          <img src="/images/netflix.png" alt="" />
-          <img src="/images/nasa.png" alt="" />
-          <img src="/images/cnn.png" alt="" />
-          <img src="/images/netflix.png" alt="" />
-          <img src="/images/nasa.png" alt="" />
-          <img src="/images/cnn.png" alt="" />
-          <img src="/images/netflix.png" alt="" />
-        </div>
-      </div>
+      <LiveSlider />
     </div>
     <div className="w-full flex items-center justify-center mt-16 space-x-1">
       <Image src="/icons/video-icon.png" quality={100} width={16} height={16} alt="camera icon" />

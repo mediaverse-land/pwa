@@ -193,7 +193,7 @@ $animationSpeed: 7s;
   &::after {
     @include white-gradient;
     content: "";
-    height: 200px;
+    height: 100px;
     position: absolute;
     width: 140px;
     z-index: 2;
