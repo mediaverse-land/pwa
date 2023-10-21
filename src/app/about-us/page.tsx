@@ -1,17 +1,8 @@
 'use client'
 
-import { useState, useRef } from 'react'
-
-import { MapContainer, TileLayer, Marker } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css'
-
 const AboutUs = () => {
 
     const location = "V8F8+6M Paris, France";
-
-    const [center, setCenter] = useState({ lat: -4.043477, lng: 39.668205 })
-    const ZOOM_LEVEL = 9
-    const mapRef = useRef()
 
     return (<div className="w-full flex justify-center flex-col items-center sm:items-start sm:flex-row mt-36 space-x-0 px-4  sm:space-x-10">
         <div className="flex flex-col">
