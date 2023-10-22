@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  app:
+    image: mediaverse_web_app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - ${APP_EXPOSED_PORT:-0}:3000
