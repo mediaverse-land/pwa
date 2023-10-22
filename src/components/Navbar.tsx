@@ -12,13 +12,13 @@ const Navbar = () => {
     return (
         <nav className="nav fixed top-0 w-full z-50 ">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a className="flex items-center">
+                <Link href={'/'} className="flex items-center">
                     <Image src="/images/media-verse-logo.png" quality={100} width={30} height={40} className=" mr-3" alt="MediaVerse Logo" />
                     <div className="flex flex-col">
                         <span className="self-center text-lg font-semibold whitespace-nowrap text-white">MediaVerse</span>
                         <span className="self-center text-xs top-0 text-gray-500 whitespace-nowrap">content is wealth</span>
                     </div>
-                </a>
+                </Link>
                 <div className="flex md:order-2 justify-between">
                     <a className="text-blue-500 mr-1 hover:text-white" href="#">Sign In</a>
                     <span className="text-blue-500 mr-1">/</span>
