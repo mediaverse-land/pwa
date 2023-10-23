@@ -52,15 +52,19 @@ const Home = async () => {
         <p className="text-gray-500 mt-4 self-center">
           Mediaverse Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.
         </p>
-        <div className="flex space-x-2 mt-[28px]">
-          <div className="app-store-container cursor-pointer py-[4px] px-[19px]">
-            <Image src="/images/apple-app-store-logo.png" quality={100} width={135} height={48} alt="google play store logo" />
+        <div className="grid grid-cols-2 mt-[28px] w-[278px] gap-[8px]">
+          <div className="app-store-container cursor-pointer py-[4px] px-[19px] flex items-center">
+            <div className="relative w-full aspect-[135/48]">
+              <Image src="/images/apple-app-store-logo.png" quality={100} fill alt="google play store logo" />
+            </div>
           </div>
-          <div className="app-store-container cursor-pointer py-[4px] px-[12px] ">
-            <Image src="/images/google-play-store-logo.png" quality={100} width={135} height={48} alt="google play store logo" />
+          <div className="app-store-container cursor-pointer py-[4px] px-[12px] flex items-center">
+            <div className="relative w-full aspect-[135/48]">
+              <Image src="/images/google-play-store-logo.png" fill quality={100} alt="google play store logo" />
+            </div>
           </div>
         </div>
-        <button type="submit" className="w-[278px] h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm  py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]">Web App</button>
+        <button type="submit" className="w-[286px] h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm  py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]">Web App</button>
       </div>
       <div className="flex space-x-4 mt-8 sm:mt-0 animate-container">
         <Image src="/images/phone-image-1.png" className="phone-animate-2 relative z-20 " width={170} height={500} quality={100} alt="phone photo" />
