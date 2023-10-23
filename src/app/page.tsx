@@ -1,6 +1,6 @@
 
 import { SongSlider, VideoSlider } from "@/components";
-import { getLives, getMostViewedImages, getMostViewedText } from "@/services/contactService";
+import { getMostViewedImages, getMostViewedText } from "@/services/contactService";
 import Image from "next/image";
 
 async function getImageData() {
@@ -20,19 +20,12 @@ async function getTextData() {
   }
   return text.json();
 }
-async function getLivesData() {
-  const text = await getLives();
 
-  if (!text.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return text.json();
-}
+
 const Home = async () => {
 
   const imageData = await getImageData();
   const textData = await getTextData();
-  const lives = await getLivesData();
 
   return (<div className=" mt-28">
     <Image src="/images/media-verse-background-image.png"
@@ -48,7 +41,7 @@ const Home = async () => {
           What is MediaVerse?
         </h1>
         <p className="text-gray-500 mt-4 self-center">
-          Mediaverse Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.
+        Mediaverse Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.
         </p>
         <div className="flex space-x-2 mt-[28px]">
           <div className="app-store-container cursor-pointer py-[4px] px-[19px]">
@@ -78,15 +71,18 @@ const Home = async () => {
     <div className=" max-w-screen-2xl mx-auto flex items-center justify-center" id="live">
       <div className="slider mt-8">
         <div className="slide-track space-x-2">
-          {
-            lives.map((item: any, index: number) => (
-              <img key={index} src={item.thumbnail} alt="" className="w-[150px] h-[100px] rounded-[8px]" />
-            ))
-          }
-
+          <img src="/images/netflix.png" alt="" />
+          <img src="/images/nasa.png" alt="" />
+          <img src="/images/cnn.png" alt="" />
+          <img src="/images/netflix.png" alt="" />
+          <img src="/images/nasa.png" alt="" />
+          <img src="/images/cnn.png" alt="" />
+          <img src="/images/netflix.png" alt="" />
+          <img src="/images/nasa.png" alt="" />
+          <img src="/images/cnn.png" alt="" />
+          <img src="/images/netflix.png" alt="" />
         </div>
       </div>
-      {/* <LiveSlider /> */}
     </div>
     <div className="w-full flex items-center justify-center mt-16 space-x-1">
       <Image src="/icons/video-icon.png" quality={100} width={16} height={16} alt="camera icon" />
@@ -101,7 +97,8 @@ const Home = async () => {
         </div>
         <div className="grid grid-rows-4 grid-flow-col gap-2 mt-10">
           {imageData.map((items: any, index: number) => {
-            return <img className={index === 4 ? "rounded-xl w-64 h-64 col-span-2 row-span-2" : "rounded-xl w-32 h-32 "} src={items.asset.thumbnails["336x366"]}  onError={({ currentTarget }) => {
+            return <img className={index === 4 ? "rounded-xl w-64 h-64 col-span-2 row-span-2" : "rounded-xl w-32 h-32 "} src={items.asset.thumbnails["336x366"]}
+              onError={({ currentTarget }) => {
               currentTarget.src="./images/room.png";
             }} alt="photo" />
           })}
