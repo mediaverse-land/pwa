@@ -9,6 +9,12 @@ const nextConfig = {
             port: '',
             pathname: '*',
           },
+          {
+            protocol: 'https',
+            hostname: 'blog.mediaverse.land',
+            port: '',
+            pathname: '/**',
+          },
         ],
       },
 }
