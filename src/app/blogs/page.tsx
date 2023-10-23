@@ -34,7 +34,7 @@ const Blogs = async () => {
                         <Image src="/images/room.png" alt="image" quality={100} className="rounded-[16px] aspect-square" fill />
                     </div>
                     <p className="text-[#CCCCFF] text-base mt-6 px-2" style={{ fontSize: '16px' }}>{item.title}</p>
-                    <p className="mt-1 text-[#666680] text-xs px-2 line-clamp-4" style={{ lineHeight: '19px', }} dangerouslySetInnerHTML={{ __html: item.body }}></p>
+                    <p className="mt-1 text-[#666680] text-xs px-2 line-clamp-4" style={{ lineHeight: '19px', }} dangerouslySetInnerHTML={{ __html: item.body.slice(0,75) }}></p>
                     <div className="flex justify-between w-full mt-4 text-[#666680] px-2 pb-2">
                         <div className="flex space-x-1">
                             <Image src="/images/mini-avatar.png" alt="avatar" quality={100} width={15} height={15} />
@@ -44,9 +44,6 @@ const Blogs = async () => {
                     </div>
                 </Link>
             })}
-
-            {/* Fake Data */}
-            {/* Fake Data */}
         </div>
 
     </div>);

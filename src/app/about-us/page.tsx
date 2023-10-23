@@ -21,18 +21,30 @@ const AboutUs = () => {
                 <p className="text-gray-400 text-xs">Email</p>
                 <p className="text-white text-xs">info@mediaverse.land</p>
             </div>
-            <div className="flex justify-between px-3 py-3 bg-[#0F0F66] rounded-lg">
+            {/* <div className="flex justify-between px-3 py-3 bg-[#0F0F66] rounded-lg">
                 <p className="text-gray-400 text-xs">Gmail</p>
                 <p className="text-white text-xs">Mediaverse.land@gmail.com</p>
+            </div> */}
+            <div className="flex justify-between px-3 py-3 bg-[#0F0F66] rounded-lg">
+                <p className="text-gray-400 text-xs">Youtube</p>
+                <p className="text-white text-xs">Mediaverseland</p>
             </div>
             <div className="flex justify-between px-3 py-3 rounded-lg">
-                <p className="text-gray-400 text-xs">X</p>
-                <p className="text-white text-xs">@Mediaverseland</p>
+                <p className="text-gray-400 text-xs">Instagram</p>
+                <p className="text-white text-xs">Mediaverse.land</p>
             </div>
-            {/* <div className="flex justify-between px-3 py-3 bg-[#0F0F66] rounded-lg">
-                <p className="text-gray-400 text-xs">Youtube</p>
-                <p className="text-white text-xs">@mediaverseland</p>
-            </div> */}
+            <div className="flex justify-between px-3 py-3 bg-[#0F0F66] rounded-lg">
+                <p className="text-gray-400 text-xs">Facebook</p>
+                <p className="text-white text-xs">MehrdadRashidian </p>
+            </div>
+            <div className="flex justify-between px-3 py-3 rounded-lg">
+                <p className="text-gray-400 text-xs">Linkedin</p>
+                <p className="text-white text-xs">Mediaverse-land</p>
+            </div>
+            <div className="flex justify-between px-3 py-3 rounded-lg bg-[#0F0F66]">
+                <p className="text-gray-400 text-xs">X</p>
+                <p className="text-white text-xs">Mediaverseland</p>
+            </div>
         </div>
         <div>
             <h1 className="text-white text-4xl mt-8 sm:mt-0">About us</h1>
