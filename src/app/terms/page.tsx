@@ -14,12 +14,10 @@ const Terms = async () => {
     const termsData = await getTermsData();
     return (<div className="w-full flex mt-36 pb-16 justify-center px-4">
         <div className="sm:w-6/12 w-full flex flex-col">
-            <h1 className="text-white text-2xl">
+            <h1 className="text-white capitalize mb-[43px] text-[25px]">
                 {termsData.name}
             </h1>
-            <p className="text-base text-white uppercase">
-                {termsData.content}
-            </p>
+            <div className="text-white w-full" dangerouslySetInnerHTML={{ __html: termsData.content }}></div>
         </div>
     </div>);
 }
