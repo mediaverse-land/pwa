@@ -81,18 +81,28 @@ const Home = async () => {
       <Image src="/icons/live-icon.png" quality={100} width={20} height={20} alt="camera icon" />
       <p className="text-white text-sm ">live channel</p>
     </div>
-    <div className=" max-w-screen-2xl mx-auto flex items-center justify-center" id="live">
-      <div className="slider mt-8">
-        <div className="slide-track space-x-2">
+    <div className=" max-w-screen-2xl mx-auto flex items-center justify-center py-4 w-[80rem]" >
+      <div className="relative flex overflow-x-hidden w-full animate-marquee-container">
+        <div className="animate-marquee whitespace-nowrap flex flex-row w-full">
           {
             liveData.map((item: any, i: number) => (
 
-              <img key={i} className="rounded-[8px] w-[154px] h-[100px]" src={item.thumbnail} alt="" />
+              <img key={i} className="rounded-[8px] w-[154px] h-[100px] mr-[8px]" src={item.thumbnail} alt="" />
             ))
           }
+        </div>
 
+        <div className="absolute top-0 animate-marquee2 whitespace-nowrap  flex flex-row  w-full ">
+          {
+            liveData.map((item: any, i: number) => (
+
+              <img key={i} className="rounded-[8px] w-[154px] h-[100px] mr-[8px]" src={item.thumbnail} alt="" />
+            ))
+          }
         </div>
       </div>
+
+
     </div>
     <div className="w-full flex items-center justify-center mt-16 space-x-1">
       <Image src="/icons/video-icon.png" quality={100} width={16} height={16} alt="camera icon" />

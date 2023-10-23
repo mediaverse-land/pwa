@@ -129,11 +129,8 @@ $animationSpeed: 7s;
 
 
 // Styling
-.slider {
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
-  overflow: hidden;
-  position: relative;
-  width: 80rem;
+.animate-marquee-container {
+  
   border-radius: 6px;
 
   &::before,
