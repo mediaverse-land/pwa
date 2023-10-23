@@ -43,13 +43,13 @@ const Home = async () => {
         </p>
         <div className="flex space-x-2 mt-[28px]">
           <div className="app-store-container cursor-pointer py-[4px] px-[19px]">
-            <Image src="/images/apple-app-store-logo.png" quality={100} width={97} height={40} alt="google play store logo" />
+            <Image src="/images/apple-app-store-logo.png" quality={100} width={135} height={48} alt="google play store logo" />
           </div>
           <div className="app-store-container cursor-pointer py-[4px] px-[12px] ">
-            <Image src="/images/google-play-store-logo.png" quality={100} width={110} height={40} alt="google play store logo" />
+            <Image src="/images/google-play-store-logo.png" quality={100} width={135} height={48} alt="google play store logo" />
           </div>
         </div>
-        <button type="submit" className="w-64 h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm  py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]">Web App</button>
+        <button type="submit" className="w-[278px] h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm  py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]">Web App</button>
       </div>
       <div className="flex space-x-4 mt-8 sm:mt-0 animate-container">
         <Image src="/images/phone-image-1.png" className="phone-animate-2 relative z-20 " width={170} height={500} quality={100} alt="phone photo" />
@@ -95,7 +95,9 @@ const Home = async () => {
         </div>
         <div className="grid grid-rows-4 grid-flow-col gap-2 mt-10">
           {imageData.map((items: any, index: number) => {
-            return <img className={index === 4 ? "rounded-xl w-64 h-64 col-span-2 row-span-2" : "rounded-xl w-32 h-32 "} src={items.asset.thumbnails["336x366"]} alt="photo" />
+            return <img className={index === 4 ? "rounded-xl w-64 h-64 col-span-2 row-span-2" : "rounded-xl w-32 h-32 "} src={items.asset.thumbnails["336x366"]}  onError={({ currentTarget }) => {
+              currentTarget.src="./images/room.png";
+            }} alt="photo" />
           })}
 
         </div>

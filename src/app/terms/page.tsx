@@ -17,7 +17,7 @@ const Terms = async () => {
             <h1 className="text-white text-2xl">
                 {termsData.name}
             </h1>
-            <p className="text-base text-white">
+            <p className="text-base text-white uppercase">
                 {termsData.content}
             </p>
         </div>

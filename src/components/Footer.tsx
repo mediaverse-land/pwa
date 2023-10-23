@@ -6,10 +6,10 @@ const Footer = () => {
             <p className="text-white">Haven't tried the app yet?</p>
             <div className="flex space-x-1">
                 <div className="app-store-container px-2 py-1 cursor-pointer">
-                    <Image src="/images/apple-app-store-logo.png" quality={100} width={70} height={40} alt="google play store logo" />
+                    <Image src="/images/apple-app-store-logo.png" quality={100} width={110} height={40} alt="google play store logo" />
                 </div>
                 <div className="app-store-container px-2 py-1 cursor-pointer ">
-                    <Image src="/images/google-play-store-logo.png" quality={100} width={70} height={40} alt="google play store logo" />
+                    <Image src="/images/google-play-store-logo.png" quality={100} width={110} height={40} alt="google play store logo" />
                 </div>
             </div>
 
