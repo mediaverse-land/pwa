@@ -1,5 +1,6 @@
 
 import { SongSlider, VideoSlider } from "@/components";
+import BorderGradient from "@/components/BorderGradient";
 import ClientImage from "@/components/ClientImage";
 import LiveSlider from "@/components/LiveSlider";
 import { getLives, getMostViewedImages, getMostViewedText } from "@/services/contactService";
@@ -129,14 +130,18 @@ const Home = async () => {
         </div>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 mt-10">
           {textData.slice(0, 6).map((items: any, index: number) => {
-            return <div key={index} className="flex flex-col aspect-square px-10 py-[1.75rem] box-border rounded-3xl  bg-card ">
-              <p className="text-white text-lg">{items.name}</p>
-              <p className="text-gray-500 mt-4">{items.description?.slice(0, 65)}</p>
-              <div className="flex mt-4 space-x-2">
-                <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
-                <p className="text-xs text-gray-500">{items.asset.user.username}</p>
+            return <BorderGradient className='flex flex-col aspect-square  box-border rounded-3xl  '
+              to='90deg' sColor='#CFCFFC4D' tColor='#CFCFFC00'>
+
+              <div key={index} className="">
+                <p className="text-white text-lg">{items.name}</p>
+                <p className="text-gray-500 mt-4">{items.description?.slice(0, 65)}</p>
+                <div className="flex mt-4 space-x-2">
+                  <Image src="/images/mini-avatar.png" alt="avatar" width={16} height={16} quality={100} />
+                  <p className="text-xs text-gray-500">{items.asset.user.username}</p>
+                </div>
               </div>
-            </div>
+            </BorderGradient>
           })}
         </div>
 
