@@ -33,6 +33,7 @@ const VideoSlider = () => {
             slidesPerView={8.5}
             spaceBetween={2}
             onSwiper={setSwiperRef}
+            loop={true            }
            
         >
             {videoData.map((item : any,index) => {

@@ -29,9 +29,9 @@ const Blogs = async () => {
 
         <div className="grid grid-cols-4 gap-6 w-full justify-center sm:justify-between sm:w-8/12 items-center mt-6">
             {blogsData.data.map((item: any, index: number) => {
-                return <Link key={index} href={`/blogs/blog`} className="flex flex-col py-4 px-4 border border-[#262699] rounded-[24px] aspect-[302/477] ">
+                return <Link key={index} href={`/blogs/${item.id}`} className="flex flex-col py-4 px-4 border border-[#262699] rounded-[24px] aspect-[302/477] ">
                     <div className="relative w-full aspect-square">
-                        <Image src="/images/room.png" alt="image" quality={100} className="rounded-[16px] aspect-square" fill />
+                        <Image src={item.image} alt="image" quality={100} className="rounded-[16px] aspect-square" fill />
                     </div>
                     <p className="text-[#CCCCFF] text-base mt-6 px-2" style={{ fontSize: '16px' }}>{item.title}</p>
                     <p className="mt-1 text-[#666680] text-xs px-2 line-clamp-4" style={{ lineHeight: '19px', }} dangerouslySetInnerHTML={{ __html: item.body.slice(0,75) }}></p>

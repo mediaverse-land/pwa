@@ -30,3 +30,7 @@ export const getPrivacy = () => {
     const url = `${URL}/privacy`;
     return http.get(url);
 }
+export const getLives = async () => {
+    const url = `${URL}/lives`;
+    return fetch(url, { cache: 'no-store' });
+};
