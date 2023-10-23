@@ -1,5 +1,6 @@
 
 import { SongSlider, VideoSlider } from "@/components";
+import ClientImage from "@/components/ClientImage";
 import { getMostViewedImages, getMostViewedText } from "@/services/contactService";
 import Image from "next/image";
 
@@ -97,10 +98,7 @@ const Home = async () => {
         </div>
         <div className="grid grid-rows-4 grid-flow-col gap-2 mt-10">
           {imageData.map((items: any, index: number) => {
-            return <img className={index === 4 ? "rounded-xl w-64 h-64 col-span-2 row-span-2" : "rounded-xl w-32 h-32 "} src={items.asset.thumbnails["336x366"]}
-              onError={({ currentTarget }) => {
-              currentTarget.src="./images/room.png";
-            }} alt="photo" />
+            return <ClientImage key={index} className={index === 4 ? "rounded-xl w-64 h-64 col-span-2 row-span-2" : "rounded-xl w-32 h-32 "} src={items.asset.thumbnails["336x366"]}  alt="photo" />
           })}
 
         </div>
