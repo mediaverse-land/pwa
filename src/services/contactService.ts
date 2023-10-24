@@ -34,3 +34,7 @@ export const getLives = async () => {
     const url = `${URL}/lives`;
     return fetch(url, { cache: 'no-store' });
 };
+export const getFAQ = () => {
+    const url = `${URL}/faq`;
+    return fetch(url, { cache: 'no-store' });
+}

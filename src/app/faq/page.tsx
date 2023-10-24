@@ -1,41 +1,39 @@
+import Accordion from "@/components/Accordion";
+import { getFAQ } from "@/services/contactService";
+import React from "react";
 
-const Faq = () => {
-    return (<div className="w-full flex mt-36 pb-16 justify-center px-4">
+async function getFAQData() {
+    const faq = await getFAQ();
+
+    if (!faq.ok) {
+        throw new Error("Failed to fetch data");
+    }
+    return faq.json();
+}
+
+const Faq = async () => {
+
+    const faqData = await getFAQData();
+
+
+    return (<div className="w-full flex mt-36 pb-16 justify-center px-4 min-h-[75vh]">
         <div className="sm:w-6/12 w-full flex flex-col">
             <h1 className="text-white text-2xl">
                 MediaVers Features
             </h1>
-            <p className="text-base text-blue-500">Photos and Videos</p>
-            <div className="w-full border-blue-500 border-b-2 pb-2 mt-11 flex justify-between ">
-                <p className="text-white text-base">Change your MediaVers password</p>
-                <p className="text-blue-500 text-xl cursor-pointer">+</p>
-            </div>
-            <div className="w-full border-blue-500 border-b-2 pb-2 mt-6 flex justify-between ">
-                <p className="text-white text-base">Change your MediaVers password</p>
-                <p className="text-blue-500 text-xl cursor-pointer">+</p>
-            </div>
-            <div className="w-full border-blue-500 border-b-2 pb-2 mt-6 flex justify-between ">
-                <p className="text-white text-base">Change your MediaVers password</p>
-                <p className="text-blue-500 text-xl cursor-pointer">+</p>
-            </div>
-            <div className="w-full border-blue-500 border-b-2 pb-2 mt-6 flex justify-between ">
-                <p className="text-white text-base">Change your MediaVers password</p>
-                <p className="text-blue-500 text-xl cursor-pointer">+</p>
-            </div>
-            <div className="w-full border-blue-500 border-b-2 pb-2 mt-6 flex justify-between ">
-                <p className="text-white text-base">Change your MediaVers password</p>
-                <p className="text-blue-500 text-xl cursor-pointer">+</p>
-            </div>
-            <div className="w-full border-blue-500 border-b-2 pb-2 mt-6 flex justify-between ">
-                <p className="text-white text-base">Change your MediaVers password</p>
-                <p className="text-blue-500 text-xl cursor-pointer">+</p>
-            </div>
-            <div className="w-full border-blue-500 border-b-2 pb-2 mt-6 flex justify-between ">
-                <p className="text-white text-base">Change your MediaVers password</p>
-                <p className="text-blue-500 text-xl cursor-pointer">+</p>
-            </div>
+            {/* <p className="text-base text-blue-500">{item.question}</p> */}
+            <div></div>
+            {
+                faqData.data.map((item: any, i: number) => (
+                    <React.Fragment key={i}>
+                        <Accordion item={item} />
+                    </React.Fragment>
+                ))
+            }
+
         </div>
     </div>);
 }
 
 export default Faq;
+
