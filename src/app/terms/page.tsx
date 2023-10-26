@@ -3,10 +3,10 @@ import { getTerms } from "@/services/contactService";
 async function getTermsData() {
     const terms = await getTerms();
 
-    if (!terms.data) {
+    if (!terms.ok) {
         throw new Error("Failed to fetch data");
     }
-    return terms.data;
+    return terms.json();
 }
 
 const Terms = async () => {

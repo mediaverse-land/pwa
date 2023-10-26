@@ -13,7 +13,8 @@ const VideoSlider = () => {
     useEffect(() => {
         const getData = async () => {
           const videoData = await getMostViewedVideos();
-          setVideoData(videoData.data);
+          const data = await videoData.json()
+          setVideoData(data);
         };
         getData();
       }, []);

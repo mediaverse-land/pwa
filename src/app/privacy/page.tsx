@@ -3,10 +3,10 @@ import { getPrivacy } from "@/services/contactService";
 async function getPrivacyData() {
     const privacy = await getPrivacy();
 
-    if (!privacy.data) {
+    if (!privacy.ok) {
         throw new Error("Failed to fetch data");
     }
-    return privacy.data;
+    return privacy.json();
 }
 const Privacy = async () => {
 

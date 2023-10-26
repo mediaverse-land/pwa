@@ -13,7 +13,8 @@ const SongSlider = () => {
     useEffect(() => {
         const getData = async () => {
             const songData = await getMostViewedSongs();
-            setSongData(songData.data);
+            const data = await songData.json()
+            setSongData(data);
         };
         getData();
     }, []);

@@ -13,22 +13,22 @@ export const getMostViewedText = async () => {
 
 export const getMostViewedVideos = () => {
     const url = `${URL}/videos/most-viewed`;
-    return http.get(url);
+    return fetch(url, { cache: 'no-store' });
 };
 
 export const getMostViewedSongs = () => {
     const url = `${URL}/audios/most-viewed`;
-    return http.get(url);
+    return fetch(url, { cache: 'no-store' });
 };
 
 export const getTerms = () => {
     const url = `${URL}/terms`;
-    return http.get(url);
+    return fetch(url, { cache: 'no-store' });
 }
 
 export const getPrivacy = () => {
     const url = `${URL}/privacy`;
-    return http.get(url);
+    return fetch(url, { cache: 'no-store' });
 }
 export const getLives = async () => {
     const url = `${URL}/lives`;
