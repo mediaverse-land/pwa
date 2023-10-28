@@ -17,7 +17,7 @@ const Terms = async () => {
             <h1 className="text-white capitalize mb-[43px] text-[25px]">
                 {termsData.name}
             </h1>
-            <article className="text-white w-full prose lg:prose-xl prose-h1:text-white prose-h2:text-white prose-h3:text-white prose-h4:text-white prose-strong:text-white" dangerouslySetInnerHTML={{ __html: termsData.content }}></article>
+            <article className="text-white w-full prose " dangerouslySetInnerHTML={{ __html: termsData.content }}></article>
         </div>
     </div>);
 }
