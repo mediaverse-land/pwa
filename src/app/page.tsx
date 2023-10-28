@@ -84,7 +84,7 @@ const Home = async () => {
           </div>
           <button
             type="submit"
-            className="w-[286px] h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm  py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]"
+            className="w-[278px] h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm  py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]"
           >
             Web App
           </button>
@@ -206,12 +206,12 @@ const Home = async () => {
                   sColor="#CFCFFC4D"
                   tColor="#CFCFFC00"
                 >
-                  <div key={index} className="">
+                  <div key={index} className="h-full flex flex-col">
                     <p className="text-white text-lg">{items.name}</p>
                     <p className="text-gray-500 mt-4">
                       {items.description?.slice(0, 65)}
                     </p>
-                    <div className="flex mt-4 space-x-2">
+                    <div className="flex mt-auto space-x-2">
                       <Image
                         src="/images/mini-avatar.png"
                         alt="avatar"

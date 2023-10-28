@@ -48,7 +48,7 @@ const VideoSlider = () => {
           centerInsufficientSlides
           slidesPerView={6.5}
           // freeMode={true}
-          // spaceBetween={16}
+          spaceBetween={16}
           onSwiper={setSwiperRef}
           loop={true}
           rewind={true}
@@ -61,7 +61,7 @@ const VideoSlider = () => {
                 key={item.id}
                 className="w-[150px] h-[190px] cursor-pointer rounded-2xl"
               >
-                <div className="relative w-[194px] aspect-square">
+                <div className="relative w-full aspect-square">
                   <Image
                     src={item.asset.thumbnails["226x226"]}
                     className="rounded-xl"

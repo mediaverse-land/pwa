@@ -27,7 +27,7 @@ const SongSlider = () => {
   }, [swiperRef]);
 
   return (
-    <div className=" flex space-x-0 sm:space-x-4 justify-center items-center mt-10 ">
+    <div className="flex space-x-0 sm:space-x-4 justify-center items-center my-10">
       <button className=" hidden sm:block " onClick={handleNext}>
         <Image
           src="/icons/prev.png"
