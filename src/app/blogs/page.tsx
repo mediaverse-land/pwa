@@ -138,7 +138,7 @@ const Blogs = async (params: any) => {
         <BlogsPagination
           currentPage={+page}
           links={blogsData.links}
-          totalPage={+blogsData.meta.total}
+          totalPage={+blogsData.meta.last_page}
           meta={blogsData.meta}
         />
       </div>
