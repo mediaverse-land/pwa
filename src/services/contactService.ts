@@ -48,3 +48,13 @@ export const getFAQ = () => {
     const url = `${URL}/faq`;
     return fetchInstance(url);
 }
+
+export const getBlogs = (page: string) => {
+    const url = `https://blog.mediaverse.land/api/posts?page=${page}`
+    return fetchInstance(url)
+}
+
+export const getBlog = (id: string) => {
+    const url = `https://blog.mediaverse.land/api/posts/${id}`    
+    return fetchInstance(url)
+}
