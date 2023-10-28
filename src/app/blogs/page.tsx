@@ -64,7 +64,7 @@ async function getBlogsData(page: string) {
   );
 
   if (!blogs.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error(`Failed to fetch data`, { cause: `${blogs.status} Error` });
   }
   return blogs.json();
 }

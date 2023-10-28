@@ -1,5 +1,6 @@
 "use client"; // Error components must be Client Components
 
+import { Footer, Navbar } from "@/components";
 import { useEffect } from "react";
 
 export default function Error({
@@ -15,8 +16,9 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="absolute z-[9999] w-screen h-screen top-0 left-0 flex flex-col text-white bg-linear items-center justify-center gap-10">
+    <div className="flex flex-col text-white my-auto items-center justify-center gap-5">
       <h2 className="text-[32px]">Something went wrong!</h2>
+      <div>{`${error?.cause || ""}`}</div>
       <button
         onClick={
           // Attempt to recover by trying to re-render the segment
