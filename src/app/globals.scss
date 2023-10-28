@@ -1,9 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
-  background: linear-gradient(356.29deg, #030340 0%, #0F0F66 163.34%);
+  background: linear-gradient(356.29deg, #030340 0%, #0f0f66 163.34%);
 }
 
 *::-webkit-scrollbar {
@@ -21,7 +17,7 @@ body {
       &:after {
         content: " ";
         height: 2px;
-        background-color: #597AFF;
+        background-color: #597aff;
         width: 24px;
         display: block;
         margin: 0 auto;
@@ -34,7 +30,7 @@ body {
 }
 
 .app-store-container {
-  background: rgba(14, 14, 18, 0.50);
+  background: rgba(14, 14, 18, 0.5);
   border-radius: 8px;
   border: 1px #353542 solid;
 }
@@ -123,14 +119,12 @@ $animationSpeed: 7s;
   }
 
   100% {
-    transform: translateX(calc(-120px * 3))
+    transform: translateX(calc(-120px * 3));
   }
 }
 
-
 // Styling
 .animate-marquee-container {
-  
   border-radius: 6px;
 
   &::before,
@@ -175,58 +169,58 @@ $animationSpeed: 7s;
   }
 }
 
-.swiper-wrapper {
-  align-items: center !important;
-  justify-content: center !important;
-  display: flex !important;
-}
+// .swiper-wrapper {
+//   align-items: center !important;
+//   justify-content: center !important;
+//   display: flex !important;
+// }
 
-.swiper {
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
-  width: 80rem;
-  border-radius: 6px !important;
+// .swiper {
+//   box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+//   width: 80rem;
+//   border-radius: 6px !important;
 
-  &::before,
-  &::after {
-    @include white-gradient;
-    content: "";
-    height: 100px;
-    position: absolute;
-    width: 140px;
-    z-index: 2;
-  }
+//   &::before,
+//   &::after {
+//     @include white-gradient;
+//     content: "";
+//     height: 100px;
+//     position: absolute;
+//     width: 140px;
+//     z-index: 2;
+//   }
 
-  &::after {
-    right: 0;
-    top: 0;
-    transform: rotateZ(180deg);
-  }
+//   &::after {
+//     right: 0;
+//     top: 0;
+//     transform: rotateZ(180deg);
+//   }
 
-  &::before {
-    left: 0;
-    top: 0;
-  }
-}
+//   &::before {
+//     left: 0;
+//     top: 0;
+//   }
+// }
 
-.swiper-slide {
-  width: 150px !important;
-  height: 190px !important;
-  border-radius: 1rem;
-  cursor: pointer;
+// .swiper-slide {
+//   width: 150px !important;
+//   height: 190px !important;
+//   border-radius: 1rem;
+//   cursor: pointer;
 
-  /* Center slide text vertically */
-}
+//   /* Center slide text vertically */
+// }
 
 .bg-card {
-  background: rgba(78, 78, 97, 0.30);
-  border: 2px rgba(207, 207, 252, 0.30) solid;
+  background: rgba(78, 78, 97, 0.3);
+  border: 2px rgba(207, 207, 252, 0.3) solid;
 }
 
 .w-ultra {
   width: 100%;
 }
 
-@media (min-width : 640px) {
+@media (min-width: 640px) {
   .w-ultra {
     width: 53%;
   }

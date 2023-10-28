@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.linear-black-bg::before,
+.linear-black-bg::after {
+  background: linear-gradient(to right, #030340 0%, rgba(0, 0, 0, 0) 100%);
+  content: "";
+  height: 100%;
+  position: absolute;
+  width: 200px;
+  z-index: 2;
+}
+
+.linear-black-bg::before {
+  left: 0;
+  top: 0;
+}
+.linear-black-bg::after {
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
+}
