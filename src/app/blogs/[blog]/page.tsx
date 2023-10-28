@@ -37,11 +37,11 @@ const Blog = async (props: any) => {
           <p className="text-white">Back To Blog</p>
         </Link>
       </div>
-      <div>
+      <div className="min-h-screen">
         <h1 className="text-white text-4xl mt-8 sm:mt-0">{data.data.title}</h1>
-        <p className="text-blue-500 mt-2">About Basic Display API</p>
+        {/* <p className="text-blue-500 mt-2">About Basic Display API</p> */}
         <div
-          className="text-white w-full sm:w-[650px]"
+          className="text-white w-full sm:w-[650px] mt-4"
           dangerouslySetInnerHTML={{ __html: data.data.body }}
         />
       </div>
