@@ -5,7 +5,6 @@ import { Swiper as SwiperClass } from "swiper/types";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { getMostViewedVideos } from "@/services/contactService";
-import { Autoplay, FreeMode } from "swiper/modules";
 
 const VideoSlider = () => {
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
@@ -58,7 +57,8 @@ const VideoSlider = () => {
             return (
               <SwiperSlide
                 key={item.id}
-                className="w-[150px] h-[190px] cursor-pointer rounded-2xl"
+                style={{}}
+                className="w-[200px] max-w-[200px] h-[250px] cursor-pointer rounded-2xl"
               >
                 <div className="relative w-full aspect-square">
                   <Image
