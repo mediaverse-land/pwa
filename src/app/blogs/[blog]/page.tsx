@@ -15,7 +15,6 @@ async function getBlogsData(props: any) {
 const Blog = async (props: any) => {
 
     const data = await getBlogsData(props);
-    console.log(data)
 
     return (<div className="w-full flex justify-center flex-col items-center sm:items-start sm:flex-row mt-36 space-x-0 px-4  sm:space-x-10">
         <div className="flex flex-col">

@@ -17,7 +17,7 @@ export const navbar = [
     },
     {
         title:"API",
-        href:"https://docs.mediaverse.land/"
+        href:"/api"
     },
     {
         title:"FAQ",
