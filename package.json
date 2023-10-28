@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-google-maps/api": "^2.19.2",
+    "@tailwindcss/typography": "^0.5.10",
     "axios": "^1.5.1",
     "framer-motion": "^10.16.4",
     "google-map-react": "^2.2.1",
