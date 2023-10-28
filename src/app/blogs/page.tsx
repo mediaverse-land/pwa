@@ -1,4 +1,5 @@
 import BlogsPagination from "@/components/BlogsPagination";
+import { getBlogs } from "@/services/contactService";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -56,15 +57,12 @@ export interface LinksEntity {
 }
 
 async function getBlogsData(page: string) {
-  const blogs = await fetch(
-    `https://blog.mediaverse.land/api/posts?page=${page}`,
-    {
-      cache: "no-store",
-    }
-  );
+  const blogs = await getBlogs(page);
+
+  console.info(blogs);
 
   if (!blogs.ok) {
-    throw new Error(`Failed to fetch data`, { cause: `${blogs.status} Error` });
+    throw new Error("Failed to fetch data");
   }
   return blogs.json();
 }
