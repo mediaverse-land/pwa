@@ -12,17 +12,39 @@ async function getBlogsData(props: any) {
   }
   return blogs.json();
 }
+const regex = /\b(\w{3}), (\w{3}) (\d{2}),/;
 
 const Blog = async (props: any) => {
   const data = await getBlogsData(props);
-  console.log(data);
+  const date = data.data.created_at.match(regex);
+  // console.log(data);
 
   return (
     <div className="w-full flex justify-center flex-col items-center sm:items-start sm:flex-row mt-36 space-x-0 px-4  sm:space-x-10">
       <div className="flex flex-col">
         {/* <div className="w-80 h-80 bg-cover bg-[url('/images/image-room.png')]">
             </div> */}
-        <img className="w-80 h-80 rounded-[24px]" src={data.data.image} />
+        <div className="relative w-80 aspect-square">
+          <div className="absolute bottom-[1.5rem] left-[1.5rem] right-[1.5rem] flex justify-between items-center z-50 text-white">
+            {/* author */}
+            <div className="flex justify-between items-center gap-3">
+              {/* picture */}
+              <div className="relative w-[20px] aspect-square rounded-full overflow-hiddend">
+                <Image
+                  src={data.data.user.image || "/images/mini-avatar.png"}
+                  alt="/images/mini-avatar.png"
+                  fill
+                />
+              </div>
+              <div>{data.data.user.name}</div>
+            </div>
+            {/* date */}
+            <div>
+              {date[3]} {date[2]}
+            </div>
+          </div>
+          <Image className="rounded-[24px]" src={data.data.image} alt="" fill />
+        </div>
         <Link
           href={"./"}
           className="flex items-center justify-center py-2 rounded-3xl w-80 bg-card mt-6 space-x-2"

@@ -13,11 +13,11 @@
 }
 
 .linear-black-bg::before {
-  left: 0;
+  left: -3px;
   top: 0;
 }
 .linear-black-bg::after {
-  right: 0;
+  right: -3px;
   top: 0;
   transform: rotateZ(180deg);
 }

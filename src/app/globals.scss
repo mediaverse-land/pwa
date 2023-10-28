@@ -131,20 +131,20 @@ $animationSpeed: 7s;
   &::after {
     @include white-gradient;
     content: "";
-    height: 100px;
+    height: 100%;
     position: absolute;
     width: 200px;
-    z-index: 2;
+    z-index: 50;
   }
 
   &::after {
-    right: 0;
+    right: -3px;
     top: 0;
     transform: rotateZ(180deg);
   }
 
   &::before {
-    left: 0;
+    left: -3px;
     top: 0;
   }
 

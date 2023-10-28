@@ -72,6 +72,10 @@ const Blogs = async () => {
           );
         })}
       </div>
+
+      <div className="my-20 text-white">
+        <div>pagination</div>
+      </div>
     </div>
   );
 };
