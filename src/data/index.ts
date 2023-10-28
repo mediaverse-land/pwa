@@ -1,30 +1,30 @@
 export const navbar = [
-    {
-        title:"Home",
-        href:"/"
-    },
-    {
-        title:"Blog",
-        href:"/blogs"
-    },
-    {
-        title:"Terms",
-        href:"/terms"
-    },
-    {
-        title:"Privacy",
-        href:"/privacy"
-    },
-    {
-        title:"API",
-        href:"/api"
-    },
-    {
-        title:"FAQ",
-        href:"/faq"
-    },
-    {
-        title:"About",
-        href:"/about-us"
-    },
-]
+  {
+    title: "Home",
+    href: "/",
+  },
+  {
+    title: "Blog",
+    href: "/blogs?page=1",
+  },
+  {
+    title: "Terms",
+    href: "/terms",
+  },
+  {
+    title: "Privacy",
+    href: "/privacy",
+  },
+  {
+    title: "API",
+    href: "/api",
+  },
+  {
+    title: "FAQ",
+    href: "/faq",
+  },
+  {
+    title: "About",
+    href: "/about-us",
+  },
+];

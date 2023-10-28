@@ -1,10 +1,67 @@
+import BlogsPagination from "@/components/BlogsPagination";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+export interface BlogsPageData {
+  data: DataEntity[];
+  links: Links;
+  meta: Meta;
+}
+export interface DataEntity {
+  id: number;
+  title: string;
+  slug: string;
+  image: string;
+  excerpt?: string | null;
+  body: string;
+  created_at: string;
+  tags: CategoriesEntityOrTagsEntity[] | [];
+  categories: CategoriesEntityOrTagsEntity1[];
+  user: User;
+}
+export interface CategoriesEntityOrTagsEntity {
+  id: number;
+  name: string;
+  slug: string;
+}
+export interface CategoriesEntityOrTagsEntity1 {
+  id: number;
+  name: string;
+  slug: string;
+}
+export interface User {
+  name: string;
+  image: string;
+}
+export interface Links {
+  first: string;
+  last: string;
+  prev?: null;
+  next?: null;
+}
+export interface Meta {
+  current_page: number;
+  from: number;
+  last_page: number;
+  links: LinksEntity[];
+  path: string;
+  per_page: number;
+  to: number;
+  total: number;
+}
+export interface LinksEntity {
+  url: string;
+  label: string;
+  active: boolean;
+}
 
-async function getBlogsData() {
-  const blogs = await fetch("https://blog.mediaverse.land/api/posts", {
-    cache: "no-store",
-  });
+async function getBlogsData(page: string) {
+  const blogs = await fetch(
+    `https://blog.mediaverse.land/api/posts?page=${page}`,
+    {
+      cache: "no-store",
+    }
+  );
 
   if (!blogs.ok) {
     throw new Error("Failed to fetch data");
@@ -12,9 +69,15 @@ async function getBlogsData() {
   return blogs.json();
 }
 
-const Blogs = async () => {
-  const blogsData = await getBlogsData();
-
+const Blogs = async (params: any) => {
+  if (!params.searchParams.page) {
+    redirect("/blogs?page=1");
+  }
+  let page = params.searchParams.page;
+  const blogsData: BlogsPageData = await getBlogsData(page);
+  if (blogsData.data.length === 0) {
+    redirect("/blogs?page=1");
+  }
   return (
     <div className=" mt-28 flex flex-col items-center">
       <div className="w-full flex flex-col items-center justify-center">
@@ -74,7 +137,12 @@ const Blogs = async () => {
       </div>
 
       <div className="my-20 text-white">
-        <div>pagination</div>
+        <BlogsPagination
+          currentPage={+page}
+          links={blogsData.links}
+          totalPage={+blogsData.meta.total}
+          meta={blogsData.meta}
+        />
       </div>
     </div>
   );
