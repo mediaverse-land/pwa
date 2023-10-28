@@ -17,7 +17,7 @@ const BlogsPagination = ({
   for (let i = 1; i <= meta.total; i++) {
     pages.push(i);
   }
-  console.log(pages);
+  //   console.log(pages);
   return (
     <div className="flex justify-center gap-7 items-center my-8 w-full min-w-[250px]">
       <Link

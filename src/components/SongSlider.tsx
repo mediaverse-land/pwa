@@ -42,7 +42,7 @@ const SongSlider = () => {
           centerInsufficientSlides
           className="w-full linear-black-bg rounded-2xl"
           slidesPerView={7.5}
-          //   spaceBetween={2}
+          spaceBetween={16}
           onSwiper={setSwiperRef}
           loop={true}
           rewind={true}

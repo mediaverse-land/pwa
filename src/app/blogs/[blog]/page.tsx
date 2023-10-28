@@ -32,7 +32,7 @@ const Blog = async (props: any) => {
               <div className="relative w-[20px] aspect-square rounded-full overflow-hiddend">
                 <Image
                   src={data.data.user.image || "/images/mini-avatar.png"}
-                  alt="/images/mini-avatar.png"
+                  alt={`${data.data.user.name} picture`}
                   fill
                 />
               </div>

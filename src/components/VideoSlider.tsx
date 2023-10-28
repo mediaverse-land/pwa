@@ -19,7 +19,7 @@ const VideoSlider = () => {
     };
     getData();
   }, []);
-  console.log(videoData, "videodata");
+  // console.log(videoData, "videodata");
   const handlePrevious = useCallback(() => {
     swiperRef?.slidePrev();
   }, [swiperRef]);
@@ -44,9 +44,8 @@ const VideoSlider = () => {
         {/* shadow left */}
         <div></div>
         <Swiper
-          modules={[Autoplay, FreeMode]}
           centerInsufficientSlides
-          slidesPerView={6.5}
+          slidesPerView={5.5}
           // freeMode={true}
           spaceBetween={16}
           onSwiper={setSwiperRef}
@@ -64,7 +63,7 @@ const VideoSlider = () => {
                 <div className="relative w-full aspect-square">
                   <Image
                     src={item.asset.thumbnails["226x226"]}
-                    className="rounded-xl"
+                    className="rounded-xl object-cover"
                     alt="video cover"
                     fill
                   />
