@@ -8,7 +8,7 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 const Navbar = () => {
   const pathname = usePathname();
 
-  console.log(pathname, "pathname");
+  // console.log(pathname, "pathname");
 
   return (
     <nav className="nav fixed top-0 w-full z-50 ">
