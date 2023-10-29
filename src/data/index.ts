@@ -23,7 +23,7 @@ export const navbar = [
   },
   {
     title: "API",
-    href: "/api",
+    href: "/APIs",
     query: "",
   },
   {
