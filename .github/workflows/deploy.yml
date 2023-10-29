@@ -20,7 +20,7 @@ jobs:
         proxy_username: root
         proxy_key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd /srv/web-app
+          cd /srv/pwa
           git reset --hard HEAD^
           git pull
           docker compose build
