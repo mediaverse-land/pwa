@@ -3,11 +3,12 @@
 import { navbar } from "@/data";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 const Navbar = () => {
   const pathname = usePathname();
-  // console.log(pathname, "pathname");
+
+  console.log(pathname, "pathname");
 
   return (
     <nav className="nav fixed top-0 w-full z-50 ">
@@ -47,7 +48,7 @@ const Navbar = () => {
             {navbar.map((item, index) => (
               <li key={index}>
                 <Link
-                  href={item.href}
+                  href={`${item.href}${item.query}`}
                   key={index}
                   className={`text-gray-400 hover:text-white md:bg-transparent pb-2 rounded-[2px] ${
                     pathname === item.href ? "active" : ""

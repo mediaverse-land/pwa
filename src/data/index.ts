@@ -4,30 +4,37 @@ export const navbar = [
   {
     title: "Home",
     href: "/",
+    query: "",
   },
   {
     title: "Blog",
     href: "/blogs",
+    query: "?page=1",
   },
   {
     title: "Terms",
     href: "/terms",
+    query: "",
   },
   {
     title: "Privacy",
     href: "/privacy",
+    query: "",
   },
   {
     title: "API",
     href: "/api",
+    query: "",
   },
   {
     title: "FAQ",
     href: "/faq",
+    query: "",
   },
   {
     title: "About",
     href: "/about-us",
+    query: "",
   },
 ];
 
