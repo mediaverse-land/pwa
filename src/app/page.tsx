@@ -157,9 +157,9 @@ const Home = async () => {
         <p className="text-white text-sm ">Best videos</p>
       </div>
       <VideoSlider />
-      <div className="flex  max-w-screen-2xl mx-auto mt-16 justify-evenly flex-col items-center sm:flex-row sm:px-0 px-2">
-        <div className="flex flex-col">
-          <div className=" flex space-x-2 ml-1 w-full">
+      <div className="flex max-w-screen-2xl w-[80rem] mx-auto mt-16 justify-between flex-col items-start sm:flex-row sm:px-0 px-2 h-[570px]">
+        <div className="flex flex-col w-[30%] h-full">
+          <div className="flex space-x-2 ml-1 w-full">
             <Image
               src="/icons/gallery.png"
               quality={100}
@@ -169,16 +169,16 @@ const Home = async () => {
             />
             <p className="text-white text-sm ">Most viewed</p>
           </div>
-          <div className="grid grid-rows-4 grid-flow-col gap-2 mt-10">
+          <div className="grid grid-rows-4 grid-flow-col gap-2 mt-10 grow max-h-[510px]">
             {imageData.map((items: any, index: number) => {
               return (
                 <ClientImage
                   key={index}
-                  className={
+                  className={`${
                     index === 4
-                      ? "rounded-xl w-64 h-64 col-span-2 row-span-2"
-                      : "rounded-xl w-32 h-32 "
-                  }
+                      ? "rounded-xl w-full aspect-square col-span-2 row-span-2"
+                      : "rounded-xl w-full aspect-square"
+                  }`}
                   src={items.asset.thumbnails["336x366"]}
                   alt="photo"
                 />
@@ -186,8 +186,8 @@ const Home = async () => {
             })}
           </div>
         </div>
-        <div className="flex flex-col w-ultra">
-          <div className=" flex space-x-2 ml-1 sm:mt-0">
+        <div className="flex flex-col w-[60%] h-full">
+          <div className="flex space-x-2 ml-1 sm:mt-0">
             <Image
               src="/icons/text.png"
               quality={100}
@@ -197,11 +197,11 @@ const Home = async () => {
             />
             <p className="text-white text-sm ">Top texts</p>
           </div>
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 mt-10">
+          <div className="flex md:grid lg:grid-cols-3 md:grid-cols-2 gap-2 grid-rows-1 md:grid-rows-2 mt-10 w-full grow">
             {textData.slice(0, 6).map((items: any, index: number) => {
               return (
                 <BorderGradient
-                  className="flex flex-col aspect-square  box-border rounded-3xl  "
+                  className="flex flex-col w-full aspect-square box-border rounded-3xl  "
                   to="90deg"
                   sColor="#CFCFFC4D"
                   tColor="#CFCFFC00"

@@ -7,7 +7,7 @@ export const navbar = [
   },
   {
     title: "Blog",
-    href: "/blogs?page=1",
+    href: "/blogs",
   },
   {
     title: "Terms",
