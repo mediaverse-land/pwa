@@ -2,21 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-.linear-black-bg::before,
-.linear-black-bg::after {
-  background: linear-gradient(91deg, #07074d 2%, rgba(7, 7, 76, 0) 99.51%);
+.linear-light-blue-bg::before,
+.linear-light-blue-bg::after {
+  background: linear-gradient(90deg, #07074d 25%, rgba(7, 7, 76, 0) 99.51%);
   content: "";
   height: 100%;
   position: absolute;
-  width: 150px;
+  width: 100px;
   z-index: 2;
 }
 
-.linear-black-bg::before {
+.linear-light-blue-bg::before {
   left: -3px;
   top: 0;
 }
-.linear-black-bg::after {
+.linear-light-blue-bg::after {
+  right: -3px;
+  top: 0;
+  transform: rotateZ(180deg);
+}
+.linear-dark-blue-bg::before,
+.linear-dark-blue-bg::after {
+  background: linear-gradient(90deg, #040443 25%, rgba(7, 7, 76, 0) 99.51%);
+  content: "";
+  height: 100%;
+  position: absolute;
+  width: 70px;
+  z-index: 2;
+}
+
+.linear-dark-blue-bg::before {
+  left: -3px;
+  top: 0;
+}
+.linear-dark-blue-bg::after {
   right: -3px;
   top: 0;
   transform: rotateZ(180deg);

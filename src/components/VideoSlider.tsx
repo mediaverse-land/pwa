@@ -38,10 +38,6 @@ const VideoSlider = () => {
         />
       </button>
       <div className="relative w-[80rem] max-w-screen-2xl mx-auto">
-        {/* shadow right */}
-        {/* <div className="absolute w-[9rem] h-full top-0 right-0 z-20 linear-black-bg"></div> */}
-        {/* shadow left */}
-        <div></div>
         <Swiper
           centerInsufficientSlides
           slidesPerView={5.5}
@@ -51,7 +47,7 @@ const VideoSlider = () => {
           loop={true}
           rewind={true}
           // autoplay={{ delay: 5 }}
-          className="w-full linear-black-bg rounded-2xl"
+          className="w-full linear-light-blue-bg"
         >
           {videoData.map((item: any, index) => {
             return (

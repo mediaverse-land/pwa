@@ -12,7 +12,7 @@ const Motion = ({ children }: { children: React.ReactNode }) => {
       initial="hidden" // Set the initial state to variants.hidden
       animate="enter" // Animated state to variants.enter
       exit="exit" // Exit state (used later) to variants.exit
-      transition={{ duration: 1 }} // Set the transition to linear
+      transition={{ duration: 1.5 }} // Set the transition to linear
       className=""
     >
       {children}
