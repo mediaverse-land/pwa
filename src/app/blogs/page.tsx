@@ -59,10 +59,10 @@ export interface LinksEntity {
 async function getBlogsData(page: string) {
   const blogs = await getBlogs(page);
 
-  console.info(blogs);
+  // console.info(blogs);
 
   if (!blogs.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error("Failed to fetch data", { cause: `${blogs.status} Error` });
   }
   return blogs.json();
 }
@@ -138,7 +138,6 @@ const Blogs = async (params: any) => {
         <BlogsPagination
           currentPage={+page}
           links={blogsData.links}
-          totalPage={+blogsData.meta.last_page}
           meta={blogsData.meta}
         />
       </div>

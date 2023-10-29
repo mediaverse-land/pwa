@@ -4,20 +4,19 @@ import { BlogsPageData } from "@/app/blogs/page";
 
 const BlogsPagination = ({
   currentPage,
-  totalPage = 1,
   links,
   meta,
 }: {
   currentPage: number;
-  links: BlogsPageData["links"];
+  links?: BlogsPageData["links"];
   meta: BlogsPageData["meta"];
-  totalPage?: number;
 }) => {
   const pages = [];
-  for (let i = 1; i <= meta.total; i++) {
+  for (let i = 1; i <= meta.last_page; i++) {
     pages.push(i);
   }
-  //   console.log(pages);
+  // console.log(pages);
+
   return (
     <div className="flex justify-center gap-7 items-center my-8 w-full min-w-[250px]">
       <Link
@@ -45,11 +44,11 @@ const BlogsPagination = ({
               </Link>
             );
           })}
-          <span>...</span>
+          {pages.length > 1 && <span>...</span>}
         </>
-      ) : currentPage === meta.total ? (
+      ) : currentPage === meta.last_page ? (
         <>
-          <span>...</span>
+          {pages.length > 1 && <span>...</span>}
           {pages.slice(-3).map((page, i) => {
             return (
               <Link
@@ -88,7 +87,7 @@ const BlogsPagination = ({
 
       <Link
         className={`select-none aspect-square h-[25px] text-white ${
-          currentPage >= meta.total && "hidden"
+          currentPage >= meta.last_page && "hidden"
         }`}
         href={`/blogs?page=${currentPage + 1}`}
       >
