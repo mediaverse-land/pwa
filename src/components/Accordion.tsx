@@ -7,7 +7,10 @@ export default function Accordion({ item }: any) {
     <div className="border-blue-500 border-b-2 ">
       <div
         className="w-full pb-2 mt-11 flex justify-between cursor-pointer"
-        onClick={() => setCollapsed((e) => !e)}
+        onClick={() => {
+          console.log("clicked");
+          setCollapsed((e) => !e);
+        }}
       >
         <p className="text-white text-base">{item.question}</p>
         <p className="text-blue-500 text-xl cursor-pointer">
@@ -15,7 +18,7 @@ export default function Accordion({ item }: any) {
         </p>
       </div>
       <div
-        className={`text-[14px] text-[#C1C1CC] duration-1000 ease-linear overflow-hidden mb-4 ${
+        className={`text-[14px] text-[#C1C1CC] transition-all duration-500 overflow-hidden mb-4 ${
           collapsed ? "max-h-0" : "max-h-[500px]"
         }`}
       >
