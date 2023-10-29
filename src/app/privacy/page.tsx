@@ -19,10 +19,10 @@ const Privacy = async () => {
           <h1 className="text-white mt-8 sm:mt-0 mb-[43px] capitalize  text-[25px]">
             {privacyData.name}
           </h1>
-          <div
+          <article
             className="text-white w-full prose "
             dangerouslySetInnerHTML={{ __html: privacyData.content }}
-          ></div>
+          ></article>
         </div>
       </div>
     </Motion>

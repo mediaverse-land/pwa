@@ -9,6 +9,62 @@ const config: Config = {
   mode: 'jit',
   theme: {
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            h1: {
+              fontSize: '2.5rem',
+              fontWeight: '700',
+              fontStyle: 'normal',
+              lineHeight: 'normal',
+              color: 'white',
+              margin: 0,
+            },
+            h2: {
+              fontSize: '1.938rem',
+              fontStyle: 'normal',
+              lineHeight: 'normal',
+              color: 'white',
+              margin: 0,
+            },
+            h3: {
+              fontSize: '1.563rem',
+              fontStyle: 'normal',
+              lineHeight: 'normal',
+              color: 'white',
+              margin: 0,
+            },
+            h4: {
+              fontSize: '1.125rem',
+              fontStyle: 'normal',
+              lineHeight: 'normal',
+              color: 'white',
+              margin: 0,
+            },
+            p: {
+              fontSize: '0.875rem',
+              fontStyle: 'normal',
+              lineHeight: 'normal',
+              color: '#C1C1CD',
+              margin: 0,
+            },
+            a: {
+              fontSize: '0.875rem',
+              fontStyle: 'normal',
+              lineHeight: 'normal',
+              color: '#C1C1CD',
+              margin: 0,
+            },
+            strong: {
+              fontSize: '0.875rem',
+              fontStyle: 'normal',
+              lineHeight: 'bold',
+              color: '#C1C1CD',
+              margin: 0,
+            },
+          },
+        },
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
