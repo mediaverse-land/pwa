@@ -1,4 +1,4 @@
-name: CD
+name: Deploy to production
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
         port: 22
         username: root
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        proxy_host: 34.29.61.238
+        proxy_host: 13.37.197.59
         proxy_port: 22
         proxy_username: root
         proxy_key: ${{ secrets.SSH_PRIVATE_KEY }}
