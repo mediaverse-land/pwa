@@ -1,9 +1,10 @@
 version: '3.8'
 services:
   app:
-    image: mediaverse_web_app
+    image: mediaverse_pwa
     build:
       context: ./
       dockerfile: Dockerfile
+    restart: unless-stopped
     ports:
       - ${APP_EXPOSED_PORT:-0}:3000
