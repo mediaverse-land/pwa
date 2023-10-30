@@ -37,10 +37,10 @@ const SongSlider = () => {
           quality={100}
         />
       </button>
-      <div className="relative w-[80rem] mx-auto max-w-screen-2xl">
+      <div className="relative w-[80rem] mx-auto max-w-screen-2xl linear-dark-blue-bg">
         <Swiper
           centerInsufficientSlides
-          className="w-full linear-black-bg rounded-2xl"
+          className="w-full"
           slidesPerView={7.5}
           spaceBetween={16}
           onSwiper={setSwiperRef}
