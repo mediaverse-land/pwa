@@ -20,7 +20,7 @@ const Terms = async () => {
             {termsData.name}
           </h1>
           <article
-            className="text-white w-full prose "
+            className="text-white w-full prose max-w-full"
             dangerouslySetInnerHTML={{ __html: termsData.content }}
           ></article>
         </div>
