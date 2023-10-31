@@ -96,60 +96,69 @@ const Blogs = async (params: any) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-6 w-full justify-center sm:justify-between items-center mt-6">
-          {blogsData.data.map((item: any, index: number) => {
-            return (
-              <Link
-                key={index}
-                href={`/blogs/${item.id}`}
-                className="flex flex-col py-4 px-4 border border-[#262699] rounded-[24px] w-full h-full"
-              >
-                <div className="relative w-full aspect-square">
-                  <Image
-                    src={item.image}
-                    alt="image"
-                    quality={100}
-                    className="rounded-[16px] aspect-square"
-                    fill
-                  />
-                </div>
-                {/* body */}
-                <div className="flex flex-col w-full grow">
-                  <p className="text-[#CCCCFF] mt-6 px-2 text-[16px]">
-                    {item.title}
-                  </p>
-                  <div
-                    className="mt-1 text-[#666680] text-xs px-2 line-clamp-4 grow leading-[19px]"
-                    dangerouslySetInnerHTML={{
-                      __html: item.body.slice(0, 75),
-                    }}
-                  ></div>
-                  <div className="flex justify-between w-full mt-4 text-[#666680] px-2 pb-2">
-                    <div className="flex space-x-1">
+        {blogsData.data.length !== 0 ? (
+          <>
+            <div className="grid grid-cols-4 gap-6 w-full justify-center sm:justify-between items-center mt-6">
+              {blogsData.data.map((item: any, index: number) => {
+                return (
+                  <Link
+                    key={index}
+                    href={`/blogs/${item.id}`}
+                    className="flex flex-col py-4 px-4 border border-[#262699] rounded-[24px] w-full h-full"
+                  >
+                    <div className="relative w-full aspect-square">
                       <Image
-                        src="/images/mini-avatar.png"
-                        alt="avatar"
+                        src={item.image}
+                        alt="image"
                         quality={100}
-                        width={15}
-                        height={15}
+                        className="rounded-[16px] aspect-square"
+                        fill
                       />
-                      <p className="text-xs">{item.user.name}</p>
                     </div>
-                    <p className="text-xs">{item.created_at.slice(5, 11)}</p>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-
-        <div className="my-20 text-white">
-          <BlogsPagination
-            currentPage={+page}
-            links={blogsData.links}
-            meta={blogsData.meta}
-          />
-        </div>
+                    {/* body */}
+                    <div className="flex flex-col w-full grow">
+                      <p className="text-[#CCCCFF] mt-6 px-2 text-[16px]">
+                        {item.title}
+                      </p>
+                      <div
+                        className="mt-1 text-[#666680] text-xs px-2 line-clamp-4 grow leading-[19px]"
+                        dangerouslySetInnerHTML={{
+                          __html: item.body.slice(0, 75),
+                        }}
+                      ></div>
+                      <div className="flex justify-between w-full mt-4 text-[#666680] px-2 pb-2">
+                        <div className="flex space-x-1">
+                          <Image
+                            src="/images/mini-avatar.png"
+                            alt="avatar"
+                            quality={100}
+                            width={15}
+                            height={15}
+                          />
+                          <p className="text-xs">{item.user.name}</p>
+                        </div>
+                        <p className="text-xs">
+                          {item.created_at.slice(5, 11)}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+            <div className="my-20 text-white">
+              <BlogsPagination
+                currentPage={+page}
+                links={blogsData.links}
+                meta={blogsData.meta}
+              />
+            </div>
+          </>
+        ) : (
+          <div className="my-20 flex items-center justify-center text-white mx-auto font-bold text-[32px]">
+            No Blogs Found
+          </div>
+        )}
       </div>
     </Motion>
   );
