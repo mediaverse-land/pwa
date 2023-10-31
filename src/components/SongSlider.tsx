@@ -1,10 +1,10 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Swiper as SwiperClass } from "swiper/types";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { getMostViewedSongs } from "@/services/contactService";
+import { Swiper, SwiperSlide } from "swiper/react";
 const SongSlider = () => {
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [songoData, setSongData] = useState([]);

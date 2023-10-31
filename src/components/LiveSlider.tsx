@@ -1,10 +1,6 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { Swiper as SwiperClass } from "swiper/types";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { getLives } from "@/services/contactService";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 const getData = async () => {
   const liveData = await getLives();
