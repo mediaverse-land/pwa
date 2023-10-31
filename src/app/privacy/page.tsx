@@ -14,13 +14,13 @@ const Privacy = async () => {
 
   return (
     <Motion>
-      <div className="w-full flex mt-36 pb-16 justify-center px-4 min-h-screen">
-        <div className="sm:w-6/12 w-full flex flex-col">
+      <div className="w-[80rem] max-w-screen-lg mx-auto flex mt-36 pb-16 justify-center px-4 min-h-screen">
+        <div className="w-full flex flex-col">
           <h1 className="text-white mt-8 sm:mt-0 mb-[43px] capitalize  text-[25px]">
             {privacyData.name}
           </h1>
           <article
-            className="text-white w-full prose "
+            className="text-white min-w-full w-full prose "
             dangerouslySetInnerHTML={{ __html: privacyData.content }}
           ></article>
         </div>

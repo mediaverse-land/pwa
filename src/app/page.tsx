@@ -43,7 +43,6 @@ const Home = async () => {
 
   return (
     <Motion>
-      {" "}
       <div className=" mt-28">
         <Image
           src="/images/media-verse-background-image.png"
@@ -53,7 +52,7 @@ const Home = async () => {
           className="absolute top-4 -z-10 "
           quality={100}
         />
-        <div className=" max-w-screen-2xl mx-auto  flex justify-evenly flex-wrap px-4">
+        <div className="max-w-screen-2xl mx-auto flex justify-evenly flex-wrap px-4">
           <div className="flex flex-col t-10">
             <h1 className="text-3xl font-semibold whitespace-nowrap text-white mt-16">
               What is MediaVerse?

@@ -80,7 +80,7 @@ const Blogs = async (params: any) => {
   // console.log("hello");
   return (
     <Motion>
-      <div className=" mt-28 flex flex-col items-center">
+      <div className="mt-28 flex flex-col items-center w-[80rem] max-w-screen-lg mx-auto">
         <div className="w-full flex flex-col items-center justify-center">
           <h1 className="text-2xl font-semibold  text-white">
             MediaVerse News
@@ -92,7 +92,7 @@ const Blogs = async (params: any) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-6 w-full justify-center sm:justify-between sm:w-8/12 items-center mt-6">
+        <div className="grid grid-cols-4 gap-6 w-full justify-center sm:justify-between items-center mt-6">
           {blogsData.data.map((item: any, index: number) => {
             return (
               <Link
