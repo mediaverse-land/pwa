@@ -20,7 +20,7 @@ const Privacy = async () => {
             {privacyData.name}
           </h1>
           <article
-            className="text-white min-w-full w-full prose "
+            className="text-white max-w-full w-full prose "
             dangerouslySetInnerHTML={{ __html: privacyData.content }}
           ></article>
         </div>
