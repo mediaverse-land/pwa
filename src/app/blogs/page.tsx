@@ -57,13 +57,15 @@ export interface LinksEntity {
   active: boolean;
 }
 
-async function getBlogsData(page: string) {
+async function getBlogsData(page: number) {
   const blogs = await getBlogs(page);
 
   // console.info(blogs);
 
   if (!blogs.ok) {
-    throw new Error("Failed to fetch data", { cause: `${blogs.status} Error` });
+    throw new Error(`Failed to fetch data. ${blogs.statusText}`, {
+      cause: `${blogs.status} Error`,
+    });
   }
   return blogs.json();
 }
@@ -72,9 +74,11 @@ const Blogs = async (params: any) => {
   if (!params.searchParams.page) {
     redirect("/blogs?page=1");
   }
-  let page = params.searchParams.page;
+  let page = +params.searchParams.page;
+  console.log(page);
   const blogsData: BlogsPageData = await getBlogsData(page);
-  if (blogsData.data.length === 0) {
+  console.log(blogsData, "data");
+  if (blogsData?.data && blogsData.data.length === 0 && page !== 1) {
     redirect("/blogs?page=1");
   }
   // console.log("hello");

@@ -16,7 +16,7 @@ const Terms = async () => {
     <Motion>
       <div className="w-[80rem] max-w-screen-lg mx-auto flex mt-36 pb-16 justify-center px-4 min-h-[90vh]">
         <div className="w-full flex flex-col">
-          <h1 className="text-white capitalize mb-[43px] text-[25px]">
+          <h1 className="text-white capitalize mb-[43px] font-bold text-[25px]">
             {termsData.name}
           </h1>
           <article
