@@ -1,5 +1,5 @@
 "use client";
-
+import { useSession, signIn, signOut } from "next-auth/react";
 import { navbar } from "@/data";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +7,8 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 
 const Navbar = () => {
   const pathname = usePathname();
-
+  const session = useSession();
+  console.log(session, "session");
   // console.log(pathname, "pathname");
 
   return (
@@ -31,15 +32,33 @@ const Navbar = () => {
             </span>
           </div>
         </Link>
-        <div className="flex md:order-2 justify-between">
-          <a className="text-blue-500 mr-1 hover:text-white" href="#">
-            Sign In
-          </a>
-          <span className="text-blue-500 mr-1">/</span>
-          <a className="text-blue-500 hover:text-white" href="#">
-            Sign Up
-          </a>
-        </div>
+        {session.data?.user ? (
+          <Link
+            href={`/explore`}
+            className="w-[50px] md:order-2 pt-2 pb-[7px] relative aspect-square rounded-full overflow-hidden shadow border border-white border-opacity-30 justify-center items-center inline-flex"
+          >
+            <Image
+              src={session.data.user.image || ""}
+              alt="user profile picture"
+              fill
+            />
+          </Link>
+        ) : (
+          <Link href={`/login`} className="flex md:order-2 justify-between">
+            <div
+              style={{
+                background: `linear-gradient(0deg, #597AFF, #597AFF),
+            linear-gradient(126.58deg, rgba(255, 255, 255, 0.3) 23.2%, rgba(255, 255, 255, 0) 71.3%)`,
+                boxShadow: `0px 0px 25px 0px rgba(89, 122, 255, 0.3)`,
+              }}
+              className="w-[136px] h-8 px-[38px] pt-2 pb-[7px] bg-indigo-500 rounded-[999px] shadow border border-white border-opacity-30 justify-center items-center inline-flex"
+            >
+              <div className="text-center text-white text-sm font-semibold whitespace-nowrap">
+                Web app
+              </div>
+            </div>
+          </Link>
+        )}
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-cta"

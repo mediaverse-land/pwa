@@ -40,3 +40,12 @@
   top: 0;
   transform: rotateZ(180deg);
 }
+
+.auth-border-image-source {
+  border: 1px solid;
+  border-image-source: linear-gradient(
+    114.85deg,
+    rgba(207, 207, 252, 0.3) 0%,
+    rgba(207, 207, 252, 0) 65.83%
+  );
+}

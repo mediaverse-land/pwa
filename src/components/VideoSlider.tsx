@@ -1,10 +1,9 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { Swiper as SwiperClass } from "swiper/types";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { getMostViewedVideos } from "@/services/contactService";
+import "swiper/css";
+import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 
 const VideoSlider = () => {
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
