@@ -11,11 +11,14 @@ const SocialLoginBtn = ({
   variant: "apple" | "google" | "facebook" | "github";
 }) => {
   const params = useSearchParams();
+  const handleSignIn = (callbackUrl?: string) => {
+    signIn(variant, { callbackUrl: callbackUrl || "/explore" });
+  };
   switch (variant) {
     case "apple":
       return (
         <div
-          onClick={() => signIn(variant)}
+          onClick={(e) => handleSignIn()}
           className="text-white flex items-center justify-center gap-2 cursor-pointer"
           style={{
             background: `linear-gradient(0deg, #000000, #000000), linear-gradient(153.43deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 83.33%)`,
@@ -30,7 +33,7 @@ const SocialLoginBtn = ({
     case "google":
       return (
         <div
-          onClick={() => signIn(variant)}
+          onClick={() => handleSignIn()}
           className="flex items-center justify-center gap-2 cursor-pointer"
           style={{
             background: `linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(153.43deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 83.33%)`,
@@ -45,7 +48,7 @@ const SocialLoginBtn = ({
     case "facebook":
       return (
         <div
-          onClick={() => signIn(variant)}
+          onClick={() => handleSignIn()}
           style={{
             background: `linear-gradient(0deg, #1771E6, #1771E6),
       linear-gradient(153.43deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 83.33%)`,
@@ -61,7 +64,7 @@ const SocialLoginBtn = ({
     case "github":
       return (
         <div
-          onClick={() => signIn(variant)}
+          onClick={() => handleSignIn()}
           style={{
             background: `linear-gradient(0deg, #1771E6, #1771E6),
     linear-gradient(153.43deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 83.33%)`,

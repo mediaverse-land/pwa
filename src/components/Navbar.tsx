@@ -33,22 +33,16 @@ const Navbar = () => {
           </div>
         </Link>
         {session.data?.user ? (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              signOut();
-            }}
-            style={{
-              background: `linear-gradient(0deg, #597AFF, #597AFF),
-        linear-gradient(126.58deg, rgba(255, 255, 255, 0.3) 23.2%, rgba(255, 255, 255, 0) 71.3%)`,
-              boxShadow: `0px 0px 25px 0px rgba(89, 122, 255, 0.3)`,
-            }}
-            className="w-[136px] md:order-2 h-8 px-[38px] pt-2 pb-[7px] bg-indigo-500 rounded-[999px] shadow border border-white border-opacity-30 justify-center items-center inline-flex"
+          <Link
+            href={`/explore`}
+            className="w-[50px] md:order-2 pt-2 pb-[7px] relative aspect-square rounded-full overflow-hidden shadow border border-white border-opacity-30 justify-center items-center inline-flex"
           >
-            <div className="text-center text-white text-sm font-semibold whitespace-nowrap">
-              Logout
-            </div>
-          </button>
+            <Image
+              src={session.data.user.image || ""}
+              alt="user profile picture"
+              fill
+            />
+          </Link>
         ) : (
           <Link href={`/login`} className="flex md:order-2 justify-between">
             <div
