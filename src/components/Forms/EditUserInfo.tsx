@@ -64,6 +64,9 @@ const EditUserInfoForm = () => {
       Cookies.set("isLogin", "true", {
         expires: 1,
       });
+      Cookies.set("EditUserInfo", "false", {
+        expires: 1,
+      });
       router.push("/explore");
     }
   });

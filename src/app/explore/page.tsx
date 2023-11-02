@@ -64,10 +64,11 @@ const navbarSections: InavbarSections[] = [
 
 const Explore = async () => {
   const session = await getServerSession();
-  const isLogin = Boolean(cookies().get("isLogin")?.value);
-  if (!session && !isLogin) {
+  const isLogin = cookies().get("isLogin")?.value;
+  if (!session && isLogin !== "true") {
     redirect("/login");
   }
+
   return (
     <Motion>
       <div className="mt-28 mx-auto flex items-center justify-center">
