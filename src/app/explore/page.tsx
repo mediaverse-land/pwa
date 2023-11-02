@@ -16,6 +16,7 @@ import {
 } from "@/components/SVG/svgs";
 import LogoutBtn from "@/components/Buttons/LogoutBtn";
 import Motion from "@/components/motion";
+import { cookies } from "next/headers";
 type InavbarSections = {
   id: string;
   name: string;
@@ -63,9 +64,11 @@ const navbarSections: InavbarSections[] = [
 
 const Explore = async () => {
   const session = await getServerSession();
-  if (!session) {
+  const isLogin = cookies().get("isLogin")?.value;
+  if (!session && isLogin !== "true") {
     redirect("/login");
   }
+
   return (
     <Motion>
       <div className="mt-28 mx-auto flex items-center justify-center">
@@ -79,17 +82,17 @@ const Explore = async () => {
               <div className="flex justify-between items-center gap-2">
                 <div className="relative w-[40px] h-[40px] rounded-full overflow-hidden">
                   <Image
-                    src={session.user?.image || ""}
+                    src={session?.user?.image || ""}
                     alt="user profile picture"
                     fill
                   />
                 </div>
                 <div className="flex flex-col items-stretch max-w-[80%] grow text-start">
                   <div className="line-clamp-1 w-full h-full font-semibold text-white">
-                    {session.user?.name}
+                    {session?.user?.name}
                   </div>
                   <div className="line-clamp-1 max-w-full h-full text-[#83839C] text-[10px]">
-                    {session.user?.email}
+                    {session?.user?.email}
                   </div>
                 </div>
               </div>
@@ -118,9 +121,12 @@ const Explore = async () => {
             </div>
           </aside>
           <div
-            className="col-span-3 rounded-2xl border border-[#CFCFFC] border-opacity-20"
+            className="col-span-3 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-hidden flex flex-col items-stretch gap-4"
             style={{ background: `rgba(78, 78, 97, 0.20)` }}
-          ></div>
+          >
+            {/* search */}
+            <div></div>
+          </div>
         </div>
       </div>
     </Motion>

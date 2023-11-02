@@ -75,9 +75,9 @@ const Blogs = async (params: any) => {
     redirect("/blogs?page=1");
   }
   let page = +params.searchParams.page;
-  console.log(page);
+  // console.log(page);
   const blogsData: BlogsPageData = await getBlogsData(page);
-  console.log(blogsData, "data");
+  // console.log(blogsData, "data");
   if (blogsData?.data && blogsData.data.length === 0 && page !== 1) {
     redirect("/blogs?page=1");
   }

@@ -8,7 +8,7 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 const Navbar = () => {
   const pathname = usePathname();
   const session = useSession();
-  console.log(session, "session");
+  // console.log(session, "session");
   // console.log(pathname, "pathname");
 
   return (
@@ -44,7 +44,7 @@ const Navbar = () => {
             />
           </Link>
         ) : (
-          <Link href={`/login`} className="flex md:order-2 justify-between">
+          <Link href={`/explore`} className="flex md:order-2 justify-between">
             <div
               style={{
                 background: `linear-gradient(0deg, #597AFF, #597AFF),

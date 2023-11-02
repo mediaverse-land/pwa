@@ -9,13 +9,12 @@ import SocialLoginBtn from "@/components/Buttons/SocialLoginBtn";
 import { LoginWithPhone, LoginWithUsername } from "@/components/LoginInputs";
 
 const Login = async (props: any) => {
-  console.log(props, "login props");
   let loginType = props.searchParams.type || "phone";
-  console.log(loginType, "login type");
+
   const session = await getServerSession(authOptions);
   console.log(session, "server session");
   if (session) {
-    redirect("/");
+    redirect("/explore");
   }
   return (
     <Motion>

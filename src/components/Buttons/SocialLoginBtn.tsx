@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { getProviders, signIn, signOut } from "next-auth/react";
@@ -8,11 +7,14 @@ import { getProviders, signIn, signOut } from "next-auth/react";
 const SocialLoginBtn = ({
   variant,
 }: {
-  variant: "apple" | "google" | "facebook" | "github";
+  variant: "apple" | "google" | "facebook" | "github" | "twitter";
 }) => {
   const params = useSearchParams();
+  const callbackUrlParams = params.get("callbackUrl");
   const handleSignIn = (callbackUrl?: string) => {
-    signIn(variant, { callbackUrl: callbackUrl || "/explore" });
+    signIn(variant, {
+      callbackUrl: callbackUrl || callbackUrlParams || "/explore",
+    });
   };
   switch (variant) {
     case "apple":
