@@ -53,8 +53,16 @@ const handler = NextAuth({
     signIn: "/login",
     error: "/login",
   },
-  session: { strategy: "jwt" },
+  // session: { strategy: "jwt" },
   callbacks: {
+    async redirect(params) {
+      // console.log(params, "params");
+      if (params.url.startsWith("http") || params.url.startsWith("/")) {
+        return params.url;
+      } else {
+        return params.baseUrl;
+      }
+    },
     async signIn(data: any) {
       console.log(data, "data");
 

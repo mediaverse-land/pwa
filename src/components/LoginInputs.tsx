@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { SPINNER } from "./SVG/svgs";
+import { useSearchParams } from "next/navigation";
 const loginWithPhoneSchema = z.object({
   cellphone: z.string().min(1, { message: "*This field is required" }),
 });
@@ -16,6 +17,7 @@ const loginWithUsernameSchema = z.object({
   password: z.string().min(1, { message: "*This field is required" }),
 });
 const LoginWithPhone = () => {
+  const params = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
@@ -71,7 +73,7 @@ const LoginWithPhone = () => {
       if (res.ok && response) {
         signIn(
           "loginWithOTP",
-          { callbackUrl: "/explore" },
+          { callbackUrl: params.get("refer") || "/explore" },
           { user: JSON.stringify(response) }
         );
         console.log(response);
@@ -180,6 +182,7 @@ const LoginWithPhone = () => {
 };
 
 const LoginWithUsername = () => {
+  const params = useSearchParams();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -194,13 +197,13 @@ const LoginWithUsername = () => {
   } = useForm({ resolver: zodResolver(loginWithUsernameSchema) });
   const handleLoginWithUsername = handleSubmit(async (data) => {
     setIsLoading(true);
-    console.log(
-      {
-        password: data.password,
-        cellphone: data.username,
-      },
-      "data"
-    );
+    // console.log(
+    //   {
+    //     password: data.password,
+    //     cellphone: data.username,
+    //   },
+    //   "data"
+    // );
     const req = await signInWithUsername({
       password: data.password,
       cellphone: data.username,
@@ -210,7 +213,7 @@ const LoginWithUsername = () => {
     if (req.ok && res) {
       signIn(
         "loginWithUsername",
-        { callbackUrl: "/explore" },
+        { callbackUrl: params.get("refer") || "/explore" },
         { user: JSON.stringify(res) }
       );
     } else {

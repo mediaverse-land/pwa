@@ -10,7 +10,7 @@ const SocialLoginBtn = ({
   variant: "apple" | "google" | "facebook" | "github" | "twitter";
 }) => {
   const params = useSearchParams();
-  const callbackUrlParams = params.get("callbackUrl");
+  const callbackUrlParams = params.get("refer");
   const handleSignIn = (callbackUrl?: string) => {
     signIn(variant, {
       callbackUrl: callbackUrl || callbackUrlParams || "/explore",
