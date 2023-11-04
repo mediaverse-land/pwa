@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { InputWithPlaceHolder } from "./shared/AuthInputs";
+import { signIn } from "next-auth/react";
 
 const LoginWithPhone = () => {
   return (
@@ -27,8 +30,8 @@ const LoginWithPhone = () => {
 
 const LoginWithUsername = () => {
   return (
-    <div className="flex flex-col gap-2 items-stretch">
-      <InputWithPlaceHolder
+    <form className="flex flex-col gap-2 items-stretch">
+      {/* <InputWithPlaceHolder
         lable="Username"
         placeholder="Enter your username..."
       />
@@ -36,8 +39,23 @@ const LoginWithUsername = () => {
         lable="Password"
         placeholder="Enter your password..."
         type="password"
-      />
-    </div>
+      /> */}
+      <button
+        type="submit"
+        onClick={(e) => {
+          e.preventDefault();
+          signIn(
+            "loginWithUsername",
+            {
+              callbackUrl: "/explore",
+            },
+            { cellphone: "65465465", password: "mmmmmmmmm" }
+          );
+        }}
+      >
+        submit
+      </button>
+    </form>
   );
 };
 export { LoginWithPhone, LoginWithUsername };
