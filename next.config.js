@@ -19,6 +19,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "mediaverse-land-assets.s3.eu-west-3.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
   },
 };

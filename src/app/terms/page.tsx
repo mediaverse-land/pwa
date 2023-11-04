@@ -14,13 +14,13 @@ const Terms = async () => {
   const termsData = await getTermsData();
   return (
     <Motion>
-      <div className="w-full flex mt-36 pb-16 justify-center px-4 min-h-[90vh]">
-        <div className="sm:w-6/12 w-full flex flex-col">
-          <h1 className="text-white capitalize mb-[43px] text-[25px]">
+      <div className="w-[80rem] max-w-screen-lg mx-auto flex mt-36 pb-16 justify-center px-4 min-h-[90vh]">
+        <div className="w-full flex flex-col">
+          <h1 className="text-white capitalize mb-[43px] font-bold text-[25px]">
             {termsData.name}
           </h1>
           <article
-            className="text-white w-full prose max-w-full"
+            className="text-white max-w-full w-full prose"
             dangerouslySetInnerHTML={{ __html: termsData.content }}
           ></article>
         </div>

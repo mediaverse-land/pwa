@@ -10,6 +10,7 @@ import {
   getMostViewedText,
 } from "@/services/contactService";
 import Image from "next/image";
+import Link from "next/link";
 
 async function getImageData() {
   const image = await getMostViewedImages();
@@ -43,7 +44,6 @@ const Home = async () => {
 
   return (
     <Motion>
-      {" "}
       <div className=" mt-28">
         <Image
           src="/images/media-verse-background-image.png"
@@ -53,7 +53,7 @@ const Home = async () => {
           className="absolute top-4 -z-10 "
           quality={100}
         />
-        <div className=" max-w-screen-2xl mx-auto  flex justify-evenly flex-wrap px-4">
+        <div className="max-w-screen-2xl mx-auto flex justify-evenly flex-wrap px-4">
           <div className="flex flex-col t-10">
             <h1 className="text-3xl font-semibold whitespace-nowrap text-white mt-16">
               What is MediaVerse?
@@ -86,12 +86,12 @@ const Home = async () => {
                 </div>
               </div>
             </div>
-            <button
-              type="submit"
-              className="w-[278px] h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm  py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]"
+            <Link
+              href={`/explore`}
+              className="w-[278px] h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm leading-none flex justify-center items-center py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]"
             >
               Web App
-            </button>
+            </Link>
           </div>
           <div className="flex space-x-4 mt-8 sm:mt-0 animate-container">
             <Image
