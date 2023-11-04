@@ -12,7 +12,7 @@ const Login = async (props: any) => {
   let loginType = props.searchParams.type || "phone";
 
   const session = await getServerSession(authOptions);
-  console.log(session, "server session");
+  // console.log(session, "server session");
   if (session) {
     redirect("/explore");
   }
@@ -28,25 +28,22 @@ const Login = async (props: any) => {
           <div className="flex flex-col items-stretch h-full justify-between gap-5 text-center">
             {/* providers */}
             <div className="flex flex-col items-stretch gap-4 [&_>_*]:py-[0.7rem] [&_>_*]:text-[14px] [&_>_*]:font-semibold [&_>_*]:leading-4 [&_>_*]:h-[40px] [&_>_*]:rounded-full">
-              <SocialLoginBtn variant="apple" />
               <SocialLoginBtn variant="google" />
+              <SocialLoginBtn variant="twitter" />
+              <SocialLoginBtn variant="apple" />
               <SocialLoginBtn variant="facebook" />
-              <SocialLoginBtn variant="github" />
             </div>
             <div className="text-[#83839C] text-[12px] leading-3 uppercase">
               or
             </div>
             {/* inputs */}
-            <div className="flex flex-col items-stretch justify-between grow gap-16">
+            <div className="flex flex-col items-stretch grow gap-8">
               {loginType === "phone" ? (
                 <LoginWithPhone />
               ) : (
                 <LoginWithUsername />
               )}
               <div className="flex flex-col items-stretch gap-5">
-                <button className="bg-[#4E4E61] bg-opacity-50 rounded-full h-[40px] text-[14px] leading-4 text-white font-semibold">
-                  Send Code
-                </button>
                 <div className="flex items-center justify-around">
                   <div>
                     <span className="text-[12px] text-[#83839C]">

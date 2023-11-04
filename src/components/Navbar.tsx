@@ -8,7 +8,7 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 const Navbar = () => {
   const pathname = usePathname();
   const session = useSession();
-  // console.log(session, "session");
+  console.log(session, "session");
   // console.log(pathname, "pathname");
 
   return (

@@ -63,7 +63,7 @@ const SocialLoginBtn = ({
           Sign up with Facebook
         </div>
       );
-    case "github":
+    case "twitter":
       return (
         <div
           onClick={() => handleSignIn()}
@@ -74,9 +74,13 @@ const SocialLoginBtn = ({
           className="text-white flex items-center justify-center gap-2 cursor-pointer"
         >
           <div className="relative w-[16px] h-[16px]">
-            <Image src={"/icons/facebook.svg"} alt="logo" fill />
+            <Image
+              src={"/icons/x-social-media-black-icon.svg"}
+              alt="logo"
+              fill
+            />
           </div>
-          Sign up with github
+          Sign up with X
         </div>
       );
     default:
