@@ -74,7 +74,7 @@ const handler = NextAuth({
           const res = await req.json();
           console.log(res, "res");
           if (req.ok) {
-            cookies().set("uesr", JSON.stringify(res));
+            cookies().set("user", JSON.stringify(res));
             return data;
           } else {
             throw new Error("Failed to login");
@@ -102,7 +102,7 @@ const handler = NextAuth({
           const res = await req.json();
           console.log(res, "res");
           if (req.ok) {
-            cookies().set("uesr", JSON.stringify(res));
+            cookies().set("user", JSON.stringify(res));
             return data;
           } else {
             throw new Error("Failed to login");
@@ -150,25 +150,30 @@ const handler = NextAuth({
         // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
-        const res = await fetch(`${URL}/auth/sign-in`, {
-          method: "POST",
-          body: JSON.stringify(req.query),
-          headers: {
-            "Content-Type": "application/json",
-            "Accept-Language": "en-US",
-            "x-app": "_Web",
-          },
-        });
-        const response = await res.json();
+
         console.log(credentials, "cred");
-        // console.log(req, "req");
-        console.log(response, "response");
+        console.log(req.query, "req");
+
         // If no error and we have user data, return it
-        if (res.ok && response) {
-          return response;
+        if (req.query) {
+          console.log("success");
+          const userInfo = JSON.parse(req.query.user);
+          // const user = {
+          //   cellphone: reqInfo.user.cellphone,
+          //   code: reqInfo.user.status,
+          //   id: reqInfo.user.id,
+          // };
+          cookies().set("user", JSON.stringify(userInfo));
+          const user = {
+            id: userInfo.user.id,
+            name: `${userInfo.user.first_name} ${userInfo.user.last_name}`,
+            image: userInfo.user.image,
+            email: userInfo.user.email,
+          };
+          console.log(user, "user in auth");
+          return user;
         } else {
-          console.log(response, "error");
-          throw new Error(`${response.message}`);
+          throw new Error(`User Not Found`);
         }
       },
     }),

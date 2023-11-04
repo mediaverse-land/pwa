@@ -155,3 +155,32 @@ export const signUpCompletion = async ({ data, token }: any) => {
     return req;
   }
 };
+export const signInWithUsername = async (data: any) => {
+  const url = `${URL}/auth/sign-in`;
+  if (process.env.NODE_ENV === "production") {
+    const req = await fetch(url, {
+      next: { revalidate: 60 },
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Accept-Language": "en-US",
+        "x-app": "_Web",
+        "Content-Type": "application/json",
+      },
+    });
+    return req;
+  } else {
+    console.log(data);
+    const req = await fetch(url, {
+      cache: "no-store",
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Accept-Language": "en-US",
+        "x-app": "_Web",
+        "Content-Type": "application/json",
+      },
+    });
+    return req;
+  }
+};
