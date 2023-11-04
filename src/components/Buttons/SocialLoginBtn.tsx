@@ -42,7 +42,7 @@ const SocialLoginBtn = ({
           }}
         >
           <div className="relative w-[16px] h-[16px]">
-            <Image src={"/icons/google.svg"} alt="logo" fill />
+            <Image src={"/icons/Google.svg"} alt="logo" fill />
           </div>
           Sign up with Google
         </div>
