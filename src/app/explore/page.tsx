@@ -82,11 +82,12 @@ const Explore = async () => {
               {/* user info */}
               <div className="flex justify-between items-center gap-2">
                 <div className="relative w-[40px] h-[40px] rounded-full overflow-hidden">
-                  <Image
-                    src={session?.user?.image || ""}
-                    alt="user profile picture"
-                    fill
-                  />
+                  {session?.user?.image &&
+                    <Image
+                      src={session?.user?.image}
+                      alt="user profile picture"
+                      fill
+                    />}
                 </div>
                 <div className="flex flex-col items-stretch max-w-[80%] grow text-start">
                   <div className="line-clamp-1 w-full h-full font-semibold text-white">
