@@ -64,6 +64,7 @@ const navbarSections: InavbarSections[] = [
 
 const Explore = async () => {
   const session = await getServerSession();
+  // console.log(session, " server session");
   const isLogin = cookies().get("isLogin")?.value;
   if (!session && isLogin !== "true") {
     redirect("/login");

@@ -14,12 +14,21 @@ const regex = /\b(\w{3}), (\w{3}) (\d{2}),/;
 
 const Blog = async (props: any) => {
   const data = await getBlogsData(props);
-  const date = data.data.created_at.match(regex);
-  // console.log(data);
+  // console.log(data.data.created_at, "creat");
+  let date = new Date(data.data.created_at);
+
+  // Extract the month and day
+  let month = date.toLocaleString("default", { month: "short" });
+  let day = date.getDate();
+
+  // Construct the output string
+  let outputDateString = `${month} ${day}`;
+
+  console.log(outputDateString);
+  // const date = data.data.created_at.match(regex) || "";
 
   return (
     <Motion>
-      {" "}
       <div className="w-full flex justify-center flex-col items-center sm:items-start sm:flex-row mt-36 space-x-0 px-4  sm:space-x-10 mb-10">
         <div className="flex flex-col">
           {/* <div className="w-80 h-80 bg-cover bg-[url('/images/image-room.png')]">
@@ -39,9 +48,7 @@ const Blog = async (props: any) => {
                 <div>{data.data.user.name}</div>
               </div>
               {/* date */}
-              <div>
-                {date[3]} {date[2]}
-              </div>
+              <div>{outputDateString}</div>
             </div>
             <Image
               className="rounded-[24px]"
