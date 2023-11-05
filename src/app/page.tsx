@@ -12,36 +12,50 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-const imageData = [
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-];
+// const imageData = [
+//   {
+//     asset: {
+//       thumbnails: {
+//         "336x366": "/images/car.png",
+//       },
+//     },
+//   },
+//   {
+//     asset: {
+//       thumbnails: {
+//         "336x366": "/images/car.png",
+//       },
+//     },
+//   },
+//   {
+//     asset: {
+//       thumbnails: {
+//         "336x366": "/images/car.png",
+//       },
+//     },
+//   },
+//   {
+//     asset: {
+//       thumbnails: {
+//         "336x366": "/images/car.png",
+//       },
+//     },
+//   },
+//   {
+//     asset: {
+//       thumbnails: {
+//         "336x366": "/images/car.png",
+//       },
+//     },
+//   },
+//   {
+//     asset: {
+//       thumbnails: {
+//         "336x366": "/images/car.png",
+//       },
+//     },
+//   },
+// ];
 
 async function getImageData() {
   const image = await getMostViewedImages();
@@ -69,7 +83,7 @@ async function getSliderData() {
   return text.json();
 }
 const Home = async () => {
-  // const imageData = await getImageData();
+  const imageData = await getImageData();
   const textData = await getTextData();
   const liveData = await getSliderData();
 
@@ -204,18 +218,18 @@ const Home = async () => {
               />
               <p className="text-white text-sm ">Most viewed</p>
             </div>
-            <div className="grid grid-cols-3 grid-rows-4 gap-2 mt-10 grow max-h-[510px] overflow-hidden">
+            <div className="grid grid-rows-4 grid-cols-3 grid-flow-row gap-2 mt-10 grow max-h-[510px]">
               {imageData.slice(0, 9).map((items: any, index: number) => {
                 return (
                   <ClientImage
                     key={index}
                     className={`${
-                      index === 2
+                      index === 1
                         ? "rounded-xl w-full aspect-square col-span-2 row-span-2"
                         : "rounded-xl w-full aspect-square"
                     }`}
                     src={items.asset.thumbnails["336x366"]}
-                    alt="photo"
+                    alt={items.name}
                   />
                 );
               })}
