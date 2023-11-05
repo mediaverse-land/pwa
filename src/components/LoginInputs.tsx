@@ -4,7 +4,7 @@ import { URL, requestOTP, signInWithUsername } from "@/services/contactService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { SPINNER } from "./SVG/svgs";
@@ -16,10 +16,19 @@ const loginWithUsernameSchema = z.object({
   username: z.string().min(1, { message: "*This field is required" }),
   password: z.string().min(1, { message: "*This field is required" }),
 });
+const convertSecondsForTimer = (number: number) => {
+  const minutes = Math.floor(number / 60);
+  const seconds = number % 60;
+  return `${minutes <= 60 && minutes >= 10 ? "" : "0"}${
+    minutes < 60 ? minutes : ""
+  }:${seconds < 10 ? "0" : ""}${seconds}`;
+};
 const LoginWithPhone = () => {
   const params = useSearchParams();
+  const [counter, setCounter] = useState<number>(0);
+  // const [timer, setTimer] = useState(convertSecondsForTimer(counter));
   const [isLoading, setIsLoading] = useState(false);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState<string>("");
   const [code, setCode] = useState("");
   const [isCodeExist, setIsCodeExist] = useState(false);
   const [error, setError] = useState({
@@ -33,6 +42,19 @@ const LoginWithPhone = () => {
   } = useForm({
     resolver: zodResolver(loginWithPhoneSchema),
   });
+  // console.log(timer);
+  // console.log(counter);
+  useEffect(() => {
+    const time = setInterval(() => {
+      if (counter > 0) {
+        setCounter((prev) => {
+          return prev - 1;
+        });
+      }
+      // setTimer(convertSecondsForTimer(counter));
+    }, 1000);
+    return () => clearInterval(time);
+  }, [counter]);
   const handleLoginWithOTP = handleSubmit(async (data) => {
     setIsLoading(true);
     setError({
@@ -52,8 +74,18 @@ const LoginWithPhone = () => {
         });
       } else if (request.ok) {
         setIsCodeExist(true);
+        setCounter(response.expires_after);
+        // setCounter(10);
       }
     } else {
+      if (code.length < 1) {
+        setError({
+          ...error,
+          code: "*This field is required",
+        });
+        setIsLoading(false);
+        return;
+      }
       const res = await fetch(`${URL}/auth/otp/submit`, {
         method: "POST",
         body: JSON.stringify({
@@ -85,6 +117,25 @@ const LoginWithPhone = () => {
       }
     }
   });
+
+  const handleSendCodeAgain = async () => {
+    const request = await requestOTP({
+      cellphone: phone,
+      captcha: "mxmx",
+    }).finally(() => setIsLoading(false));
+    const response = await request.json();
+    if (request.status === 422) {
+      setError({
+        ...error,
+        phone: response.error,
+      });
+    } else if (request.ok) {
+      setIsCodeExist(true);
+      setCounter(response.expires_after);
+      // setCounter(10);
+    }
+  };
+
   return (
     <form
       onSubmit={handleLoginWithOTP}
@@ -108,6 +159,7 @@ const LoginWithPhone = () => {
             <input
               className="bg-transparent grow placeholder:text-[#353542] outline-none"
               placeholder="your number..."
+              type="tel"
               disabled={isCodeExist}
               {...register("cellphone", {
                 value: phone,
@@ -150,6 +202,26 @@ const LoginWithPhone = () => {
       </div>
 
       <div>
+        {/* counter */}
+        <div
+          className={`mb-4 text-white text-[12px] overflow-hidden ${
+            isCodeExist ? "block" : "hidden"
+          }`}
+        >
+          {counter > 0 ? (
+            convertSecondsForTimer(counter)
+          ) : (
+            <button
+              onClick={async (e) => {
+                e.preventDefault();
+                handleSendCodeAgain();
+              }}
+              className="text-white text-[14px]"
+            >
+              Send Code Again
+            </button>
+          )}
+        </div>
         <button
           type="submit"
           className="bg-[#4E4E61] bg-opacity-50 rounded-full w-full h-[40px] text-[14px] leading-4 text-white font-semibold"
