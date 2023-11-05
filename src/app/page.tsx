@@ -218,15 +218,15 @@ const Home = async () => {
               />
               <p className="text-white text-sm ">Most viewed</p>
             </div>
-            <div className="grid grid-rows-4 grid-cols-3 grid-flow-row gap-2 mt-10 grow max-h-[510px]">
+            <div className="grid grid-rows-4 grid-cols-3 grid-flow-row gap-4 mt-10 grow max-h-[510px]">
               {imageData.slice(0, 9).map((items: any, index: number) => {
                 return (
                   <ClientImage
                     key={index}
                     className={`${
                       index === 1
-                        ? "rounded-xl w-full aspect-square col-span-2 row-span-2"
-                        : "rounded-xl w-full aspect-square"
+                        ? "rounded-[15%] w-full aspect-square col-span-2 row-span-2"
+                        : "rounded-[15%] w-full aspect-square"
                     }`}
                     src={items.asset.thumbnails["336x366"]}
                     alt={items.name}
