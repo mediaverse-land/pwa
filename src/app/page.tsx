@@ -175,13 +175,13 @@ const Home = async () => {
             </div>
             <div className="grid grid-rows-4 grid-cols-3 grid-flow-row gap-2 mt-10 grow max-h-[510px]">
               {imageData.map((items: any, index: number) => {
-
                 return (
                   <ClientImage
                     key={index}
-                    className={`${index  === 1
-                      ? "rounded-xl w-full aspect-square col-span-2 row-span-2"
-                      : "rounded-xl w-full aspect-square col-span-1 row-span-1"
+                    className={`${
+                      index === 1
+                        ? "rounded-xl w-full aspect-square col-span-2 row-span-2"
+                        : "rounded-xl w-full aspect-square col-span-1 row-span-1"
                     }`}
                     src={items.asset.thumbnails["336x366"]}
                     alt={items.name}
