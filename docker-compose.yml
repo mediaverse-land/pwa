@@ -5,6 +5,6 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    restart: unless-stopped
+    restart: always
     ports:
       - ${APP_EXPOSED_PORT:-0}:3000
