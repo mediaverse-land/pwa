@@ -1,19 +1,18 @@
 "use client";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { INACTIVE_LOGOUT } from "../SVG/svgs";
 import Cookies from "js-cookie";
 const LogoutBtn = () => {
-  const accessToken = Cookies.get("access_token");
   const isLogin = Cookies.get("isLogin");
+  const session = useSession();
+  // console.log(session.data);
   return (
     <button
-      onClick={(e) => {
+      onClick={async (e) => {
         e.preventDefault();
+        Cookies.set("isLogin", "false");
+        Cookies.remove("user");
         signOut({ callbackUrl: "/" });
-        if (accessToken || isLogin === "true") {
-          Cookies.remove("access_token");
-          Cookies.set("isLogin", "false");
-        }
       }}
       className="flex items-center gap-4 group"
     >

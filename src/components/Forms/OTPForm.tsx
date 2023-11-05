@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
@@ -9,10 +9,12 @@ import z from "zod";
 import { requestOTP, submitOTP } from "@/services/contactService";
 import { SPINNER } from "../SVG/svgs";
 import Cookies from "js-cookie";
+import { signIn } from "next-auth/react";
+import { convertSecondsForTimer } from "@/lib/convertSecondToTimer";
 const requestOtpSchema = z.object({
   cellphone: z
     .string({
-      errorMap: () => ({ message: "Please Enter Valid Phone Number" }),
+      errorMap: () => ({ message: "*Please Enter Valid Phone Number" }),
     })
     .min(1)
     .max(10),
@@ -24,6 +26,7 @@ const OTPForm = () => {
     otp: "",
   });
   const [loading, setLoading] = useState(false);
+  const [counter, setCounter] = useState(0);
   const router = useRouter();
   const [cellphone, setCellphone] = useState("");
   const [codeStatus, setCodeStatus] = useState({
@@ -45,7 +48,16 @@ const OTPForm = () => {
       cellphone: "",
       otp: "",
     });
+
     if (codeStatus.isCodeExist) {
+      if (codeStatus.code.length < 1) {
+        setInputErrors({
+          ...inputErrors,
+          otp: "*This field is required",
+        });
+        setLoading(false);
+        return;
+      }
       const formData = {
         cellphone: data.cellphone,
         otp: codeStatus.code,
@@ -53,16 +65,18 @@ const OTPForm = () => {
       const request = await submitOTP(formData).finally(() =>
         setLoading(false)
       );
+      const response = await request.json();
+      // console.log(response, "res");
       if (request.ok) {
-        const response = await request.json();
-        console.log(response, "res");
         Cookies.set("EditUserInfo", "true", {
           expires: 1,
         });
-        Cookies.set("access_token", response.token, {
-          expires: 1,
-        });
-        router.push("/sign-up/info");
+        Cookies.set("user", JSON.stringify(response));
+        signIn(
+          "loginWithOTP",
+          { callbackUrl: "/sign-up/info" },
+          { user: JSON.stringify(response) }
+        );
       }
     } else {
       setCellphone(data.cellphone);
@@ -76,6 +90,7 @@ const OTPForm = () => {
       const response = await request.json();
       console.log(response, "res");
       if (request.ok) {
+        setCounter(response.expires_after);
         setCodeStatus((prev) => {
           return { ...prev, isCodeExist: true };
         });
@@ -89,6 +104,39 @@ const OTPForm = () => {
     reset();
   });
 
+  useEffect(() => {
+    const time = setInterval(() => {
+      if (counter > 0) {
+        setCounter((prev) => {
+          return prev - 1;
+        });
+      }
+      // setTimer(convertSecondsForTimer(counter));
+    }, 1000);
+    return () => clearInterval(time);
+  }, [counter]);
+
+  const handleSendCodeAgain = async () => {
+    const request = await requestOTP({
+      cellphone: codeStatus.code,
+      captcha: "mxmx",
+    }).finally(() => setLoading(false));
+    const response = await request.json();
+    if (request.status === 422) {
+      setInputErrors({
+        ...inputErrors,
+        cellphone: response.error,
+      });
+    } else if (request.ok) {
+      setCodeStatus({
+        ...codeStatus,
+        isCodeExist: true,
+      });
+      setCounter(response.expires_after);
+      // setCounter(10);
+    }
+  };
+
   return (
     <form
       onSubmit={onSubmitForRequestOtp}
@@ -97,7 +145,7 @@ const OTPForm = () => {
       }}
       className="mx-auto max-w-[674px] auth-border-image-source rounded-3xl px-[8rem] pt-[3.5rem] pb-[3rem] backdrop-blur-[5px]"
     >
-      <div className="flex flex-col items-stretch h-full justify-between gap-[9rem] text-center">
+      <div className="flex flex-col items-stretch h-full justify-between gap-[6rem] text-center">
         {/* input */}
         <div className="flex items-stretch justify-between flex-col gap-12">
           {/* heading */}
@@ -172,7 +220,27 @@ const OTPForm = () => {
           </div>
         </div>
         {/* buttons */}
-        <div className="flex flex-col items-stretch justify-between grow gap-16">
+        <div className="flex flex-col items-stretch justify-between grow gap-4">
+          {/* counter */}
+          <div
+            className={`mb-4 text-white text-[12px] overflow-hidden ${
+              codeStatus.isCodeExist ? "block" : "hidden"
+            }`}
+          >
+            {counter > 0 ? (
+              convertSecondsForTimer(counter)
+            ) : (
+              <button
+                onClick={async (e) => {
+                  e.preventDefault();
+                  handleSendCodeAgain();
+                }}
+                className="text-white text-[14px]"
+              >
+                Send Code Again
+              </button>
+            )}
+          </div>
           <div className="flex flex-col items-stretch gap-[2rem]">
             {/* send button */}
             <button

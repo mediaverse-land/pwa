@@ -3,7 +3,7 @@ import Motion from "@/components/motion";
 import Image from "next/image";
 import Link from "next/link";
 
-const SingUp = () => {
+const SignUp = () => {
   return (
     <Motion>
       <div className="mt-28">
@@ -13,4 +13,4 @@ const SingUp = () => {
   );
 };
 
-export default SingUp;
+export default SignUp;

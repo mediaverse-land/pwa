@@ -8,31 +8,39 @@ import { signUpCompletion } from "@/services/contactService";
 import { SPINNER } from "../SVG/svgs";
 import Cookies from "js-cookie";
 import { redirect, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const schema = z.object({
   username: z
     .string({
-      errorMap: () => ({ message: "* This field is requeired" }),
+      errorMap: () => ({ message: "*This field is requeired" }),
     })
-    .min(1),
+    .min(1, {
+      message: "*Please enter your Username",
+    }),
   password: z
     .string({
-      errorMap: () => ({ message: "* This field is requeired" }),
+      errorMap: () => ({ message: "*This field is requeired" }),
     })
-    .min(1),
+    .min(1, {
+      message: "*Please enter your Password",
+    }),
   first_name: z
     .string({
-      errorMap: () => ({ message: "* This field is requeired" }),
+      errorMap: () => ({ message: "*This field is requeired" }),
     })
     .min(1),
   last_name: z
     .string({
-      errorMap: () => ({ message: "* This field is requeired" }),
+      errorMap: () => ({ message: "*This field is requeired" }),
     })
     .min(1),
 });
 const EditUserInfoForm = () => {
+  const userCookie = Cookies.get("user");
+  const session = useSession();
   const [loading, setLoading] = useState(false);
+  const [serverErrors, setServerErrors] = useState("");
   const [inputErrors, setInputErrors] = useState({
     username: "",
     password: "",
@@ -48,6 +56,7 @@ const EditUserInfoForm = () => {
   } = useForm({ resolver: zodResolver(schema) });
   const handleEditUserInfo = handleSubmit(async (data) => {
     setLoading(true);
+    setServerErrors("");
     setInputErrors({
       username: "",
       password: "",
@@ -56,10 +65,10 @@ const EditUserInfoForm = () => {
     });
     const request = await signUpCompletion({
       data: data,
-      token: Cookies.get("access_token"),
+      token: userCookie && JSON.parse(userCookie).token,
     }).finally(() => setLoading(false));
     const response = await request.json();
-    console.log(response);
+    // console.log(response, "signUpCompletion");
     if (request.ok) {
       Cookies.set("isLogin", "true", {
         expires: 1,
@@ -67,7 +76,21 @@ const EditUserInfoForm = () => {
       Cookies.set("EditUserInfo", "false", {
         expires: 1,
       });
+      await session.update({
+        name: `${response.first_name} ${response.last_name}`,
+        picture: response.image,
+        email: response.email,
+      });
+      Cookies.set(
+        "user",
+        JSON.stringify({
+          user: { ...response },
+          token: userCookie && JSON.parse(userCookie).token,
+        })
+      );
       router.push("/explore");
+    } else {
+      setServerErrors(response.error || response.message);
     }
   });
   return (
@@ -160,22 +183,29 @@ const EditUserInfoForm = () => {
             </p>
           </div>
         </div>
-        <button
-          disabled={loading}
-          className="bg-[#4E4E61] bg-opacity-50 w-full mt-5 rounded-full h-[40px] text-[14px] leading-4 text-white font-semibold flex items-center justify-center"
-          type="submit"
-        >
-          {loading ? (
-            <SPINNER
-              style={{
-                width: "40px",
-                height: "40px",
-              }}
-            />
-          ) : (
-            "Submit Info"
-          )}
-        </button>
+        <div>
+          <div>
+            <p className="line-clamp-2 mb-2 text-[14px] text-red-400 text-start">
+              {serverErrors}
+            </p>
+          </div>
+          <button
+            disabled={loading}
+            className="bg-[#4E4E61] bg-opacity-50 w-full mt-5 rounded-full h-[40px] text-[14px] leading-4 text-white font-semibold flex items-center justify-center"
+            type="submit"
+          >
+            {loading ? (
+              <SPINNER
+                style={{
+                  width: "40px",
+                  height: "40px",
+                }}
+              />
+            ) : (
+              "Submit Info"
+            )}
+          </button>
+        </div>
       </form>
     </div>
   );

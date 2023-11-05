@@ -8,7 +8,7 @@ export default function Accordion({ item }: any) {
       <div
         className="w-full pb-2 mt-11 flex justify-between cursor-pointer"
         onClick={() => {
-          console.log("clicked");
+          // console.log("clicked");
           setCollapsed((e) => !e);
         }}
       >
