@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { getProviders, signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 const SocialLoginBtn = ({
   variant,
 }: {
-  variant: "apple" | "google" | "facebook" | "github" | "twitter";
+  variant: "apple" | "google" | "facebook" | "twitter";
 }) => {
   const params = useSearchParams();
   const callbackUrlParams = params.get("refer");

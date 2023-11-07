@@ -11,7 +11,10 @@ import { SPINNER } from "./SVG/svgs";
 import { useSearchParams } from "next/navigation";
 import { convertSecondsForTimer } from "@/lib/convertSecondToTimer";
 const loginWithPhoneSchema = z.object({
-  cellphone: z.string().min(1, { message: "*This field is required" }),
+  cellphone: z
+    .string()
+    .min(1, { message: "*This field is required" })
+    .regex(/^\d+$/, "*Please Enter Valid Numbers"),
 });
 const loginWithUsernameSchema = z.object({
   username: z.string().min(1, { message: "*This field is required" }),
@@ -37,8 +40,7 @@ const LoginWithPhone = () => {
   } = useForm({
     resolver: zodResolver(loginWithPhoneSchema),
   });
-  // console.log(timer);
-  // console.log(counter);
+
   useEffect(() => {
     const time = setInterval(() => {
       if (counter > 0) {
