@@ -29,9 +29,9 @@ const Login = async (props: any) => {
             {/* providers */}
             <div className="flex flex-col items-stretch gap-4 [&_>_*]:py-[0.7rem] [&_>_*]:text-[14px] [&_>_*]:font-semibold [&_>_*]:leading-4 [&_>_*]:h-[40px] [&_>_*]:rounded-full">
               <SocialLoginBtn variant="google" />
-              <SocialLoginBtn variant="twitter" />
+              {/* <SocialLoginBtn variant="twitter" />
               <SocialLoginBtn variant="apple" />
-              <SocialLoginBtn variant="facebook" />
+              <SocialLoginBtn variant="facebook" /> */}
             </div>
             <div className="text-[#83839C] text-[12px] leading-3 uppercase">
               or

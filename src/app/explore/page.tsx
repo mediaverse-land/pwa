@@ -1,5 +1,4 @@
 import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 import Image from "next/image";
 import {
   ACTIVE_ACCOUNT,
@@ -17,12 +16,20 @@ import {
 import LogoutBtn from "@/components/Buttons/LogoutBtn";
 import Motion from "@/components/motion";
 import { cookies } from "next/headers";
+import Link from "next/link";
+import ExploreSection from "@/components/ExplorePageComponents/Explore";
+import AppsSection from "@/components/ExplorePageComponents/Apps";
+import PlusSection from "@/components/ExplorePageComponents/Plus";
+import WalletSection from "@/components/ExplorePageComponents/Wallet";
+import AccountSection from "@/components/ExplorePageComponents/Account";
+import { redirect } from "next/navigation";
 type InavbarSections = {
   id: string;
   name: string;
   link: string;
   active_icon: JSX.Element;
   inactive_icon: JSX.Element;
+  component: JSX.Element;
 };
 const navbarSections: InavbarSections[] = [
   {
@@ -31,6 +38,7 @@ const navbarSections: InavbarSections[] = [
     link: "explore",
     active_icon: <ACTIVE_EXPLORE />,
     inactive_icon: <INACTIVE_EXPLORE />,
+    component: <ExploreSection />,
   },
   {
     id: "2",
@@ -38,6 +46,7 @@ const navbarSections: InavbarSections[] = [
     link: "apps",
     active_icon: <ACTIVE_APPS />,
     inactive_icon: <INACTIVE_APPS />,
+    component: <AppsSection />,
   },
   {
     id: "3",
@@ -45,6 +54,7 @@ const navbarSections: InavbarSections[] = [
     link: "plus",
     active_icon: <ACTIVE_PLUS />,
     inactive_icon: <INACTIVE_PLUS />,
+    component: <PlusSection />,
   },
   {
     id: "4",
@@ -52,6 +62,7 @@ const navbarSections: InavbarSections[] = [
     link: "wallet",
     active_icon: <ACTIVE_WALLET />,
     inactive_icon: <INACTIVE_WALLET />,
+    component: <WalletSection />,
   },
   {
     id: "5",
@@ -59,16 +70,20 @@ const navbarSections: InavbarSections[] = [
     link: "account",
     active_icon: <ACTIVE_ACCOUNT />,
     inactive_icon: <INACTIVE_ACCOUNT />,
+    component: <AccountSection />,
   },
 ];
 
-const Explore = async () => {
+const Explore = async (params: any) => {
+  // console.log(params, "explore params");
   const session = await getServerSession();
-  // console.log(session, " server session");
-  const isLogin = cookies().get("isLogin")?.value;
   if (!session) {
     redirect("/login");
   }
+  // console.log(session, " server session");
+  const isLogin = cookies().get("isLogin")?.value;
+  const activeSection = params.searchParams.section || navbarSections[0].link;
+  // console.log(activeSection, "search params");
 
   return (
     <Motion>
@@ -103,12 +118,32 @@ const Explore = async () => {
                 <nav>
                   <ul className="flex flex-col gap-6">
                     {navbarSections.map((item) => (
-                      <li
-                        key={item.id}
-                        className="flex items-center gap-4 cursor-pointer text-[14px]"
-                      >
-                        <div>{item.inactive_icon}</div>
-                        <div>{item.name}</div>
+                      <li key={item.id} className="">
+                        <Link
+                          className="flex items-center gap-4 cursor-pointer text-[14px] font-normal"
+                          href={`/explore?section=${item.link}`}
+                        >
+                          <div
+                            className={`${
+                              activeSection === item.link
+                                ? "font-semibold"
+                                : "duration-150"
+                            }`}
+                          >
+                            {activeSection === item.link
+                              ? item.active_icon
+                              : item.inactive_icon}
+                          </div>
+                          <div
+                            className={`duration-150 ${
+                              activeSection === item.link
+                                ? "font-medium text-white"
+                                : ""
+                            }`}
+                          >
+                            {item.name}
+                          </div>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -128,7 +163,12 @@ const Explore = async () => {
             style={{ background: `rgba(78, 78, 97, 0.20)` }}
           >
             {/* search */}
-            <div></div>
+            <div>
+              {
+                navbarSections.find((item) => item.link === activeSection)
+                  ?.component
+              }
+            </div>
           </div>
         </div>
       </div>
