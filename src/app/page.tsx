@@ -183,7 +183,7 @@ const Home = async () => {
               ))}
             </div>
 
-            <div className="absolute top-0 animate-marquee2 whitespace-nowrap  flex flex-row  w-full ">
+            <div className="absolute top-0 animate-marquee2 whitespace-nowrap flex flex-row w-full ">
               {liveData.map((item: any, i: number) => (
                 <img
                   key={i}

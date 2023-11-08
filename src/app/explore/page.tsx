@@ -31,51 +31,56 @@ type InavbarSections = {
   inactive_icon: JSX.Element;
   component: JSX.Element;
 };
-const navbarSections: InavbarSections[] = [
-  {
-    id: "1",
-    name: "Explore",
-    link: "explore",
-    active_icon: <ACTIVE_EXPLORE />,
-    inactive_icon: <INACTIVE_EXPLORE />,
-    component: <ExploreSection />,
-  },
-  {
-    id: "2",
-    name: "Apps",
-    link: "apps",
-    active_icon: <ACTIVE_APPS />,
-    inactive_icon: <INACTIVE_APPS />,
-    component: <AppsSection />,
-  },
-  {
-    id: "3",
-    name: "Plus",
-    link: "plus",
-    active_icon: <ACTIVE_PLUS />,
-    inactive_icon: <INACTIVE_PLUS />,
-    component: <PlusSection />,
-  },
-  {
-    id: "4",
-    name: "Wallet",
-    link: "wallet",
-    active_icon: <ACTIVE_WALLET />,
-    inactive_icon: <INACTIVE_WALLET />,
-    component: <WalletSection />,
-  },
-  {
-    id: "5",
-    name: "Account",
-    link: "account",
-    active_icon: <ACTIVE_ACCOUNT />,
-    inactive_icon: <INACTIVE_ACCOUNT />,
-    component: <AccountSection />,
-  },
-];
 
-const Explore = async (params: any) => {
+const Explore = async (params: {
+  params: any;
+  searchParams: {
+    [key: string]: string;
+  };
+}) => {
   // console.log(params, "explore params");
+  const navbarSections: InavbarSections[] = [
+    {
+      id: "1",
+      name: "Explore",
+      link: "explore",
+      active_icon: <ACTIVE_EXPLORE />,
+      inactive_icon: <INACTIVE_EXPLORE />,
+      component: <ExploreSection searchParams={params.searchParams} />,
+    },
+    {
+      id: "2",
+      name: "Apps",
+      link: "apps",
+      active_icon: <ACTIVE_APPS />,
+      inactive_icon: <INACTIVE_APPS />,
+      component: <AppsSection />,
+    },
+    {
+      id: "3",
+      name: "Plus",
+      link: "plus",
+      active_icon: <ACTIVE_PLUS />,
+      inactive_icon: <INACTIVE_PLUS />,
+      component: <PlusSection />,
+    },
+    {
+      id: "4",
+      name: "Wallet",
+      link: "wallet",
+      active_icon: <ACTIVE_WALLET />,
+      inactive_icon: <INACTIVE_WALLET />,
+      component: <WalletSection />,
+    },
+    {
+      id: "5",
+      name: "Account",
+      link: "account",
+      active_icon: <ACTIVE_ACCOUNT />,
+      inactive_icon: <INACTIVE_ACCOUNT />,
+      component: <AccountSection />,
+    },
+  ];
   const session = await getServerSession();
   if (!session) {
     redirect("/login");
@@ -88,7 +93,7 @@ const Explore = async (params: any) => {
   return (
     <Motion>
       <div className="mt-28 mx-auto flex items-center justify-center">
-        <div className="grid grid-cols-5 grid-rows-1 gap-4 h-[32rem] min-w-[640px] max-w-screen-md text-[#C1C1CD]">
+        <div className="grid grid-cols-5 grid-rows-1 gap-4 h-[32rem] min-w-[720px] max-w-screen-md text-[#C1C1CD]">
           <aside
             className="col-span-2 rounded-2xl border border-[#CFCFFC] border-opacity-20 py-8 px-6 flex flex-col items-stretch justify-between"
             style={{ background: `rgba(78, 78, 97, 0.20)` }}
@@ -99,7 +104,7 @@ const Explore = async (params: any) => {
                 <div className="relative w-[40px] h-[40px] rounded-full overflow-hidden">
                   {session?.user?.image && (
                     <Image
-                      src={session?.user?.image}
+                      src={session?.user?.image || "/images/no.png"}
                       alt="user profile picture"
                       fill
                     />
@@ -159,11 +164,10 @@ const Explore = async (params: any) => {
             </div>
           </aside>
           <div
-            className="col-span-3 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-hidden flex flex-col items-stretch gap-4"
+            className="col-span-3 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
             style={{ background: `rgba(78, 78, 97, 0.20)` }}
           >
-            {/* search */}
-            <div>
+            <div className="">
               {
                 navbarSections.find((item) => item.link === activeSection)
                   ?.component
