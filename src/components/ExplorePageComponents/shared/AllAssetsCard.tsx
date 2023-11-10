@@ -32,7 +32,12 @@ const ExploreAssetsCard = ({
     <div className="flex flex-col items-stretch gap-4">
       {/* image */}
       <div className="relative w-[143px] h-[143px] rounded-2xl overflow-hidden">
-        <Image className="z-10" src={`/images/car.png`} alt="" fill />
+        <Image
+          className="z-10"
+          src={`${cover || "/images/car.png"}`}
+          alt=""
+          fill
+        />
         <div className="overlay-bg absolute w-full h-full top-0 left-0 z-20"></div>
         <div className="flex items-center justify-center absolute bottom-[15px] right-[15px] z-30">
           {icons[`${type}`]}
@@ -42,13 +47,19 @@ const ExploreAssetsCard = ({
       <div className="flex flex-col gap-2 items-stretch">
         {/* title */}
         <div className="line-clamp-1 text-[#666680] leading-none">
-          Tiger love...
+          {title || "Tiger love..."}
         </div>
         {/* author */}
-        <div className="">
-          <div></div>
+        <div className="flex items-center gap-2">
+          <div className="relative w-[16px] h-[16px] rounded-full overflow-hidden">
+            <Image
+              src={`${author?.picture || "/images/no.png"}`}
+              alt={`${author?.name}`}
+              fill
+            />
+          </div>
           <div className="text-[12px] text-[#666680] line-clamp-1 leading-3">
-            Arlene McCoys
+            {author?.name || "Arlene McCoys"}
           </div>
         </div>
       </div>

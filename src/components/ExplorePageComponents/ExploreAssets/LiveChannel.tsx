@@ -31,12 +31,12 @@ const ExploreLiveChannel = ({ liveData }: { liveData: any }) => {
 
           <div className="absolute top-0 animate-marquee2 whitespace-nowrap flex flex-row w-full ">
             {liveData.map((item: any, i: number) => (
-              <img
+              <div
                 key={i}
-                className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
-                src={item.thumbnail}
-                alt=""
-              />
+                className="relative rounded-[8px] w-[154px] h-[100px] mr-[8px] overflow-hidden"
+              >
+                <Image className="" src={item.thumbnail} alt="" fill />
+              </div>
             ))}
           </div>
         </div>

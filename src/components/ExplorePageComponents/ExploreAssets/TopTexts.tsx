@@ -16,8 +16,14 @@ const ExploreTopTexts = () => {
       </div>
       <div>
         <div className="overflow-x-hidden">
-          <div className="flex items-stretch gap-4 overflow-x-auto">
+          <div className="flex gap-4 overflow-x-auto">
             {/* card */}
+            <ExploreTextCard />
+            <ExploreTextCard />
+            <ExploreTextCard />
+            <ExploreTextCard />
+            <ExploreTextCard />
+            <ExploreTextCard />
             <ExploreTextCard />
           </div>
         </div>

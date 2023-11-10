@@ -5,7 +5,13 @@ const variants = {
   enter: { opacity: 1 },
   exit: { opacity: 0 },
 };
-const Motion = ({ children }: { children: React.ReactNode }) => {
+const Motion = ({
+  children,
+  center,
+}: {
+  children: React.ReactNode;
+  center?: boolean;
+}) => {
   return (
     <motion.main
       variants={variants} // Pass the variant object into Framer Motion
@@ -13,7 +19,7 @@ const Motion = ({ children }: { children: React.ReactNode }) => {
       animate="enter" // Animated state to variants.enter
       exit="exit" // Exit state (used later) to variants.exit
       transition={{ duration: 1.5 }} // Set the transition to linear
-      className=""
+      className={`${center ? "flex items-center justify-center" : ""}`}
     >
       {children}
     </motion.main>

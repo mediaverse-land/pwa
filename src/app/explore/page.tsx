@@ -22,13 +22,13 @@ import AppsSection from "@/components/ExplorePageComponents/Apps";
 import PlusSection from "@/components/ExplorePageComponents/Plus";
 import WalletSection from "@/components/ExplorePageComponents/Wallet";
 import AccountSection from "@/components/ExplorePageComponents/Account";
-import { redirect } from "next/navigation";
-type InavbarSections = {
+import { notFound, redirect } from "next/navigation";
+type IexploreSections = {
   id: string;
   name: string;
   link: string;
-  active_icon: JSX.Element;
-  inactive_icon: JSX.Element;
+  active_icon?: JSX.Element;
+  inactive_icon?: JSX.Element;
   component: JSX.Element;
 };
 
@@ -39,7 +39,7 @@ const Explore = async (params: {
   };
 }) => {
   // console.log(params, "explore params");
-  const navbarSections: InavbarSections[] = [
+  const exploreSections: IexploreSections[] = [
     {
       id: "1",
       name: "Explore",
@@ -80,6 +80,12 @@ const Explore = async (params: {
       inactive_icon: <INACTIVE_ACCOUNT />,
       component: <AccountSection />,
     },
+    {
+      id: "6",
+      name: "Search",
+      link: "search",
+      component: <AccountSection />,
+    },
   ];
   const session = await getServerSession();
   if (!session) {
@@ -87,13 +93,13 @@ const Explore = async (params: {
   }
   // console.log(session, " server session");
   const isLogin = cookies().get("isLogin")?.value;
-  const activeSection = params.searchParams.section || navbarSections[0].link;
+  const activeSection = params.searchParams.section || exploreSections[0].link;
   // console.log(activeSection, "search params");
 
   return (
-    <Motion>
-      <div className="mt-28 mx-auto flex items-center justify-center">
-        <div className="grid grid-cols-5 grid-rows-1 gap-4 h-[32rem] min-w-[720px] max-w-screen-md text-[#C1C1CD]">
+    <Motion center>
+      <div className="mt-24 mx-auto flex items-center justify-center">
+        <div className="grid grid-cols-6 grid-rows-1 gap-4 h-[520px] w-[674px] text-[#C1C1CD]">
           <aside
             className="col-span-2 rounded-2xl border border-[#CFCFFC] border-opacity-20 py-8 px-6 flex flex-col items-stretch justify-between"
             style={{ background: `rgba(78, 78, 97, 0.20)` }}
@@ -122,7 +128,8 @@ const Explore = async (params: {
               <div>
                 <nav>
                   <ul className="flex flex-col gap-6">
-                    {navbarSections.map((item) => (
+                    {/* navbar exept search and recently */}
+                    {exploreSections.slice(0, 5).map((item) => (
                       <li key={item.id} className="">
                         <Link
                           className="flex items-center gap-4 cursor-pointer text-[14px] font-normal"
@@ -164,14 +171,12 @@ const Explore = async (params: {
             </div>
           </aside>
           <div
-            className="col-span-3 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
+            className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
             style={{ background: `rgba(78, 78, 97, 0.20)` }}
           >
             <div className="">
-              {
-                navbarSections.find((item) => item.link === activeSection)
-                  ?.component
-              }
+              {exploreSections.find((item) => item.link === activeSection)
+                ?.component || redirect("/explore?section=explore")}
             </div>
           </div>
         </div>

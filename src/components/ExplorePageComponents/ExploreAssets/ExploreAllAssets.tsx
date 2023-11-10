@@ -4,6 +4,7 @@ import ExploreLiveChannel from "./LiveChannel";
 import ExploreDailyRecommended from "./DailyRecommended";
 import ExploreMostViewd from "./MostViewed";
 import ExploreTopTexts from "./TopTexts";
+import ExploreChillSongs from "./ChillSongs";
 
 const getData = async () => {
   const liveData = await getLives();
@@ -24,6 +25,8 @@ const ExploreAllAssets = async () => {
       <ExploreMostViewd />
       {/* Top 10 texts */}
       <ExploreTopTexts />
+      {/* Chill songs */}
+      <ExploreChillSongs />
     </div>
   );
 };
