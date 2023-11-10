@@ -78,13 +78,13 @@ const Explore = async (params: {
       link: "account",
       active_icon: <ACTIVE_ACCOUNT />,
       inactive_icon: <INACTIVE_ACCOUNT />,
-      component: <AccountSection />,
+      component: <AccountSection searchParams={params.searchParams} />,
     },
     {
       id: "6",
       name: "Search",
       link: "search",
-      component: <AccountSection />,
+      component: <AccountSection searchParams={params.searchParams} />,
     },
   ];
   const session = await getServerSession();
@@ -107,20 +107,18 @@ const Explore = async (params: {
             <div className="flex flex-col items-stretch gap-8">
               {/* user info */}
               <div className="flex justify-between items-center gap-2">
-                <div className="relative w-[40px] h-[40px] rounded-full overflow-hidden">
-                  {session?.user?.image && (
-                    <Image
-                      src={session?.user?.image || "/images/no.png"}
-                      alt="user profile picture"
-                      fill
-                    />
-                  )}
+                <div className="relative w-[40px] h-[40px] min-w-[40px] min-h-[40px] aspect-square rounded-full overflow-hidden">
+                  <Image
+                    src={session?.user?.image || "/images/no.png"}
+                    alt="user profile picture"
+                    fill
+                  />
                 </div>
-                <div className="flex flex-col items-stretch max-w-[80%] grow text-start">
+                <div className="flex flex-col grow text-start leading-none gap-1 overflow-hidden">
                   <div className="line-clamp-1 w-full h-full font-semibold text-white">
                     {session?.user?.name}
                   </div>
-                  <div className="line-clamp-1 max-w-full h-full text-[#83839C] text-[10px]">
+                  <div className="text-[#83839C] text-[10px] max-w-[100px]">
                     {session?.user?.email}
                   </div>
                 </div>
