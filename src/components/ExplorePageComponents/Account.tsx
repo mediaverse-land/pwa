@@ -3,25 +3,28 @@ import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-
-const accountTypes = [
-  {
-    id: 1,
-    name: "Subscribe",
-    link: "subscribe",
-  },
-  {
-    id: 2,
-    name: "Ownership",
-    link: "ownership",
-  },
-];
+import { ExploreSectionNavs } from "./Explore";
+import AccountSubscribeSection from "./Account/SubscribeSection";
 
 const AccountSection = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string };
 }) => {
+  const accountTypes = [
+    {
+      id: 1,
+      name: "Subscribe",
+      link: "subscribe",
+      component: <AccountSubscribeSection searchParams={searchParams} />,
+    },
+    {
+      id: 2,
+      name: "Ownership",
+      link: "ownership",
+      component: <></>,
+    },
+  ];
   const session = await getServerSession(authOptions);
   const type = searchParams["type"] || "subscribe";
   if (!accountTypes.find((item) => item.link === type)) {
@@ -98,6 +101,8 @@ const AccountSection = async ({
           </div>
         </div>
       </div>
+      {/* content  */}
+      {accountTypes.find((item) => item.link === type)?.component}
     </div>
   );
 };

@@ -28,7 +28,7 @@ type IExploreSectionNavs = {
   inactive_icon: JSX.Element;
   component: JSX.Element;
 };
-const ExploreSectionNavs: IExploreSectionNavs[] = [
+export const ExploreSectionNavs: IExploreSectionNavs[] = [
   {
     id: 1,
     name: "All",

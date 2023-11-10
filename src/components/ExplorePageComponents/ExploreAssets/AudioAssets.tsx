@@ -4,7 +4,7 @@ import { VIDEO_ICON } from "@/components/SVG/svgs";
 import ExploreVideoCard from "../shared/VideoCard";
 import ExploreAudioCard from "../shared/AudioCard";
 
-const audioData = [
+export const audioData = [
   {
     id: 1,
     title: "Velit officia",
