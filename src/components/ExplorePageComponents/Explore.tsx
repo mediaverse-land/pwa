@@ -1,9 +1,25 @@
 // "use client";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
+import {
+  notFound,
+  redirect,
+  useParams,
+  usePathname,
+  useSearchParams,
+} from "next/navigation";
 import Motion from "../motion";
 import Link from "next/link";
-import { AUDIO_ICON, PICTURE_ICON, TEXT_ICON, VIDEO_ICON } from "../SVG/svgs";
+import {
+  AUDIO_ICON,
+  PICTURE_ICON,
+  SEARCH_ICON,
+  TEXT_ICON,
+  VIDEO_ICON,
+} from "../SVG/svgs";
 import ExploreAllAssets from "./ExploreAssets/ExploreAllAssets";
+import ExploreImageAssets from "./ExploreAssets/ImageAssets";
+import ExploreVideoAssets from "./ExploreAssets/VideoAssets";
+import ExploreAudioAssets from "./ExploreAssets/AudioAssets";
+import ExploreTextsAssets from "./ExploreAssets/TextsAssets";
 type IExploreSectionNavs = {
   id: number;
   name: string;
@@ -12,7 +28,7 @@ type IExploreSectionNavs = {
   inactive_icon: JSX.Element;
   component: JSX.Element;
 };
-const ExploreSectionNavs: IExploreSectionNavs[] = [
+export const ExploreSectionNavs: IExploreSectionNavs[] = [
   {
     id: 1,
     name: "All",
@@ -27,7 +43,7 @@ const ExploreSectionNavs: IExploreSectionNavs[] = [
     link: "pictures",
     active_icon: <PICTURE_ICON />,
     inactive_icon: <PICTURE_ICON fill="#666680" />,
-    component: <div>component</div>,
+    component: <ExploreImageAssets />,
   },
   {
     id: 3,
@@ -35,7 +51,7 @@ const ExploreSectionNavs: IExploreSectionNavs[] = [
     link: "videos",
     active_icon: <VIDEO_ICON />,
     inactive_icon: <VIDEO_ICON fill="#666680" />,
-    component: <div>component</div>,
+    component: <ExploreVideoAssets />,
   },
   {
     id: 4,
@@ -43,7 +59,7 @@ const ExploreSectionNavs: IExploreSectionNavs[] = [
     link: "audio",
     active_icon: <AUDIO_ICON />,
     inactive_icon: <AUDIO_ICON fill="#666680" />,
-    component: <div>component</div>,
+    component: <ExploreAudioAssets />,
   },
   {
     id: 5,
@@ -51,7 +67,7 @@ const ExploreSectionNavs: IExploreSectionNavs[] = [
     link: "texts",
     active_icon: <TEXT_ICON />,
     inactive_icon: <TEXT_ICON fill="#666680" />,
-    component: <div>component</div>,
+    component: <ExploreTextsAssets />,
   },
 ];
 
@@ -71,18 +87,21 @@ const ExploreSection = ({
     <Motion key={"ExploreSection"}>
       <div className="w-full h-full">
         <div className="flex flex-col items-stretch gap-8">
-          <div className="flex flex-col items-stretch gap-6 sticky top-0 left-0 w-full z-30">
+          <div className="flex flex-col items-stretch gap-6 sticky top-0 left-0 w-full z-50">
             {/* search section */}
-            <div className="bg-[#0E0E124D] p-6 backdrop-blur-md rounded-b-[45px_35px]">
+            <Link
+              href={`/explore?section=search`}
+              className="bg-[#0E0E124D] p-6 backdrop-blur-md rounded-b-[45px_35px] select-none"
+            >
               <div className="h-[40px] rounded-lg px-4 py-3 border border-[#353542] flex gap-8 items-center">
-                <input
-                  className="outline-none grow bg-transparent text-[14px]"
-                  type="text"
-                  placeholder="Search"
-                />
-                <div>icon</div>
+                <div className="outline-none grow bg-transparent text-[14px]">
+                  Search
+                </div>
+                <div>
+                  <SEARCH_ICON fill="#666680" />
+                </div>
               </div>
-            </div>
+            </Link>
             {/* tabs */}
             <div className="rounded-lg grid grid-flow-col grid-rows-1 bg-[#0E0E1280] backdrop-blur-md mx-6">
               {ExploreSectionNavs.map((tab) => (
@@ -107,10 +126,10 @@ const ExploreSection = ({
             </div>
           </div>
           <div className="px-6">
-            {
-              ExploreSectionNavs.find((tab) => tab.link === activeTab)
-                ?.component
-            }
+            {ExploreSectionNavs.find((tab) => tab.link === activeTab)
+              ? ExploreSectionNavs.find((tab) => tab.link === activeTab)
+                  ?.component
+              : redirect("/explore?section=explore")}
           </div>
         </div>
       </div>

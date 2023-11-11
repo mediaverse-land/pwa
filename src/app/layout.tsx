@@ -30,7 +30,9 @@ export default function RootLayout({
   gtag('js', new Date());
   gtag('config', 'G-667BH3TKMH');`}
       </Script>
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+      <body
+        className={`${inter.className} min-h-screen flex flex-col justify-between [&_>_*:nth-child(2)]:grow`}
+      >
         <NextAuthSessionProvider>
           <Navbar />
           {children}

@@ -22,13 +22,14 @@ import AppsSection from "@/components/ExplorePageComponents/Apps";
 import PlusSection from "@/components/ExplorePageComponents/Plus";
 import WalletSection from "@/components/ExplorePageComponents/Wallet";
 import AccountSection from "@/components/ExplorePageComponents/Account";
-import { redirect } from "next/navigation";
-type InavbarSections = {
+import { notFound, redirect } from "next/navigation";
+import ExploreRecently from "@/components/ExplorePageComponents/Recently";
+type IexploreSections = {
   id: string;
   name: string;
   link: string;
-  active_icon: JSX.Element;
-  inactive_icon: JSX.Element;
+  active_icon?: JSX.Element;
+  inactive_icon?: JSX.Element;
   component: JSX.Element;
 };
 
@@ -39,15 +40,16 @@ const Explore = async (params: {
   };
 }) => {
   // console.log(params, "explore params");
-  const navbarSections: InavbarSections[] = [
+  const exploreSections: IexploreSections[] = [
     {
-      id: "1",
-      name: "Explore",
-      link: "explore",
-      active_icon: <ACTIVE_EXPLORE />,
-      inactive_icon: <INACTIVE_EXPLORE />,
-      component: <ExploreSection searchParams={params.searchParams} />,
+      id: "5",
+      name: "Account",
+      link: "account",
+      active_icon: <ACTIVE_ACCOUNT />,
+      inactive_icon: <INACTIVE_ACCOUNT />,
+      component: <AccountSection searchParams={params.searchParams} />,
     },
+
     {
       id: "2",
       name: "Apps",
@@ -73,27 +75,37 @@ const Explore = async (params: {
       component: <WalletSection />,
     },
     {
-      id: "5",
-      name: "Account",
-      link: "account",
-      active_icon: <ACTIVE_ACCOUNT />,
-      inactive_icon: <INACTIVE_ACCOUNT />,
-      component: <AccountSection />,
+      id: "1",
+      name: "Explore",
+      link: "explore",
+      active_icon: <ACTIVE_EXPLORE />,
+      inactive_icon: <INACTIVE_EXPLORE />,
+      component: <ExploreSection searchParams={params.searchParams} />,
+    },
+    {
+      id: "6",
+      name: "Search",
+      link: "search",
+      component: <AccountSection searchParams={params.searchParams} />,
+    },
+    {
+      id: "7",
+      name: "Recently",
+      link: "recently",
+      component: <ExploreRecently searchParams={params.searchParams} />,
     },
   ];
   const session = await getServerSession();
   if (!session) {
     redirect("/login");
   }
-  // console.log(session, " server session");
-  const isLogin = cookies().get("isLogin")?.value;
-  const activeSection = params.searchParams.section || navbarSections[0].link;
-  // console.log(activeSection, "search params");
+
+  const activeSection = params.searchParams.section || exploreSections[0].link;
 
   return (
-    <Motion>
-      <div className="mt-28 mx-auto flex items-center justify-center">
-        <div className="grid grid-cols-5 grid-rows-1 gap-4 h-[32rem] min-w-[720px] max-w-screen-md text-[#C1C1CD]">
+    <Motion center>
+      <div className="mt-24 mx-auto flex items-center justify-center">
+        <div className="grid grid-cols-6 grid-rows-1 gap-4 h-[520px] w-[674px] text-[#C1C1CD]">
           <aside
             className="col-span-2 rounded-2xl border border-[#CFCFFC] border-opacity-20 py-8 px-6 flex flex-col items-stretch justify-between"
             style={{ background: `rgba(78, 78, 97, 0.20)` }}
@@ -101,28 +113,34 @@ const Explore = async (params: {
             <div className="flex flex-col items-stretch gap-8">
               {/* user info */}
               <div className="flex justify-between items-center gap-2">
-                <div className="relative w-[40px] h-[40px] rounded-full overflow-hidden">
-                  {session?.user?.image && (
+                <div className="relative w-[40px] h-[40px] min-w-[40px] min-h-[40px] aspect-square rounded-full overflow-hidden">
+                  {session?.user?.image ? (
                     <Image
                       src={session?.user?.image || "/images/no.png"}
                       alt="user profile picture"
                       fill
                     />
+                  ) : (
+                    <div className="w-full aspect-square bg-white overflow-hidden rounded-full"></div>
                   )}
                 </div>
-                <div className="flex flex-col items-stretch max-w-[80%] grow text-start">
+                <div className="flex flex-col grow text-start leading-none gap-1 overflow-hidden">
                   <div className="line-clamp-1 w-full h-full font-semibold text-white">
-                    {session?.user?.name}
+                    {session?.user?.name &&
+                    session?.user?.name?.trim().length > 0
+                      ? session?.user?.name
+                      : "Unknown"}
                   </div>
-                  <div className="line-clamp-1 max-w-full h-full text-[#83839C] text-[10px]">
-                    {session?.user?.email}
+                  <div className="text-[#83839C] text-[10px] max-w-[100px]">
+                    {session?.user?.email || ""}
                   </div>
                 </div>
               </div>
               <div>
                 <nav>
                   <ul className="flex flex-col gap-6">
-                    {navbarSections.map((item) => (
+                    {/* navbar exept search and recently */}
+                    {exploreSections.slice(0, 5).map((item) => (
                       <li key={item.id} className="">
                         <Link
                           className="flex items-center gap-4 cursor-pointer text-[14px] font-normal"
@@ -164,14 +182,12 @@ const Explore = async (params: {
             </div>
           </aside>
           <div
-            className="col-span-3 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
+            className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
             style={{ background: `rgba(78, 78, 97, 0.20)` }}
           >
             <div className="">
-              {
-                navbarSections.find((item) => item.link === activeSection)
-                  ?.component
-              }
+              {exploreSections.find((item) => item.link === activeSection)
+                ?.component || redirect("/explore?section=explore")}
             </div>
           </div>
         </div>
