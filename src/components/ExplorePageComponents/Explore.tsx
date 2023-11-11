@@ -35,7 +35,7 @@ export const ExploreSectionNavs: IExploreSectionNavs[] = [
     link: "all",
     active_icon: <span className="text-[14px] text-[#D9D9FF]">All</span>,
     inactive_icon: <span className="text-[#666680] text-[14px]">All</span>,
-    component: <ExploreAllAssets />,
+    component: <ExploreAllAssets key="ExploreAllAssets" />,
   },
   {
     id: 2,
@@ -43,7 +43,7 @@ export const ExploreSectionNavs: IExploreSectionNavs[] = [
     link: "pictures",
     active_icon: <PICTURE_ICON />,
     inactive_icon: <PICTURE_ICON fill="#666680" />,
-    component: <ExploreImageAssets />,
+    component: <ExploreImageAssets key="ExploreImageAssets" />,
   },
   {
     id: 3,
@@ -51,7 +51,7 @@ export const ExploreSectionNavs: IExploreSectionNavs[] = [
     link: "videos",
     active_icon: <VIDEO_ICON />,
     inactive_icon: <VIDEO_ICON fill="#666680" />,
-    component: <ExploreVideoAssets />,
+    component: <ExploreVideoAssets key="ExploreVideoAssets" />,
   },
   {
     id: 4,
@@ -59,7 +59,7 @@ export const ExploreSectionNavs: IExploreSectionNavs[] = [
     link: "audio",
     active_icon: <AUDIO_ICON />,
     inactive_icon: <AUDIO_ICON fill="#666680" />,
-    component: <ExploreAudioAssets />,
+    component: <ExploreAudioAssets key="ExploreAudioAssets" />,
   },
   {
     id: 5,
@@ -67,7 +67,7 @@ export const ExploreSectionNavs: IExploreSectionNavs[] = [
     link: "texts",
     active_icon: <TEXT_ICON />,
     inactive_icon: <TEXT_ICON fill="#666680" />,
-    component: <ExploreTextsAssets />,
+    component: <ExploreTextsAssets key="ExploreTextsAssets" />,
   },
 ];
 
@@ -84,8 +84,8 @@ const ExploreSection = ({
   // const params = usePathname();
   // console.log(params.concat("&hello"));
   return (
-    <Motion key={"ExploreSection"}>
-      <div className="w-full h-full">
+    <Motion key={"ExploreSection"} fullHeight>
+      <div className="w-full h-full overflow-y-auto">
         <div className="flex flex-col items-stretch gap-8">
           <div className="flex flex-col items-stretch gap-6 sticky top-0 left-0 w-full z-50">
             {/* search section */}

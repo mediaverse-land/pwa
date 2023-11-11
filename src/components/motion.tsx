@@ -8,9 +8,11 @@ const variants = {
 const Motion = ({
   children,
   center,
+  fullHeight,
 }: {
   children: React.ReactNode;
   center?: boolean;
+  fullHeight?: boolean;
 }) => {
   return (
     <motion.main
@@ -19,7 +21,9 @@ const Motion = ({
       animate="enter" // Animated state to variants.enter
       exit="exit" // Exit state (used later) to variants.exit
       transition={{ duration: 1.5 }} // Set the transition to linear
-      className={`${center ? "flex items-center justify-center" : ""}`}
+      className={`${center ? "flex items-center justify-center" : ""} ${
+        fullHeight ? "h-full" : ""
+      }`}
     >
       {children}
     </motion.main>
