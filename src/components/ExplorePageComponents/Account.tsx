@@ -48,17 +48,23 @@ const AccountSection = async ({
             {/* user image */}
             <div className="w-[80px] absolute aspect-square rounded-full p-3 flex items-center bg-[#13133F] justify-center z-20 top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
               <div className="relative w-full h-full rounded-full overflow-hidden">
-                <Image
-                  src={session?.user?.image || "/images/no.png"}
-                  alt="user"
-                  fill
-                />
+                {session?.user?.image ? (
+                  <Image
+                    src={session?.user?.image || "/images/no.png"}
+                    alt="user"
+                    fill
+                  />
+                ) : (
+                  <div className="w-full aspect-square bg-white overflow-hidden rounded-full"></div>
+                )}
               </div>
             </div>
             {/* user name and email */}
             <div className="flex flex-col justify-center items-center py-1 mt-[38px] max-w-[90%] mx-auto">
               <div className="line-clamp-1 font-semibold text-white">
-                {session?.user?.name || ""}
+                {session?.user?.name && session?.user?.name?.trim().length > 0
+                  ? session?.user?.name
+                  : "Unknown"}
               </div>
               <div className="line-clamp-1 text-[12px] text-[#83839C] leading-4">
                 {session?.user?.email || ""}

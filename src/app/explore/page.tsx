@@ -23,6 +23,7 @@ import PlusSection from "@/components/ExplorePageComponents/Plus";
 import WalletSection from "@/components/ExplorePageComponents/Wallet";
 import AccountSection from "@/components/ExplorePageComponents/Account";
 import { notFound, redirect } from "next/navigation";
+import ExploreRecently from "@/components/ExplorePageComponents/Recently";
 type IexploreSections = {
   id: string;
   name: string;
@@ -41,13 +42,14 @@ const Explore = async (params: {
   // console.log(params, "explore params");
   const exploreSections: IexploreSections[] = [
     {
-      id: "1",
-      name: "Explore",
-      link: "explore",
-      active_icon: <ACTIVE_EXPLORE />,
-      inactive_icon: <INACTIVE_EXPLORE />,
-      component: <ExploreSection searchParams={params.searchParams} />,
+      id: "5",
+      name: "Account",
+      link: "account",
+      active_icon: <ACTIVE_ACCOUNT />,
+      inactive_icon: <INACTIVE_ACCOUNT />,
+      component: <AccountSection searchParams={params.searchParams} />,
     },
+
     {
       id: "2",
       name: "Apps",
@@ -73,12 +75,12 @@ const Explore = async (params: {
       component: <WalletSection />,
     },
     {
-      id: "5",
-      name: "Account",
-      link: "account",
-      active_icon: <ACTIVE_ACCOUNT />,
-      inactive_icon: <INACTIVE_ACCOUNT />,
-      component: <AccountSection searchParams={params.searchParams} />,
+      id: "1",
+      name: "Explore",
+      link: "explore",
+      active_icon: <ACTIVE_EXPLORE />,
+      inactive_icon: <INACTIVE_EXPLORE />,
+      component: <ExploreSection searchParams={params.searchParams} />,
     },
     {
       id: "6",
@@ -86,15 +88,19 @@ const Explore = async (params: {
       link: "search",
       component: <AccountSection searchParams={params.searchParams} />,
     },
+    {
+      id: "7",
+      name: "Recently",
+      link: "recently",
+      component: <ExploreRecently searchParams={params.searchParams} />,
+    },
   ];
   const session = await getServerSession();
   if (!session) {
     redirect("/login");
   }
-  // console.log(session, " server session");
-  const isLogin = cookies().get("isLogin")?.value;
+
   const activeSection = params.searchParams.section || exploreSections[0].link;
-  // console.log(activeSection, "search params");
 
   return (
     <Motion center>
@@ -108,18 +114,25 @@ const Explore = async (params: {
               {/* user info */}
               <div className="flex justify-between items-center gap-2">
                 <div className="relative w-[40px] h-[40px] min-w-[40px] min-h-[40px] aspect-square rounded-full overflow-hidden">
-                  <Image
-                    src={session?.user?.image || "/images/no.png"}
-                    alt="user profile picture"
-                    fill
-                  />
+                  {session?.user?.image ? (
+                    <Image
+                      src={session?.user?.image || "/images/no.png"}
+                      alt="user profile picture"
+                      fill
+                    />
+                  ) : (
+                    <div className="w-full aspect-square bg-white overflow-hidden rounded-full"></div>
+                  )}
                 </div>
                 <div className="flex flex-col grow text-start leading-none gap-1 overflow-hidden">
                   <div className="line-clamp-1 w-full h-full font-semibold text-white">
-                    {session?.user?.name}
+                    {session?.user?.name &&
+                    session?.user?.name?.trim().length > 0
+                      ? session?.user?.name
+                      : "Unknown"}
                   </div>
                   <div className="text-[#83839C] text-[10px] max-w-[100px]">
-                    {session?.user?.email}
+                    {session?.user?.email || ""}
                   </div>
                 </div>
               </div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
+import Link from "next/link";
 const imageData = [
   {
     asset: {
@@ -164,7 +165,12 @@ const ExploreImageAssets = async () => {
           <div className="flex items-center space-x-1">
             <p className="text-white text-sm ">Recently</p>
           </div>
-          <div className="text-[14px] text-[#597AFF]">View all</div>
+          <Link
+            href={`/explore?section=recently&content=pictures`}
+            className="text-[14px] text-[#597AFF]"
+          >
+            View all
+          </Link>
         </div>
         <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2">
           {imageData.map((items: any, index: number) => {

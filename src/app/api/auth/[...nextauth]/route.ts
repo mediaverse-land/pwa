@@ -146,7 +146,9 @@ export const authOptions: AuthOptions = {
           cookies().set("user", JSON.stringify(userInfo));
           const user = {
             id: userInfo.user.id,
-            name: `${userInfo.user.first_name} ${userInfo.user.last_name}`,
+            name: `${userInfo.user.first_name || ""} ${
+              userInfo.user.last_name || ""
+            }`,
             image: userInfo.user.image,
             email: userInfo.user.email,
           };
@@ -193,7 +195,9 @@ export const authOptions: AuthOptions = {
           cookies().set("user", JSON.stringify(userInfo));
           const user = {
             id: userInfo.user.id,
-            name: `${userInfo.user.first_name} ${userInfo.user.last_name}`,
+            name: `${userInfo.user.first_name || ""} ${
+              userInfo.user.last_name || ""
+            }`,
             image: userInfo.user.image,
             email: userInfo.user.email,
           };
@@ -240,7 +244,9 @@ export const authOptions: AuthOptions = {
           cookies().set("user", JSON.stringify(userInfo));
           const user = {
             id: userInfo.user.id,
-            name: `${userInfo.user.first_name} ${userInfo.user.last_name}`,
+            name: `${userInfo.user.first_name || ""} ${
+              userInfo.user.last_name || ""
+            }`,
             image: userInfo.user.image,
             email: userInfo.user.email,
           };
