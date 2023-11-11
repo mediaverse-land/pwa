@@ -47,52 +47,104 @@ const Explore = async (params: {
       link: "account",
       active_icon: <ACTIVE_ACCOUNT />,
       inactive_icon: <INACTIVE_ACCOUNT />,
-      component: <AccountSection searchParams={params.searchParams} />,
+      component: (
+        <div
+          key={"AccountSection"}
+          className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
+          style={{ background: `rgba(78, 78, 97, 0.20)` }}
+        >
+          <AccountSection searchParams={params.searchParams} />
+        </div>
+      ),
     },
+    // {
+    //   id: "2",
+    //   name: "Apps",
+    //   link: "apps",
+    //   active_icon: <ACTIVE_APPS />,
+    //   inactive_icon: <INACTIVE_APPS />,
+    //   component: (
+    //     <div
+    //       className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
+    //       style={{ background: `rgba(78, 78, 97, 0.20)` }}
+    //     >
+    //       <AppsSection />
+    //     </div>
+    //   ),
+    // },
+    // {
+    //   id: "3",
+    //   name: "Plus",
+    //   link: "plus",
+    //   active_icon: <ACTIVE_PLUS />,
+    //   inactive_icon: <INACTIVE_PLUS />,
+    //   component: (
+    //     <div
+    //       className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
+    //       style={{ background: `rgba(78, 78, 97, 0.20)` }}
+    //     >
 
-    {
-      id: "2",
-      name: "Apps",
-      link: "apps",
-      active_icon: <ACTIVE_APPS />,
-      inactive_icon: <INACTIVE_APPS />,
-      component: <AppsSection />,
-    },
-    {
-      id: "3",
-      name: "Plus",
-      link: "plus",
-      active_icon: <ACTIVE_PLUS />,
-      inactive_icon: <INACTIVE_PLUS />,
-      component: <PlusSection />,
-    },
-    {
-      id: "4",
-      name: "Wallet",
-      link: "wallet",
-      active_icon: <ACTIVE_WALLET />,
-      inactive_icon: <INACTIVE_WALLET />,
-      component: <WalletSection />,
-    },
+    //       <PlusSection />
+    //     </div>
+    //   ),
+    // },
+    // {
+    //   id: "4",
+    //   name: "Wallet",
+    //   link: "wallet",
+    //   active_icon: <ACTIVE_WALLET />,
+    //   inactive_icon: <INACTIVE_WALLET />,
+    //   component: (
+    //     <div
+    //       className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
+    //       style={{ background: `rgba(78, 78, 97, 0.20)` }}
+    //     >
+
+    //       <WalletSection />
+    //     </div>
+    //   ),
+    // },
     {
       id: "1",
       name: "Explore",
       link: "explore",
       active_icon: <ACTIVE_EXPLORE />,
       inactive_icon: <INACTIVE_EXPLORE />,
-      component: <ExploreSection searchParams={params.searchParams} />,
+      component: (
+        <div
+          key={"ExploreSection"}
+          className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-hidden flex flex-col items-stretch gap-4"
+          style={{ background: `rgba(78, 78, 97, 0.20)` }}
+        >
+          <ExploreSection searchParams={params.searchParams} />
+        </div>
+      ),
     },
     {
       id: "6",
       name: "Search",
       link: "search",
-      component: <AccountSection searchParams={params.searchParams} />,
+      component: (
+        <div
+          className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
+          style={{ background: `rgba(78, 78, 97, 0.20)` }}
+        >
+          <AccountSection searchParams={params.searchParams} />
+        </div>
+      ),
     },
     {
       id: "7",
       name: "Recently",
       link: "recently",
-      component: <ExploreRecently searchParams={params.searchParams} />,
+      component: (
+        <div
+          className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
+          style={{ background: `rgba(78, 78, 97, 0.20)` }}
+        >
+          <ExploreRecently searchParams={params.searchParams} />
+        </div>
+      ),
     },
   ];
   const session = await getServerSession();
@@ -140,7 +192,7 @@ const Explore = async (params: {
                 <nav>
                   <ul className="flex flex-col gap-6">
                     {/* navbar exept search and recently */}
-                    {exploreSections.slice(0, 5).map((item) => (
+                    {exploreSections.slice(0, 2).map((item) => (
                       <li key={item.id} className="">
                         <Link
                           className="flex items-center gap-4 cursor-pointer text-[14px] font-normal"
@@ -181,15 +233,8 @@ const Explore = async (params: {
               <LogoutBtn />
             </div>
           </aside>
-          <div
-            className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
-            style={{ background: `rgba(78, 78, 97, 0.20)` }}
-          >
-            <div className="">
-              {exploreSections.find((item) => item.link === activeSection)
-                ?.component || redirect("/explore?section=explore")}
-            </div>
-          </div>
+          {exploreSections.find((item) => item.link === activeSection)
+            ?.component || redirect("/explore?section=explore")}
         </div>
       </div>
     </Motion>

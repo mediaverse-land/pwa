@@ -33,7 +33,7 @@ const AccountSection = async ({
   }
 
   return (
-    <Motion key={"account"}>
+    <Motion key={"account"} fullHeight>
       <div className="w-full h-full">
         {/* user info */}
         <div className="flex flex-col items-stretch h-[280px]">
