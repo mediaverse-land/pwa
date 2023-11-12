@@ -11,8 +11,11 @@ export const audioData = [
     title: "Velit officia",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut libero.",
-    author: "Ralph",
-    time: "8:15",
+    author: {
+      name: "auth",
+      picture: "",
+    },
+    time: 560,
     image: "/images/nasa.png",
   },
   {
@@ -20,16 +23,22 @@ export const audioData = [
     title: "Velit officia",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut libero.",
-    author: "Ralph",
-    time: "8:15",
+    author: {
+      name: "auth",
+      picture: "",
+    },
+    time: 560,
   },
   {
     id: 3,
     title: "Velit officia",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut libero.",
-    author: "Ralph",
-    time: "8:15",
+    author: {
+      name: "auth",
+      picture: "",
+    },
+    time: 560,
     image: "/images/nasa.png",
   },
 ];
