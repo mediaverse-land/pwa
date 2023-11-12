@@ -1,7 +1,8 @@
-import Image from "next/image";
+import {
+  getMostViewedSongs,
+  getRecentlySongs,
+} from "@/services/contactService";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
-import { VIDEO_ICON } from "@/components/SVG/svgs";
-import ExploreVideoCard from "../shared/VideoCard";
 import ExploreAudioCard from "../shared/AudioCard";
 
 export const audioData = [
@@ -32,8 +33,24 @@ export const audioData = [
     image: "/images/nasa.png",
   },
 ];
-
+const getMostViewedSongsData = async () => {
+  const liveData = await getMostViewedSongs();
+  if (liveData.ok) {
+    return liveData.json();
+  }
+};
+const getRecentlySongsData = async () => {
+  const liveData = await getRecentlySongs();
+  if (liveData.ok) {
+    return liveData.json();
+  }
+};
 const ExploreAudioAssets = async () => {
+  const [mostViewedSongs, rececentlySongsData] = await Promise.all([
+    getMostViewedSongsData(),
+    getRecentlySongsData(),
+  ]);
+
   return (
     <div className="flex flex-col items-stretch gap-6 pb-8">
       {/* best in month */}
@@ -48,15 +65,18 @@ const ExploreAudioAssets = async () => {
         <div>
           <div className="overflow-x-hidden">
             <div className="flex items-stretch gap-4 overflow-x-auto [&_>_*]:w-[200px]">
-              <ExploreAssetsCard type="audio" />
-              <ExploreAssetsCard type="audio" />
-              <ExploreAssetsCard type="audio" />
-              <ExploreAssetsCard type="audio" />
-              <ExploreAssetsCard type="audio" />
-              <ExploreAssetsCard type="audio" />
-              <ExploreAssetsCard type="audio" />
-              <ExploreAssetsCard type="audio" />
-              <ExploreAssetsCard type="audio" />
+              {mostViewedSongs.slice(0, 10).map((item: any) => (
+                <ExploreAssetsCard
+                  key={item.id}
+                  type="audio"
+                  cover={item.asset.thumbnails["336x366"]}
+                  title={item.name}
+                  author={{
+                    name: item.asset.user.username,
+                    picture: item.asset.user.image_url,
+                  }}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -71,15 +91,18 @@ const ExploreAudioAssets = async () => {
           <div className="text-[14px] text-[#597AFF]">View all</div>
         </div>
         <div className="grid grid-cols-2 grid-flow-row gap-x-4 gap-y-6">
-          {audioData.map((items, index: number) => {
+          {rececentlySongsData.map((items: any, index: number) => {
             return (
               <ExploreAudioCard
                 key={items.id}
-                author={items.author}
+                author={{
+                  name: items.asset.user.username,
+                  picture: items.asset.user.image_url,
+                }}
                 description={items.description}
-                image={items.image}
-                time={items.time}
-                title={items.title}
+                image={items.asset.thumbnails["336x366"]}
+                time={items.length}
+                title={items.name}
               />
             );
           })}

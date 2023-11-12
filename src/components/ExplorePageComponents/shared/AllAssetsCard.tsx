@@ -29,11 +29,11 @@ const ExploreAssetsCard = ({
   };
 }) => {
   return (
-    <div className="flex flex-col items-stretch gap-4">
+    <div className="flex flex-col items-stretch gap-4 min-w-[143px] overflow-hidden">
       {/* image */}
       <div className="relative w-[143px] h-[143px] rounded-2xl overflow-hidden">
         <Image
-          className="z-10"
+          className="z-10 object-cover"
           src={`${cover || "/images/car.png"}`}
           alt=""
           fill
@@ -46,17 +46,22 @@ const ExploreAssetsCard = ({
       {/* content */}
       <div className="flex flex-col gap-2 items-stretch">
         {/* title */}
-        <div className="line-clamp-1 text-[#666680] leading-none">
+        <div className="line-clamp-1 text-[#666680] leading-none max-w-full overflow-hidden">
           {title || "Tiger love..."}
         </div>
         {/* author */}
         <div className="flex items-center gap-2">
           <div className="relative w-[16px] h-[16px] rounded-full overflow-hidden">
-            <Image
-              src={`${author?.picture || "/images/no.png"}`}
-              alt={`${author?.name}`}
-              fill
-            />
+            {author?.picture ? (
+              <Image
+                className="object-cover"
+                src={`${author?.picture}`}
+                alt={`${author?.name}`}
+                fill
+              />
+            ) : (
+              <div className="bg-white w-full aspect-square overflow-hidden rounded-full"></div>
+            )}
           </div>
           <div className="text-[12px] text-[#666680] line-clamp-1 leading-3">
             {author?.name || "Arlene McCoys"}

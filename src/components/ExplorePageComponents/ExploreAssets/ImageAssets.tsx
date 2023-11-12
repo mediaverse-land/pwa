@@ -1,6 +1,10 @@
 import Image from "next/image";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
 import Link from "next/link";
+import {
+  getMostViewedImages,
+  getRecentlyImages,
+} from "@/services/contactService";
 const imageData = [
   {
     asset: {
@@ -130,7 +134,24 @@ const imageData = [
   },
 ];
 
+const getMostViewedImagesData = async () => {
+  const liveData = await getMostViewedImages();
+  if (liveData.ok) {
+    return liveData.json();
+  }
+};
+const getRecentlyImagesData = async () => {
+  const liveData = await getRecentlyImages();
+  if (liveData.ok) {
+    return liveData.json();
+  }
+};
+
 const ExploreImageAssets = async () => {
+  const [mostViewedImages, rececentlyImagesData] = await Promise.all([
+    getMostViewedImagesData(),
+    getRecentlyImagesData(),
+  ]);
   return (
     <div className="flex flex-col items-stretch gap-6 pb-8">
       {/* best in month */}
@@ -145,15 +166,18 @@ const ExploreImageAssets = async () => {
         <div>
           <div className="overflow-x-hidden">
             <div className="flex items-stretch gap-4 overflow-x-auto">
-              <ExploreAssetsCard type="image" />
-              <ExploreAssetsCard type="image" />
-              <ExploreAssetsCard type="image" />
-              <ExploreAssetsCard type="image" />
-              <ExploreAssetsCard type="image" />
-              <ExploreAssetsCard type="image" />
-              <ExploreAssetsCard type="image" />
-              <ExploreAssetsCard type="image" />
-              <ExploreAssetsCard type="image" />
+              {mostViewedImages.slice(0, 10).map((item: any) => (
+                <ExploreAssetsCard
+                  key={item.id}
+                  type="image"
+                  cover={item.asset.thumbnails["336x366"]}
+                  title={item.name}
+                  author={{
+                    name: item.asset.user.username,
+                    picture: item.asset.user.image_url,
+                  }}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -173,10 +197,10 @@ const ExploreImageAssets = async () => {
           </Link>
         </div>
         <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2">
-          {imageData.map((items: any, index: number) => {
+          {rececentlyImagesData.map((items: any, index: number) => {
             return (
               <div
-                key={index}
+                key={items.id}
                 className={`relative overflow-hidden rounded-lg w-full aspect-square `}
               >
                 <Image

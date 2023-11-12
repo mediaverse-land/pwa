@@ -23,8 +23,16 @@ export const getMostViewedImages = async () => {
   const url = `${URL}/images/most-viewed`;
   return fetchInstance(url);
 };
+export const getRecentlyImages = async () => {
+  const url = `${URL}/images/newest`;
+  return fetchInstance(url);
+};
 export const getMostViewedText = async () => {
   const url = `${URL}/texts/most-viewed`;
+  return fetchInstance(url);
+};
+export const getRecentlyTexts = async () => {
+  const url = `${URL}/texts/newest`;
   return fetchInstance(url);
 };
 
@@ -32,9 +40,17 @@ export const getMostViewedVideos = () => {
   const url = `${URL}/videos/most-viewed`;
   return fetchInstance(url);
 };
+export const getRecentlyVideos = () => {
+  const url = `${URL}/videos/newest`;
+  return fetchInstance(url);
+};
 
 export const getMostViewedSongs = () => {
   const url = `${URL}/audios/most-viewed`;
+  return fetchInstance(url);
+};
+export const getRecentlySongs = () => {
+  const url = `${URL}/audios/newest`;
   return fetchInstance(url);
 };
 

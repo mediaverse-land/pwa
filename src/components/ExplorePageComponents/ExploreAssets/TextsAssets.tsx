@@ -1,8 +1,4 @@
-import Image from "next/image";
-import ExploreAssetsCard from "../shared/AllAssetsCard";
-import { VIDEO_ICON } from "@/components/SVG/svgs";
-import ExploreVideoCard from "../shared/VideoCard";
-import ExploreAudioCard from "../shared/AudioCard";
+import { getMostViewedText, getRecentlyTexts } from "@/services/contactService";
 import ExploreTextCard from "../shared/TextCard";
 
 const audioData = [
@@ -34,7 +30,25 @@ const audioData = [
   },
 ];
 
+const getMostViewedTextsData = async () => {
+  const liveData = await getMostViewedText();
+  if (liveData.ok) {
+    return liveData.json();
+  }
+};
+const getRecentlyTextsData = async () => {
+  const liveData = await getRecentlyTexts();
+  if (liveData.ok) {
+    return liveData.json();
+  }
+};
+
 const ExploreTextsAssets = async () => {
+  const [mostViewedTexts, rececentlyTextsData] = await Promise.all([
+    getMostViewedTextsData(),
+    getRecentlyTextsData(),
+  ]);
+
   return (
     <div className="flex flex-col items-stretch gap-6 pb-8">
       {/* best in month */}
@@ -49,12 +63,9 @@ const ExploreTextsAssets = async () => {
         <div>
           <div className="overflow-x-hidden">
             <div className="flex items-stretch gap-4 overflow-x-auto">
-              <ExploreTextCard />
-              <ExploreTextCard />
-              <ExploreTextCard />
-              <ExploreTextCard />
-              <ExploreTextCard />
-              <ExploreTextCard />
+              {mostViewedTexts.slice(0, 10).map((item: any) => (
+                <ExploreTextCard key={item.id} data={item} />
+              ))}
             </div>
           </div>
         </div>
@@ -69,12 +80,9 @@ const ExploreTextsAssets = async () => {
           <div className="text-[14px] text-[#597AFF]">View all</div>
         </div>
         <div className="grid grid-cols-2 grid-flow-row gap-4">
-          <ExploreTextCard />
-          <ExploreTextCard />
-          <ExploreTextCard />
-          <ExploreTextCard />
-          <ExploreTextCard />
-          <ExploreTextCard />
+          {rececentlyTextsData.map((item: any) => (
+            <ExploreTextCard key={item.id} data={item} />
+          ))}
         </div>
       </div>
     </div>

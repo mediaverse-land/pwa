@@ -10,7 +10,7 @@ import ExploreMostViewd from "./MostViewed";
 import ExploreTopTexts from "./TopTexts";
 import ExploreChillSongs from "./ChillSongs";
 
-const getData = async () => {
+const getLiveData = async () => {
   const liveData = await getLives();
   if (liveData.ok) {
     return liveData.json();
@@ -29,9 +29,9 @@ const getTopTextsData = async () => {
   }
 };
 const ExploreAllAssets = async () => {
-  // const liveData = await getData();
+  // const liveData = await getLiveData();
   const [liveData, mostViewedImages] = await Promise.all([
-    getData(),
+    getLiveData(),
     getMostViewedImagesData(),
   ]);
   const topTextsData = await getTopTextsData();

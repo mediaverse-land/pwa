@@ -1,6 +1,7 @@
 import { CIRCLE_VIDEO_ICON, VIDEO_ICON } from "@/components/SVG/svgs";
 import Image from "next/image";
 import "./styles.css";
+import { secondsToHMS } from "@/lib/convertSecondsToHMS";
 
 const ExploreVideoCard = ({
   author,
@@ -12,8 +13,11 @@ const ExploreVideoCard = ({
   image: string;
   title: string;
   description: string;
-  author: string;
-  time: string;
+  author: {
+    picture: string;
+    name: string;
+  };
+  time: number;
 }) => {
   return (
     <div className="flex flex-col items-stretch gap-3">
@@ -39,8 +43,24 @@ const ExploreVideoCard = ({
           {description}
         </div>
         <div className="flex justify-between text-[12px] text-[#666680]">
-          <div>{author}</div>
-          <div>{time}</div>
+          <div className="flex items-center gap-2">
+            <div className="relative w-[16px] h-[16px] rounded-full overflow-hidden">
+              {author?.picture ? (
+                <Image
+                  className="object-cover"
+                  src={`${author?.picture}`}
+                  alt={`${author?.name}`}
+                  fill
+                />
+              ) : (
+                <div className="bg-white w-full aspect-square overflow-hidden rounded-full"></div>
+              )}
+            </div>
+            <div className="text-[12px] text-[#666680] line-clamp-1 leading-3">
+              {author?.name || "Arlene McCoys"}
+            </div>
+          </div>
+          <div>{secondsToHMS(time)}</div>
         </div>
       </div>
     </div>
