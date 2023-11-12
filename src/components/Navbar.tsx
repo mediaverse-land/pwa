@@ -12,7 +12,7 @@ const Navbar = () => {
   // console.log(pathname, "pathname");
 
   return (
-    <nav className="nav fixed top-0 w-full z-50 ">
+    <nav className="nav fixed top-0 w-full z-[70]">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href={"/"} className="flex items-center">
           <Image
@@ -37,12 +37,13 @@ const Navbar = () => {
             href={`/explore`}
             className="w-[50px] md:order-2 pt-2 pb-[7px] relative aspect-square rounded-full overflow-hidden shadow border border-white border-opacity-30 justify-center items-center inline-flex"
           >
-            {session.data.user.image &&
+            {session.data.user.image && (
               <Image
                 src={session.data.user.image}
                 alt="user profile picture"
                 fill
-              />}
+              />
+            )}
           </Link>
         ) : (
           <Link href={`/explore`} className="flex md:order-2 justify-between">
@@ -70,8 +71,9 @@ const Navbar = () => {
                 <Link
                   href={`${item.href}${item.query}`}
                   key={index}
-                  className={`text-gray-400 hover:text-white md:bg-transparent pb-2 rounded-[2px] ${pathname === item.href ? "active" : ""
-                    }`}
+                  className={`text-gray-400 hover:text-white md:bg-transparent pb-2 rounded-[2px] ${
+                    pathname === item.href ? "active" : ""
+                  }`}
                 >
                   {item.title}
                 </Link>
