@@ -12,7 +12,7 @@ const Navbar = () => {
   // console.log(pathname, "pathname");
 
   return (
-    <nav className="nav fixed top-0 w-full z-[70]">
+    <nav className="nav fixed top-0 w-full z-[90]">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href={"/"} className="flex items-center">
           <Image
