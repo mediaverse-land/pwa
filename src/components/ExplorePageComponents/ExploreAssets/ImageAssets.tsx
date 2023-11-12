@@ -166,7 +166,7 @@ const ExploreImageAssets = async () => {
             <p className="text-white text-sm ">Recently</p>
           </div>
           <Link
-            href={`/explore?section=recently&content=pictures`}
+            href={`/explore?section=recently&content=images`}
             className="text-[14px] text-[#597AFF]"
           >
             View all

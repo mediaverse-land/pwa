@@ -14,7 +14,7 @@ const AccountSubscribeSection = ({
       <div className="rounded-lg grid grid-flow-col grid-rows-1 bg-[#0E0E1280] backdrop-blur-md">
         {ExploreSectionNavs.map((tab) => (
           <Link
-            href={`/explore?section=explore&content=${tab.link}`}
+            href={`/explore?section=account&type=subscribe&content=${tab.link}`}
             key={tab.id}
             className="text-center flex flex-col items-center justify-center cursor-pointer h-full"
           >

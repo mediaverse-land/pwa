@@ -1,52 +1,57 @@
 import { PICTURE_ICON } from "@/components/SVG/svgs";
 import Image from "next/image";
 
-const imageData = [
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-];
+// const imageData = [
+//   {
+//     asset: {
+//       thumbnails: {
+//         "336x366": "/images/car.png",
+//       },
+//     },
+//   },
+//   {
+//     asset: {
+//       thumbnails: {
+//         "336x366": "/images/car.png",
+//       },
+//     },
+//   },
+//   {
+//     asset: {
+//       thumbnails: {
+//         "336x366": "/images/car.png",
+//       },
+//     },
+//   },
+//   {
+//     asset: {
+//       thumbnails: {
+//         "336x366": "/images/car.png",
+//       },
+//     },
+//   },
+//   {
+//     asset: {
+//       thumbnails: {
+//         "336x366": "/images/car.png",
+//       },
+//     },
+//   },
+//   {
+//     asset: {
+//       thumbnails: {
+//         "336x366": "/images/car.png",
+//       },
+//     },
+//   },
+// ];
 
-const ExploreMostViewd = () => {
+const ExploreMostViewd = ({
+  mostViewedImages,
+}: {
+  mostViewedImages: any[];
+}) => {
+  // console.log(mostViewedImages);
   return (
     <div className="flex items-stretch flex-col gap-4">
       {/* header */}
@@ -58,15 +63,16 @@ const ExploreMostViewd = () => {
         <div className="text-[14px] text-[#597AFF]">View all</div>
       </div>
       <div className="grid grid-rows-3 grid-cols-3 grid-flow-row gap-2">
-        {imageData.slice(0, 6).map((items: any, index: number) => {
+        {mostViewedImages.slice(0, 6).map((items: any, index: number) => {
           return (
             <div
-              key={index}
+              key={items.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square ${
                 index === 1 ? " col-span-2 row-span-2" : ""
               }`}
             >
               <Image
+                className="object-cover"
                 src={items.asset.thumbnails["336x366"]}
                 alt={items.name}
                 fill

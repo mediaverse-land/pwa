@@ -1,5 +1,9 @@
 import Image from "next/image";
-import { getLives } from "@/services/contactService";
+import {
+  getLives,
+  getMostViewedImages,
+  getMostViewedText,
+} from "@/services/contactService";
 import ExploreLiveChannel from "./LiveChannel";
 import ExploreDailyRecommended from "./DailyRecommended";
 import ExploreMostViewd from "./MostViewed";
@@ -12,9 +16,25 @@ const getData = async () => {
     return liveData.json();
   }
 };
+const getMostViewedImagesData = async () => {
+  const liveData = await getMostViewedImages();
+  if (liveData.ok) {
+    return liveData.json();
+  }
+};
+const getTopTextsData = async () => {
+  const liveData = await getMostViewedText();
+  if (liveData.ok) {
+    return liveData.json();
+  }
+};
 const ExploreAllAssets = async () => {
-  const liveData = await getData();
-
+  // const liveData = await getData();
+  const [liveData, mostViewedImages] = await Promise.all([
+    getData(),
+    getMostViewedImagesData(),
+  ]);
+  const topTextsData = await getTopTextsData();
   return (
     <div className="flex flex-col items-stretch gap-6 pb-8">
       {/* live chanel */}
@@ -22,9 +42,9 @@ const ExploreAllAssets = async () => {
       {/* daily recommended */}
       <ExploreDailyRecommended />
       {/* Most viewed  */}
-      <ExploreMostViewd />
+      <ExploreMostViewd mostViewedImages={mostViewedImages} />
       {/* Top 10 texts */}
-      <ExploreTopTexts />
+      <ExploreTopTexts topTextsData={topTextsData} />
       {/* Chill songs */}
       <ExploreChillSongs />
     </div>

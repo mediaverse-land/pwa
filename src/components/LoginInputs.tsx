@@ -275,7 +275,7 @@ const LoginWithUsername = () => {
     // );
     const req = await signInWithUsername({
       password: data.password,
-      cellphone: data.username,
+      username: data.username,
     }).finally(() => setIsLoading(false));
     const res = await req.json();
     console.log(res);

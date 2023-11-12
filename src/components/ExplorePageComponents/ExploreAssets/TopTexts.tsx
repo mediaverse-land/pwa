@@ -3,7 +3,7 @@ import { TEXT_ICON } from "@/components/SVG/svgs";
 import Image from "next/image";
 import ExploreTextCard from "../shared/TextCard";
 
-const ExploreTopTexts = () => {
+const ExploreTopTexts = ({ topTextsData }: { topTextsData: any[] }) => {
   return (
     <div className="flex items-stretch flex-col gap-4">
       {/* header */}
@@ -18,13 +18,9 @@ const ExploreTopTexts = () => {
         <div className="overflow-x-hidden">
           <div className="flex gap-4 overflow-x-auto">
             {/* card */}
-            <ExploreTextCard />
-            <ExploreTextCard />
-            <ExploreTextCard />
-            <ExploreTextCard />
-            <ExploreTextCard />
-            <ExploreTextCard />
-            <ExploreTextCard />
+            {topTextsData.slice(0, 10).map((item) => (
+              <ExploreTextCard key={item.id} data={item} />
+            ))}
           </div>
         </div>
       </div>
