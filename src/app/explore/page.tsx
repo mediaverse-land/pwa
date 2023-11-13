@@ -120,32 +120,6 @@ const Explore = async (params: {
         </div>
       ),
     },
-    {
-      id: "6",
-      name: "Search",
-      link: "search",
-      component: (
-        <div
-          className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
-          style={{ background: `rgba(78, 78, 97, 0.20)` }}
-        >
-          <AccountSection searchParams={params.searchParams} />
-        </div>
-      ),
-    },
-    {
-      id: "7",
-      name: "Recently",
-      link: "recently",
-      component: (
-        <div
-          className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
-          style={{ background: `rgba(78, 78, 97, 0.20)` }}
-        >
-          <ExploreRecently searchParams={params.searchParams} />
-        </div>
-      ),
-    },
   ];
   const session = await getServerSession();
   if (!session) {
@@ -191,8 +165,8 @@ const Explore = async (params: {
               <div>
                 <nav>
                   <ul className="flex flex-col gap-6">
-                    {/* navbar exept search and recently */}
-                    {exploreSections.slice(0, 2).map((item) => (
+                    {/* navbar */}
+                    {exploreSections.map((item) => (
                       <li key={item.id} className="">
                         <Link
                           className="flex items-center gap-4 cursor-pointer text-[14px] font-normal"

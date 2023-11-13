@@ -9,6 +9,10 @@ import ExploreDailyRecommended from "./DailyRecommended";
 import ExploreMostViewd from "./MostViewed";
 import ExploreTopTexts from "./TopTexts";
 import ExploreChillSongs from "./ChillSongs";
+import Link from "next/link";
+import { SEARCH_ICON } from "@/components/SVG/svgs";
+import { ExploreSectionNavs } from "../Explore";
+import ExploreSearchAndNavSection from "./SearchAndNavSection";
 
 const getLiveData = async () => {
   const liveData = await getLives();
@@ -28,7 +32,7 @@ const getTopTextsData = async () => {
     return liveData.json();
   }
 };
-const ExploreAllAssets = async () => {
+const ExploreAllAssets = async ({ activeTab }: { activeTab: string }) => {
   // const liveData = await getLiveData();
   const [liveData, mostViewedImages] = await Promise.all([
     getLiveData(),
@@ -36,18 +40,21 @@ const ExploreAllAssets = async () => {
   ]);
   const topTextsData = await getTopTextsData();
   return (
-    <div className="flex flex-col items-stretch gap-6 pb-8">
-      {/* live chanel */}
-      <ExploreLiveChannel liveData={liveData} />
-      {/* daily recommended */}
-      <ExploreDailyRecommended />
-      {/* Most viewed  */}
-      <ExploreMostViewd mostViewedImages={mostViewedImages} />
-      {/* Top 10 texts */}
-      <ExploreTopTexts topTextsData={topTextsData} />
-      {/* Chill songs */}
-      <ExploreChillSongs />
-    </div>
+    <>
+      <ExploreSearchAndNavSection activeTab={activeTab} />
+      <div className="flex flex-col items-stretch gap-6 pb-8 px-6">
+        {/* live chanel */}
+        <ExploreLiveChannel liveData={liveData} />
+        {/* daily recommended */}
+        <ExploreDailyRecommended />
+        {/* Most viewed  */}
+        <ExploreMostViewd mostViewedImages={mostViewedImages} />
+        {/* Top 10 texts */}
+        <ExploreTopTexts topTextsData={topTextsData} />
+        {/* Chill songs */}
+        <ExploreChillSongs />
+      </div>
+    </>
   );
 };
 

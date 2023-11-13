@@ -1,5 +1,7 @@
 import { getMostViewedText, getRecentlyTexts } from "@/services/contactService";
 import ExploreTextCard from "../shared/TextCard";
+import Link from "next/link";
+import ExploreSearchAndNavSection from "./SearchAndNavSection";
 
 const audioData = [
   {
@@ -43,50 +45,62 @@ const getRecentlyTextsData = async () => {
   }
 };
 
-const ExploreTextsAssets = async () => {
-  const [mostViewedTexts, rececentlyTextsData] = await Promise.all([
-    getMostViewedTextsData(),
-    getRecentlyTextsData(),
-  ]);
+const ExploreTextsAssets = async ({ activeTab }: { activeTab: string }) => {
+  const [mostViewedTexts] = await Promise.all([getMostViewedTextsData()]);
 
   return (
-    <div className="flex flex-col items-stretch gap-6 pb-8">
-      {/* best in month */}
-      <div className="flex items-stretch flex-col gap-4">
-        {/* header */}
-        <div className="w-full flex items-center justify-between">
-          <div className="flex items-center space-x-1">
-            <p className="text-white text-sm ">Best in month</p>
+    <>
+      <ExploreSearchAndNavSection activeTab={activeTab} />
+      <div className="flex flex-col items-stretch gap-6 pb-8 px-6">
+        {/* best in month */}
+        <div className="flex items-stretch flex-col gap-4">
+          {/* header */}
+          <div className="w-full flex items-center justify-between">
+            <div className="flex items-center space-x-1">
+              <p className="text-white text-sm ">Best in month</p>
+            </div>
+            <div className="text-[14px] text-[#597AFF]">View all</div>
           </div>
-          <div className="text-[14px] text-[#597AFF]">View all</div>
-        </div>
-        <div>
-          <div className="overflow-x-hidden">
-            <div className="flex items-stretch gap-4 overflow-x-auto">
-              {mostViewedTexts.slice(0, 10).map((item: any) => (
-                <ExploreTextCard key={item.id} data={item} />
-              ))}
+          <div>
+            <div className="overflow-x-hidden">
+              <div className="flex items-stretch gap-4 overflow-x-auto">
+                {mostViewedTexts.slice(0, 10).map((item: any) => (
+                  <ExploreTextCard key={item.id} data={item} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      {/* recently */}
-      <div className="flex items-stretch flex-col gap-4">
-        {/* header */}
-        <div className="w-full flex items-center justify-between">
-          <div className="flex items-center space-x-1">
-            <p className="text-white text-sm ">Recently</p>
+        {/* recently */}
+        <div className="flex items-stretch flex-col gap-4">
+          {/* header */}
+          <div className="w-full flex items-center justify-between">
+            <div className="flex items-center space-x-1">
+              <p className="text-white text-sm ">Recently</p>
+            </div>
+            <Link
+              href={`/explore?section=explore&content=recently&type=texts`}
+              className="text-[14px] text-[#597AFF]"
+            >
+              View all
+            </Link>
           </div>
-          <div className="text-[14px] text-[#597AFF]">View all</div>
-        </div>
-        <div className="grid grid-cols-2 grid-flow-row gap-4">
-          {rececentlyTextsData.map((item: any) => (
-            <ExploreTextCard key={item.id} data={item} />
-          ))}
+          <RecentlyTexts />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
 export default ExploreTextsAssets;
+
+export const RecentlyTexts = async () => {
+  const rececentlyTextsData = await getRecentlyTextsData();
+  return (
+    <div className="grid grid-cols-2 grid-flow-row gap-4">
+      {rececentlyTextsData.map((item: any) => (
+        <ExploreTextCard key={item.id} data={item} />
+      ))}
+    </div>
+  );
+};
