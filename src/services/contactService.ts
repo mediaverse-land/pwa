@@ -71,6 +71,10 @@ export const getFAQ = () => {
   const url = `${URL}/faq`;
   return fetchInstance(url);
 };
+export const getSearch = (params: string) => {
+  const url = `${URL}/search?${params}`;
+  return fetchInstance(url);
+};
 
 export const getBlogs = (page: number) => {
   const url = `https://blog.mediaverse.land/api/posts?page=${page}`;

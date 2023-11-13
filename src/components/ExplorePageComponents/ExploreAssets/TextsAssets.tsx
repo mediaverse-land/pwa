@@ -97,7 +97,7 @@ export default ExploreTextsAssets;
 export const RecentlyTexts = async () => {
   const rececentlyTextsData = await getRecentlyTextsData();
   return (
-    <div className="grid grid-cols-2 grid-flow-row gap-4">
+    <div className="grid grid-cols-3 grid-flow-row gap-4">
       {rececentlyTextsData.map((item: any) => (
         <ExploreTextCard key={item.id} data={item} />
       ))}

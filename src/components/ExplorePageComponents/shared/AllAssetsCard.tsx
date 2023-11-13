@@ -29,9 +29,9 @@ const ExploreAssetsCard = ({
   };
 }) => {
   return (
-    <div className="flex flex-col items-stretch gap-4 min-w-[143px] overflow-hidden">
+    <div className="flex flex-col items-stretch gap-4 min-w-[190px] overflow-hidden">
       {/* image */}
-      <div className="relative w-[143px] h-[143px] rounded-2xl overflow-hidden">
+      <div className="relative w-[190px] h-[190px] rounded-2xl overflow-hidden">
         <Image
           className="z-10 object-cover"
           src={`${cover || "/images/car.png"}`}

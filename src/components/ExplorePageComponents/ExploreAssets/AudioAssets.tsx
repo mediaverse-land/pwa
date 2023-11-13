@@ -117,7 +117,7 @@ export default ExploreAudioAssets;
 export const RecentlyAudio = async () => {
   const rececentlySongsData = await getRecentlySongsData();
   return (
-    <div className="grid grid-cols-2 grid-flow-row gap-x-4 gap-y-6">
+    <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6">
       {rececentlySongsData.map((items: any, index: number) => {
         return (
           <ExploreAudioCard

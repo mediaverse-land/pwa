@@ -113,7 +113,7 @@ const Explore = async (params: {
       component: (
         <div
           key={"ExploreSection"}
-          className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-hidden flex flex-col items-stretch gap-4"
+          className="col-span-6 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-hidden flex flex-col items-stretch gap-4"
           style={{ background: `rgba(78, 78, 97, 0.20)` }}
         >
           <ExploreSection searchParams={params.searchParams} />
@@ -131,7 +131,7 @@ const Explore = async (params: {
   return (
     <Motion center>
       <div className="mt-24 mx-auto flex items-center justify-center">
-        <div className="grid grid-cols-6 grid-rows-1 gap-4 h-[520px] w-[674px] text-[#C1C1CD]">
+        <div className="grid grid-cols-8 grid-rows-1 gap-4 h-[604px] w-[1062px] text-[#C1C1CD]">
           <aside
             className="col-span-2 rounded-2xl border border-[#CFCFFC] border-opacity-20 py-8 px-6 flex flex-col items-stretch justify-between"
             style={{ background: `rgba(78, 78, 97, 0.20)` }}

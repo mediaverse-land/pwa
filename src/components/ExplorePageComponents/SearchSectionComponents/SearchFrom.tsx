@@ -77,11 +77,12 @@ const SearchSectionFrom = () => {
             className="relative select-none"
           >
             <div className="flex items-center justify-between gap-4 cursor-pointer">
-              <div>
+              <div
+                className={`transition-all duration-200 ${
+                  isMenuOpen ? "-rotate-90" : "rotate-90"
+                }`}
+              >
                 <CHEVRON_LEFT
-                  className={`transition-all duration-200 ${
-                    isMenuOpen ? "rotate-90" : "-rotate-90"
-                  }`}
                   style={{
                     width: "18px",
                     height: "20px",
