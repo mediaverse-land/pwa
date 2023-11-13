@@ -3,7 +3,7 @@ import "./styles.css";
 
 const ExploreTextCard = ({ data }: { data: any }) => {
   return (
-    <div className="max-w-[200px] min-w-[190px] min-h-[155px] h-[155px] max-h-[155px] w-full">
+    <div className="max-w-full min-w-[220px] w-full aspect-square">
       <div className="text-card w-full h-full px-4 py-6 flex flex-col items-stretch leading-none">
         <div className="text-[#CCCCFF] line-clamp-1 text-[14px] leading-4">
           {data.name}

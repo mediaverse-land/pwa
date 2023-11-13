@@ -22,7 +22,7 @@ const ExploreVideoCard = ({
   return (
     <div className="flex flex-col items-stretch gap-3">
       <div
-        className={`relative overflow-hidden rounded-lg w-full aspect-video min-h-[132px]`}
+        className={`relative overflow-hidden rounded-lg w-full aspect-video min-h-[145px]`}
       >
         {/* overlay */}
         <div className="absolute left-0 top-0 w-full h-full video-overlay-bg z-20"></div>

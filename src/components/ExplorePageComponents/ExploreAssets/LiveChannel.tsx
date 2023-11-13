@@ -22,7 +22,7 @@ const ExploreLiveChannel = ({ liveData }: { liveData: any }) => {
             {liveData.map((item: any, i: number) => (
               <div
                 key={i}
-                className="relative rounded-[8px] min-w-[154px] w-[154px] h-[100px] mr-[8px] overflow-hidden"
+                className="relative rounded-[8px] min-w-[190px] w-[190px] h-[125px] mr-[8px] overflow-hidden"
               >
                 <Image className="" src={item.thumbnail} alt="" fill />
               </div>
