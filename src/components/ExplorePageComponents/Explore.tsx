@@ -22,6 +22,7 @@ import ExploreAudioAssets from "./ExploreAssets/AudioAssets";
 import ExploreTextsAssets from "./ExploreAssets/TextsAssets";
 import AccountSection from "./Account";
 import ExploreRecently from "./Recently";
+import ExploreSearchSection from "./Search";
 type IExploreSectionNavs = {
   id: number;
   name: string;
@@ -128,23 +129,15 @@ const ExploreSection = ({
     },
     recently: {
       component: (
-        <div
-          key={"recently"}
-          className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto h-full flex flex-col items-stretch gap-4"
-          style={{ background: `rgba(78, 78, 97, 0.20)` }}
-        >
+        <div key={"recently"} className="overflow-y-auto h-w-full">
           <ExploreRecently searchParams={searchParams} />
         </div>
       ),
     },
     search: {
       component: (
-        <div
-          key={"search"}
-          className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
-          style={{ background: `rgba(78, 78, 97, 0.20)` }}
-        >
-          <AccountSection searchParams={searchParams} />
+        <div key={"search"} className="overflow-y-auto h-full">
+          <ExploreSearchSection searchParams={searchParams} />
         </div>
       ),
     },
