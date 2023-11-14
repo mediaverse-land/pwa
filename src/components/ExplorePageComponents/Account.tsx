@@ -5,6 +5,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import AccountSubscribeSection from "./Account/SubscribeSection";
 import Motion from "../motion";
+import UserStatics from "./Account/UserStatics";
+import AccountOwnershipSection from "./Account/OwnershipSection";
 
 const AccountSection = async ({
   searchParams,
@@ -22,7 +24,7 @@ const AccountSection = async ({
       id: 2,
       name: "Ownership",
       link: "ownership",
-      component: <></>,
+      component: <AccountOwnershipSection searchParams={searchParams} />,
     },
   ];
   const session = await getServerSession(authOptions);
@@ -73,32 +75,7 @@ const AccountSection = async ({
               </div>
             </div>
             {/* statistics */}
-            <div className="w-full h-[68px] grid grid-cols-3 grid-rows-1 gap-2 mt-4">
-              <div className="rounded-2xl bg-[rgba(78,78,97,0.20)] backdrop-blur-sm h-full before:content-[''] before:absolute before:w-[45%] before:left-1/2 before:-translate-x-1/2 before:h-[1px] before:bg-[#597AFF] before:top-0 w-full flex flex-col items-center justify-center gap-1 leading-none">
-                <div className="leading-5 font-semibold text-[#D9D9FF] line-clamp-1">
-                  126
-                </div>
-                <div className="leading-4 text-[12px] text-[#83839C]">
-                  Assets
-                </div>
-              </div>
-              <div className="rounded-2xl bg-[rgba(78,78,97,0.20)] backdrop-blur-sm h-full before:content-[''] before:absolute before:w-[45%] before:left-1/2 before:-translate-x-1/2 before:h-[1px] before:bg-[#597AFF] before:top-0 w-full flex flex-col items-center justify-center gap-1 leading-none">
-                <div className="leading-5 font-semibold text-[#D9D9FF] line-clamp-1">
-                  15.1 k
-                </div>
-                <div className="leading-4 text-[12px] text-[#83839C]">
-                  Sales
-                </div>
-              </div>
-              <div className="rounded-2xl bg-[rgba(78,78,97,0.20)] backdrop-blur-sm h-full before:content-[''] before:absolute before:w-[45%] before:left-1/2 before:-translate-x-1/2 before:h-[1px] before:bg-[#597AFF] before:top-0 w-full flex flex-col items-center justify-center gap-1 leading-none">
-                <div className="leading-5 font-semibold text-[#D9D9FF] line-clamp-1">
-                  20k $
-                </div>
-                <div className="leading-4 text-[12px] text-[#83839C]">
-                  Volume
-                </div>
-              </div>
-            </div>
+            <UserStatics />
             {/* tabs */}
             <div className="flex items-stretch justify-around">
               {accountTypes.map((item) => (

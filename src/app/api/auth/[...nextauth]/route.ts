@@ -14,8 +14,10 @@ export const authOptions: AuthOptions = {
   },
   // session: { strategy: "jwt" },
   callbacks: {
+    // async session(params) {
+    //   console.log(params);
+    // },
     async redirect(params: { url: string; baseUrl: string }) {
-      // console.log(params, "params");
       if (params.url.startsWith("http") || params.url.startsWith("/")) {
         return params.url;
       } else {
@@ -24,10 +26,12 @@ export const authOptions: AuthOptions = {
     },
     async jwt(params) {
       // console.log(params, "jwt");
+      // console.log(params);
       if (params.trigger === "update") {
         params.token.name = params.session.name;
         params.token.email = params.session.email;
         params.token.picture = params.session.picture;
+        params.token.id = params.session.id;
       }
       return params.token;
     },
@@ -115,25 +119,11 @@ export const authOptions: AuthOptions = {
       id: "loginWithUsername",
       type: "credentials",
       name: "Login With Username",
-      // The credentials is used to generate a suitable form on the sign in page.
-      // You can specify whatever fields you are expecting to be submitted.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
         username: { label: "Username", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        // You need to provide your own logic here that takes the credentials
-        // submitted and returns either a object representing a user or value
-        // that is false/null if the credentials are invalid.
-        // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-        // You can also use the `req` object to obtain additional parameters
-        // (i.e., the request IP address)
-
-        // console.log(credentials, "cred");
-        // console.log(req.query, "req");
-
         // If no error and we have user data, return it
         if (req.query) {
           // console.log("success");
@@ -164,25 +154,11 @@ export const authOptions: AuthOptions = {
       id: "loginWithOTP",
       type: "credentials",
       name: "Login With OTP",
-      // The credentials is used to generate a suitable form on the sign in page.
-      // You can specify whatever fields you are expecting to be submitted.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
         cellphone: { label: "Cellphone", type: "text" },
         code: { label: "Code", type: "text" },
       },
       async authorize(credentials, req) {
-        // You need to provide your own logic here that takes the credentials
-        // submitted and returns either a object representing a user or value
-        // that is false/null if the credentials are invalid.
-        // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-        // You can also use the `req` object to obtain additional parameters
-        // (i.e., the request IP address)
-
-        // console.log(credentials, "cred");
-        // console.log(req.query, "req");
-
         // If no error and we have user data, return it
         if (req.query) {
           // console.log("success");
@@ -213,25 +189,11 @@ export const authOptions: AuthOptions = {
       id: "signUpWithOTP",
       type: "credentials",
       name: "Sign up With OTP",
-      // The credentials is used to generate a suitable form on the sign in page.
-      // You can specify whatever fields you are expecting to be submitted.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
         cellphone: { label: "Cellphone", type: "text" },
         code: { label: "Code", type: "text" },
       },
       async authorize(credentials, req) {
-        // You need to provide your own logic here that takes the credentials
-        // submitted and returns either a object representing a user or value
-        // that is false/null if the credentials are invalid.
-        // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-        // You can also use the `req` object to obtain additional parameters
-        // (i.e., the request IP address)
-
-        // console.log(credentials, "cred");
-        // console.log(req.query, "req");
-
         // If no error and we have user data, return it
         if (req.query) {
           // console.log("success");

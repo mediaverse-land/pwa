@@ -4,7 +4,7 @@ import {
   getMostViewedImages,
   getMostViewedText,
 } from "@/services/contactService";
-import ExploreLiveChannel from "./LiveChannel";
+
 import ExploreDailyRecommended from "./DailyRecommended";
 import ExploreMostViewd from "./MostViewed";
 import ExploreTopTexts from "./TopTexts";
@@ -13,9 +13,10 @@ import Link from "next/link";
 import { SEARCH_ICON } from "@/components/SVG/svgs";
 import { ExploreSectionNavs } from "../Explore";
 import ExploreSearchAndNavSection from "./SearchAndNavSection";
+import { ExploreLiveChannel } from "./LiveChannel";
 
 const getLiveData = async () => {
-  const liveData = await getLives();
+  const liveData = await getLives({});
   if (liveData.ok) {
     return liveData.json();
   }

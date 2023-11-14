@@ -69,6 +69,17 @@ export const getRecommendedSongs = () => {
   const url = `${URL}/audios/daily-recommended`;
   return fetchInstance(url);
 };
+export const getProfileStatics = (token: string) => {
+  const url = `${URL}/profile/statics`;
+  return fetch(url, {
+    next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+    headers: {
+      "Accept-Language": "en-US",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 export const getTerms = () => {
   const url = `${URL}/terms`;
@@ -79,8 +90,8 @@ export const getPrivacy = () => {
   const url = `${URL}/privacy`;
   return fetchInstance(url);
 };
-export const getLives = async () => {
-  const url = `${URL}/lives`;
+export const getLives = async (args: { params?: string }) => {
+  const url = `${URL}/lives${args.params}`;
   return fetchInstance(url);
 };
 export const getFAQ = () => {
@@ -90,6 +101,40 @@ export const getFAQ = () => {
 export const getSearch = (params: string) => {
   const url = `${URL}/search?${params}`;
   return fetchInstance(url);
+};
+export const getSubscribeAssets = ({
+  params,
+  token,
+}: {
+  params: string;
+  token: string;
+}) => {
+  const url = `${URL}/profile/subscriptions${params}`;
+  return fetch(url, {
+    next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+    headers: {
+      "Accept-Language": "en-US",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const getOwnershipAssets = ({
+  params,
+  token,
+}: {
+  params: string;
+  token: string;
+}) => {
+  const url = `${URL}/profile${params}`;
+  return fetch(url, {
+    next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+    headers: {
+      "Accept-Language": "en-US",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export const getBlogs = (page: number) => {

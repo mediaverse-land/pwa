@@ -31,11 +31,11 @@ const SearchSectionFrom = () => {
   });
   const handleSubmitForm = handleSubmit((data) => {
     console.log(data);
-    console.log(
-      `/explore?section=explore&content=search?q=${data.q}${
-        data.searchIn && `&${contentType}=${data.searchIn}`
-      }`
-    );
+    // console.log(
+    //   `/explore?section=explore&content=search?q=${data.q}${
+    //     data.searchIn && `&${contentType}=${data.searchIn}`
+    //   }`
+    // );
     router.push(
       `/explore?section=explore&content=search&q=${data.q}${
         data.searchIn && `&${contentType}=${data.searchIn}`

@@ -11,6 +11,7 @@ import {
 } from "./SearchTypes";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import SecondSearchForm from "./SecondSearchForm";
 
 const SearchSectionResultFrom = async ({
   searchParams,
@@ -20,6 +21,8 @@ const SearchSectionResultFrom = async ({
   };
 }) => {
   const searchQuery = searchParams.q;
+  const plan = searchParams.plan;
+  const tag = searchParams.tag;
   const dataType = searchParams.type || ExploreSectionNavs[0].link;
 
   const searchResultsComponents: {
@@ -54,9 +57,7 @@ const SearchSectionResultFrom = async ({
             </Link>
           </div>
           <div className="bg-[rgba(14,14,18,0.20)] h-full border border-[#353542] rounded-lg px-4 py-3 flex items-center justify-between grow mr-4">
-            <div className="text-white text-[12px] select-none">
-              {searchQuery}
-            </div>
+            <SecondSearchForm searchParams={searchParams} />
           </div>
           <div className="rounded-lg p-2 aspect-square border border-[#353542] bg-[rgba(14,14,18,0.20)] h-full">
             <SEARCH_SETTING_ICON
@@ -73,7 +74,9 @@ const SearchSectionResultFrom = async ({
           {ExploreSectionNavs.map((item) => (
             <Link
               key={item.id}
-              href={`/explore?section=explore&content=search&q=${searchQuery}&type=${item.link}`}
+              href={`/explore?section=explore&content=search&q=${searchQuery}&type=${
+                item.link
+              }${plan ? `&plan=${plan}` : ""}${tag ? `&tag=${tag}` : ""}`}
             >
               <div
                 className={`relative after:bg-[#597AFF] after:m-auto after:absolute after:left-0 after:rounded-full after:bottom-0 after:origin-center px-2 py-2 after:content-[''] flex items-center justify-between h-full ${
