@@ -50,7 +50,7 @@ const Explore = async (params: {
       component: (
         <div
           key={"AccountSection"}
-          className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
+          className="col-span-6 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-hidden flex flex-col items-stretch gap-4"
           style={{ background: `rgba(78, 78, 97, 0.20)` }}
         >
           <AccountSection searchParams={params.searchParams} />

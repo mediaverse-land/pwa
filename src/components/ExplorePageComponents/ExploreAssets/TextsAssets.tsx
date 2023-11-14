@@ -51,7 +51,7 @@ const ExploreTextsAssets = async ({ activeTab }: { activeTab: string }) => {
   return (
     <>
       <ExploreSearchAndNavSection activeTab={activeTab} />
-      <div className="flex flex-col items-stretch gap-6 pb-8 px-6">
+      <div className="flex flex-col items-stretch gap-6 pb-8 px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}
@@ -65,7 +65,9 @@ const ExploreTextsAssets = async ({ activeTab }: { activeTab: string }) => {
             <div className="overflow-x-hidden">
               <div className="flex items-stretch gap-4 overflow-x-auto">
                 {mostViewedTexts.slice(0, 10).map((item: any) => (
-                  <ExploreTextCard key={item.id} data={item} />
+                  <div key={item.id} className="min-w-[190px] max-w-[190px]">
+                    <ExploreTextCard data={item} />
+                  </div>
                 ))}
               </div>
             </div>
@@ -99,7 +101,9 @@ export const RecentlyTexts = async () => {
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-4">
       {rececentlyTextsData.map((item: any) => (
-        <ExploreTextCard key={item.id} data={item} />
+        <div key={item.id} className="max-w-[220px]">
+          <ExploreTextCard data={item} />
+        </div>
       ))}
     </div>
   );

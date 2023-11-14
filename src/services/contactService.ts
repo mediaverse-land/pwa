@@ -27,12 +27,20 @@ export const getRecentlyImages = async () => {
   const url = `${URL}/images/newest`;
   return fetchInstance(url);
 };
+export const getRecommendedImages = async () => {
+  const url = `${URL}/images/daily-recommended`;
+  return fetchInstance(url);
+};
 export const getMostViewedText = async () => {
   const url = `${URL}/texts/most-viewed`;
   return fetchInstance(url);
 };
 export const getRecentlyTexts = async () => {
   const url = `${URL}/texts/newest`;
+  return fetchInstance(url);
+};
+export const getRecommendedTexts = async () => {
+  const url = `${URL}/texts/daily-recommended`;
   return fetchInstance(url);
 };
 
@@ -44,6 +52,10 @@ export const getRecentlyVideos = () => {
   const url = `${URL}/videos/newest`;
   return fetchInstance(url);
 };
+export const getRecommendedVideos = () => {
+  const url = `${URL}/videos/daily-recommended`;
+  return fetchInstance(url);
+};
 
 export const getMostViewedSongs = () => {
   const url = `${URL}/audios/most-viewed`;
@@ -51,6 +63,10 @@ export const getMostViewedSongs = () => {
 };
 export const getRecentlySongs = () => {
   const url = `${URL}/audios/newest`;
+  return fetchInstance(url);
+};
+export const getRecommendedSongs = () => {
+  const url = `${URL}/audios/daily-recommended`;
   return fetchInstance(url);
 };
 

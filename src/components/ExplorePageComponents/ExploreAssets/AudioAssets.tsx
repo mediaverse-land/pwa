@@ -62,7 +62,7 @@ const ExploreAudioAssets = async ({ activeTab }: { activeTab: string }) => {
   return (
     <>
       <ExploreSearchAndNavSection activeTab={activeTab} />
-      <div className="flex flex-col items-stretch gap-6 pb-8 px-6">
+      <div className="flex flex-col items-stretch gap-6 pb-8 px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}
