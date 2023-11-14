@@ -33,7 +33,10 @@ const AccountSection = async ({
 
   return (
     <Motion key={"account"} fullHeight>
-      <div className="w-full h-full">
+      <div
+        key={searchParams.content || "all"}
+        className="w-full h-full overflow-y-auto pb-6"
+      >
         {/* user info */}
         <div className="flex flex-col items-stretch h-[280px]">
           {/* linear head bg */}

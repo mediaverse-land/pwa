@@ -29,15 +29,21 @@ const ExploreAssetsCard = ({
   };
 }) => {
   return (
-    <div className="flex flex-col items-stretch gap-4 min-w-[143px] overflow-hidden">
+    <div className="flex flex-col items-stretch gap-4 min-w-[190px] overflow-hidden max-w-full">
       {/* image */}
-      <div className="relative w-[143px] h-[143px] rounded-2xl overflow-hidden">
-        <Image
-          className="z-10 object-cover"
-          src={`${cover || "/images/car.png"}`}
-          alt=""
-          fill
-        />
+      <div className="relative w-full aspect-square rounded-2xl overflow-hidden">
+        {cover ? (
+          <Image
+            className="z-10 object-cover"
+            src={`${cover || "/images/car.png"}`}
+            alt=""
+            fill
+          />
+        ) : (
+          <div className="w-full h-full bg-slate-400 relative">
+            <Image src={`/images/no.png`} alt="no image" fill />
+          </div>
+        )}
         <div className="overlay-bg absolute w-full h-full top-0 left-0 z-20"></div>
         <div className="flex items-center justify-center absolute bottom-[15px] right-[15px] z-30">
           {icons[`${type}`]}

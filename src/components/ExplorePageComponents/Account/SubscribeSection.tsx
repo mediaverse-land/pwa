@@ -30,7 +30,7 @@ const AccountSubscribeSection = ({
           </Link>
         ))}
       </div>
-      <div className="grid grid-cols-2 grid-flow-row gap-x-4 gap-y-6">
+      <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6">
         {audioData.map((items, index: number) => {
           return (
             <ExploreAudioCard
