@@ -16,7 +16,7 @@ import ExploreSearchAndNavSection from "./SearchAndNavSection";
 import { ExploreLiveChannel } from "./LiveChannel";
 
 const getLiveData = async () => {
-  const liveData = await getLives({});
+  const liveData = await getLives({ params: "" });
   if (liveData.ok) {
     return liveData.json();
   }
