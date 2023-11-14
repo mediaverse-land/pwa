@@ -3,12 +3,12 @@ import Image from "next/image";
 import ExploreVideoCard from "../shared/VideoCard";
 import ExploreAudioCard from "../shared/AudioCard";
 import ExploreTextCard from "../shared/TextCard";
+import ExploreAssetsCard from "../shared/AllAssetsCard";
 
 const getSearchResults = async (params: string) => {
   try {
     const req = await getSearch(params);
     if (req.ok) {
-      console.log(params);
       return req.json();
     }
   } catch (error) {
@@ -28,8 +28,47 @@ export const SearchForAll = async ({
       searchParams.plan ? `&plan=${searchParams.plan}` : ""
     }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
+  const concatData = () => {
+    const data = [
+      ...searchResults.images,
+      ...searchResults.videos,
+      ...searchResults.texts,
+      ...searchResults.audios,
+    ];
+    return data;
+  };
   return (
-    <div className="py-7 px-6 grid grid-cols-2 grid-flow-row gap-4">all</div>
+    <div className="py-7 px-6 grid grid-cols-3 grid-flow-row gap-4">
+      {concatData().map((item) => {
+        const dataType = () => {
+          switch (item.asset.type) {
+            case 1:
+              return "text";
+            case 2:
+              return "image";
+            case 3:
+              return "audio";
+            case 4:
+              return "video";
+
+            default:
+              return "image";
+          }
+        };
+        return (
+          <ExploreAssetsCard
+            key={item.id}
+            author={{
+              name: item.asset.user.username,
+              picture: item.asset.user.image_url,
+            }}
+            cover={item.asset.thumbnails["336x366"]}
+            title={item.name}
+            type={dataType()}
+          />
+        );
+      })}
+    </div>
   );
 };
 export const SearchForImages = async ({
@@ -42,7 +81,7 @@ export const SearchForImages = async ({
   const searchResults = await getSearchResults(
     `q=${searchParams.q}${
       searchParams.plan ? `&plan=${searchParams.plan}` : ""
-    }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}&type=2`
+    }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2 px-6 py-7 h-full overflow-y-auto">
@@ -73,7 +112,7 @@ export const SearchForVideos = async ({
   const searchResults = await getSearchResults(
     `q=${searchParams.q}${
       searchParams.plan ? `&plan=${searchParams.plan}` : ""
-    }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}&type=4`
+    }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
@@ -105,7 +144,7 @@ export const SearchForAudios = async ({
   const searchResults = await getSearchResults(
     `q=${searchParams.q}${
       searchParams.plan ? `&plan=${searchParams.plan}` : ""
-    }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}&type=3`
+    }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
 
   return (
@@ -138,7 +177,7 @@ export const SearchForTexts = async ({
   const searchResults = await getSearchResults(
     `q=${searchParams.q}${
       searchParams.plan ? `&plan=${searchParams.plan}` : ""
-    }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}&type=1`
+    }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-4">

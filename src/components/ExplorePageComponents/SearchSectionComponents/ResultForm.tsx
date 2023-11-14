@@ -44,7 +44,7 @@ const SearchSectionResultFrom = async ({
     },
   };
   return (
-    <div className="h-full flex flex-col items-stretch">
+    <div className="h-full flex flex-col items-stretch overflow-y-auto">
       <div className="pl-6 pr-4 pt-4 flex flex-col items-stretch justify-between bg-[rgba(78,78,97,0.50)] backdrop-blur gap-4">
         {/* input section */}
         <div className="flex items-center h-[40px]">
