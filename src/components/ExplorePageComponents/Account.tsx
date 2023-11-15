@@ -7,6 +7,8 @@ import AccountSubscribeSection from "./Account/SubscribeSection";
 import Motion from "../motion";
 import UserStatics from "./Account/UserStatics";
 import AccountOwnershipSection from "./Account/OwnershipSection";
+import { cookies } from "next/headers";
+import LogoutNoUser from "./Account/Logout";
 
 const AccountSection = async ({
   searchParams,
@@ -27,6 +29,10 @@ const AccountSection = async ({
       component: <AccountOwnershipSection searchParams={searchParams} />,
     },
   ];
+  const cookie = cookies().get("user")?.value;
+  if (!cookie) {
+    return <LogoutNoUser />;
+  }
   const session = await getServerSession(authOptions);
   const type = searchParams["type"] || "subscribe";
   if (!accountTypes.find((item) => item.link === type)) {

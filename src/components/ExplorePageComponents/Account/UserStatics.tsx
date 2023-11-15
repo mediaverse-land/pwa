@@ -5,8 +5,6 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import LogoutNoUser from "./Logout";
 
-import Cookies from "js-cookie";
-
 const UserStatics = async () => {
   const getStatics = async (token: string) => {
     try {

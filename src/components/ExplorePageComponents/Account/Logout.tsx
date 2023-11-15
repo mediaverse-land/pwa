@@ -1,6 +1,6 @@
 "use client";
 import { signOut } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 
 const LogoutNoUser = () => {
   useEffect(() => {
@@ -8,7 +8,7 @@ const LogoutNoUser = () => {
       callbackUrl: "/login?refer=/explore?section=account",
     });
   }, []);
-  return <></>;
+  return <div></div>;
 };
 
 export default LogoutNoUser;
