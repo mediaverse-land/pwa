@@ -3,6 +3,9 @@ import { getSingleImage } from "@/services/contactService";
 import Image from "next/image";
 import ImageSinglePage from "./ImageSinglePage";
 import { redirect } from "next/navigation";
+import VideoSinglePage from "./VideoSinglePage";
+import TextSinglePage from "./TextSinglePage";
+import AudioSinglePage from "./AudioSinglePage";
 
 const AssetSinglePage = async ({
   searchParams,
@@ -20,9 +23,18 @@ const AssetSinglePage = async ({
     image: {
       component: <ImageSinglePage searchParams={searchParams} />,
     },
+    video: {
+      component: <VideoSinglePage searchParams={searchParams} />,
+    },
+    text: {
+      component: <TextSinglePage searchParams={searchParams} />,
+    },
+    audio: {
+      component: <AudioSinglePage searchParams={searchParams} />,
+    },
   };
   return (
-    componentType[pageType].component || redirect("/explore?section=explore")
+    componentType[pageType]?.component || redirect("/explore?section=explore")
   );
 };
 

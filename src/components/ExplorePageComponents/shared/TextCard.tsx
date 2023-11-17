@@ -1,9 +1,13 @@
 import Image from "next/image";
 import "./styles.css";
+import Link from "next/link";
 
 const ExploreTextCard = ({ data }: { data: any }) => {
   return (
-    <div className="max-w-full min-w-full w-full aspect-square">
+    <Link
+      href={`/explore?section=explore&content=asset-single-page&name=${data.name}&id=${data.id}&type=text`}
+      className="max-w-full min-w-full w-full aspect-square block max-h-[190px]"
+    >
       <div className="text-card w-full h-full px-4 py-6 flex flex-col items-stretch leading-none">
         <div className="text-[#CCCCFF] line-clamp-1 text-[14px] leading-4">
           {data.name}
@@ -18,7 +22,7 @@ const ExploreTextCard = ({ data }: { data: any }) => {
           <div>{data.asset.user.username}</div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

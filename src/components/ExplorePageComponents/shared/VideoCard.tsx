@@ -2,6 +2,7 @@ import { CIRCLE_VIDEO_ICON, VIDEO_ICON } from "@/components/SVG/svgs";
 import Image from "next/image";
 import "./styles.css";
 import { secondsToHMS } from "@/lib/convertSecondsToHMS";
+import Link from "next/link";
 
 const ExploreVideoCard = ({
   author,
@@ -9,10 +10,12 @@ const ExploreVideoCard = ({
   image,
   time,
   title,
+  id,
 }: {
   image: string;
   title: string;
   description: string;
+  id: number;
   author: {
     picture: string;
     name: string;
@@ -20,7 +23,10 @@ const ExploreVideoCard = ({
   time: number;
 }) => {
   return (
-    <div className="flex flex-col items-stretch gap-3">
+    <Link
+      href={`/explore?section=explore&content=asset-single-page&name=${title}&id=${id}&type=video`}
+      className="flex flex-col items-stretch gap-3"
+    >
       <div
         className={`relative overflow-hidden rounded-lg w-full aspect-video min-h-[145px]`}
       >
@@ -63,7 +69,7 @@ const ExploreVideoCard = ({
           <div>{secondsToHMS(time)}</div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

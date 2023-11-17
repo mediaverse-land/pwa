@@ -2,9 +2,10 @@ import {
   BACK_ICON,
   PICTURE_ICON,
   PLAY,
+  TEXT_ICON,
   VIDEO_ICON,
 } from "@/components/SVG/svgs";
-import { getSingleImage } from "@/services/contactService";
+import { getSingleImage, getSingleText } from "@/services/contactService";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import AssetSinglePageTitleAndDescription from "./shared/TitleAndDescription";
@@ -16,7 +17,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import BuySection from "./shared/BuySection";
 
-const getSingleImageData = async ({
+const getSingleTextData = async ({
   id,
   token,
 }: {
@@ -24,7 +25,7 @@ const getSingleImageData = async ({
   token?: string;
 }) => {
   try {
-    const req = await getSingleImage({ id, token });
+    const req = await getSingleText({ id, token });
     if (req.ok) {
       const res = await req.json();
       return res;
@@ -38,7 +39,7 @@ const getSingleImageData = async ({
   }
 };
 
-const ImageSinglePage = async ({
+const TextSinglePage = async ({
   searchParams,
 }: {
   searchParams: {
@@ -48,9 +49,9 @@ const ImageSinglePage = async ({
   const assetID = searchParams.id || "0";
   const user = cookies().get("user")?.value;
   const token = user && JSON.parse(user).token;
-  const singleImageData = await getSingleImageData({ id: assetID, token });
+  const singleTextData = await getSingleTextData({ id: assetID, token });
 
-  if (singleImageData === "not-found") {
+  if (singleTextData === "not-found") {
     return (
       <div className="w-full h-full flex items-center justify-center">
         Page Not Found
@@ -61,7 +62,7 @@ const ImageSinglePage = async ({
   return (
     <div className="flex flex-col items-stretch h-full overflow-y-auto">
       {/* top section */}
-      <div className="rounded-b-2xl h-[450px] min-h-[450px] relative overflow-hidden">
+      <div className="rounded-b-2xl h-[450px] min-h-[450px] bg-[rgba(78,78,97,0.30)] backdrop-blur-md relative overflow-hidden">
         {/* overlay */}
         <div
           style={{
@@ -70,21 +71,26 @@ const ImageSinglePage = async ({
           className="absolute w-full h-full z-20"
         ></div>
         {/* asset */}
-        <div className="relative w-full h-full overflow-hidden z-10">
+        <div className="absolute w-[316px] h-[316px] overflow-hidden z-10 inset-0 m-auto">
           <Image
             className="object-cover"
-            src={`${singleImageData.asset.thumbnails["523x304"]}`}
+            src={`/images/no-cover.png`}
             alt=""
             fill
           />
+          {/* icon */}
+          <div className="absolute z-30 inset-0 m-auto flex items-center justify-center">
+            <TEXT_ICON
+              style={{
+                width: "24px",
+                height: "24px",
+              }}
+            />
+          </div>
         </div>
         {/* back */}
         <div className="absolute z-30 left-10 top-10">
           <BackButton fill="#597AFF" />
-        </div>
-        {/* icon */}
-        <div className="absolute z-30 left-10 bottom-10">
-          <PICTURE_ICON />
         </div>
       </div>
       {/* content */}
@@ -93,11 +99,11 @@ const ImageSinglePage = async ({
         <div className="flex flex-col items-stretch gap-2">
           <AssetSinglePageTitleAndDescription
             author={{
-              image: singleImageData.asset.user.image_url,
-              name: singleImageData.asset.user.username,
+              image: singleTextData.asset.user.image_url,
+              name: singleTextData.asset.user.username,
             }}
-            description={singleImageData.description}
-            title={singleImageData.name}
+            description={singleTextData.description}
+            title={singleTextData.name}
           />
         </div>
         {/* files */}
@@ -106,17 +112,17 @@ const ImageSinglePage = async ({
             <div className="text-white font-semibold">Files</div>
             <div className="flex flex-col items-stretch gap-2">
               <Link
-                href={singleImageData.asset.file.url}
+                href={singleTextData.asset.file.url}
                 className="flex items-center rounded-lg bg-[rgba(78,78,97,0.30)] backdrop-blur-md px-6 py-4"
               >
-                <div className="text-white mr-auto">{singleImageData.name}</div>
+                <div className="text-white mr-auto">{singleTextData.name}</div>
               </Link>
             </div>
           </div>
         ) : null}
         {/* comment */}
         <SingleAssetComments
-          assetID={singleImageData.asset_id}
+          assetID={singleTextData.asset_id}
           userImage={session?.user?.image}
           username={session?.user?.name}
           token={token}
@@ -128,4 +134,4 @@ const ImageSinglePage = async ({
   );
 };
 
-export default ImageSinglePage;
+export default TextSinglePage;

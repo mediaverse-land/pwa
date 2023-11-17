@@ -6,6 +6,7 @@ import {
 import Image from "next/image";
 import "./styles.css";
 import { secondsToHMS } from "@/lib/convertSecondsToHMS";
+import Link from "next/link";
 
 const ExploreAudioCard = ({
   author,
@@ -13,10 +14,12 @@ const ExploreAudioCard = ({
   image,
   time,
   title,
+  id,
 }: {
   image?: string;
   title: string;
   description: string;
+  id: number;
   author: {
     picture: string;
     name: string;
@@ -24,7 +27,10 @@ const ExploreAudioCard = ({
   time: number;
 }) => {
   return (
-    <div className="flex flex-col items-stretch gap-3">
+    <Link
+      href={`/explore?section=explore&content=asset-single-page&name=${title}&id=${id}&type=audio`}
+      className="flex flex-col items-stretch gap-3"
+    >
       <div
         className={`relative overflow-hidden rounded-2xl w-full aspect-square`}
       >
@@ -79,7 +85,7 @@ const ExploreAudioCard = ({
           <div>{time && secondsToHMS(time)}</div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

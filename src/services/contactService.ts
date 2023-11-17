@@ -56,6 +56,81 @@ export const getSingleImage = async ({
         },
       });
 };
+export const getSingleVideo = async ({
+  id,
+  token,
+}: {
+  id: string;
+  token?: string;
+}) => {
+  const url = `${URL}/videos/${id}`;
+  return token
+    ? fetch(url, {
+        next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+        headers: {
+          "Accept-Language": "en-US",
+          "x-app": "_Web",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    : fetch(url, {
+        next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+        headers: {
+          "Accept-Language": "en-US",
+          "x-app": "_Web",
+        },
+      });
+};
+export const getSingleText = async ({
+  id,
+  token,
+}: {
+  id: string;
+  token?: string;
+}) => {
+  const url = `${URL}/texts/${id}`;
+  return token
+    ? fetch(url, {
+        next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+        headers: {
+          "Accept-Language": "en-US",
+          "x-app": "_Web",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    : fetch(url, {
+        next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+        headers: {
+          "Accept-Language": "en-US",
+          "x-app": "_Web",
+        },
+      });
+};
+export const getSingleAudio = async ({
+  id,
+  token,
+}: {
+  id: string;
+  token?: string;
+}) => {
+  const url = `${URL}/audios/${id}`;
+  return token
+    ? fetch(url, {
+        next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+        headers: {
+          "Accept-Language": "en-US",
+          "x-app": "_Web",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    : fetch(url, {
+        next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+        headers: {
+          "Accept-Language": "en-US",
+          "x-app": "_Web",
+        },
+      });
+};
 export const getMostViewedText = async () => {
   const url = `${URL}/texts/most-viewed`;
   return fetchInstance(url);

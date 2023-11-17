@@ -118,6 +118,7 @@ export const RecentlyVideos = async () => {
       {rececentlyVideosData.map((items: any, index: number) => {
         return (
           <ExploreVideoCard
+            id={items.id}
             key={items.id}
             author={{
               name: items.asset.user.username,

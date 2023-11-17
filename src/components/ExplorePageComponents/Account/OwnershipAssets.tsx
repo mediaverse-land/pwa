@@ -142,6 +142,7 @@ export const OwnershipVideoAssets = async ({
         searchResults.data.map((items: any, index: number) => {
           return (
             <ExploreVideoCard
+              id={items.id}
               key={items.id}
               author={{
                 name: items.asset.user.username,
@@ -182,6 +183,7 @@ export const OwnershipAudioAssets = async ({
         searchResults.data.map((items: any, index: number) => {
           return (
             <ExploreAudioCard
+              id={items.id}
               key={items.id}
               author={{
                 name: items.asset.user.username,

@@ -122,6 +122,7 @@ export const RecentlyAudio = async () => {
       {rececentlySongsData.map((items: any, index: number) => {
         return (
           <ExploreAudioCard
+            id={items.id}
             key={items.id}
             author={{
               name: items.asset.user.username,

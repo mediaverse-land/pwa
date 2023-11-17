@@ -122,6 +122,7 @@ export const SearchForVideos = async ({
       {searchResults.videos.map((items: any, index: number) => {
         return (
           <ExploreVideoCard
+            id={items.id}
             key={items.id}
             author={{
               name: items.asset.user.username,
@@ -156,6 +157,7 @@ export const SearchForAudios = async ({
         return (
           <ExploreAudioCard
             key={items.id}
+            id={items.id}
             author={{
               name: items.asset.user.username,
               picture: items.asset.user.image_url,

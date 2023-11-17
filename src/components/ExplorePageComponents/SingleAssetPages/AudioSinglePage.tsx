@@ -1,10 +1,16 @@
 import {
+  AUDIO_ICON,
   BACK_ICON,
   PICTURE_ICON,
   PLAY,
+  TEXT_ICON,
   VIDEO_ICON,
 } from "@/components/SVG/svgs";
-import { getSingleImage } from "@/services/contactService";
+import {
+  getSingleAudio,
+  getSingleImage,
+  getSingleText,
+} from "@/services/contactService";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import AssetSinglePageTitleAndDescription from "./shared/TitleAndDescription";
@@ -16,7 +22,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import BuySection from "./shared/BuySection";
 
-const getSingleImageData = async ({
+const getSingleAudioData = async ({
   id,
   token,
 }: {
@@ -24,7 +30,7 @@ const getSingleImageData = async ({
   token?: string;
 }) => {
   try {
-    const req = await getSingleImage({ id, token });
+    const req = await getSingleAudio({ id, token });
     if (req.ok) {
       const res = await req.json();
       return res;
@@ -38,7 +44,7 @@ const getSingleImageData = async ({
   }
 };
 
-const ImageSinglePage = async ({
+const AudioSinglePage = async ({
   searchParams,
 }: {
   searchParams: {
@@ -48,9 +54,9 @@ const ImageSinglePage = async ({
   const assetID = searchParams.id || "0";
   const user = cookies().get("user")?.value;
   const token = user && JSON.parse(user).token;
-  const singleImageData = await getSingleImageData({ id: assetID, token });
+  const singleAudioData = await getSingleAudioData({ id: assetID, token });
 
-  if (singleImageData === "not-found") {
+  if (singleAudioData === "not-found") {
     return (
       <div className="w-full h-full flex items-center justify-center">
         Page Not Found
@@ -61,7 +67,7 @@ const ImageSinglePage = async ({
   return (
     <div className="flex flex-col items-stretch h-full overflow-y-auto">
       {/* top section */}
-      <div className="rounded-b-2xl h-[450px] min-h-[450px] relative overflow-hidden">
+      <div className="rounded-b-2xl h-[450px] min-h-[450px] bg-[rgba(78,78,97,0.30)] backdrop-blur-md relative overflow-hidden">
         {/* overlay */}
         <div
           style={{
@@ -70,22 +76,37 @@ const ImageSinglePage = async ({
           className="absolute w-full h-full z-20"
         ></div>
         {/* asset */}
-        <div className="relative w-full h-full overflow-hidden z-10">
+        <div className="absolute w-[316px] h-[316px] overflow-hidden z-10 inset-0 m-auto rounded-2xl">
           <Image
             className="object-cover"
-            src={`${singleImageData.asset.thumbnails["523x304"]}`}
+            src={`${
+              singleAudioData.asset.thumbnails["336x366"] ||
+              "/images/no-cover.png"
+            }`}
             alt=""
             fill
           />
+
+          {singleAudioData.asset.thumbnails["336x366"] ? null : (
+            <div className="absolute z-30 inset-0 m-auto flex items-center justify-center">
+              <AUDIO_ICON
+                style={{
+                  width: "24px",
+                  height: "24px",
+                }}
+              />
+            </div>
+          )}
         </div>
         {/* back */}
         <div className="absolute z-30 left-10 top-10">
           <BackButton fill="#597AFF" />
         </div>
-        {/* icon */}
-        <div className="absolute z-30 left-10 bottom-10">
-          <PICTURE_ICON />
-        </div>
+        {singleAudioData.asset.thumbnails["336x366"] ? (
+          <div className="absolute z-30 left-10 bottom-10">
+            <AUDIO_ICON />
+          </div>
+        ) : null}
       </div>
       {/* content */}
       <div className="py-8 px-10 flex flex-col items-stretch gap-6">
@@ -93,11 +114,11 @@ const ImageSinglePage = async ({
         <div className="flex flex-col items-stretch gap-2">
           <AssetSinglePageTitleAndDescription
             author={{
-              image: singleImageData.asset.user.image_url,
-              name: singleImageData.asset.user.username,
+              image: singleAudioData.asset.user.image_url,
+              name: singleAudioData.asset.user.username,
             }}
-            description={singleImageData.description}
-            title={singleImageData.name}
+            description={singleAudioData.description}
+            title={singleAudioData.name}
           />
         </div>
         {/* files */}
@@ -106,17 +127,17 @@ const ImageSinglePage = async ({
             <div className="text-white font-semibold">Files</div>
             <div className="flex flex-col items-stretch gap-2">
               <Link
-                href={singleImageData.asset.file.url}
+                href={singleAudioData.asset.file.url}
                 className="flex items-center rounded-lg bg-[rgba(78,78,97,0.30)] backdrop-blur-md px-6 py-4"
               >
-                <div className="text-white mr-auto">{singleImageData.name}</div>
+                <div className="text-white mr-auto">{singleAudioData.name}</div>
               </Link>
             </div>
           </div>
         ) : null}
         {/* comment */}
         <SingleAssetComments
-          assetID={singleImageData.asset_id}
+          assetID={singleAudioData.asset_id}
           userImage={session?.user?.image}
           username={session?.user?.name}
           token={token}
@@ -128,4 +149,4 @@ const ImageSinglePage = async ({
   );
 };
 
-export default ImageSinglePage;
+export default AudioSinglePage;
