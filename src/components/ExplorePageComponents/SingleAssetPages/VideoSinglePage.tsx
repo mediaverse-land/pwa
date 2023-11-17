@@ -9,6 +9,7 @@ import Link from "next/link";
 import SingleAssetComments from "./shared/Comments";
 import { secondsToHMS } from "@/lib/convertSecondsToHMS";
 import BuySection from "./shared/BuySection";
+import { VideoType } from "@/data";
 
 const getSingleVideoData = async ({
   id,
@@ -118,7 +119,7 @@ const VideoSinglePage = async ({
               <div className="text-[12px] text-[#666680]">Type</div>
               <div className="h-[70%] w-[1px] bg-[#666680]"></div>
               <div className="text-white text-[14px] grow text-center">
-                {singleVideoData.type}
+                {VideoType[singleVideoData.type]}
               </div>
             </div>
             <div className="flex items-center rounded-lg border border-[#666680] px-4 py-1 gap-4">
@@ -132,7 +133,7 @@ const VideoSinglePage = async ({
           </div>
         </div>
         {/* files */}
-        {user ? (
+        {/* {user ? (
           <div className="p-8 flex flex-col items-stretch gap-6 bg-[rgba(78,78,97,0.30)] backdrop-blur-sm rounded-2xl">
             <div className="text-white font-semibold">Files</div>
             <div className="flex flex-col items-stretch gap-2">
@@ -147,7 +148,7 @@ const VideoSinglePage = async ({
               </Link>
             </div>
           </div>
-        ) : null}
+        ) : null} */}
         {/* comment */}
         <SingleAssetComments
           assetID={singleVideoData.asset_id}

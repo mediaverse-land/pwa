@@ -44,11 +44,11 @@ const ExploreVideoCard = ({
         </div>
       </div>
       {/* content */}
-      <div className="flex flex-col gap-3 leading-none">
+      <div className="flex flex-col gap-3 leading-none mt-auto">
         <div className="grow line-clamp-2 text-[12px] text-[#666680] leading-tight">
           {description}
         </div>
-        <div className="flex justify-between text-[12px] text-[#666680]">
+        <div className="flex justify-between text-[12px] text-[#666680] mt-auto">
           <div className="flex items-center gap-2">
             <div className="relative w-[16px] h-[16px] rounded-full overflow-hidden">
               {author?.picture ? (
@@ -63,7 +63,7 @@ const ExploreVideoCard = ({
               )}
             </div>
             <div className="text-[12px] text-[#666680] line-clamp-1 leading-3">
-              {author?.name || "Arlene McCoys"}
+              {author?.name}
             </div>
           </div>
           <div>{secondsToHMS(time)}</div>

@@ -79,7 +79,7 @@ const ExploreAudioCard = ({
               )}
             </div>
             <div className="text-[12px] text-[#666680] line-clamp-1 leading-3">
-              {author?.name || "Arlene McCoys"}
+              {author?.name}
             </div>
           </div>
           <div>{time && secondsToHMS(time)}</div>

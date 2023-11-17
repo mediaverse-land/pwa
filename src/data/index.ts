@@ -64,3 +64,26 @@ export const socialMedia: socialMediaLinks[] = [
     icon: "/icons/linkedin-square-icon.svg",
   },
 ];
+
+export const AssetPurchasePlan = {
+  1: "Free",
+  2: "Ownership",
+  3: "Subscribe",
+};
+
+export const VideoType: any = {
+  1: "Film",
+  2: "Serial",
+  3: "Episode",
+  4: "Collection",
+  5: "Trailer",
+};
+
+export const AssetType = {
+  1: "Text",
+  2: "Image",
+  3: "Sound",
+  4: "Video",
+  5: "3d",
+  6: "Thumbnail",
+};

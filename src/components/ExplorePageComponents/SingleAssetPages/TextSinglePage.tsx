@@ -107,7 +107,7 @@ const TextSinglePage = async ({
           />
         </div>
         {/* files */}
-        {user ? (
+        {/* {user ? (
           <div className="p-8 flex flex-col items-stretch gap-6 bg-[rgba(78,78,97,0.30)] backdrop-blur-sm rounded-2xl">
             <div className="text-white font-semibold">Files</div>
             <div className="flex flex-col items-stretch gap-2">
@@ -119,7 +119,7 @@ const TextSinglePage = async ({
               </Link>
             </div>
           </div>
-        ) : null}
+        ) : null} */}
         {/* comment */}
         <SingleAssetComments
           assetID={singleTextData.asset_id}

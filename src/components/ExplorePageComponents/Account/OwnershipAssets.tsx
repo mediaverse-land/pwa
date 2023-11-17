@@ -43,6 +43,7 @@ export const OwnershipAllAssets = async ({
     ];
     return data;
   };
+  console.log(searchResults.videos[0].asset, "searchResults");
   return (
     <div className="py-7 px-6 grid grid-cols-3 grid-flow-row gap-4">
       {concatData().length > 0 ? (
@@ -67,8 +68,8 @@ export const OwnershipAllAssets = async ({
               key={item.id}
               id={item.id}
               author={{
-                name: item.asset.user.username,
-                picture: item.asset.user.image_url,
+                name: item.asset.user?.username,
+                picture: item.asset.user?.image_url,
               }}
               cover={item.asset.thumbnails["336x366"]}
               title={item.name}
@@ -145,8 +146,8 @@ export const OwnershipVideoAssets = async ({
               id={items.id}
               key={items.id}
               author={{
-                name: items.asset.user.username,
-                picture: items.asset.user.image_url,
+                name: items.asset.user?.username,
+                picture: items.asset.user?.image_url,
               }}
               description={items.description}
               image={items.asset.thumbnails["336x366"]}
@@ -186,8 +187,8 @@ export const OwnershipAudioAssets = async ({
               id={items.id}
               key={items.id}
               author={{
-                name: items.asset.user.username,
-                picture: items.asset.user.image_url,
+                name: items.asset.user?.username,
+                picture: items.asset.user?.image_url,
               }}
               description={items.description}
               image={items.asset.thumbnails["336x366"]}

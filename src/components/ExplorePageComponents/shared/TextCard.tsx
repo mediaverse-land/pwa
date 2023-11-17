@@ -17,9 +17,13 @@ const ExploreTextCard = ({ data }: { data: any }) => {
         </div>
         <div className="text-[#666680] text-[12px] flex items-center gap-2 mt-auto">
           <div className="relative w-[16px] h-[16px] rounded-full overflow-hidden">
-            <Image src={data.asset.user.image_url} alt="author image" fill />
+            {data.asset.user?.image_url ? (
+              <Image src={data.asset.user?.image_url} alt="author image" fill />
+            ) : (
+              <div className="w-full h-full bg-white"></div>
+            )}
           </div>
-          <div>{data.asset.user.username}</div>
+          <div>{data.asset.user?.username}</div>
         </div>
       </div>
     </Link>
