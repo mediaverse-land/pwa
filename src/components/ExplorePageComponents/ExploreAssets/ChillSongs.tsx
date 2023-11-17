@@ -32,6 +32,7 @@ const ExploreChillSongs = async () => {
             {chillSongs.slice(0, 10).map((item: any) => (
               <ExploreAssetsCard
                 key={item.id}
+                id={item.id}
                 type="audio"
                 cover={item.asset.thumbnails["336x366"]}
                 title={item.name}

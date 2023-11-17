@@ -5,6 +5,7 @@ import ExploreAudioCard from "../shared/AudioCard";
 import ExploreTextCard from "../shared/TextCard";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
 import { cookies } from "next/headers";
+import Link from "next/link";
 
 const getSubscribeData = async ({
   params,
@@ -63,6 +64,7 @@ export const SubscribeAllAssets = async ({
           };
           return (
             <ExploreAssetsCard
+              id={item.id}
               key={item.id}
               author={{
                 name: item.asset.user.username,
@@ -100,7 +102,8 @@ export const SubscribeImageAssets = async ({
       {searchResults.data.length > 0 ? (
         searchResults.data.map((items: any, index: number) => {
           return (
-            <div
+            <Link
+              href={`/explore?section=explore&content=asset-single-page&name=${items.name}&id=${items.id}&type=image`}
               key={items.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
@@ -109,7 +112,7 @@ export const SubscribeImageAssets = async ({
                 alt={items.name}
                 fill
               />
-            </div>
+            </Link>
           );
         })
       ) : (

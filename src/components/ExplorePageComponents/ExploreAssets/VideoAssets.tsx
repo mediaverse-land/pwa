@@ -73,6 +73,7 @@ const ExploreVideoAssets = async ({ activeTab }: { activeTab: string }) => {
               <div className="flex items-stretch gap-4 overflow-x-auto">
                 {mostViewedVideos.slice(0, 10).map((item: any) => (
                   <ExploreAssetsCard
+                    id={item.id}
                     key={item.id}
                     type="video"
                     cover={item.asset.thumbnails["336x366"]}

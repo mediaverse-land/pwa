@@ -5,6 +5,7 @@ import ExploreAudioCard from "../shared/AudioCard";
 import ExploreTextCard from "../shared/TextCard";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
 import { cookies } from "next/headers";
+import Link from "next/link";
 
 const getOwnership = async ({
   params,
@@ -64,6 +65,7 @@ export const OwnershipAllAssets = async ({
           return (
             <ExploreAssetsCard
               key={item.id}
+              id={item.id}
               author={{
                 name: item.asset.user.username,
                 picture: item.asset.user.image_url,
@@ -100,7 +102,8 @@ export const OwnershipImageAssets = async ({
       {searchResults.data.length > 0 ? (
         searchResults.data.map((items: any, index: number) => {
           return (
-            <div
+            <Link
+              href={`/explore?section=explore&content=asset-single-page&name=${items.name}&id=${items.id}&type=image`}
               key={items.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
@@ -109,7 +112,7 @@ export const OwnershipImageAssets = async ({
                 alt={items.name}
                 fill
               />
-            </div>
+            </Link>
           );
         })
       ) : (

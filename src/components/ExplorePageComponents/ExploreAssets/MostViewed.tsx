@@ -1,5 +1,6 @@
 import { PICTURE_ICON } from "@/components/SVG/svgs";
 import Image from "next/image";
+import Link from "next/link";
 
 // const imageData = [
 //   {
@@ -65,7 +66,8 @@ const ExploreMostViewd = ({
       <div className="grid grid-rows-3 grid-cols-3 grid-flow-row gap-2">
         {mostViewedImages.slice(0, 6).map((items: any, index: number) => {
           return (
-            <div
+            <Link
+              href={`/explore?section=explore&content=asset-single-page&name=${items.name}&id=${items.id}&type=image`}
               key={items.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square ${
                 index === 1 ? " col-span-2 row-span-2" : ""
@@ -77,7 +79,7 @@ const ExploreMostViewd = ({
                 alt={items.name}
                 fill
               />
-            </div>
+            </Link>
           );
         })}
       </div>

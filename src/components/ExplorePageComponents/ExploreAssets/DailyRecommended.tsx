@@ -67,6 +67,7 @@ const ExploreDailyRecommended = async () => {
               return (
                 <ExploreAssetsCard
                   key={item.id}
+                  id={item.id}
                   author={{
                     name: item.asset.user.username,
                     picture: item.asset.user.image_url,

@@ -6,6 +6,7 @@ import {
 } from "@/components/SVG/svgs";
 import Image from "next/image";
 import "./styles.css";
+import Link from "next/link";
 
 const icons: { [key: string]: JSX.Element } = {
   video: <VIDEO_ICON fill="#83839C" />,
@@ -19,8 +20,10 @@ const ExploreAssetsCard = ({
   author,
   title,
   type,
+  id,
 }: {
   cover?: string;
+  id: number;
   type?: "video" | "image" | "text" | "audio";
   title?: string;
   author?: {
@@ -29,7 +32,10 @@ const ExploreAssetsCard = ({
   };
 }) => {
   return (
-    <div className="flex flex-col items-stretch gap-4 min-w-[190px] overflow-hidden max-w-full">
+    <Link
+      href={`/explore?section=explore&content=asset-single-page&name=${title}&id=${id}&type=${type}`}
+      className="flex flex-col items-stretch gap-4 min-w-[190px] overflow-hidden max-w-full"
+    >
       {/* image */}
       <div className="relative w-full aspect-square rounded-2xl overflow-hidden">
         {cover ? (
@@ -74,7 +80,7 @@ const ExploreAssetsCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

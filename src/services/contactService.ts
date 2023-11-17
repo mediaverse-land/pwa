@@ -31,6 +31,31 @@ export const getRecommendedImages = async () => {
   const url = `${URL}/images/daily-recommended`;
   return fetchInstance(url);
 };
+export const getSingleImage = async ({
+  id,
+  token,
+}: {
+  id: string;
+  token?: string;
+}) => {
+  const url = `${URL}/images/${id}`;
+  return token
+    ? fetch(url, {
+        next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+        headers: {
+          "Accept-Language": "en-US",
+          "x-app": "_Web",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    : fetch(url, {
+        next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+        headers: {
+          "Accept-Language": "en-US",
+          "x-app": "_Web",
+        },
+      });
+};
 export const getMostViewedText = async () => {
   const url = `${URL}/texts/most-viewed`;
   return fetchInstance(url);
@@ -127,6 +152,24 @@ export const getOwnershipAssets = ({
   token: string;
 }) => {
   const url = `${URL}/profile${params}`;
+  return fetch(url, {
+    next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+    headers: {
+      "Accept-Language": "en-US",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const getComments = async ({
+  id,
+  token,
+}: {
+  id: string;
+  token: string;
+}) => {
+  const url = `${URL}/assets/${id}/comments`;
   return fetch(url, {
     next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
     headers: {

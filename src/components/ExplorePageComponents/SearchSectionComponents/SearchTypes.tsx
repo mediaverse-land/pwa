@@ -4,6 +4,7 @@ import ExploreVideoCard from "../shared/VideoCard";
 import ExploreAudioCard from "../shared/AudioCard";
 import ExploreTextCard from "../shared/TextCard";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
+import Link from "next/link";
 
 const getSearchResults = async (params: string) => {
   try {
@@ -57,6 +58,7 @@ export const SearchForAll = async ({
         };
         return (
           <ExploreAssetsCard
+            id={item.id}
             key={item.id}
             author={{
               name: item.asset.user.username,
@@ -87,7 +89,8 @@ export const SearchForImages = async ({
     <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2 px-6 py-7 h-full overflow-y-auto">
       {searchResults.images.map((items: any, index: number) => {
         return (
-          <div
+          <Link
+            href={`/explore?section=explore&content=asset-single-page&name=${items.name}&id=${items.id}&type=image`}
             key={items.id}
             className={`relative overflow-hidden rounded-lg w-full aspect-square `}
           >
@@ -96,7 +99,7 @@ export const SearchForImages = async ({
               alt={items.name}
               fill
             />
-          </div>
+          </Link>
         );
       })}
     </div>
