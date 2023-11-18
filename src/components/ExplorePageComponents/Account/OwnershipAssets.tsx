@@ -6,6 +6,8 @@ import ExploreTextCard from "../shared/TextCard";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const getOwnership = async ({
   params,
@@ -43,7 +45,6 @@ export const OwnershipAllAssets = async ({
     ];
     return data;
   };
-  console.log(searchResults.videos[0].asset, "searchResults");
   return (
     <div className="py-7 px-6 grid grid-cols-3 grid-flow-row gap-4">
       {concatData().length > 0 ? (
@@ -65,6 +66,7 @@ export const OwnershipAllAssets = async ({
           };
           return (
             <ExploreAssetsCard
+              ownershipcard
               key={item.id}
               id={item.id}
               author={{
@@ -137,6 +139,7 @@ export const OwnershipVideoAssets = async ({
     params: "/videos",
     token: token,
   });
+  const session = await getServerSession(authOptions);
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
       {searchResults.data.length > 0 ? (
@@ -146,8 +149,8 @@ export const OwnershipVideoAssets = async ({
               id={items.id}
               key={items.id}
               author={{
-                name: items.asset.user?.username,
-                picture: items.asset.user?.image_url,
+                name: session?.user?.name,
+                picture: session?.user?.image,
               }}
               description={items.description}
               image={items.asset.thumbnails["336x366"]}
@@ -177,7 +180,7 @@ export const OwnershipAudioAssets = async ({
     params: "/audios",
     token: token,
   });
-
+  const session = await getServerSession(authOptions);
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
       {searchResults.data.length > 0 ? (
@@ -187,8 +190,8 @@ export const OwnershipAudioAssets = async ({
               id={items.id}
               key={items.id}
               author={{
-                name: items.asset.user?.username,
-                picture: items.asset.user?.image_url,
+                name: session?.user?.name,
+                picture: session?.user?.image,
               }}
               description={items.description}
               image={items.asset.thumbnails["336x366"]}

@@ -93,8 +93,8 @@ const ImageSinglePage = async ({
         <div className="flex flex-col items-stretch gap-2">
           <AssetSinglePageTitleAndDescription
             author={{
-              image: singleImageData.asset.user.image_url,
-              name: singleImageData.asset.user.username,
+              image: singleImageData?.asset?.user.image_url,
+              name: singleImageData?.asset?.user.username,
             }}
             description={singleImageData.description}
             title={singleImageData.name}

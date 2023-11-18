@@ -55,10 +55,12 @@ const SingleAssetComments = ({
     <>
       <div
         onClick={() => {
-          setModalStatus({
-            ...modalStatus,
-            isOpen: true,
-          });
+          if (token) {
+            setModalStatus({
+              ...modalStatus,
+              isOpen: true,
+            });
+          }
         }}
         className="p-8 rounded-2xl bg-[rgba(78,78,97,0.30)] backdrop-blur-sm flex flex-col items-stretch justify-between leading-none gap-6 select-none cursor-pointer"
       >

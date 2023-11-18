@@ -72,11 +72,14 @@ export const AssetPurchasePlan = {
 };
 
 export const VideoType: any = {
-  1: "Film",
+  1: "Movie",
   2: "Serial",
   3: "Episode",
   4: "Collection",
   5: "Trailer",
+  6: "Live",
+  7: "VLog",
+  8: "Photo Album",
 };
 
 export const AssetType = {

@@ -114,8 +114,8 @@ const AudioSinglePage = async ({
         <div className="flex flex-col items-stretch gap-2">
           <AssetSinglePageTitleAndDescription
             author={{
-              image: singleAudioData.asset.user.image_url,
-              name: singleAudioData.asset.user.username,
+              image: singleAudioData?.asset?.user.image_url,
+              name: singleAudioData?.asset?.user.username,
             }}
             description={singleAudioData.description}
             title={singleAudioData.name}

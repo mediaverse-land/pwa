@@ -17,8 +17,8 @@ const ExploreVideoCard = ({
   description: string;
   id: number;
   author: {
-    picture: string;
-    name: string;
+    picture: string | null | undefined;
+    name: string | null | undefined;
   };
   time: number;
 }) => {

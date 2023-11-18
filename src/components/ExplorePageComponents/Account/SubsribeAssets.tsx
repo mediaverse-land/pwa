@@ -43,7 +43,6 @@ export const SubscribeAllAssets = async ({
     ];
     return data;
   };
-  console.log(searchResults, "searchResults");
   return (
     <div className="py-7 px-6 grid grid-cols-3 grid-flow-row gap-4">
       {concatData().length > 0 ? (

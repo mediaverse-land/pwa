@@ -24,6 +24,7 @@ const getSingleVideoData = async ({
       const res = await req.json();
       return res;
     } else {
+      console.log(req.status, "Res");
       if (req.status === 404) {
         return "not-found";
       }
@@ -42,6 +43,7 @@ const VideoSinglePage = async ({
   const assetID = searchParams.id || "0";
   const user = cookies().get("user")?.value;
   const token = user && JSON.parse(user).token;
+  console.log(token, "token");
   const singleVideoData = await getSingleVideoData({ id: assetID, token });
   const languageName = new Intl.DisplayNames(["en"], { type: "language" });
 
@@ -99,8 +101,8 @@ const VideoSinglePage = async ({
         <div className="flex flex-col items-stretch gap-2">
           <AssetSinglePageTitleAndDescription
             author={{
-              image: singleVideoData.asset.user.image_url,
-              name: singleVideoData.asset.user.username,
+              image: singleVideoData?.asset?.user.image_url,
+              name: singleVideoData?.asset?.user.username,
             }}
             description={singleVideoData.description}
             title={singleVideoData.name}
