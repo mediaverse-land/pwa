@@ -123,7 +123,12 @@ const ImageSinglePage = async ({
         />
       </div>
       {/* buy */}
-      <BuySection />
+      {singleImageData.asset.plan !== 1 && (
+        <BuySection
+          plan={singleImageData.asset.plan}
+          price={singleImageData.asset.price}
+        />
+      )}
     </div>
   );
 };

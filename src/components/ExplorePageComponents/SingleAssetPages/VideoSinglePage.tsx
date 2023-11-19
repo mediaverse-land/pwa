@@ -10,6 +10,7 @@ import SingleAssetComments from "./shared/Comments";
 import { secondsToHMS } from "@/lib/convertSecondsToHMS";
 import BuySection from "./shared/BuySection";
 import { VideoType } from "@/data";
+import Image from "next/image";
 
 const getSingleVideoData = async ({
   id,
@@ -43,7 +44,6 @@ const VideoSinglePage = async ({
   const assetID = searchParams.id || "0";
   const user = cookies().get("user")?.value;
   const token = user && JSON.parse(user).token;
-  console.log(token, "token");
   const singleVideoData = await getSingleVideoData({ id: assetID, token });
   const languageName = new Intl.DisplayNames(["en"], { type: "language" });
 
@@ -60,22 +60,34 @@ const VideoSinglePage = async ({
       {/* top section */}
       <div className="rounded-b-2xl h-[450px] min-h-[450px] relative overflow-hidden">
         {/* overlay */}
-        {/* <div
-          style={{
-            background: `linear-gradient(0deg, rgba(11, 11, 49, 0.70) -19.12%, rgba(11, 11, 50, 0.00) 83.82%)`,
-          }}
-          className="absolute w-full h-full z-20"
-        ></div> */}
+        {singleVideoData.asset.plan !== 1 && (
+          <div
+            style={{
+              background: `linear-gradient(0deg, rgba(11, 11, 49, 0.70) -19.12%, rgba(11, 11, 50, 0.00) 83.82%)`,
+            }}
+            className="absolute w-full h-full z-20"
+          ></div>
+        )}
         {/* asset */}
         <div className="relative w-full h-full overflow-hidden z-10">
           {token ? (
-            <video
-              controlsList="nodownload"
-              className="h-full w-full"
-              controls
-              poster={`${singleVideoData.asset.thumbnails["523x304"]}`}
-              src={singleVideoData.asset.file.url}
-            ></video>
+            singleVideoData.asset.plan === 1 ? (
+              <video
+                controlsList="nodownload"
+                className="h-full w-full"
+                controls
+                poster={`${singleVideoData.asset.thumbnails["523x304"]}`}
+                src={singleVideoData?.asset?.file?.url}
+              ></video>
+            ) : (
+              <div className="relative w-full h-full">
+                <Image
+                  src={`${singleVideoData?.asset.thumbnails["336x366"] || ""}`}
+                  alt=""
+                  fill
+                />
+              </div>
+            )
           ) : (
             <div className="flex items-center justify-center">
               Please Login to see the video
@@ -87,13 +99,19 @@ const VideoSinglePage = async ({
           <BackButton fill="#597AFF" />
         </div>
         {/* icon */}
-        <div className="absolute z-30 left-10 bottom-20">
+        <div
+          className={`absolute z-30 left-10 ${
+            singleVideoData.asset.plan !== 1 ? "bottom-10" : "bottom-20"
+          }`}
+        >
           <VIDEO_ICON />
         </div>
         {/* play */}
-        {/* <div className="absolute z-40 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-          <PLAY fill="#597AFF" />
-        </div> */}
+        {singleVideoData.asset.plan !== 1 && (
+          <div className="absolute z-40 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+            <PLAY fill="#597AFF" />
+          </div>
+        )}
       </div>
       {/* content */}
       <div className="py-8 px-10 flex flex-col items-stretch gap-6">
@@ -160,7 +178,12 @@ const VideoSinglePage = async ({
         />
       </div>
       {/* buy */}
-      <BuySection />
+      {singleVideoData.asset.plan !== 1 && (
+        <BuySection
+          plan={singleVideoData.asset.plan}
+          price={singleVideoData.asset.price}
+        />
+      )}
     </div>
   );
 };

@@ -1,5 +1,6 @@
 "use client";
 
+import { AssetPurchasePlan } from "@/data";
 import { useState } from "react";
 
 const buyMethods: {
@@ -16,13 +17,14 @@ const buyMethods: {
   },
 ];
 
-const BuySection = () => {
+const BuySection = ({ plan, price }: { plan: number; price: number }) => {
   const [selectedMethod, setSelectedMethod] = useState<
     "Ownership" | "Monthly" | string
   >("Monthly");
   const handleSelectedMethod = (name: string) => {
     setSelectedMethod(name);
   };
+  console.log(AssetPurchasePlan[plan], plan);
   return (
     <div className="px-10 py-8 flex flex-col items-stretch justify-between gap-8 rounded-t-2xl bg-[rgba(78,78,97,0.75)] backdrop-blur-md">
       <div className="flex flex-col items-stretch gap-4">
@@ -40,7 +42,7 @@ const BuySection = () => {
           >
             <div className="flex items-center gap-4 mr-auto leading-4">
               <div className="text-[#CCCCFF]">{item.name}</div>
-              <div className="text-white font-semibold">150 $</div>
+              <div className="text-white font-semibold">{price} $</div>
             </div>
             <div
               className={`w-[18px] aspect-square border border-[#CCCCFF] rounded-full ${

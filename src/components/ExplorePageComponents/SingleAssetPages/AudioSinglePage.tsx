@@ -144,7 +144,12 @@ const AudioSinglePage = async ({
         />
       </div>
       {/* buy */}
-      <BuySection />
+      {singleAudioData.asset.plan !== 1 && (
+        <BuySection
+          plan={singleAudioData.asset.plan}
+          price={singleAudioData.asset.price}
+        />
+      )}
     </div>
   );
 };

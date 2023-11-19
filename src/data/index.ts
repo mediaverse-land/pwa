@@ -65,7 +65,7 @@ export const socialMedia: socialMediaLinks[] = [
   },
 ];
 
-export const AssetPurchasePlan = {
+export const AssetPurchasePlan: any = {
   1: "Free",
   2: "Ownership",
   3: "Subscribe",

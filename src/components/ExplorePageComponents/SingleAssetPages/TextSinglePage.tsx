@@ -129,7 +129,12 @@ const TextSinglePage = async ({
         />
       </div>
       {/* buy */}
-      <BuySection />
+      {singleTextData.asset.plan !== 1 && (
+        <BuySection
+          plan={singleTextData.asset.plan}
+          price={singleTextData.asset.price}
+        />
+      )}
     </div>
   );
 };

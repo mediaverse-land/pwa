@@ -24,8 +24,12 @@ export const authOptions: AuthOptions = {
         return params.baseUrl;
       }
     },
+    // async session(params) {
+    //   console.log(params);
+    //   return params.session;
+    // },
     async jwt(params) {
-      // console.log(params, "jwt");
+      // console.log(params.profile, "jwt");
       // console.log(params);
       if (params.trigger === "update") {
         params.token.name = params.session.name;
@@ -58,7 +62,6 @@ export const authOptions: AuthOptions = {
             return data;
           } else {
             throw new Error("Failed to login");
-            return false;
           }
         }
 
@@ -141,6 +144,7 @@ export const authOptions: AuthOptions = {
             }`,
             image: userInfo.user.image,
             email: userInfo.user.email,
+            accessToken: userInfo.token,
           };
           // console.log(user, "user in auth");
           return user;
