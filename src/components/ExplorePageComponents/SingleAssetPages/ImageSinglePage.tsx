@@ -73,7 +73,7 @@ const ImageSinglePage = async ({
         <div className="relative w-full h-full overflow-hidden z-10">
           <Image
             className="object-cover"
-            src={`${singleImageData.asset.thumbnails["523x304"]}`}
+            src={`${singleImageData?.asset.thumbnails["523x304"]}`}
             alt=""
             fill
           />
