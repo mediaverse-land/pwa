@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { getLives } from "@/services/contactService";
 
 const getData = async () => {
-  const liveData = await getLives();
+  const liveData = await getLives({ params: "" });
   if (liveData.ok) {
     return liveData.json();
   }

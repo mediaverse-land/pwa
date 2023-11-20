@@ -5,6 +5,7 @@ import {
   ACTIVE_APPS,
   ACTIVE_EXPLORE,
   ACTIVE_PLUS,
+  ACTIVE_SETTING,
   ACTIVE_WALLET,
   INACTIVE_ACCOUNT,
   INACTIVE_APPS,
@@ -24,14 +25,79 @@ import WalletSection from "@/components/ExplorePageComponents/Wallet";
 import AccountSection from "@/components/ExplorePageComponents/Account";
 import { notFound, redirect } from "next/navigation";
 import ExploreRecently from "@/components/ExplorePageComponents/Recently";
+import Setting from "@/components/ExplorePageComponents/Setting";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 type IexploreSections = {
   id: string;
   name: string;
   link: string;
   active_icon?: JSX.Element;
   inactive_icon?: JSX.Element;
-  component: JSX.Element;
+  component?: JSX.Element;
 };
+const exploreSections: IexploreSections[] = [
+  {
+    id: "5",
+    name: "Account",
+    link: "account",
+    active_icon: <ACTIVE_ACCOUNT />,
+    inactive_icon: <INACTIVE_ACCOUNT />,
+  },
+  // {
+  //   id: "2",
+  //   name: "Apps",
+  //   link: "apps",
+  //   active_icon: <ACTIVE_APPS />,
+  //   inactive_icon: <INACTIVE_APPS />,
+  //   component: (
+  //     <div
+  //       className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
+  //       style={{ background: `rgba(78, 78, 97, 0.20)` }}
+  //     >
+  //       <AppsSection />
+  //     </div>
+  //   ),
+  // },
+  // {
+  //   id: "3",
+  //   name: "Plus",
+  //   link: "plus",
+  //   active_icon: <ACTIVE_PLUS />,
+  //   inactive_icon: <INACTIVE_PLUS />,
+  //   component: (
+  //     <div
+  //       className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
+  //       style={{ background: `rgba(78, 78, 97, 0.20)` }}
+  //     >
+
+  //       <PlusSection />
+  //     </div>
+  //   ),
+  // },
+  // {
+  //   id: "4",
+  //   name: "Wallet",
+  //   link: "wallet",
+  //   active_icon: <ACTIVE_WALLET />,
+  //   inactive_icon: <INACTIVE_WALLET />,
+  //   component: (
+  //     <div
+  //       className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
+  //       style={{ background: `rgba(78, 78, 97, 0.20)` }}
+  //     >
+
+  //       <WalletSection />
+  //     </div>
+  //   ),
+  // },
+  {
+    id: "1",
+    name: "Explore",
+    link: "explore",
+    active_icon: <ACTIVE_EXPLORE />,
+    inactive_icon: <INACTIVE_EXPLORE />,
+  },
+];
 
 const Explore = async (params: {
   params: any;
@@ -40,76 +106,23 @@ const Explore = async (params: {
   };
 }) => {
   // console.log(params, "explore params");
-  const exploreSections: IexploreSections[] = [
-    {
-      id: "5",
-      name: "Account",
-      link: "account",
-      active_icon: <ACTIVE_ACCOUNT />,
-      inactive_icon: <INACTIVE_ACCOUNT />,
+  const exploreComponents: {
+    [key: string]: {
+      component: JSX.Element;
+    };
+  } = {
+    account: {
       component: (
         <div
           key={"AccountSection"}
-          className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
+          className="col-span-6 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-hidden flex flex-col items-stretch gap-4"
           style={{ background: `rgba(78, 78, 97, 0.20)` }}
         >
           <AccountSection searchParams={params.searchParams} />
         </div>
       ),
     },
-    // {
-    //   id: "2",
-    //   name: "Apps",
-    //   link: "apps",
-    //   active_icon: <ACTIVE_APPS />,
-    //   inactive_icon: <INACTIVE_APPS />,
-    //   component: (
-    //     <div
-    //       className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
-    //       style={{ background: `rgba(78, 78, 97, 0.20)` }}
-    //     >
-    //       <AppsSection />
-    //     </div>
-    //   ),
-    // },
-    // {
-    //   id: "3",
-    //   name: "Plus",
-    //   link: "plus",
-    //   active_icon: <ACTIVE_PLUS />,
-    //   inactive_icon: <INACTIVE_PLUS />,
-    //   component: (
-    //     <div
-    //       className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
-    //       style={{ background: `rgba(78, 78, 97, 0.20)` }}
-    //     >
-
-    //       <PlusSection />
-    //     </div>
-    //   ),
-    // },
-    // {
-    //   id: "4",
-    //   name: "Wallet",
-    //   link: "wallet",
-    //   active_icon: <ACTIVE_WALLET />,
-    //   inactive_icon: <INACTIVE_WALLET />,
-    //   component: (
-    //     <div
-    //       className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
-    //       style={{ background: `rgba(78, 78, 97, 0.20)` }}
-    //     >
-
-    //       <WalletSection />
-    //     </div>
-    //   ),
-    // },
-    {
-      id: "1",
-      name: "Explore",
-      link: "explore",
-      active_icon: <ACTIVE_EXPLORE />,
-      inactive_icon: <INACTIVE_EXPLORE />,
+    explore: {
       component: (
         <div
           key={"ExploreSection"}
@@ -120,8 +133,21 @@ const Explore = async (params: {
         </div>
       ),
     },
-  ];
-  const session = await getServerSession();
+    setting: {
+      component: (
+        <div
+          key={"AccountSection"}
+          className="col-span-6 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-hidden flex flex-col items-stretch gap-4"
+          style={{ background: `rgba(78, 78, 97, 0.20)` }}
+        >
+          <Setting searchParams={params.searchParams} />
+        </div>
+      ),
+    },
+  };
+
+  const session = await getServerSession(authOptions);
+  console.log(session?.user);
   if (!session) {
     redirect("/login");
   }
@@ -200,15 +226,28 @@ const Explore = async (params: {
               </div>
             </div>
             <div className="flex flex-col items-stretch gap-6">
-              <div className="flex items-center gap-4">
-                <INACTIVE_SETTING />
-                <div className="text-[14px]">Setting</div>
-              </div>
+              <Link
+                href={`/explore?section=setting`}
+                className="flex items-center gap-4"
+              >
+                {activeSection === "setting" ? (
+                  <ACTIVE_SETTING />
+                ) : (
+                  <INACTIVE_SETTING />
+                )}
+                <div
+                  className={`text-[14px] ${
+                    activeSection === "setting" ? "font-medium text-white" : ""
+                  }`}
+                >
+                  Setting
+                </div>
+              </Link>
               <LogoutBtn />
             </div>
           </aside>
-          {exploreSections.find((item) => item.link === activeSection)
-            ?.component || redirect("/explore?section=explore")}
+          {exploreComponents[activeSection]?.component ||
+            redirect("/explore?section=explore")}
         </div>
       </div>
     </Motion>

@@ -40,7 +40,7 @@ const ExploreRecently = async ({
   }
   //   console.log(searchParams.content);
   return (
-    <div className="flex flex-col items-stretch gap-8 px-6 py-10">
+    <div className="flex flex-col items-stretch gap-8 px-10 py-10">
       <div className="flex items-center">
         <Link
           href={`/explore?section=explore&content=${

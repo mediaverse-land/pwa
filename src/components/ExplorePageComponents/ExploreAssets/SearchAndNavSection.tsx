@@ -20,7 +20,7 @@ const ExploreSearchAndNavSection = ({ activeTab }: { activeTab: string }) => {
         </div>
       </Link>
       {/* tabs */}
-      <div className="rounded-lg grid grid-flow-col grid-rows-1 bg-[#0E0E1280] backdrop-blur-md mx-6">
+      <div className="rounded-lg grid grid-flow-col grid-rows-1 bg-[#0E0E1280] backdrop-blur-md mx-10">
         {ExploreSectionNavs.slice(0, 5).map((tab) => (
           <Link
             href={`/explore?section=explore&content=${tab.link}`}

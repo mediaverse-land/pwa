@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: white !important;
+  transition: background-color 5000s ease-in-out 0s;
+  background-color: transparent;
+  filter: none;
+}
 .linear-light-blue-bg::before,
 .linear-light-blue-bg::after {
   background: linear-gradient(90deg, #07074d 25%, rgba(7, 7, 76, 0) 99.51%);

@@ -2,6 +2,7 @@ import { CIRCLE_VIDEO_ICON, VIDEO_ICON } from "@/components/SVG/svgs";
 import Image from "next/image";
 import "./styles.css";
 import { secondsToHMS } from "@/lib/convertSecondsToHMS";
+import Link from "next/link";
 
 const ExploreVideoCard = ({
   author,
@@ -9,18 +10,23 @@ const ExploreVideoCard = ({
   image,
   time,
   title,
+  id,
 }: {
   image: string;
   title: string;
   description: string;
+  id: number;
   author: {
-    picture: string;
-    name: string;
+    picture: string | null | undefined;
+    name: string | null | undefined;
   };
   time: number;
 }) => {
   return (
-    <div className="flex flex-col items-stretch gap-3">
+    <Link
+      href={`/explore?section=explore&content=asset-single-page&name=${title}&id=${id}&type=video`}
+      className="flex flex-col items-stretch gap-3"
+    >
       <div
         className={`relative overflow-hidden rounded-lg w-full aspect-video min-h-[145px]`}
       >
@@ -38,11 +44,11 @@ const ExploreVideoCard = ({
         </div>
       </div>
       {/* content */}
-      <div className="flex flex-col gap-3 leading-none">
+      <div className="flex flex-col gap-3 leading-none mt-auto">
         <div className="grow line-clamp-2 text-[12px] text-[#666680] leading-tight">
           {description}
         </div>
-        <div className="flex justify-between text-[12px] text-[#666680]">
+        <div className="flex justify-between text-[12px] text-[#666680] mt-auto">
           <div className="flex items-center gap-2">
             <div className="relative w-[16px] h-[16px] rounded-full overflow-hidden">
               {author?.picture ? (
@@ -57,13 +63,13 @@ const ExploreVideoCard = ({
               )}
             </div>
             <div className="text-[12px] text-[#666680] line-clamp-1 leading-3">
-              {author?.name || "Arlene McCoys"}
+              {author?.name}
             </div>
           </div>
           <div>{secondsToHMS(time)}</div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

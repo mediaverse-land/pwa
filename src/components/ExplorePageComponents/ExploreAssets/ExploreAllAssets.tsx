@@ -4,7 +4,7 @@ import {
   getMostViewedImages,
   getMostViewedText,
 } from "@/services/contactService";
-import ExploreLiveChannel from "./LiveChannel";
+
 import ExploreDailyRecommended from "./DailyRecommended";
 import ExploreMostViewd from "./MostViewed";
 import ExploreTopTexts from "./TopTexts";
@@ -13,9 +13,10 @@ import Link from "next/link";
 import { SEARCH_ICON } from "@/components/SVG/svgs";
 import { ExploreSectionNavs } from "../Explore";
 import ExploreSearchAndNavSection from "./SearchAndNavSection";
+import { ExploreLiveChannel } from "./LiveChannel";
 
 const getLiveData = async () => {
-  const liveData = await getLives();
+  const liveData = await getLives({ params: "" });
   if (liveData.ok) {
     return liveData.json();
   }
@@ -42,7 +43,7 @@ const ExploreAllAssets = async ({ activeTab }: { activeTab: string }) => {
   return (
     <>
       <ExploreSearchAndNavSection activeTab={activeTab} />
-      <div className="flex flex-col items-stretch gap-6 pb-8 px-6">
+      <div className="flex flex-col items-stretch gap-6 pb-8 px-10">
         {/* live chanel */}
         <ExploreLiveChannel liveData={liveData} />
         {/* daily recommended */}

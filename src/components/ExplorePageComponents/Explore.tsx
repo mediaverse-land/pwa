@@ -23,6 +23,8 @@ import ExploreTextsAssets from "./ExploreAssets/TextsAssets";
 import AccountSection from "./Account";
 import ExploreRecently from "./Recently";
 import ExploreSearchSection from "./Search";
+import { AllLiveChanells } from "./ExploreAssets/LiveChannel";
+import AssetSinglePage from "./SingleAssetPages/SinglePageMain";
 type IExploreSectionNavs = {
   id: number;
   name: string;
@@ -140,6 +142,12 @@ const ExploreSection = ({
           <ExploreSearchSection searchParams={searchParams} />
         </div>
       ),
+    },
+    "live-channels": {
+      component: <AllLiveChanells searchParams={searchParams} />,
+    },
+    "asset-single-page": {
+      component: <AssetSinglePage searchParams={searchParams} />,
     },
   };
 

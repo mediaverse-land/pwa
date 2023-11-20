@@ -1,8 +1,21 @@
 import Image from "next/image";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
 import { AUDIO_ICON } from "@/components/SVG/svgs";
+import { getRecentlySongs } from "@/services/contactService";
 
-const ExploreChillSongs = () => {
+const getChillSongs = async () => {
+  try {
+    const req = await getRecentlySongs();
+    if (req.ok) {
+      return req.json();
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const ExploreChillSongs = async () => {
+  const chillSongs = await getChillSongs();
   return (
     <div className="flex items-stretch flex-col gap-4">
       {/* header */}
@@ -16,15 +29,19 @@ const ExploreChillSongs = () => {
       <div>
         <div className="overflow-x-hidden">
           <div className="flex items-stretch gap-4 overflow-x-auto">
-            <ExploreAssetsCard type="audio" />
-            <ExploreAssetsCard type="audio" />
-            <ExploreAssetsCard type="audio" />
-            <ExploreAssetsCard type="audio" />
-            <ExploreAssetsCard type="audio" />
-            <ExploreAssetsCard type="audio" />
-            <ExploreAssetsCard type="audio" />
-            <ExploreAssetsCard type="audio" />
-            <ExploreAssetsCard type="audio" />
+            {chillSongs.slice(0, 10).map((item: any) => (
+              <ExploreAssetsCard
+                key={item.id}
+                id={item.id}
+                type="audio"
+                cover={item.asset.thumbnails["336x366"]}
+                title={item.name}
+                author={{
+                  name: item.asset.user.username,
+                  picture: item.asset.user.image_url,
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>

@@ -9,9 +9,16 @@ import {
   SubscribeTextAssets,
   SubscribeVideoAssets,
 } from "./SubsribeAssets";
+import {
+  OwnershipAllAssets,
+  OwnershipAudioAssets,
+  OwnershipImageAssets,
+  OwnershipTextAssets,
+  OwnershipVideoAssets,
+} from "./OwnershipAssets";
 import { redirect } from "next/navigation";
 
-const AccountSubscribeSection = ({
+const AccountOwnershipSection = ({
   searchParams,
 }: {
   searchParams: { [key: string]: string };
@@ -23,19 +30,19 @@ const AccountSubscribeSection = ({
     };
   } = {
     all: {
-      component: <SubscribeAllAssets searchParams={searchParams} />,
+      component: <OwnershipAllAssets searchParams={searchParams} />,
     },
     images: {
-      component: <SubscribeImageAssets searchParams={searchParams} />,
+      component: <OwnershipImageAssets searchParams={searchParams} />,
     },
     texts: {
-      component: <SubscribeTextAssets searchParams={searchParams} />,
+      component: <OwnershipTextAssets searchParams={searchParams} />,
     },
     audios: {
-      component: <SubscribeAudioAssets searchParams={searchParams} />,
+      component: <OwnershipAudioAssets searchParams={searchParams} />,
     },
     videos: {
-      component: <SubscribeVideoAssets searchParams={searchParams} />,
+      component: <OwnershipVideoAssets searchParams={searchParams} />,
     },
   };
   return (
@@ -43,7 +50,7 @@ const AccountSubscribeSection = ({
       <div className="rounded-lg grid grid-flow-col grid-rows-1 bg-[#0E0E1280] backdrop-blur-md">
         {ExploreSectionNavs.map((tab) => (
           <Link
-            href={`/explore?section=account&type=subscribe&content=${tab.link}`}
+            href={`/explore?section=account&type=ownership&content=${tab.link}`}
             key={tab.id}
             className="text-center flex flex-col items-center justify-center cursor-pointer h-full"
           >
@@ -61,10 +68,10 @@ const AccountSubscribeSection = ({
       </div>
       <div className="">
         {assetComponents[activeTab]?.component ||
-          redirect("/explore?section=account&type=subscribe")}
+          redirect("/explore?section=account&type=ownership")}
       </div>
     </div>
   );
 };
 
-export default AccountSubscribeSection;
+export default AccountOwnershipSection;

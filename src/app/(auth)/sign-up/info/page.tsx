@@ -1,11 +1,13 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import EditUserInfoForm from "@/components/Forms/EditUserInfo";
 import Motion from "@/components/motion";
+import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-const SignUpInfo = () => {
-  const isEditing = cookies().get("EditUserInfo");
-  if (!isEditing || isEditing.value !== "true") {
+const SignUpInfo = async () => {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user?.name) {
     redirect("/sign-up");
   }
   return (

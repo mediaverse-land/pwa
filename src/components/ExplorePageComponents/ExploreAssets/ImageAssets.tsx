@@ -153,7 +153,7 @@ const ExploreImageAssets = async ({ activeTab }: { activeTab: string }) => {
   return (
     <>
       <ExploreSearchAndNavSection activeTab={activeTab} />
-      <div className="flex flex-col items-stretch gap-6 pb-8 px-6">
+      <div className="flex flex-col items-stretch gap-6 pb-8 px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}
@@ -169,6 +169,7 @@ const ExploreImageAssets = async ({ activeTab }: { activeTab: string }) => {
                 {mostViewedImages.slice(0, 10).map((item: any) => (
                   <ExploreAssetsCard
                     key={item.id}
+                    id={item.id}
                     type="image"
                     cover={item.asset.thumbnails["336x366"]}
                     title={item.name}
@@ -211,7 +212,8 @@ export const RecentlyImages = async () => {
     <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2">
       {data.map((items: any, index: number) => {
         return (
-          <div
+          <Link
+            href={`/explore?section=explore&content=asset-single-page&name=${items.name}&id=${items.id}&type=image`}
             key={items.id}
             className={`relative overflow-hidden rounded-lg w-full aspect-square `}
           >
@@ -220,7 +222,7 @@ export const RecentlyImages = async () => {
               alt={items.name}
               fill
             />
-          </div>
+          </Link>
         );
       })}
     </div>

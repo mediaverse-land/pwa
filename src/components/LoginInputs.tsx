@@ -184,7 +184,7 @@ const LoginWithPhone = () => {
             </div>
             <div className="h-full w-[1px] bg-white"></div>
             <input
-              className="bg-transparent grow placeholder:text-[#353542] outline-none"
+              className="bg-transparent grow placeholder:text-[#353542] outline-none autofill:bg-transparent"
               disabled={isLoading || !isCodeExist}
               maxLength={20}
               placeholder="Enter Code..."

@@ -76,7 +76,7 @@ async function getTextData() {
 }
 
 async function getSliderData() {
-  const text = await getLives();
+  const text = await getLives({ params: "" });
   if (!text.ok) {
     throw new Error("Failed to fetch data");
   }

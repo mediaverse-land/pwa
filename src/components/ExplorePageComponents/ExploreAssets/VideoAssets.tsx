@@ -58,7 +58,7 @@ const ExploreVideoAssets = async ({ activeTab }: { activeTab: string }) => {
   return (
     <>
       <ExploreSearchAndNavSection activeTab={activeTab} />
-      <div className="flex flex-col items-stretch gap-6 pb-8 px-6">
+      <div className="flex flex-col items-stretch gap-6 pb-8 px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}
@@ -73,6 +73,7 @@ const ExploreVideoAssets = async ({ activeTab }: { activeTab: string }) => {
               <div className="flex items-stretch gap-4 overflow-x-auto">
                 {mostViewedVideos.slice(0, 10).map((item: any) => (
                   <ExploreAssetsCard
+                    id={item.id}
                     key={item.id}
                     type="video"
                     cover={item.asset.thumbnails["336x366"]}
@@ -117,6 +118,7 @@ export const RecentlyVideos = async () => {
       {rececentlyVideosData.map((items: any, index: number) => {
         return (
           <ExploreVideoCard
+            id={items.id}
             key={items.id}
             author={{
               name: items.asset.user.username,
