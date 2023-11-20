@@ -13,6 +13,7 @@ export async function middleware(request: NextRequest) {
   //   if (request.nextUrl.search === "") {
   //     return NextResponse.redirect(new URL("/blogs?page=1", request.url));
   //   }
+  // console.log(request, "==1====1==1=1=1==1");
 }
 
 // See "Matching Paths" below to learn more

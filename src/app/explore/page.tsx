@@ -74,28 +74,19 @@ const exploreSections: IexploreSections[] = [
   //     </div>
   //   ),
   // },
-  // {
-  //   id: "4",
-  //   name: "Wallet",
-  //   link: "wallet",
-  //   active_icon: <ACTIVE_WALLET />,
-  //   inactive_icon: <INACTIVE_WALLET />,
-  //   component: (
-  //     <div
-  //       className="col-span-4 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-y-auto flex flex-col items-stretch gap-4"
-  //       style={{ background: `rgba(78, 78, 97, 0.20)` }}
-  //     >
-
-  //       <WalletSection />
-  //     </div>
-  //   ),
-  // },
   {
     id: "1",
     name: "Explore",
     link: "explore",
     active_icon: <ACTIVE_EXPLORE />,
     inactive_icon: <INACTIVE_EXPLORE />,
+  },
+  {
+    id: "4",
+    name: "Wallet",
+    link: "wallet",
+    active_icon: <ACTIVE_WALLET />,
+    inactive_icon: <INACTIVE_WALLET />,
   },
 ];
 
@@ -133,10 +124,21 @@ const Explore = async (params: {
         </div>
       ),
     },
+    wallet: {
+      component: (
+        <div
+          key={"WalletSection"}
+          className="col-span-6 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-hidden flex flex-col items-stretch gap-4"
+          style={{ background: `rgba(78, 78, 97, 0.20)` }}
+        >
+          <WalletSection searchParams={params.searchParams} />
+        </div>
+      ),
+    },
     setting: {
       component: (
         <div
-          key={"AccountSection"}
+          key={"SettingSection"}
           className="col-span-6 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-hidden flex flex-col items-stretch gap-4"
           style={{ background: `rgba(78, 78, 97, 0.20)` }}
         >
@@ -227,7 +229,7 @@ const Explore = async (params: {
             </div>
             <div className="flex flex-col items-stretch gap-6">
               <Link
-                href={`/explore?section=setting`}
+                href={`/explore?section=setting&page=main`}
                 className="flex items-center gap-4"
               >
                 {activeSection === "setting" ? (

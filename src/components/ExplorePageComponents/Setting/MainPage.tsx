@@ -1,12 +1,27 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import {
+  CHART_ICON,
   INACTIVE_ACCOUNT,
   INACTIVE_WALLET,
   MESSAGE_ICON,
+  SHARE_ICON,
 } from "@/components/SVG/svgs";
+import { getUserWallets } from "@/services/contactService";
 import { getServerSession } from "next-auth";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
+const getUserWalletData = async (token: string) => {
+  try {
+    const req = await getUserWallets(token);
+    if (req.ok) {
+      const res = await req.json();
+      return res;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const SettingMainPage = async ({
   searchParams,
@@ -16,6 +31,10 @@ const SettingMainPage = async ({
   };
 }) => {
   const session = await getServerSession(authOptions);
+  const cookie = cookies().get("user");
+  const token = cookie && JSON.parse(cookie?.value)?.token;
+  const [wallets] = await Promise.all([getUserWalletData(token)]);
+
   return (
     <div
       key={searchParams.content || "all"}
@@ -59,7 +78,7 @@ const SettingMainPage = async ({
         </div>
       </div>
       {/* setting secttions */}
-      <div className="flex flex-col items-stretch gap-2 px-10">
+      <div className="flex flex-col items-stretch gap-2 px-10 leading-none">
         {/* first section */}
         <div className="flex flex-col items-stretch gap-5 bg-[rgba(78,78,97,0.30)] backdrop-blur-sm border rounded-2xl border-[#cfcffc36] px-6 py-4">
           <Link
@@ -76,7 +95,9 @@ const SettingMainPage = async ({
                   fill="#A2A2B5"
                 />
               </div>
-              <div className="text-[14px] text-white">Account</div>
+              <div className="text-[14px] text-white flex items-center justify-center">
+                Account
+              </div>
             </div>
             <div className="text-[12px] text-[#A2A2B5]">
               {session?.user?.name}
@@ -96,13 +117,15 @@ const SettingMainPage = async ({
                   fill="#A2A2B5"
                 />
               </div>
-              <div className="text-[14px] text-white">Message</div>
+              <div className="text-[14px] text-white flex items-center justify-center">
+                Message
+              </div>
             </div>
             <div className="text-[12px] text-black flex items-center justify-center leading-none w-[18px] aspect-square rounded-full bg-white">
               2
             </div>
           </Link>
-          <Link href={`/explore?section=wallet&`} className="flex items-center">
+          <Link href={`/explore?section=wallet`} className="flex items-center">
             <div className="flex items-center gap-3 mr-auto">
               <div className="flex items-center justify-center">
                 <INACTIVE_WALLET
@@ -113,14 +136,55 @@ const SettingMainPage = async ({
                   fill="#A2A2B5"
                 />
               </div>
-              <div className="text-[14px] text-white">Wallet</div>
+              <div className="text-[14px] text-white flex items-center justify-center">
+                Wallet
+              </div>
             </div>
-            <div className="text-[12px] text-[#A2A2B5]">200 $</div>
+            <div className="text-[12px] text-[#A2A2B5]">
+              {wallets[0].balance} {wallets[0].type}
+            </div>
           </Link>
         </div>
         {/* second section  */}
-        <div className="bg-[rgba(78,78,97,0.30)] backdrop-blur-sm border rounded-2xl border-[#cfcffc36] px-6 py-4">
-          d
+        <div className="flex flex-col items-stretch gap-5 bg-[rgba(78,78,97,0.30)] backdrop-blur-sm border rounded-2xl border-[#cfcffc36] px-6 py-4">
+          <Link
+            href={`/explore?section=setting&page=analytics`}
+            className="flex items-center"
+          >
+            <div className="flex items-center gap-3 mr-auto">
+              <div className="flex items-center justify-center">
+                <CHART_ICON
+                  style={{
+                    width: "18px",
+                    height: "18px",
+                  }}
+                  fill="#A2A2B5"
+                />
+              </div>
+              <div className="text-[14px] text-white flex items-center justify-center">
+                Analytics
+              </div>
+            </div>
+          </Link>
+          <Link
+            href={`/explore?section=setting&page=share`}
+            className="flex items-center"
+          >
+            <div className="flex items-center gap-3 mr-auto">
+              <div className="flex items-center justify-center">
+                <SHARE_ICON
+                  style={{
+                    width: "18px",
+                    height: "18px",
+                  }}
+                  fill="#A2A2B5"
+                />
+              </div>
+              <div className="text-[14px] text-white flex items-center justify-center">
+                Share account
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

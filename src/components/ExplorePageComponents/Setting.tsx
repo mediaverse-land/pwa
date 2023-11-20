@@ -14,6 +14,7 @@ const Setting = async ({
     [key: string]: string;
   };
 }) => {
+  const activePage = searchParams["page"] || "main";
   const cookie = cookies().get("user")?.value;
   if (!cookie) {
     return <LogoutNoUser />;
@@ -33,8 +34,8 @@ const Setting = async ({
   };
   return (
     <Motion key={"setting"} fullHeight>
-      {settingComponents[searchParams["page"]]?.component ||
-        redirect("/explore?section=setting&page=main")}
+      {settingComponents[activePage]?.component ||
+        redirect("/explore?section=setting")}
     </Motion>
   );
 };
