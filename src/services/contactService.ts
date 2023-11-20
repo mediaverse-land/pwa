@@ -243,7 +243,7 @@ export const getOwnershipAssets = ({
     headers: {
       "Accept-Language": "en-US",
       "x-app": "_Web",
-      // Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 };
