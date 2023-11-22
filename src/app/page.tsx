@@ -120,7 +120,10 @@ const Home = async () => {
                   />
                 </div>
               </div>
-              <div className="app-store-container cursor-pointer py-[4px] px-[12px] flex items-center">
+              <Link
+                href={`https://play.google.com/store/apps/dev?id=9075123475680600566`}
+                className="app-store-container cursor-pointer py-[4px] px-[12px] flex items-center"
+              >
                 <div className="relative w-full aspect-[135/48]">
                   <Image
                     src="/images/google-play-store-logo.png"
@@ -129,7 +132,7 @@ const Home = async () => {
                     alt="google play store logo"
                   />
                 </div>
-              </div>
+              </Link>
             </div>
             <Link
               href={`/explore`}

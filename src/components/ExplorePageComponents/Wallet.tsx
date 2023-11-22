@@ -1,4 +1,9 @@
+import { redirect } from "next/navigation";
+import { DELETE_ICON, INACTIVE_PLUS } from "../SVG/svgs";
 import Motion from "../motion";
+import AddCardAndInventory from "./WalletComponents/AddCardAndInventory";
+import WalletMainPage from "./WalletComponents/WalletMainPage";
+import WalletHistory from "./WalletComponents/WalletHistory";
 
 const WalletSection = ({
   searchParams,
@@ -7,9 +12,25 @@ const WalletSection = ({
     [key: string]: string;
   };
 }) => {
+  const walletComponents: {
+    [key: string]: {
+      component: JSX.Element;
+    };
+  } = {
+    main: {
+      component: <WalletMainPage />,
+    },
+    history: {
+      component: <WalletHistory />,
+    },
+  };
+  const page = searchParams.page || "main";
   return (
     <Motion key={"Wallet"} fullHeight>
-      <div className="w-full h-full">Wallet</div>
+      <div className="w-full h-full relative">
+        {walletComponents[page]?.component ||
+          redirect("/explore?section=wallet&page=main")}
+      </div>
     </Motion>
   );
 };
