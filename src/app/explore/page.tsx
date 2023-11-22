@@ -16,7 +16,6 @@ import {
   INACTIVE_SETTING,
   INACTIVE_WALLET,
 } from "@/components/SVG/svgs";
-import LogoutBtn from "@/components/Buttons/LogoutBtn";
 import Motion from "@/components/motion";
 import { cookies } from "next/headers";
 import Link from "next/link";
