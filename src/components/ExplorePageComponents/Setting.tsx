@@ -6,6 +6,12 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Image from "next/image";
 import SettingMainPage from "./SettingComponents/MainPage";
 import { redirect } from "next/navigation";
+import SettingWalletSection from "./SettingComponents/WalletSection";
+import SettingAccountSection from "./SettingComponents/SettingAccount";
+import SettingSignIns from "./SettingComponents/SignIns";
+import SettingGeneralInformation from "./SettingComponents/GeneralInformation";
+import SettingMessages from "./SettingComponents/Messages";
+import SettingSessions from "./SettingComponents/Sessions";
 
 const Setting = async ({
   searchParams,
@@ -29,7 +35,22 @@ const Setting = async ({
       component: <SettingMainPage searchParams={searchParams} />,
     },
     account: {
-      component: <div>s</div>,
+      component: <SettingAccountSection searchParams={searchParams} />,
+    },
+    wallet: {
+      component: <SettingWalletSection />,
+    },
+    "sign-ins": {
+      component: <SettingSignIns />,
+    },
+    info: {
+      component: <SettingGeneralInformation />,
+    },
+    messages: {
+      component: <SettingMessages searchParams={searchParams} />,
+    },
+    sessions: {
+      component: <SettingSessions />,
     },
   };
   return (

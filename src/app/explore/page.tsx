@@ -4,12 +4,14 @@ import {
   ACTIVE_ACCOUNT,
   ACTIVE_APPS,
   ACTIVE_EXPLORE,
+  ACTIVE_LOGOUT,
   ACTIVE_PLUS,
   ACTIVE_SETTING,
   ACTIVE_WALLET,
   INACTIVE_ACCOUNT,
   INACTIVE_APPS,
   INACTIVE_EXPLORE,
+  INACTIVE_LOGOUT,
   INACTIVE_PLUS,
   INACTIVE_SETTING,
   INACTIVE_WALLET,
@@ -27,6 +29,7 @@ import { notFound, redirect } from "next/navigation";
 import ExploreRecently from "@/components/ExplorePageComponents/Recently";
 import Setting from "@/components/ExplorePageComponents/Setting";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import Logout from "@/components/ExplorePageComponents/Logout";
 type IexploreSections = {
   id: string;
   name: string;
@@ -146,6 +149,17 @@ const Explore = async (params: {
         </div>
       ),
     },
+    logout: {
+      component: (
+        <div
+          key={"SettingSection"}
+          className="col-span-6 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-hidden flex flex-col items-stretch gap-4"
+          style={{ background: `rgba(78, 78, 97, 0.20)` }}
+        >
+          <Logout />
+        </div>
+      ),
+    },
   };
 
   const session = await getServerSession(authOptions);
@@ -245,7 +259,23 @@ const Explore = async (params: {
                   Setting
                 </div>
               </Link>
-              <LogoutBtn />
+              <Link
+                href={`/explore?section=logout`}
+                className="flex items-center gap-4 group"
+              >
+                {activeSection === "logout" ? (
+                  <ACTIVE_LOGOUT />
+                ) : (
+                  <INACTIVE_LOGOUT />
+                )}
+                <div
+                  className={`text-[14px] ${
+                    activeSection === "logout" ? "font-medium text-white" : ""
+                  }`}
+                >
+                  Logout
+                </div>
+              </Link>
             </div>
           </aside>
           {exploreComponents[activeSection]?.component ||

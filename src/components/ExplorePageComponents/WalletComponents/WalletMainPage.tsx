@@ -2,9 +2,13 @@ import { DELETE_ICON } from "@/components/SVG/svgs";
 import AddCardAndInventory from "./AddCardAndInventory";
 import Link from "next/link";
 
-const WalletMainPage = () => {
+const WalletMainPage = ({ type = "main" }: { type?: "main" | "sub" }) => {
   return (
-    <div className="h-full w-full flex flex-col items-stretch gap-6 p-10">
+    <div
+      className={`h-full w-full flex flex-col items-stretch gap-6 ${
+        type === "main" ? "p-10" : ""
+      }`}
+    >
       {/* top section */}
       <div className="flex items-center gap-4 bg-[rgba(78,78,97,0.75)] rounded-lg px-4 py-3">
         <div className="text-[14px] text-[#83839C]">Inventory</div>

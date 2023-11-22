@@ -1,5 +1,5 @@
 import { BACK_ICON, PLAY, VIDEO_ICON } from "@/components/SVG/svgs";
-import { getSingleVideo } from "@/services/contactService";
+import { getComments, getSingleVideo } from "@/services/contactService";
 import AssetSinglePageTitleAndDescription from "./shared/TitleAndDescription";
 import BackButton from "@/components/shared/BackButton";
 import { cookies } from "next/headers";
@@ -34,6 +34,28 @@ const getSingleVideoData = async ({
     console.error(error);
   }
 };
+const getCommentsData = async ({
+  id,
+  token,
+}: {
+  id: string;
+  token: string;
+}) => {
+  try {
+    const req = await getComments({ id, token });
+    if (req.ok) {
+      const res = await req.json();
+      return res;
+    } else {
+      // console.log(req.status, "Res");
+      if (req.status === 404) {
+        return "not-found";
+      }
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 const VideoSinglePage = async ({
   searchParams,
 }: {
@@ -44,8 +66,12 @@ const VideoSinglePage = async ({
   const assetID = searchParams.id || "0";
   const user = cookies().get("user")?.value;
   const token = user && JSON.parse(user).token;
-  const singleVideoData = await getSingleVideoData({ id: assetID, token });
+  const [singleVideoData, commentsData] = await Promise.all([
+    getSingleVideoData({ id: assetID, token }),
+    getCommentsData({ id: assetID, token }),
+  ]);
   const languageName = new Intl.DisplayNames(["en"], { type: "language" });
+  console.log(token);
 
   if (singleVideoData === "not-found") {
     return (

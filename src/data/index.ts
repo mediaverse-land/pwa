@@ -90,3 +90,8 @@ export const AssetType = {
   5: "3d",
   6: "Thumbnail",
 };
+export const AssetCommentStatus = {
+  1: "Confirm Requested",
+  2: "Accepted",
+  3: "Rejected",
+};

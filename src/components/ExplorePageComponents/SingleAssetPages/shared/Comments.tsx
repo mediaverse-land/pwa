@@ -3,16 +3,17 @@
 import { getComments } from "@/services/contactService";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { set } from "react-hook-form";
 
 const SingleAssetComments = ({
   assetID,
   userImage,
   username,
+  commentsData,
   token,
 }: {
   userImage: string | null | undefined;
   assetID: number;
+  commentsData: any;
   username: string | null | undefined;
   token: string;
 }) => {
@@ -119,6 +120,7 @@ const SingleAssetComments = ({
           <input
             className="rounded-lg bg-[rgba(28,28,35,0.75)] placeholder:text-[##666680] text-white text-[14px] px-4 py-3 grow outline-none"
             placeholder="Add a comment..."
+            onChange={(e) => setInputValue(e.target.value)}
             value={inputValue}
           />
         </div>

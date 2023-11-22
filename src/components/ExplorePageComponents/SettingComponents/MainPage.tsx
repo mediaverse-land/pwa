@@ -125,7 +125,10 @@ const SettingMainPage = async ({
               2
             </div>
           </Link>
-          <Link href={`/explore?section=wallet`} className="flex items-center">
+          <Link
+            href={`/explore?section=setting&page=wallet`}
+            className="flex items-center"
+          >
             <div className="flex items-center gap-3 mr-auto">
               <div className="flex items-center justify-center">
                 <INACTIVE_WALLET

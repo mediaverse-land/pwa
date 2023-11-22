@@ -17,7 +17,7 @@ const AddCardAndInventory = () => {
       <div className="grow flex flex-col items-stretch justify-between">
         <div
           onClick={() => setDrawerStatus({ isOpen: true, type: "Wallet" })}
-          className="rounded-2xl border border-dashed border-[#666680] text-[14px] cursor-pointer leading-5 capitalize text-center text-[#A2A2B5] flex items-center justify-center gap-2 py-5"
+          className="rounded-2xl border border-dashed border-[#666680] text-[14px] cursor-pointer leading-none capitalize text-center text-[#A2A2B5] flex items-center justify-center gap-2 py-5"
         >
           <span>Add Card</span>
           <span>
@@ -26,7 +26,7 @@ const AddCardAndInventory = () => {
         </div>
         <div
           onClick={() => setDrawerStatus({ isOpen: true, type: "Inventory" })}
-          className="rounded-2xl border border-dashed border-[#666680] text-[14px] cursor-pointer leading-5 capitalize text-center text-[#A2A2B5] flex items-center justify-center gap-2 py-5"
+          className="rounded-2xl border border-dashed border-[#666680] text-[14px] cursor-pointer leading-none capitalize text-center text-[#A2A2B5] flex items-center justify-center gap-2 py-5"
         >
           <span>Add Inventory</span>
           <span>
