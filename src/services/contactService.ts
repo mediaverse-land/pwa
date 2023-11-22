@@ -6,6 +6,7 @@ const fetchInstance = (url: string) => {
       next: { revalidate: 60 },
       headers: {
         "Accept-Language": "en-US",
+        accept: "application/json",
         "x-app": "_Web",
       },
     });
@@ -14,6 +15,7 @@ const fetchInstance = (url: string) => {
       cache: "no-store",
       headers: {
         "Accept-Language": "en-US",
+        accept: "application/json",
         "x-app": "_Web",
       },
     });
@@ -44,6 +46,7 @@ export const getSingleImage = async ({
         next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
         headers: {
           "Accept-Language": "en-US",
+          accept: "application/json",
           "x-app": "_Web",
           Authorization: `Bearer ${token}`,
         },
@@ -52,6 +55,7 @@ export const getSingleImage = async ({
         next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
         headers: {
           "Accept-Language": "en-US",
+          accept: "application/json",
           "x-app": "_Web",
         },
       });
@@ -69,6 +73,7 @@ export const getSingleVideo = async ({
         next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
         headers: {
           "Accept-Language": "en-US",
+          accept: "application/json",
           "x-app": "_Web",
           Authorization: `Bearer ${token}`,
         },
@@ -77,6 +82,7 @@ export const getSingleVideo = async ({
         next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
         headers: {
           "Accept-Language": "en-US",
+          accept: "application/json",
           "x-app": "_Web",
         },
       });
@@ -94,6 +100,7 @@ export const getSingleText = async ({
         next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
         headers: {
           "Accept-Language": "en-US",
+          accept: "application/json",
           "x-app": "_Web",
           Authorization: `Bearer ${token}`,
         },
@@ -102,6 +109,7 @@ export const getSingleText = async ({
         next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
         headers: {
           "Accept-Language": "en-US",
+          accept: "application/json",
           "x-app": "_Web",
         },
       });
@@ -119,6 +127,7 @@ export const getSingleAudio = async ({
         next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
         headers: {
           "Accept-Language": "en-US",
+          accept: "application/json",
           "x-app": "_Web",
           Authorization: `Bearer ${token}`,
         },
@@ -127,6 +136,7 @@ export const getSingleAudio = async ({
         next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
         headers: {
           "Accept-Language": "en-US",
+          accept: "application/json",
           "x-app": "_Web",
         },
       });
@@ -175,6 +185,7 @@ export const getProfileStatics = (token: string) => {
     next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
     headers: {
       "Accept-Language": "en-US",
+      accept: "application/json",
       "x-app": "_Web",
       Authorization: `Bearer ${token}`,
     },
@@ -186,6 +197,7 @@ export const getUserWallets = (token: string) => {
     next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
     headers: {
       "Accept-Language": "en-US",
+      accept: "application/json",
       "x-app": "_Web",
       Authorization: `Bearer ${token}`,
     },
@@ -225,6 +237,7 @@ export const getSubscribeAssets = ({
     next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
     headers: {
       "Accept-Language": "en-US",
+      accept: "application/json",
       "x-app": "_Web",
       Authorization: `Bearer ${token}`,
     },
@@ -262,6 +275,7 @@ export const getComments = async ({
     next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
     headers: {
       "Accept-Language": "en-US",
+      accept: "application/json",
       "x-app": "_Web",
       Authorization: `Bearer ${token}`,
     },
@@ -287,6 +301,7 @@ export const requestOTP = async (data: any) => {
       body: JSON.stringify(data),
       headers: {
         "Accept-Language": "en-US",
+        accept: "application/json",
         "x-app": "_Web",
         "Content-Type": "application/json",
       },
@@ -300,6 +315,7 @@ export const requestOTP = async (data: any) => {
       body: JSON.stringify(data),
       headers: {
         "Accept-Language": "en-US",
+        accept: "application/json",
         "x-app": "_Web",
         "Content-Type": "application/json",
       },
@@ -316,6 +332,7 @@ export const submitOTP = async (data: any) => {
       body: JSON.stringify(data),
       headers: {
         "Accept-Language": "en-US",
+        accept: "application/json",
         "x-app": "_Web",
         "Content-Type": "application/json",
       },
@@ -329,6 +346,7 @@ export const submitOTP = async (data: any) => {
       body: JSON.stringify(data),
       headers: {
         "Accept-Language": "en-US",
+        accept: "application/json",
         "x-app": "_Web",
         "Content-Type": "application/json",
       },
@@ -345,6 +363,7 @@ export const signUpCompletion = async ({ data, token }: any) => {
       body: JSON.stringify(data),
       headers: {
         "Accept-Language": "en-US",
+        accept: "application/json",
         "x-app": "_Web",
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -359,6 +378,7 @@ export const signUpCompletion = async ({ data, token }: any) => {
       body: JSON.stringify(data),
       headers: {
         "Accept-Language": "en-US",
+        accept: "application/json",
         "x-app": "_Web",
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -376,6 +396,7 @@ export const signInWithUsername = async (data: any) => {
       body: JSON.stringify(data),
       headers: {
         "Accept-Language": "en-US",
+        accept: "application/json",
         "x-app": "_Web",
         "Content-Type": "application/json",
       },
@@ -389,6 +410,7 @@ export const signInWithUsername = async (data: any) => {
       body: JSON.stringify(data),
       headers: {
         "Accept-Language": "en-US",
+        accept: "application/json",
         "x-app": "_Web",
         "Content-Type": "application/json",
       },
