@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import { NextAuthSessionProvider } from "@/components/nextauthProvider";
 import Script from "next/script";
 import Head from "next/head";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} min-h-screen flex flex-col justify-between [&_>_*:nth-child(2)]:grow`}
       >
+        <NextTopLoader />
         <NextAuthSessionProvider>
           <Navbar />
           {children}
