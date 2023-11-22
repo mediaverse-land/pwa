@@ -8,12 +8,12 @@ const SingleAssetComments = ({
   assetID,
   userImage,
   username,
-  commentsData,
+  // commentsData,
   token,
 }: {
   userImage: string | null | undefined;
   assetID: number;
-  commentsData: any;
+  // commentsData: any;
   username: string | null | undefined;
   token: string;
 }) => {
