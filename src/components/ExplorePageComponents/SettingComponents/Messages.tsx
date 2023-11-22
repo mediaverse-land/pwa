@@ -11,7 +11,7 @@ const SettingMessages = ({
 }) => {
   const id = searchParams.id;
   return (
-    <div className="flex flex-col items-stretch gap-10 p-10 h-full">
+    <div className="flex flex-col items-stretch gap-10 px-10 pt-10 h-full">
       <SubSectionHeader name="Messages" />
       {id ? <SettingSingleMessage id={+id} /> : <SettingAllMessages />}
     </div>
