@@ -68,8 +68,9 @@ const EditUserInfoForm = () => {
       token: userCookie && JSON.parse(userCookie).token,
     }).finally(() => setLoading(false));
     const response = await request.json();
-    // console.log(response, "signUpCompletion");
+    // console.log(request, "signUpCompletion");
     if (request.ok) {
+      // console.log("success");
       Cookies.set("isLogin", "true", {
         expires: 1,
       });
@@ -90,6 +91,7 @@ const EditUserInfoForm = () => {
       );
       router.push("/explore");
     } else {
+      // console.log("failed");
       setServerErrors(response.error || response.message);
     }
   });

@@ -240,8 +240,10 @@ export const getOwnershipAssets = ({
   const url = `${URL}/profile${params}`;
   return fetch(url, {
     next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+    method: "GET",
     headers: {
       "Accept-Language": "en-US",
+      accept: "application/json",
       "x-app": "_Web",
       Authorization: `Bearer ${token}`,
     },

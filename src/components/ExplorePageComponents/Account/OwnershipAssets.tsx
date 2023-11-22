@@ -18,11 +18,14 @@ const getOwnership = async ({
 }) => {
   try {
     const req = await getOwnershipAssets({ params, token });
+    // console.log(req);
     if (req.ok) {
       return req.json();
+    } else {
+      throw new Error("Unauthorized");
     }
   } catch (error) {
-    console.error(error);
+    throw new Error(`${error}`);
   }
 };
 
@@ -35,16 +38,20 @@ export const OwnershipAllAssets = async ({
 }) => {
   const cookie = cookies().get("user");
   const token = cookie && JSON.parse(cookie?.value)?.token;
-  const searchResults = await getOwnership({ params: "/assets", token: token });
+  const searchResults = await getOwnership({
+    params: "/assets",
+    token: `${token}asdfsa`,
+  });
   const concatData = () => {
     const data = [
-      ...searchResults.images,
-      ...searchResults.videos,
-      ...searchResults.texts,
-      ...searchResults.audios,
+      ...searchResults?.images,
+      ...searchResults?.videos,
+      ...searchResults?.texts,
+      ...searchResults?.audios,
     ];
     return data;
   };
+
   return (
     <div className="py-7 px-6 grid grid-cols-3 grid-flow-row gap-4">
       {concatData().length > 0 ? (
@@ -98,7 +105,7 @@ export const OwnershipImageAssets = async ({
   const token = cookie && JSON.parse(cookie?.value)?.token;
   const searchResults = await getOwnership({
     params: "/images",
-    token: token,
+    token: `${token}`,
   });
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2 px-6 py-7 h-full overflow-y-auto">
