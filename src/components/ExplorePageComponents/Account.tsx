@@ -3,12 +3,12 @@ import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import AccountSubscribeSection from "./Account/SubscribeSection";
+import AccountSubscribeSection from "./AccountComponents/SubscribeSection";
 import Motion from "../motion";
-import UserStatics from "./Account/UserStatics";
-import AccountOwnershipSection from "./Account/OwnershipSection";
+import UserStatics from "./AccountComponents/UserStatics";
+import AccountOwnershipSection from "./AccountComponents/OwnershipSection";
 import { cookies } from "next/headers";
-import LogoutNoUser from "./Account/Logout";
+import LogoutNoUser from "./AccountComponents/Logout";
 
 const AccountSection = async ({
   searchParams,

@@ -96,16 +96,16 @@ const LoginWithPhone = () => {
         },
       }).finally(() => setIsLoading(false));
       const response = await res.json();
-      console.log(response, "response");
+      // console.log(response, "response");
       // If no error and we have user data, return it
-      console.log({ user: response }, "req body");
+      // console.log({ user: response }, "req body");
       if (res.ok && response) {
         signIn(
           "loginWithOTP",
           { callbackUrl: params.get("refer") || "/explore" },
           { user: JSON.stringify(response) }
         );
-        console.log(response);
+        // console.log(response);
       } else {
         setError({
           ...error,
@@ -278,7 +278,7 @@ const LoginWithUsername = () => {
       username: data.username,
     }).finally(() => setIsLoading(false));
     const res = await req.json();
-    console.log(res);
+    // console.log(res);
     if (req.ok && res) {
       signIn(
         "loginWithUsername",

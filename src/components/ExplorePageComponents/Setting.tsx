@@ -1,10 +1,10 @@
 import { cookies } from "next/headers";
 import Motion from "../motion";
-import LogoutNoUser from "./Account/Logout";
+import LogoutNoUser from "./AccountComponents/Logout";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Image from "next/image";
-import SettingMainPage from "./Setting/MainPage";
+import SettingMainPage from "./SettingComponents/MainPage";
 import { redirect } from "next/navigation";
 
 const Setting = async ({

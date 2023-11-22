@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
 import { BACK_ICON } from "../SVG/svgs";
 import Link from "next/link";
-import { RecentlyImages } from "./ExploreAssets/ImageAssets";
-import { RecentlyAudio } from "./ExploreAssets/AudioAssets";
-import { RecentlyTexts } from "./ExploreAssets/TextsAssets";
-import { RecentlyVideos } from "./ExploreAssets/VideoAssets";
+import { RecentlyImages } from "./ExploreAssetsComponents/ImageAssets";
+import { RecentlyAudio } from "./ExploreAssetsComponents/AudioAssets";
+import { RecentlyTexts } from "./ExploreAssetsComponents/TextsAssets";
+import { RecentlyVideos } from "./ExploreAssetsComponents/VideoAssets";
 const allowedType = ["images", "videos", "texts", "audios"];
 const RecentlyComponent = [
   {

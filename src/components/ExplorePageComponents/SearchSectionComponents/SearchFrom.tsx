@@ -30,7 +30,7 @@ const SearchSectionFrom = () => {
     resolver: zodResolver(formSchema),
   });
   const handleSubmitForm = handleSubmit((data) => {
-    console.log(data);
+    // console.log(data);
     // console.log(
     //   `/explore?section=explore&content=search?q=${data.q}${
     //     data.searchIn && `&${contentType}=${data.searchIn}`

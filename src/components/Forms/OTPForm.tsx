@@ -88,7 +88,7 @@ const OTPForm = () => {
         setLoading(false)
       );
       const response = await request.json();
-      console.log(response, "res");
+      // console.log(response, "res");
       if (request.ok) {
         setCounter(response.expires_after);
         setCodeStatus((prev) => {

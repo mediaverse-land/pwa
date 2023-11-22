@@ -40,7 +40,7 @@ export const OwnershipAllAssets = async ({
   const token = cookie && JSON.parse(cookie?.value)?.token;
   const searchResults = await getOwnership({
     params: "/assets",
-    token: `${token}asdfsa`,
+    token: `${token}`,
   });
   const concatData = () => {
     const data = [

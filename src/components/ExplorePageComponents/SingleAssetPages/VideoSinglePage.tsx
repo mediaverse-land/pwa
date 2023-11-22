@@ -25,7 +25,7 @@ const getSingleVideoData = async ({
       const res = await req.json();
       return res;
     } else {
-      console.log(req.status, "Res");
+      // console.log(req.status, "Res");
       if (req.status === 404) {
         return "not-found";
       }

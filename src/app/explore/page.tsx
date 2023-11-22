@@ -149,7 +149,7 @@ const Explore = async (params: {
   };
 
   const session = await getServerSession(authOptions);
-  console.log(session?.user);
+  // console.log(session?.user);
   if (!session) {
     redirect("/login");
   }

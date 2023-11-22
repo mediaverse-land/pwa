@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ExploreSectionNavs } from "../Explore";
-import { audioData } from "../ExploreAssets/AudioAssets";
+import { audioData } from "../ExploreAssetsComponents/AudioAssets";
 import ExploreAudioCard from "../shared/AudioCard";
 import {
   SubscribeAllAssets,
@@ -9,16 +9,9 @@ import {
   SubscribeTextAssets,
   SubscribeVideoAssets,
 } from "./SubsribeAssets";
-import {
-  OwnershipAllAssets,
-  OwnershipAudioAssets,
-  OwnershipImageAssets,
-  OwnershipTextAssets,
-  OwnershipVideoAssets,
-} from "./OwnershipAssets";
 import { redirect } from "next/navigation";
 
-const AccountOwnershipSection = ({
+const AccountSubscribeSection = ({
   searchParams,
 }: {
   searchParams: { [key: string]: string };
@@ -30,19 +23,19 @@ const AccountOwnershipSection = ({
     };
   } = {
     all: {
-      component: <OwnershipAllAssets searchParams={searchParams} />,
+      component: <SubscribeAllAssets searchParams={searchParams} />,
     },
     images: {
-      component: <OwnershipImageAssets searchParams={searchParams} />,
+      component: <SubscribeImageAssets searchParams={searchParams} />,
     },
     texts: {
-      component: <OwnershipTextAssets searchParams={searchParams} />,
+      component: <SubscribeTextAssets searchParams={searchParams} />,
     },
     audios: {
-      component: <OwnershipAudioAssets searchParams={searchParams} />,
+      component: <SubscribeAudioAssets searchParams={searchParams} />,
     },
     videos: {
-      component: <OwnershipVideoAssets searchParams={searchParams} />,
+      component: <SubscribeVideoAssets searchParams={searchParams} />,
     },
   };
   return (
@@ -50,7 +43,7 @@ const AccountOwnershipSection = ({
       <div className="rounded-lg grid grid-flow-col grid-rows-1 bg-[#0E0E1280] backdrop-blur-md">
         {ExploreSectionNavs.map((tab) => (
           <Link
-            href={`/explore?section=account&type=ownership&content=${tab.link}`}
+            href={`/explore?section=account&type=subscribe&content=${tab.link}`}
             key={tab.id}
             className="text-center flex flex-col items-center justify-center cursor-pointer h-full"
           >
@@ -68,10 +61,10 @@ const AccountOwnershipSection = ({
       </div>
       <div className="">
         {assetComponents[activeTab]?.component ||
-          redirect("/explore?section=account&type=ownership")}
+          redirect("/explore?section=account&type=subscribe")}
       </div>
     </div>
   );
 };
 
-export default AccountOwnershipSection;
+export default AccountSubscribeSection;

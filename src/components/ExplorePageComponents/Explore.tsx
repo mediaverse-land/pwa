@@ -15,15 +15,15 @@ import {
   TEXT_ICON,
   VIDEO_ICON,
 } from "../SVG/svgs";
-import ExploreAllAssets from "./ExploreAssets/ExploreAllAssets";
-import ExploreImageAssets from "./ExploreAssets/ImageAssets";
-import ExploreVideoAssets from "./ExploreAssets/VideoAssets";
-import ExploreAudioAssets from "./ExploreAssets/AudioAssets";
-import ExploreTextsAssets from "./ExploreAssets/TextsAssets";
+import ExploreAllAssets from "./ExploreAssetsComponents/ExploreAllAssets";
+import ExploreImageAssets from "./ExploreAssetsComponents/ImageAssets";
+import ExploreVideoAssets from "./ExploreAssetsComponents/VideoAssets";
+import ExploreAudioAssets from "./ExploreAssetsComponents/AudioAssets";
+import ExploreTextsAssets from "./ExploreAssetsComponents/TextsAssets";
 import AccountSection from "./Account";
 import ExploreRecently from "./Recently";
 import ExploreSearchSection from "./Search";
-import { AllLiveChanells } from "./ExploreAssets/LiveChannel";
+import { AllLiveChanells } from "./ExploreAssetsComponents/LiveChannel";
 import AssetSinglePage from "./SingleAssetPages/SinglePageMain";
 type IExploreSectionNavs = {
   id: number;
