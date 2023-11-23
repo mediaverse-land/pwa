@@ -2,12 +2,16 @@ import Motion from "@/components/motion";
 import { getPrivacy } from "@/services/contactService";
 
 async function getPrivacyData() {
-  const privacy = await getPrivacy();
-
-  if (!privacy.ok) {
-    throw new Error("Failed to fetch data");
+  try {
+    const privacy = await getPrivacy();
+    if (privacy.ok) {
+      return privacy.json();
+    } else {
+      throw new Error(`Failed to fetch data ${privacy.status}`);
+    }
+  } catch (error) {
+    console.error(error);
   }
-  return privacy.json();
 }
 const Privacy = async () => {
   const privacyData = await getPrivacyData();

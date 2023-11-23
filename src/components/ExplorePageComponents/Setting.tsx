@@ -12,6 +12,7 @@ import SettingSignIns from "./SettingComponents/SignIns";
 import SettingGeneralInformation from "./SettingComponents/GeneralInformation";
 import SettingMessages from "./SettingComponents/Messages";
 import SettingSessions from "./SettingComponents/Sessions";
+import SettingShareAccount from "./SettingComponents/ShareAccount";
 
 const Setting = async ({
   searchParams,
@@ -51,6 +52,9 @@ const Setting = async ({
     },
     sessions: {
       component: <SettingSessions />,
+    },
+    share: {
+      component: <SettingShareAccount />,
     },
   };
   return (

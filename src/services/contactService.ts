@@ -1,3 +1,5 @@
+import { PostCommentData } from "@/types";
+
 export const URL = "https://api.mediaverse.land/v2";
 
 const fetchInstance = (url: string) => {
@@ -279,6 +281,27 @@ export const getComments = async ({
       "x-app": "_Web",
       Authorization: `Bearer ${token}`,
     },
+  });
+};
+export const postComment = async ({
+  body,
+  token,
+}: {
+  body: PostCommentData;
+  token: string;
+}) => {
+  const url = `${URL}/assets/comments`;
+  return fetch(url, {
+    next: { revalidate: 10, tags: ["postComment"] },
+    method: "POST",
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "Content-Type": "application/json",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body),
   });
 };
 

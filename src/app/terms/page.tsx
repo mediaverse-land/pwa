@@ -2,12 +2,16 @@ import Motion from "@/components/motion";
 import { getTerms } from "@/services/contactService";
 
 async function getTermsData() {
-  const terms = await getTerms();
-
-  if (!terms.ok) {
-    throw new Error("Failed to fetch data");
+  try {
+    const terms = await getTerms();
+    if (terms.ok) {
+      return terms.json();
+    } else {
+      throw new Error(`Failed to fetch data ${terms.status}`);
+    }
+  } catch (error) {
+    console.error(error);
   }
-  return terms.json();
 }
 
 const Terms = async () => {

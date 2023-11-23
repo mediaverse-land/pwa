@@ -31,7 +31,7 @@ const UserStatics = async () => {
     redirect("/sign-up/info");
   }
   return (
-    <div className="w-full h-[68px] grid grid-cols-3 grid-rows-1 gap-2 mt-4">
+    <div className="w-full h-[68px] grid grid-cols-3 grid-rows-1 gap-2 mt-4 max-w-[420px] mx-auto">
       <div className="rounded-2xl bg-[rgba(78,78,97,0.20)] backdrop-blur-sm h-full before:content-[''] before:absolute before:w-[45%] before:left-1/2 before:-translate-x-1/2 before:h-[1px] before:bg-[#597AFF] before:top-0 w-full flex flex-col items-center justify-center gap-1 leading-none">
         <div className="leading-5 font-semibold text-[#D9D9FF] line-clamp-1">
           {statics?.assets || 0}

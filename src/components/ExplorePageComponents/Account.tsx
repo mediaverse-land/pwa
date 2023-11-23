@@ -83,7 +83,7 @@ const AccountSection = async ({
             {/* statistics */}
             <UserStatics />
             {/* tabs */}
-            <div className="flex items-stretch justify-around">
+            <div className="flex items-stretch justify-around w-[420px] mx-auto">
               {accountTypes.map((item) => (
                 <Link
                   href={`/explore?section=account&type=${item.link}`}

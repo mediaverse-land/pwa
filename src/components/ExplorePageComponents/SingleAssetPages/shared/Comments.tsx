@@ -1,8 +1,41 @@
 "use client";
 
-import { getComments } from "@/services/contactService";
+import { convertISOToRelative } from "@/lib/convertISOToRelative";
+import { getComments, postComment } from "@/services/contactService";
+import { PostCommentData } from "@/types";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+const schema = z.object({
+  body: z.string().min(1, {
+    message: "*Please Enter Your Comment",
+  }),
+});
+
+const postCommentData = async ({
+  body,
+  token,
+}: {
+  body: PostCommentData;
+  token: string;
+}) => {
+  try {
+    const req = await postComment({ body, token });
+    if (req.ok) {
+      return req.json();
+    } else {
+      return {
+        statusCode: req.status,
+        ...(await req.json()),
+      };
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const SingleAssetComments = ({
   assetID,
@@ -17,11 +50,20 @@ const SingleAssetComments = ({
   username: string | null | undefined;
   token: string;
 }) => {
-  const [comments, setComment] = useState<any[]>();
+  const [comments, setComments] = useState<any[]>();
   const [commentsNumber, setCommentsNumber] = useState(0);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(false);
+  const [refetchComments, setRefetchComment] = useState(false);
   const [modalStatus, setModalStatus] = useState({
     isOpen: false,
+  });
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(schema),
   });
   useEffect(() => {
     if (token) {
@@ -30,7 +72,8 @@ const SingleAssetComments = ({
           const req = await getComments({ id: `${assetID}`, token });
           if (req.ok) {
             const res = await req.json();
-            setComment(res.data);
+            console.log(res);
+            setComments(res.data);
             setCommentsNumber(res.data.length);
             return res;
           } else {
@@ -44,7 +87,7 @@ const SingleAssetComments = ({
       };
       getCommentsData();
     }
-  }, []);
+  }, [refetchComments]);
   useEffect(() => {
     if (modalStatus.isOpen) {
       document.body.style.overflow = "hidden";
@@ -52,6 +95,24 @@ const SingleAssetComments = ({
       document.body.style.overflow = "auto";
     }
   }, [modalStatus.isOpen]);
+  const handleAddComment = handleSubmit(async (data) => {
+    console.log(data);
+
+    const res = await postCommentData({
+      body: {
+        asset_id: assetID,
+        body: data.body,
+        parent_id: null,
+      },
+      token,
+    });
+    console.log(res);
+    if (res.status === 1) {
+      console.log("set");
+      reset();
+      setRefetchComment(!refetchComments);
+    }
+  });
   return (
     <>
       <div
@@ -92,7 +153,7 @@ const SingleAssetComments = ({
       <div
         className={`${
           modalStatus.isOpen ? "flex" : "hidden"
-        } fixed top-[50%] left-[60%] z-[9999] w-[790px] max-h-[520px] p-8 -translate-x-1/2 -translate-y-1/2 bg-[rgba(78,78,97,0.75)] backdrop-blur-md rounded-2xl flex-col items-stretch gap-8 overflow-y-auto`}
+        } fixed top-[350px] left-[60%] z-[9999] w-[790px] max-h-[520px] p-8 -translate-x-1/2 -translate-y-1/2 bg-[rgba(78,78,97,0.75)] backdrop-blur-md rounded-2xl flex-col items-stretch gap-8 overflow-y-auto`}
       >
         <div className="flex items-center">
           <div className="mr-auto text-[#D9D9FF]">Comments</div>
@@ -104,12 +165,13 @@ const SingleAssetComments = ({
                 ...modalStatus,
                 isOpen: false,
               });
+              reset();
             }}
           >
             Cancel
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <form onSubmit={handleAddComment} className="flex items-center gap-4">
           <div className="relative w-[40px] h-[40px] aspect-square overflow-hidden rounded-full">
             {userImage ? (
               <Image src={`${userImage}`} alt={`${username}`} fill />
@@ -120,126 +182,35 @@ const SingleAssetComments = ({
           <input
             className="rounded-lg bg-[rgba(28,28,35,0.75)] placeholder:text-[##666680] text-white text-[14px] px-4 py-3 grow outline-none"
             placeholder="Add a comment..."
-            onChange={(e) => setInputValue(e.target.value)}
-            value={inputValue}
+            {...register("body")}
           />
-        </div>
+        </form>
         <div className="flex flex-col gap-2">
-          <div className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md border border-[#CFCFFC] rounded-2xl p-6 flex flex-col items-stretch gap-5">
-            <div className="flex items-center">
-              <div className="flex items-center gap-2 mr-auto">
-                <div className="relative w-[18px] h-[18px] aspect-square overflow-hidden rounded-full">
-                  {"author.image" ? (
-                    <Image src={`${"/images/car.png"}`} alt={``} fill />
-                  ) : (
-                    <div className="w-full h-full bg-white"></div>
-                  )}
+          {comments?.map((item) => (
+            <div
+              key={item.id}
+              className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md border border-[#CFCFFC] rounded-2xl p-6 flex flex-col items-stretch gap-5"
+            >
+              <div className="flex items-center">
+                <div className="flex items-center gap-2 mr-auto">
+                  <div className="relative w-[18px] h-[18px] aspect-square overflow-hidden rounded-full">
+                    {item.user.image_url ? (
+                      <Image src={`${item.user.image_url}`} alt={``} fill />
+                    ) : (
+                      <div className="w-full h-full bg-white"></div>
+                    )}
+                  </div>
+                  <div className="text-[#A2A2B5] text-[12px] leading-3">
+                    {item.user.username}
+                  </div>
                 </div>
-                <div className="text-[#A2A2B5] text-[12px] leading-3">
-                  KhaPa-hi7ji
+                <div className="text-[12px] leading-3 text-[#666680]">
+                  {convertISOToRelative(item.created_at)}
                 </div>
               </div>
-              <div className="text-[12px] leading-3 text-[#666680]">
-                1 day ago
-              </div>
+              <p className="text-white">{item.body}</p>
             </div>
-            <p className="text-white">
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do am
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do am
-            </p>
-          </div>
-          <div className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md border border-[#CFCFFC] rounded-2xl p-6 flex flex-col items-stretch gap-5">
-            <div className="flex items-center">
-              <div className="flex items-center gap-2 mr-auto">
-                <div className="relative w-[18px] h-[18px] aspect-square overflow-hidden rounded-full">
-                  {"author.image" ? (
-                    <Image src={`${"/images/car.png"}`} alt={``} fill />
-                  ) : (
-                    <div className="w-full h-full bg-white"></div>
-                  )}
-                </div>
-                <div className="text-[#A2A2B5] text-[12px] leading-3">
-                  KhaPa-hi7ji
-                </div>
-              </div>
-              <div className="text-[12px] leading-3 text-[#666680]">
-                1 day ago
-              </div>
-            </div>
-            <p className="text-white">
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do am
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do am
-            </p>
-          </div>
-          <div className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md border border-[#CFCFFC] rounded-2xl p-6 flex flex-col items-stretch gap-5">
-            <div className="flex items-center">
-              <div className="flex items-center gap-2 mr-auto">
-                <div className="relative w-[18px] h-[18px] aspect-square overflow-hidden rounded-full">
-                  {"author.image" ? (
-                    <Image src={`${"/images/car.png"}`} alt={``} fill />
-                  ) : (
-                    <div className="w-full h-full bg-white"></div>
-                  )}
-                </div>
-                <div className="text-[#A2A2B5] text-[12px] leading-3">
-                  KhaPa-hi7ji
-                </div>
-              </div>
-              <div className="text-[12px] leading-3 text-[#666680]">
-                1 day ago
-              </div>
-            </div>
-            <p className="text-white">
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do am
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do am
-            </p>
-          </div>
-          <div className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md border border-[#CFCFFC] rounded-2xl p-6 flex flex-col items-stretch gap-5">
-            <div className="flex items-center">
-              <div className="flex items-center gap-2 mr-auto">
-                <div className="relative w-[18px] h-[18px] aspect-square overflow-hidden rounded-full">
-                  {"author.image" ? (
-                    <Image src={`${"/images/car.png"}`} alt={``} fill />
-                  ) : (
-                    <div className="w-full h-full bg-white"></div>
-                  )}
-                </div>
-                <div className="text-[#A2A2B5] text-[12px] leading-3">
-                  KhaPa-hi7ji
-                </div>
-              </div>
-              <div className="text-[12px] leading-3 text-[#666680]">
-                1 day ago
-              </div>
-            </div>
-            <p className="text-white">
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do am
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do am
-            </p>
-          </div>
-          <div className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md border border-[#CFCFFC] rounded-2xl p-6 flex flex-col items-stretch gap-5">
-            <div className="flex items-center">
-              <div className="flex items-center gap-2 mr-auto">
-                <div className="relative w-[18px] h-[18px] aspect-square overflow-hidden rounded-full">
-                  {"author.image" ? (
-                    <Image src={`${"/images/car.png"}`} alt={``} fill />
-                  ) : (
-                    <div className="w-full h-full bg-white"></div>
-                  )}
-                </div>
-                <div className="text-[#A2A2B5] text-[12px] leading-3">
-                  KhaPa-hi7ji
-                </div>
-              </div>
-              <div className="text-[12px] leading-3 text-[#666680]">
-                1 day ago
-              </div>
-            </div>
-            <p className="text-white">
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do am
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do am
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </>
