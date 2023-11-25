@@ -4,9 +4,10 @@ import { convertISOToRelative } from "@/lib/convertISOToRelative";
 import { getComments, postComment } from "@/services/contactService";
 import { PostCommentData } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { revalidateTag } from "next/cache";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { z } from "zod";
 
 const schema = z.object({
@@ -24,14 +25,10 @@ const postCommentData = async ({
 }) => {
   try {
     const req = await postComment({ body, token });
-    if (req.ok) {
-      return req.json();
-    } else {
-      return {
-        statusCode: req.status,
-        ...(await req.json()),
-      };
-    }
+    return {
+      data: await req.json(),
+      status: req.status,
+    };
   } catch (error) {
     console.error(error);
   }
@@ -52,7 +49,7 @@ const SingleAssetComments = ({
 }) => {
   const [comments, setComments] = useState<any[]>();
   const [commentsNumber, setCommentsNumber] = useState(0);
-  const [inputValue, setInputValue] = useState(false);
+  const [message, setMessage] = useState("");
   const [refetchComments, setRefetchComment] = useState(false);
   const [modalStatus, setModalStatus] = useState({
     isOpen: false,
@@ -61,7 +58,7 @@ const SingleAssetComments = ({
     handleSubmit,
     register,
     reset,
-    formState: { errors },
+    formState: { errors, isLoading, isSubmitting },
   } = useForm({
     resolver: zodResolver(schema),
   });
@@ -72,7 +69,7 @@ const SingleAssetComments = ({
           const req = await getComments({ id: `${assetID}`, token });
           if (req.ok) {
             const res = await req.json();
-            // console.log(res);
+            console.log(res);
             setComments(res.data);
             setCommentsNumber(res.data.length);
             return res;
@@ -106,11 +103,22 @@ const SingleAssetComments = ({
       },
       token,
     });
-    // console.log(res);
-    if (res.status === 1) {
+    console.log(res);
+    if (res?.status === 200 && res.data.status === 1) {
+      reset();
+      setRefetchComment((prev) => {
+        return !prev;
+      });
+      setMessage("Your comment will be displayed after approval");
+    } else if (res?.status === 200 && res.data.status === 2) {
       // console.log("set");
       reset();
-      setRefetchComment(!refetchComments);
+      setRefetchComment((prev) => {
+        return !prev;
+      });
+    } else if (res?.status === 200 && res.data.status === 3) {
+      reset();
+      setMessage("Your comment rejected");
     }
   });
   return (
@@ -166,24 +174,32 @@ const SingleAssetComments = ({
                 isOpen: false,
               });
               reset();
+              setMessage("");
             }}
           >
             Cancel
           </div>
         </div>
-        <form onSubmit={handleAddComment} className="flex items-center gap-4">
-          <div className="relative w-[40px] h-[40px] aspect-square overflow-hidden rounded-full">
-            {userImage ? (
-              <Image src={`${userImage}`} alt={`${username}`} fill />
-            ) : (
-              <div className="w-full h-full bg-white"></div>
-            )}
+        <form
+          onSubmit={handleAddComment}
+          className="flex flex-col items-stretch gap-2"
+        >
+          <div className="flex items-center gap-4">
+            <div className="relative w-[40px] h-[40px] aspect-square overflow-hidden rounded-full">
+              {userImage ? (
+                <Image src={`${userImage}`} alt={`${username}`} fill />
+              ) : (
+                <div className="w-full h-full bg-white"></div>
+              )}
+            </div>
+            <input
+              disabled={isLoading || isSubmitting}
+              className="rounded-lg bg-[rgba(28,28,35,0.75)] placeholder:text-[##666680] text-white text-[14px] px-4 py-3 grow outline-none"
+              placeholder="Add a comment..."
+              {...register("body")}
+            />
           </div>
-          <input
-            className="rounded-lg bg-[rgba(28,28,35,0.75)] placeholder:text-[##666680] text-white text-[14px] px-4 py-3 grow outline-none"
-            placeholder="Add a comment..."
-            {...register("body")}
-          />
+          <div className="text-white text-[14px] leading-[16px]">{message}</div>
         </form>
         <div className="flex flex-col gap-2">
           {comments?.map((item) => (

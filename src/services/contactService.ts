@@ -367,7 +367,9 @@ export const getComments = async ({
 }) => {
   const url = `${URL}/assets/${id}/comments`;
   return fetch(url, {
-    next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+    next: {
+      revalidate: 0,
+    },
     headers: {
       "Accept-Language": "en-US",
       accept: "application/json",
@@ -385,7 +387,7 @@ export const postComment = async ({
 }) => {
   const url = `${URL}/assets/comments`;
   return fetch(url, {
-    next: { revalidate: 10, tags: ["postComment"] },
+    next: { revalidate: 0 },
     method: "POST",
     headers: {
       "Accept-Language": "en-US",
