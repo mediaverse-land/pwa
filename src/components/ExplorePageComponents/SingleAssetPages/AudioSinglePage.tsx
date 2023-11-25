@@ -146,6 +146,8 @@ const AudioSinglePage = async ({
       {/* buy */}
       {singleAudioData.asset.plan !== 1 && (
         <BuySection
+          asset={singleAudioData.id}
+          type={singleAudioData.asset.type}
           plan={singleAudioData.asset.plan}
           price={singleAudioData.asset.price}
         />

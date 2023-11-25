@@ -13,6 +13,24 @@ import SettingGeneralInformation from "./SettingComponents/GeneralInformation";
 import SettingMessages from "./SettingComponents/Messages";
 import SettingSessions from "./SettingComponents/Sessions";
 import SettingShareAccount from "./SettingComponents/ShareAccount";
+import { getUserProfile } from "@/services/contactService";
+
+const getUserProfileData = async (token: string) => {
+  try {
+    const req = await getUserProfile({ token });
+    if (req.ok) {
+      const res = await req.json();
+      return res;
+    } else {
+      return {
+        statusCode: req.status,
+        ...(await req.json()),
+      };
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const Setting = async ({
   searchParams,
@@ -26,7 +44,8 @@ const Setting = async ({
   if (!cookie) {
     return <LogoutNoUser />;
   }
-
+  const token = cookie && JSON.parse(cookie).token;
+  const userProfileData = await getUserProfileData(token);
   const settingComponents: {
     [key: string]: {
       component: JSX.Element;
@@ -45,7 +64,7 @@ const Setting = async ({
       component: <SettingSignIns />,
     },
     info: {
-      component: <SettingGeneralInformation />,
+      component: <SettingGeneralInformation data={userProfileData} />,
     },
     messages: {
       component: <SettingMessages searchParams={searchParams} />,

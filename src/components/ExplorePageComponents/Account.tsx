@@ -10,34 +10,42 @@ import AccountOwnershipSection from "./AccountComponents/OwnershipSection";
 import { cookies } from "next/headers";
 import LogoutNoUser from "./AccountComponents/Logout";
 
+const accountTypes = [
+  {
+    id: 1,
+    name: "Subscribe",
+    link: "subscribe",
+  },
+  {
+    id: 2,
+    name: "Ownership",
+    link: "ownership",
+  },
+];
+
 const AccountSection = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string };
 }) => {
-  const accountTypes = [
-    {
-      id: 1,
-      name: "Subscribe",
-      link: "subscribe",
-      component: <AccountSubscribeSection searchParams={searchParams} />,
-    },
-    {
-      id: 2,
-      name: "Ownership",
-      link: "ownership",
-      component: <AccountOwnershipSection searchParams={searchParams} />,
-    },
-  ];
   const cookie = cookies().get("user")?.value;
   if (!cookie) {
     return <LogoutNoUser />;
   }
+  const accountComponents: {
+    [key: string]: {
+      component: JSX.Element;
+    };
+  } = {
+    subscribe: {
+      component: <AccountSubscribeSection searchParams={searchParams} />,
+    },
+    ownership: {
+      component: <AccountOwnershipSection searchParams={searchParams} />,
+    },
+  };
   const session = await getServerSession(authOptions);
   const type = searchParams["type"] || "subscribe";
-  if (!accountTypes.find((item) => item.link === type)) {
-    redirect("/explore?section=account");
-  }
 
   return (
     <Motion key={"account"} fullHeight>
@@ -101,7 +109,8 @@ const AccountSection = async ({
           </div>
         </div>
         {/* content  */}
-        {accountTypes.find((item) => item.link === type)?.component}
+        {accountComponents[type]?.component ||
+          redirect("/explore?section=account")}
       </div>
     </Motion>
   );

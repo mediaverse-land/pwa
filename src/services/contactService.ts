@@ -264,6 +264,72 @@ export const getOwnershipAssets = ({
     },
   });
 };
+export const getUserBalance = ({ token }: { token: string }) => {
+  const url = `${URL}/stipe/balance`;
+  return fetch(url, {
+    next: { revalidate: process.env.NODE_ENV === "production" ? 0 : 0 },
+    method: "GET",
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const getUserProfile = ({ token }: { token: string }) => {
+  const url = `${URL}/profile`;
+  return fetch(url, {
+    next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+    method: "GET",
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const buyAsset_Fetch = ({
+  token,
+  id,
+}: {
+  token: string;
+  id: string;
+}) => {
+  const url = `${URL}/assets/${id}/buy`;
+  return fetch(url, {
+    next: { revalidate: process.env.NODE_ENV === "production" ? 0 : 0 },
+    method: "GET",
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const putUserProfile = ({
+  token,
+  data,
+}: {
+  token: string;
+  data: any;
+}) => {
+  const url = `${URL}/profile`;
+  return fetch(url, {
+    next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+    method: "PUT",
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "x-app": "_Web",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+};
 
 export const getComments = async ({
   id,

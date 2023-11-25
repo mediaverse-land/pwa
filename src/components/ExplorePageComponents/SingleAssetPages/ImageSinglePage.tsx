@@ -125,6 +125,8 @@ const ImageSinglePage = async ({
       {/* buy */}
       {singleImageData.asset.plan !== 1 && (
         <BuySection
+          asset={singleImageData.id}
+          type={singleImageData.asset.type}
           plan={singleImageData.asset.plan}
           price={singleImageData.asset.price}
         />

@@ -4,6 +4,7 @@ import Motion from "../motion";
 import AddCardAndInventory from "./WalletComponents/AddCardAndInventory";
 import WalletMainPage from "./WalletComponents/WalletMainPage";
 import WalletHistory from "./WalletComponents/WalletHistory";
+import BuyAsset from "./WalletComponents/BuyAsset";
 
 const WalletSection = ({
   searchParams,
@@ -22,6 +23,9 @@ const WalletSection = ({
     },
     history: {
       component: <WalletHistory />,
+    },
+    buy: {
+      component: <BuyAsset searchParams={searchParams} />,
     },
   };
   const page = searchParams.page || "main";

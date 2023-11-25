@@ -66,9 +66,10 @@ const VideoSinglePage = async ({
   const assetID = searchParams.id || "0";
   const user = cookies().get("user")?.value;
   const token = user && JSON.parse(user).token;
-  const [singleVideoData, commentsData] = await Promise.all([
+  const [singleVideoData, commentsData, session] = await Promise.all([
     getSingleVideoData({ id: assetID, token }),
     getCommentsData({ id: assetID, token }),
+    getServerSession(authOptions),
   ]);
   const languageName = new Intl.DisplayNames(["en"], { type: "language" });
   console.log(token);
@@ -80,7 +81,7 @@ const VideoSinglePage = async ({
       </div>
     );
   }
-  const [session] = await Promise.all([getServerSession(authOptions)]);
+  console.log(session, "session");
   return (
     <div className="flex flex-col items-stretch h-full overflow-y-auto">
       {/* top section */}
@@ -206,6 +207,8 @@ const VideoSinglePage = async ({
       {/* buy */}
       {singleVideoData.asset.plan !== 1 && (
         <BuySection
+          type={singleVideoData.asset.type}
+          asset={singleVideoData.id}
           plan={singleVideoData.asset.plan}
           price={singleVideoData.asset.price}
         />

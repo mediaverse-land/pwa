@@ -4,74 +4,79 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { z } from "zod";
 import SubSectionHeader from "../shared/SubSectionHeader";
 import { SPINNER } from "@/components/SVG/svgs";
 import Cookies from "js-cookie";
+import { putUserProfile } from "@/services/contactService";
+const putUserProfileData = async ({
+  data,
+  token,
+}: {
+  token: string;
+  data: any;
+}) => {
+  try {
+    const req = await putUserProfile({ data, token });
+    if (req.ok) {
+      const res = await req.json();
+      return res;
+    } else {
+      return {
+        statusCode: req.status,
+        ...(await req.json()),
+      };
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const schema = z.object({
-  username: z
-    .string({
-      errorMap: () => ({ message: "*This field is requeired" }),
-    })
-    .min(1, {
-      message: "*Please enter your Username",
-    }),
-  password: z
-    .string({
-      errorMap: () => ({ message: "*This field is requeired" }),
-    })
-    .min(1, {
-      message: "*Please enter your Password",
-    }),
-  first_name: z
-    .string({
-      errorMap: () => ({ message: "*This field is requeired" }),
-    })
-    .min(1, {
-      message: "*Please enter your Username",
-    }),
-  last_name: z
-    .string({
-      errorMap: () => ({ message: "*This field is requeired" }),
-    })
-    .min(1, {
-      message: "*Please enter your Username",
-    }),
-  email: z
-    .string({
-      errorMap: () => ({ message: "*This field is requeired" }),
-    })
-    .min(1, {
-      message: "*Please enter your Username",
-    }),
-  city: z
-    .string({
-      errorMap: () => ({ message: "*This field is requeired" }),
-    })
-    .min(1, {
-      message: "*Please enter your Username",
-    }),
-  address: z
-    .string({
-      errorMap: () => ({ message: "*This field is requeired" }),
-    })
-    .min(1, {
-      message: "*Please enter your Username",
-    }),
+  // username: z.string().min(1, {
+  //   message: "*Please enter your Username",
+  // }),
+  // password: z.string().min(1, {
+  //   message: "*Please enter your Password",
+  // }),
+  first_name: z.string().min(1, {
+    message: "*Please enter your Firstname",
+  }),
+  last_name: z.string().min(1, {
+    message: "*Please enter your Lastname",
+  }),
+  email: z.string().min(1, {
+    message: "*Please enter your Email",
+  }),
+  cellphone: z.string().min(1, {
+    message: "*Please enter your Cellphone",
+  }),
+
+  // address: z.string().min(1, {
+  //   message: "*Please enter your Username",
+  // }),
 });
-const SettingGeneralInformation = () => {
+const SettingGeneralInformation = ({ data }: { data: any }) => {
   const userCookie = Cookies.get("user");
   const session = useSession();
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState("");
+  const [inputValues, setInputValues] = useState({
+    username: data?.username || "",
+    // password: "",
+    email: data?.email || "",
+    cellphone: data?.cellphone || "",
+    // address: data?.address || "",
+    first_name: data?.first_name || "",
+    last_name: data?.last_name || "",
+  });
+
   const [inputErrors, setInputErrors] = useState({
     username: "",
-    password: "",
+    // password: "",
     email: "",
-    city: "",
-    address: "",
+    // address: "",
     first_name: "",
     last_name: "",
   });
@@ -82,8 +87,15 @@ const SettingGeneralInformation = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
-  const handleEditUserInfo = handleSubmit((data) => {
+  const handleEditUserInfo = handleSubmit(async (data) => {
+    setLoading(true);
     console.log(data);
+    const token = userCookie && JSON.parse(userCookie).token;
+    const res = await putUserProfileData({ data, token });
+    if (res?.statusCode) {
+      setServerErrors(res.message);
+    }
+    setLoading(false);
   });
   return (
     <div className="flex flex-col items-stretch gap-4 px-10 py-6 h-full">
@@ -94,7 +106,7 @@ const SettingGeneralInformation = () => {
       >
         <div className="flex flex-col items-stretch h-full justify-between gap-2 text-center">
           <div className="flex flex-col items-stretch h-full gap-2 text-center">
-            <div className="flex flex-col items-stretch">
+            {/* <div className="flex flex-col items-stretch">
               <div
                 className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
                 style={{
@@ -108,35 +120,21 @@ const SettingGeneralInformation = () => {
                 <input
                   className="bg-transparent grow placeholder:text-[#353542] outline-none"
                   placeholder="Username"
-                  {...register("username")}
+                  {...register("username", {
+                    value: inputValues.username,
+                    onChange(event) {
+                      setInputValues((prevState) => ({
+                        ...prevState,
+                        username: event.target.value,
+                      }));
+                    },
+                  })}
                 />
               </div>
               <p className="text-[12px] text-red-400 text-start">
                 {errors.username?.message?.toString() || inputErrors.username}
               </p>
-            </div>
-            <div className="flex flex-col items-stretch">
-              <div
-                className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
-                style={{
-                  background: `rgba(14, 14, 18, 0.50)`,
-                }}
-              >
-                <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
-                  Password
-                </div>
-                <div className="h-full w-[1px] bg-white mx-1"></div>
-                <input
-                  type="password"
-                  className="bg-transparent grow placeholder:text-[#353542] outline-none"
-                  placeholder="Password"
-                  {...register("password")}
-                />
-              </div>
-              <p className="text-[12px] text-red-400 text-start">
-                {errors.password?.message?.toString() || inputErrors.password}
-              </p>
-            </div>
+            </div> */}
             <div className="flex flex-col items-stretch">
               <div
                 className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
@@ -151,7 +149,15 @@ const SettingGeneralInformation = () => {
                 <input
                   className="bg-transparent grow placeholder:text-[#353542] outline-none"
                   placeholder="Firstname"
-                  {...register("first_name")}
+                  {...register("first_name", {
+                    value: inputValues.first_name,
+                    onChange(event) {
+                      setInputValues((prevState) => ({
+                        ...prevState,
+                        first_name: event.target.value,
+                      }));
+                    },
+                  })}
                 />
               </div>
               <p className="text-[12px] text-red-400 text-start">
@@ -173,7 +179,15 @@ const SettingGeneralInformation = () => {
                 <input
                   className="bg-transparent grow placeholder:text-[#353542] outline-none"
                   placeholder="Lastname"
-                  {...register("last_name")}
+                  {...register("last_name", {
+                    value: inputValues.last_name,
+                    onChange(event) {
+                      setInputValues((prevState) => ({
+                        ...prevState,
+                        last_name: event.target.value,
+                      }));
+                    },
+                  })}
                 />
               </div>
               <p className="text-[12px] text-red-400 text-start">
@@ -188,19 +202,50 @@ const SettingGeneralInformation = () => {
                 }}
               >
                 <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
-                  Email
+                  Cellphone
                 </div>
                 <div className="h-full w-[1px] bg-white mx-1"></div>
                 <input
                   className="bg-transparent grow placeholder:text-[#353542] outline-none"
-                  placeholder="Email"
-                  {...register("email")}
+                  placeholder="Cellphone"
+                  {...register("cellphone", {
+                    value: inputValues.cellphone,
+                    onChange(event) {
+                      setInputValues((prevState) => ({
+                        ...prevState,
+                        cellphone: event.target.value,
+                      }));
+                    },
+                  })}
                 />
               </div>
               <p className="text-[12px] text-red-400 text-start">
-                {errors.email?.message?.toString() || inputErrors.email}
+                {errors.username?.message?.toString() || inputErrors.username}
               </p>
             </div>
+            {/* <div className="flex flex-col items-stretch">
+              <div
+                className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
+                style={{
+                  background: `rgba(14, 14, 18, 0.50)`,
+                }}
+              >
+                <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
+                  Password
+                </div>
+                <div className="h-full w-[1px] bg-white mx-1"></div>
+                <input
+                  type="password"
+                  className="bg-transparent grow placeholder:text-[#353542] outline-none"
+                  placeholder="Password"
+                  {...register("password")}
+                />
+              </div>
+              <p className="text-[12px] text-red-400 text-start">
+                {errors.password?.message?.toString() || inputErrors.password}
+              </p>
+            </div> */}
+
             <div className="flex flex-col items-stretch">
               <div
                 className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
@@ -209,20 +254,29 @@ const SettingGeneralInformation = () => {
                 }}
               >
                 <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
-                  City
+                  Email
                 </div>
                 <div className="h-full w-[1px] bg-white mx-1"></div>
                 <input
                   className="bg-transparent grow placeholder:text-[#353542] outline-none"
-                  placeholder="City"
-                  {...register("city")}
+                  placeholder="Email"
+                  {...register("email", {
+                    value: inputValues.email,
+                    onChange(event) {
+                      setInputValues((prevState) => ({
+                        ...prevState,
+                        email: event.target.value,
+                      }));
+                    },
+                  })}
                 />
               </div>
               <p className="text-[12px] text-red-400 text-start">
-                {errors.city?.message?.toString() || inputErrors.city}
+                {errors.email?.message?.toString() || inputErrors.email}
               </p>
             </div>
-            <div className="flex flex-col items-stretch">
+
+            {/* <div className="flex flex-col items-stretch">
               <div
                 className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
                 style={{
@@ -236,13 +290,21 @@ const SettingGeneralInformation = () => {
                 <input
                   className="bg-transparent grow placeholder:text-[#353542] outline-none"
                   placeholder="Address"
-                  {...register("address")}
+                  {...register("address", {
+                    value: inputValues.address,
+                    onChange(event) {
+                      setInputValues((prevState) => ({
+                        ...prevState,
+                        address: event.target.value,
+                      }));
+                    },
+                  })}
                 />
               </div>
               <p className="text-[12px] text-red-400 text-start">
                 {errors.address?.message?.toString() || inputErrors.address}
               </p>
-            </div>
+            </div> */}
           </div>
           <div>
             <div>
@@ -255,18 +317,20 @@ const SettingGeneralInformation = () => {
 
         <button
           disabled={loading}
-          className="bg-[#4E4E61] bg-opacity-50 w-full mt-5 rounded-full text-[14px] leading-4 text-white font-semibold flex items-center justify-center py-4"
+          className="bg-[#4E4E61] bg-opacity-50 w-full mt-5 rounded-full text-[14px] leading-none text-white font-semibold flex items-center justify-center"
           type="submit"
         >
           {loading ? (
-            <SPINNER
-              style={{
-                width: "40px",
-                height: "40px",
-              }}
-            />
+            <span className="py-2">
+              <SPINNER
+                style={{
+                  width: "30px",
+                  height: "30px",
+                }}
+              />
+            </span>
           ) : (
-            "Edit"
+            <span className="py-4">Edit</span>
           )}
         </button>
       </form>

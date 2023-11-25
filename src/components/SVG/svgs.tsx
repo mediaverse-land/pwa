@@ -96,6 +96,29 @@ export const PLAY = ({
     </svg>
   );
 };
+export const PLAY_NO_BORDER = ({
+  style,
+  fill = "#666680",
+}: {
+  style?: CSSProperties;
+  fill?: string;
+}) => {
+  return (
+    <svg
+      style={style}
+      width="14"
+      height="16"
+      viewBox="0 0 14 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1.6745 0.0013826C0.80143 0.0378561 0 0.789988 0 1.80332V14.1969C0 15.548 1.42551 16.4345 2.54485 15.7797L13.1363 9.58289C14.2879 8.90913 14.2879 7.09109 13.1363 6.41733L2.54485 0.220537C2.26501 0.0568372 1.96552 -0.0107752 1.6745 0.0013826Z"
+        fill={fill}
+      />
+    </svg>
+  );
+};
 export const INSTAGRAM = ({ style }: { style?: CSSProperties }) => {
   return (
     <svg

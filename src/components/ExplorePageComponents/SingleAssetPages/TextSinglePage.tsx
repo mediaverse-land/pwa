@@ -131,6 +131,8 @@ const TextSinglePage = async ({
       {/* buy */}
       {singleTextData.asset.plan !== 1 && (
         <BuySection
+          asset={singleTextData.id}
+          type={singleTextData.asset.type}
           plan={singleTextData.asset.plan}
           price={singleTextData.asset.price}
         />

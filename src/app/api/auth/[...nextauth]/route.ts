@@ -24,20 +24,25 @@ export const authOptions: AuthOptions = {
         return params.baseUrl;
       }
     },
-    // async session(params) {
-    //   console.log(params);
-    //   return params.session;
-    // },
-    async jwt(params) {
-      // console.log(params.profile, "jwt");
-      // console.log(params);
-      if (params.trigger === "update") {
-        params.token.name = params.session.name;
-        params.token.email = params.session.email;
-        params.token.picture = params.session.picture;
-        params.token.id = params.session.id;
+    async session({ session, token, user, trigger }) {
+      session.user.token = token.token;
+      session.user.id = token.id;
+      session.user.cellphone = token.cellphone;
+      return session;
+    },
+    async jwt({ account, token, user, profile, session, trigger }) {
+      if (user) {
+        token.token = user.token;
+        token.id = user.id;
+        token.cellphone = user.cellphone;
       }
-      return params.token;
+      if (trigger === "update") {
+        token.name = session.name;
+        token.email = session.email;
+        token.picture = session.picture;
+        token.id = session.id;
+      }
+      return token;
     },
     async signIn(data: any) {
       // console.log(data, "data");
@@ -59,6 +64,9 @@ export const authOptions: AuthOptions = {
           // console.log(res, "res");
           if (req.ok) {
             cookies().set("user", JSON.stringify(res));
+            data.user.token = res.token;
+            data.user.cellphone = res.user.cellphone;
+            data.user.id = res.user.id;
             return data;
           } else {
             throw new Error("Failed to login");
@@ -87,6 +95,7 @@ export const authOptions: AuthOptions = {
           }
         }
         case "loginWithUsername": {
+          // console.log(data, "username login");
           return data;
         }
         case "loginWithOTP": {
@@ -131,6 +140,7 @@ export const authOptions: AuthOptions = {
         if (req.query) {
           // console.log("success");
           const userInfo = JSON.parse(req.query.user);
+          // console.log(userInfo);
           // const user = {
           //   cellphone: reqInfo.user.cellphone,
           //   code: reqInfo.user.status,
@@ -144,7 +154,8 @@ export const authOptions: AuthOptions = {
             }`,
             image: userInfo.user.image,
             email: userInfo.user.email,
-            accessToken: userInfo.token,
+            cellphone: userInfo.user.cellphone,
+            token: userInfo.token,
           };
           // console.log(user, "user in auth");
           return user;
@@ -175,11 +186,13 @@ export const authOptions: AuthOptions = {
           cookies().set("user", JSON.stringify(userInfo));
           const user = {
             id: userInfo.user.id,
+            token: userInfo.token,
             name: `${userInfo.user.first_name || ""} ${
               userInfo.user.last_name || ""
             }`,
             image: userInfo.user.image,
             email: userInfo.user.email,
+            cellphone: userInfo.user.cellphone,
           };
           // console.log(user, "user in auth");
           return user;
@@ -210,11 +223,13 @@ export const authOptions: AuthOptions = {
           cookies().set("user", JSON.stringify(userInfo));
           const user = {
             id: userInfo.user.id,
+            token: userInfo.token,
             name: `${userInfo.user.first_name || ""} ${
               userInfo.user.last_name || ""
             }`,
             image: userInfo.user.image,
             email: userInfo.user.email,
+            cellphone: userInfo.user.cellphone,
           };
           // console.log(user, "user in auth");
           return user;
