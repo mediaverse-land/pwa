@@ -400,6 +400,35 @@ export const postComment = async ({
   });
 };
 
+export const getSignIns = async ({ token }: { token: string }) => {
+  const url = `${URL}/sign-ins`;
+  return fetch(url, {
+    next: {
+      revalidate: process.env.NODE_ENV === "production" ? 10 : 0,
+    },
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const getSessions = async ({ token }: { token: string }) => {
+  const url = `${URL}/sessions`;
+  return fetch(url, {
+    next: {
+      revalidate: process.env.NODE_ENV === "production" ? 10 : 0,
+    },
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export const getBlogs = (page: number) => {
   const url = `https://blog.mediaverse.land/api/posts?page=${page}`;
   return fetchInstance(url);

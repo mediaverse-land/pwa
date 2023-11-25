@@ -150,8 +150,8 @@ const SettingMainPage = async ({
         </div>
         {/* second section  */}
         <div className="flex flex-col items-stretch gap-5 bg-[rgba(78,78,97,0.30)] backdrop-blur-sm border rounded-2xl border-[#cfcffc36] px-6 py-4">
-          <Link
-            href={`/explore?section=setting&page=analytics`}
+          <div
+            // href={`/explore?section=setting&page=analytics`}
             className="flex items-center"
           >
             <div className="flex items-center gap-3 mr-auto">
@@ -161,16 +161,16 @@ const SettingMainPage = async ({
                     width: "18px",
                     height: "18px",
                   }}
-                  fill="#A2A2B5"
+                  fill="#555454"
                 />
               </div>
-              <div className="text-[14px] text-white flex items-center justify-center">
+              <div className="text-[14px] text-[#555454] flex items-center justify-center">
                 Analytics
               </div>
             </div>
-          </Link>
-          <Link
-            href={`/explore?section=setting&page=share`}
+          </div>
+          <div
+            // href={`/explore?section=setting&page=share`}
             className="flex items-center"
           >
             <div className="flex items-center gap-3 mr-auto">
@@ -180,14 +180,14 @@ const SettingMainPage = async ({
                     width: "18px",
                     height: "18px",
                   }}
-                  fill="#A2A2B5"
+                  fill="#555454"
                 />
               </div>
-              <div className="text-[14px] text-white flex items-center justify-center">
+              <div className="text-[14px] text-[#555454] flex items-center justify-center">
                 Share account
               </div>
             </div>
-          </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -48,7 +48,6 @@ const WalletMainPage = async ({ type = "main" }: { type?: "main" | "sub" }) => {
       }`}
     >
       {/* top section */}
-      <div className="text-center font-semibold text-white">Wallet</div>
       <div className="flex flex-col items-stretch gap-20">
         <div className="flex items-center gap-4 bg-[rgba(78,78,97,0.75)] rounded-lg px-4 py-3">
           <div className="text-[14px] text-[#83839C]">Inventory</div>
