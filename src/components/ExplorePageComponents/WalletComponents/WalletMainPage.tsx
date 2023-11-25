@@ -35,12 +35,12 @@ const getUserBalacneData = async (token: string) => {
 const WalletMainPage = async ({ type = "main" }: { type?: "main" | "sub" }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
-  console.log(token, "token");
+  // console.log(token, "token");
   const [userBalance, profile] = await Promise.all([
     getUserBalacneData(token),
     getUserData(token),
   ]);
-  console.log(userBalance, "userBalance");
+  // console.log(userBalance, "userBalance");
   return (
     <div
       className={`h-full w-full flex flex-col items-stretch justify-start gap-14 ${

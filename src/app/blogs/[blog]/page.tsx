@@ -24,7 +24,7 @@ const Blog = async (props: any) => {
   // Construct the output string
   let outputDateString = `${month} ${day}`;
 
-  console.log(outputDateString);
+  // console.log(outputDateString);
   // const date = data.data.created_at.match(regex) || "";
 
   return (

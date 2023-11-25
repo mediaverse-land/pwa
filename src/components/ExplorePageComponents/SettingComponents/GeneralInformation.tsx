@@ -84,10 +84,10 @@ const SettingGeneralInformation = ({ data }: { data: any }) => {
   } = useForm({ resolver: zodResolver(schema) });
   const handleEditUserInfo = handleSubmit(async (data) => {
     setLoading(true);
-    console.log(data);
+    // console.log(data);
     const token = userCookie && JSON.parse(userCookie).token;
     const res = await putUserProfileData({ data, token });
-    console.log(res, "edit info");
+    // console.log(res, "edit info");
     if (res?.status === 200) {
       await session.update({
         name: `${res.data.first_name} ${res.data.last_name}`,

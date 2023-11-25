@@ -18,7 +18,7 @@ const ConnetToStripeButton = async () => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const stripe = await connectToStripe(token);
-  console.log(stripe, "stripe");
+  //   console.log(stripe, "stripe");
   return stripe?.status === 200 ? (
     <Link
       href={`${stripe?.data.url}`}

@@ -103,7 +103,7 @@ const BuyAsset = async ({
   const id = searchParams.asset || redirect("/explore?section=explore");
   const type = searchParams.type || redirect("/explore?section=explore");
   const session = await getServerSession(authOptions);
-  console.log(session, "buu info");
+  // console.log(session, "buu info");
   const token = session?.user.token || "";
   const [assetData, profile] = await Promise.all([
     getAssetData({ id, type }),
@@ -114,7 +114,7 @@ const BuyAsset = async ({
   const userBalance = await getUserBalacneData(token);
   // const account = await getUserStripeAccountData(token);
   // console.log(account, "account");
-  console.log(userBalance);
+  // console.log(userBalance);
   // console.log(assetData, "asset data");
   return (
     <div className="w-full h-full overflow-y-auto">

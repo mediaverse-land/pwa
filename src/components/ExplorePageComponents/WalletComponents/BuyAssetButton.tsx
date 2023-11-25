@@ -35,7 +35,7 @@ const BuyAssetComponent = ({
     // console.log("onClick");
     setLoading(true);
     const req = await buyAsset({ id, token });
-    console.log(req, "req");
+    // console.log(req, "req");
     if (req?.status === 200) {
       if (assetData.asset.plan === 2) {
         router.push("/explore?section=account&type=ownership");

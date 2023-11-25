@@ -30,7 +30,7 @@ const BuySection = ({
   type: number;
 }) => {
   const [selectedMethod, setSelectedMethod] = useState(AssetPurchasePlan[plan]);
-  console.log(AssetPurchasePlan[plan], plan);
+  // console.log(AssetPurchasePlan[plan], plan);
   return (
     <div className="px-10 py-8 flex flex-col items-stretch justify-between gap-8 rounded-t-2xl bg-[rgba(78,78,97,0.75)] backdrop-blur-md">
       <div className="flex flex-col items-stretch gap-4">

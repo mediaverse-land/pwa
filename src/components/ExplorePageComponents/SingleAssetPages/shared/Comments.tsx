@@ -72,7 +72,7 @@ const SingleAssetComments = ({
           const req = await getComments({ id: `${assetID}`, token });
           if (req.ok) {
             const res = await req.json();
-            console.log(res);
+            // console.log(res);
             setComments(res.data);
             setCommentsNumber(res.data.length);
             return res;
@@ -96,7 +96,7 @@ const SingleAssetComments = ({
     }
   }, [modalStatus.isOpen]);
   const handleAddComment = handleSubmit(async (data) => {
-    console.log(data);
+    // console.log(data);
 
     const res = await postCommentData({
       body: {
@@ -106,9 +106,9 @@ const SingleAssetComments = ({
       },
       token,
     });
-    console.log(res);
+    // console.log(res);
     if (res.status === 1) {
-      console.log("set");
+      // console.log("set");
       reset();
       setRefetchComment(!refetchComments);
     }

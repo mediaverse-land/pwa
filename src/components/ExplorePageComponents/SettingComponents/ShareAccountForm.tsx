@@ -38,7 +38,7 @@ const ShareAccountForm = () => {
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
   const handleAddAccount = handleSubmit((data) => {
-    console.log(data);
+    // console.log(data);
   });
   return (
     <>

@@ -72,7 +72,7 @@ const VideoSinglePage = async ({
     getServerSession(authOptions),
   ]);
   const languageName = new Intl.DisplayNames(["en"], { type: "language" });
-  console.log(token);
+  // console.log(token);
 
   if (singleVideoData === "not-found") {
     return (
@@ -81,7 +81,7 @@ const VideoSinglePage = async ({
       </div>
     );
   }
-  console.log(session, "session");
+  // console.log(session, "session");
   return (
     <div className="flex flex-col items-stretch h-full overflow-y-auto">
       {/* top section */}
