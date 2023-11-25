@@ -19,15 +19,10 @@ const putUserProfileData = async ({
 }) => {
   try {
     const req = await putUserProfile({ data, token });
-    if (req.ok) {
-      const res = await req.json();
-      return res;
-    } else {
-      return {
-        statusCode: req.status,
-        ...(await req.json()),
-      };
-    }
+    return {
+      data: await req.json(),
+      status: req.status,
+    };
   } catch (error) {
     console.error(error);
   }
@@ -92,8 +87,16 @@ const SettingGeneralInformation = ({ data }: { data: any }) => {
     console.log(data);
     const token = userCookie && JSON.parse(userCookie).token;
     const res = await putUserProfileData({ data, token });
-    if (res?.statusCode) {
-      setServerErrors(res.message);
+    console.log(res, "edit info");
+    if (res?.status === 200) {
+      await session.update({
+        name: `${res.data.first_name} ${res.data.last_name}`,
+        email: res.data.email,
+      });
+      router.push(`/explore?section=setting`);
+    }
+    if (res?.status !== 200) {
+      setServerErrors(res?.data.message);
     }
     setLoading(false);
   });
