@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { DELETE_ICON, INACTIVE_PLUS } from "../SVG/svgs";
 import Motion from "../motion";
-import AddCardAndInventory from "./WalletComponents/AddCardAndInventory";
+import AddCardAndInventory from "../shared/AddCardAndInventory";
 import WalletMainPage from "./WalletComponents/WalletMainPage";
 import WalletHistory from "./WalletComponents/WalletHistory";
 import BuyAsset from "./WalletComponents/BuyAsset";

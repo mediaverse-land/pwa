@@ -1,7 +1,10 @@
 "use client";
 import { INACTIVE_PLUS } from "@/components/SVG/svgs";
 import { useState } from "react";
-import { AddCardForm, AddInventoryForm } from "./Forms";
+import {
+  AddCardForm,
+  AddInventoryForm,
+} from "../ExplorePageComponents/WalletComponents/Forms";
 export type DrawerStatus = {
   isOpen: boolean;
   type: "Inventory" | "Wallet";
@@ -14,7 +17,7 @@ const AddCardAndInventory = () => {
   });
   return (
     <>
-      <div className="grow flex flex-col items-stretch justify-between">
+      <div className="flex flex-col items-stretch justify-center gap-6">
         <div
           onClick={() => setDrawerStatus({ isOpen: true, type: "Wallet" })}
           className="rounded-2xl border border-dashed border-[#666680] text-[14px] cursor-pointer leading-none capitalize text-center text-[#A2A2B5] flex items-center justify-center gap-2 py-5"

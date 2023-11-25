@@ -265,9 +265,22 @@ export const getOwnershipAssets = ({
   });
 };
 export const getUserBalance = ({ token }: { token: string }) => {
-  const url = `${URL}/stipe/balance`;
+  const url = `${URL}/stripe/balance`;
   return fetch(url, {
-    next: { revalidate: process.env.NODE_ENV === "production" ? 0 : 0 },
+    next: { revalidate: 0 },
+    method: "GET",
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const getUserStripeAccount = ({ token }: { token: string }) => {
+  const url = `${URL}/stripe/account`;
+  return fetch(url, {
+    next: { revalidate: 0 },
     method: "GET",
     headers: {
       "Accept-Language": "en-US",
@@ -299,11 +312,25 @@ export const buyAsset_Fetch = ({
 }) => {
   const url = `${URL}/assets/${id}/buy`;
   return fetch(url, {
-    next: { revalidate: process.env.NODE_ENV === "production" ? 0 : 0 },
-    method: "GET",
+    next: { revalidate: 0 },
+    method: "PATCH",
     headers: {
       "Accept-Language": "en-US",
       accept: "application/json",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const connetToStripe_Fetch = async ({ token }: { token: string }) => {
+  const url = `${URL}/stripe/connect`;
+  return fetch(url, {
+    next: { revalidate: 0, tags: ["connetStripe"] },
+    method: "POST",
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "Content-Type": "application/json",
       "x-app": "_Web",
       Authorization: `Bearer ${token}`,
     },

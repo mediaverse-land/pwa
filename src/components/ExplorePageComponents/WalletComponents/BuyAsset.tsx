@@ -12,9 +12,12 @@ import {
   getSingleVideo,
   getUserBalance,
   getUserProfile,
+  getUserStripeAccount,
 } from "@/services/contactService";
 import { AssetPurchasePlan } from "@/data";
 import BuyAssetComponent from "./BuyAssetButton";
+import Link from "next/link";
+import { getCurrencySymbol } from "@/lib/getSymbolForCurrency";
 const getAssetData = async ({ id, type }: { id: string; type: string }) => {
   try {
     switch (type) {
@@ -67,14 +70,24 @@ const getUserData = async (token: string) => {
     console.error(error);
   }
 };
+const getUserStripeAccountData = async (token: string) => {
+  try {
+    const req = await getUserStripeAccount({ token });
+    return {
+      data: req.status === 200 ? await req.json() : [],
+      status: req.status,
+    };
+  } catch (error) {
+    console.error(error);
+  }
+};
 const getUserBalacneData = async (token: string) => {
   try {
     const req = await getUserBalance({ token });
-    if (req.ok) {
-      return req.json();
-    } else {
-      return req.status;
-    }
+    return {
+      data: req.status === 200 ? await req.json() : [],
+      status: req.status,
+    };
   } catch (error) {
     console.error(error);
   }
@@ -96,9 +109,11 @@ const BuyAsset = async ({
     getAssetData({ id, type }),
     getUserData(token),
   ]);
-  console.log(profile, "profile");
+  // console.log(profile, "profile");
   if (assetData.asset.plan === 1) redirect("/explore?section=explore");
   const userBalance = await getUserBalacneData(token);
+  // const account = await getUserStripeAccountData(token);
+  // console.log(account, "account");
   console.log(userBalance);
   // console.log(assetData, "asset data");
   return (
@@ -110,7 +125,15 @@ const BuyAsset = async ({
             <div className="p-6 bg-[rgba(78,78,97,0.50)] backdrop-blur-sm flex flex-col items-stretch gap-4 rounded-2xl">
               <div className="flex items-start h-[88px] gap-6">
                 <div className="relative h-full aspect-square min-w-[88px] max-w-[88px] rounded-lg overflow-hidden">
-                  <Image src={`/images/car.png`} alt="" fill />
+                  {assetData.asset.thumbnails["336x366"] ? (
+                    <Image
+                      src={`${assetData.asset.thumbnails["336x366"]}`}
+                      alt=""
+                      fill
+                    />
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
                 <div className="flex flex-col gap-4">
                   <div className="text-white leading-5">{assetData.name}</div>
@@ -140,26 +163,40 @@ const BuyAsset = async ({
                     <INACTIVE_WALLET fill="black" />
                   </div>
                 </div>
-                <div className="flex flex-col justify-between">
-                  <div className="text-white font-semibold leading-5">
-                    Wallet
+                {userBalance?.status === 404 ? (
+                  <div className="text-[#666680] text-[14px] leading-[16px]">
+                    Please Check and Connet Your Wallet To Stipe
                   </div>
-                  <div className="text-[#666680] text-[12px] leading-[14.5px]">
-                    Inventory: 15$
-                  </div>
-                </div>
+                ) : (
+                  <>
+                    <div className="flex flex-col justify-between">
+                      <div className="text-white font-semibold leading-5">
+                        Wallet
+                      </div>
+                      <div className="text-[#666680] text-[12px] leading-[14.5px]">
+                        Inventory: {userBalance?.data.available[0].amount}
+                        {getCurrencySymbol(
+                          `${userBalance?.data.available[0].currency}`
+                        )}
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
-              <div className="text-[#666680] text-[14px] leading-[17px]">
+              <Link
+                href={`/explore?section=wallet`}
+                className="text-[#666680] text-[14px] leading-[17px]"
+              >
                 Add inventory
-              </div>
+              </Link>
             </div>
           </div>
           {
             <BuyAssetComponent
               assetData={assetData}
-              id={id}
+              id={assetData.asset_id}
               token={token}
-              disableed={userBalance === 404 ? true : false}
+              disableed={userBalance?.status === 404 ? true : false}
             />
           }
         </div>

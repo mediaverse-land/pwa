@@ -1,6 +1,6 @@
 "use client";
 import { Dispatch, SetStateAction } from "react";
-import { DrawerStatus } from "./AddCardAndInventory";
+import { DrawerStatus } from "../../shared/AddCardAndInventory";
 
 export const AddInventoryForm = ({
   setDrawerStatus,
