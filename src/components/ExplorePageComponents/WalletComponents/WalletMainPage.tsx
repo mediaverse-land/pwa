@@ -7,6 +7,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import ConnetToStripeButton from "./ConnetToStripeButton";
 import { Suspense } from "react";
 import { getCurrencySymbol } from "@/lib/getSymbolForCurrency";
+import AddInventoryButton from "./AddInventoryButton";
 
 const getUserData = async (token: string) => {
   try {
@@ -85,14 +86,7 @@ const WalletMainPage = async ({ type = "main" }: { type?: "main" | "sub" }) => {
               <ConnetToStripeButton />
             </Suspense>
           )}
-          {userBalance?.status === 200 ? (
-            <div className="rounded-2xl border border-dashed border-[#666680] text-[14px] leading-none capitalize text-center text-[#A2A2B5] flex items-center justify-center gap-2 py-4">
-              <span>Add Inventory</span>
-              <span>
-                <INACTIVE_PLUS fill="#A2A2B5" />
-              </span>
-            </div>
-          ) : null}
+          {userBalance?.status === 200 ? <AddInventoryButton /> : null}
         </div>
       </div>
     </div>

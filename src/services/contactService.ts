@@ -293,7 +293,10 @@ export const getUserStripeAccount = ({ token }: { token: string }) => {
 export const getUserProfile = ({ token }: { token: string }) => {
   const url = `${URL}/profile`;
   return fetch(url, {
-    next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+    next: {
+      revalidate: process.env.NODE_ENV === "production" ? 0 : 0,
+      tags: ["getUserProfile"],
+    },
     method: "GET",
     headers: {
       "Accept-Language": "en-US",
@@ -327,6 +330,20 @@ export const connetToStripe_Fetch = async ({ token }: { token: string }) => {
   return fetch(url, {
     next: { revalidate: 0, tags: ["connetStripe"] },
     method: "POST",
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "Content-Type": "application/json",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const getStripeGateway = async ({ token }: { token: string }) => {
+  const url = `${URL}/stripe/gateway`;
+  return fetch(url, {
+    next: { revalidate: 0, tags: ["getStripeGateway"] },
+    method: "GET",
     headers: {
       "Accept-Language": "en-US",
       accept: "application/json",

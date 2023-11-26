@@ -103,7 +103,7 @@ const SingleAssetComments = ({
       },
       token,
     });
-    console.log(res);
+    // console.log(res);
     if (res?.status === 200 && res.data.status === 1) {
       reset();
       setRefetchComment((prev) => {

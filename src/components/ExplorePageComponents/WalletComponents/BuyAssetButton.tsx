@@ -43,8 +43,11 @@ const BuyAssetComponent = ({
         router.push("/explore?section=account&type=subscribe");
       }
     } else {
+      console.log(req, "error");
       if (req?.status === 403) {
         setMessage(req.data.message);
+      } else if (req?.status === 500) {
+        setMessage("Something went wrong, please try again later.");
       }
     }
     setLoading(false);

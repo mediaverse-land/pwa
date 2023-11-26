@@ -1,11 +1,11 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { connetToStripe_Fetch } from "@/services/contactService";
+import { INACTIVE_PLUS } from "@/components/SVG/svgs";
+import { getStripeGateway } from "@/services/contactService";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-
-const connectToStripe = async (token: string) => {
+const getGatewayData = async (token: string) => {
   try {
-    const req = await connetToStripe_Fetch({ token });
+    const req = await getStripeGateway({ token });
     return {
       data: await req.json(),
       status: req.status,
@@ -14,7 +14,8 @@ const connectToStripe = async (token: string) => {
     console.error(error);
   }
 };
-const ConnetToStripeButton = async () => {
+
+const AddInventoryButton = async () => {
   const session = await getServerSession(authOptions);
   // check to see user info is complete or not
   if (!session?.user.name || !session.user.email) {
@@ -33,14 +34,17 @@ const ConnetToStripeButton = async () => {
     );
   }
   const token = session?.user.token || "";
-  const stripe = await connectToStripe(token);
-  //   console.log(stripe, "stripe");
-  return stripe?.status === 200 ? (
+  const gateway = await getGatewayData(token);
+  console.log(gateway, "gateway");
+  return gateway?.status === 200 ? (
     <Link
-      href={`${stripe?.data.url}`}
+      href={`${gateway?.data.url}`}
       className="rounded-2xl border border-dashed border-[#666680] text-[14px] leading-none capitalize text-center text-[#A2A2B5] flex items-center justify-center gap-2 py-5"
     >
-      <span>Connet To Stripe</span>
+      <span>Add Inventory</span>
+      <span>
+        <INACTIVE_PLUS fill="#A2A2B5" />
+      </span>
     </Link>
   ) : (
     <div className="w-full text-center bg-[#666680] rounded-2xl py-2 space-x-2">
@@ -49,4 +53,4 @@ const ConnetToStripeButton = async () => {
   );
 };
 
-export default ConnetToStripeButton;
+export default AddInventoryButton;

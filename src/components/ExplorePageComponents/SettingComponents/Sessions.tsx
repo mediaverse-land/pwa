@@ -19,7 +19,7 @@ const SettingSessions = async () => {
   const session = await getServerSession(authOptions);
   const token = session?.user?.token || "";
   const sessionsData = await getSessionsData(token);
-  // console.log(sessionsData?.data[0].details);
+  console.log(sessionsData?.data[0].details);
   return (
     <div className="flex flex-col items-stretch gap-10 p-10 w-full h-full overflow-y-auto">
       <SubSectionHeader name="Sessions" />
