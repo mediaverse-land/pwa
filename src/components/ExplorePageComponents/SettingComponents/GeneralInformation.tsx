@@ -74,6 +74,7 @@ const SettingGeneralInformation = () => {
     username: "",
     // password: "",
     email: "",
+    cellphone: "",
     // address: "",
     first_name: "",
     last_name: "",
@@ -118,6 +119,7 @@ const SettingGeneralInformation = () => {
       await session.update({
         name: `${res.data.first_name} ${res.data.last_name}`,
         email: res.data.email,
+        cellphone: res.data.cellphone,
       });
       setRefetch(!refetch);
       setMessage("Profile updated successfully");
@@ -262,7 +264,8 @@ const SettingGeneralInformation = () => {
                   />
                 </div>
                 <p className="text-[12px] text-red-400 text-start">
-                  {errors.username?.message?.toString() || inputErrors.username}
+                  {errors.cellphone?.message?.toString() ||
+                    inputErrors.cellphone}
                 </p>
               </div>
               {/* <div className="flex flex-col items-stretch">
