@@ -8,6 +8,7 @@ import { useState } from "react";
 const buyAsset = async ({ id, token }: { id: string; token: string }) => {
   try {
     const req = await buyAsset_Fetch({ id, token });
+
     return {
       data: await req.json(),
       status: req.status,
@@ -31,8 +32,11 @@ const BuyAssetComponent = ({
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const router = useRouter();
+  // console.log(id);
+  // console.log(token);
   const handleBuyAsset = async () => {
     // console.log("onClick");
+    setMessage("");
     setLoading(true);
     const req = await buyAsset({ id, token });
     // console.log(req, "req");

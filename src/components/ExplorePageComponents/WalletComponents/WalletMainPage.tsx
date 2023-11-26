@@ -38,7 +38,7 @@ const getUserBalacneData = async (token: string) => {
 const WalletMainPage = async ({ type = "main" }: { type?: "main" | "sub" }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
-  // console.log(token, "token");
+  console.log(token, "token");
   const [userBalance, profile] = await Promise.all([
     getUserBalacneData(token),
     getUserData(token),

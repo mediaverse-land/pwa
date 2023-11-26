@@ -48,7 +48,7 @@ const SettingMainPage = async ({
     getUserWalletData(token),
     getUserMessagesData(token),
   ]);
-  console.log(messagesData, "data");
+  // console.log(messagesData, "data");
   return (
     <div
       key={searchParams.content || "all"}

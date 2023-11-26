@@ -127,20 +127,27 @@ const SettingGeneralInformation = () => {
     const res = await putUserProfileData({ data, token });
     // console.log(res, "edit info");
     if (res?.status === 200) {
+      // revalidatePath("/explore?section=wallet");
+
+      router.refresh();
+      setRefetch(!refetch);
       await session.update({
         name: `${res.data.first_name} ${res.data.last_name}`,
         email: res.data.email,
         cellphone: res.data.cellphone,
       });
-      // console.log(res);
-      // revalidatePath("/explore?section=wallet");
-
-      setRefetch(!refetch);
+      setInputValues({
+        ...inputValues,
+        email: res.data.email || "",
+        cellphone: res.data.cellphone || "",
+        first_name: res.data.first_name || "",
+        last_name: res.data.last_name || "",
+      });
+      console.log(res);
       setMessage("Profile updated successfully");
       setTimeout(() => {
         setMessage("");
       }, 2000);
-      router.refresh();
     }
     if (res?.status !== 200) {
       setServerErrors(res?.data.message);
