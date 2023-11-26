@@ -38,7 +38,7 @@ const getUserBalacneData = async (token: string) => {
 const WalletMainPage = async ({ type = "main" }: { type?: "main" | "sub" }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
-  console.log(token, "token");
+  // console.log(token, "token");
   const [userBalance, profile] = await Promise.all([
     getUserBalacneData(token),
     getUserData(token),
@@ -62,14 +62,14 @@ const WalletMainPage = async ({ type = "main" }: { type?: "main" | "sub" }) => {
                 )}`
               : "------ $"}
           </div>
-          {userBalance?.status === 200 ? (
+          {/* {userBalance?.status === 200 ? (
             <Link
               href={`/explore?section=wallet&page=history`}
               className="text-[14px] leading-[14px] text-[#D9D9FF]"
             >
               History
             </Link>
-          ) : null}
+          ) : null} */}
         </div>
         <div className="flex flex-col items-stretch gap-6">
           {userBalance?.status === 200 ? null : (

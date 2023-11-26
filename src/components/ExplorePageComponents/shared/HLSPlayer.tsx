@@ -1,20 +1,32 @@
 "use client";
-import { useRef } from "react";
-import ReactHlsPlayer from "react-hls-player";
-const HLSPlayer = ({ src }: { src: string }) => {
-  const playerRef = useRef(null);
-  return (
-    <div className="w-full h-full">
-      <ReactHlsPlayer
-        src={src}
-        playerRef={playerRef}
-        autoPlay={false}
-        controls
-        width={"100%"}
-        height={"100%"}
-      />
-    </div>
-  );
-};
+import { useEffect, useRef } from "react";
+import Hls from "hls.js";
+
+function HLSPlayer({ src }: { src: string }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    let hls: Hls | undefined;
+
+    if (Hls.isSupported() && videoRef.current) {
+      hls = new Hls();
+      hls.loadSource(src);
+      hls.attachMedia(videoRef.current);
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        if (videoRef.current) {
+          videoRef.current.play();
+        }
+      });
+    }
+
+    return () => {
+      if (hls) {
+        hls.destroy();
+      }
+    };
+  }, [src]);
+
+  return <video ref={videoRef} controls className="w-full h-full" />;
+}
 
 export default HLSPlayer;
