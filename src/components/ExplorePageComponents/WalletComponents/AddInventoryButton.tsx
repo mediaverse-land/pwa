@@ -35,7 +35,7 @@ const AddInventoryButton = async () => {
   }
   const token = session?.user.token || "";
   const gateway = await getGatewayData(token);
-  console.log(gateway, "gateway");
+  //   console.log(gateway, "gateway");
   return gateway?.status === 200 ? (
     <Link
       href={`${gateway?.data.url}`}

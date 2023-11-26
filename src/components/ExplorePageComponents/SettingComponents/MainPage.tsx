@@ -6,7 +6,7 @@ import {
   MESSAGE_ICON,
   SHARE_ICON,
 } from "@/components/SVG/svgs";
-import { getUserWallets } from "@/services/contactService";
+import { getUserMessages, getUserWallets } from "@/services/contactService";
 import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
 import Image from "next/image";
@@ -22,6 +22,17 @@ const getUserWalletData = async (token: string) => {
     console.error(error);
   }
 };
+const getUserMessagesData = async (token: string) => {
+  try {
+    const req = await getUserMessages(token);
+    return {
+      data: await req.json(),
+      status: req.status,
+    };
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const SettingMainPage = async ({
   searchParams,
@@ -33,8 +44,11 @@ const SettingMainPage = async ({
   const session = await getServerSession(authOptions);
   const cookie = cookies().get("user");
   const token = cookie && JSON.parse(cookie?.value)?.token;
-  const [wallets] = await Promise.all([getUserWalletData(token)]);
-
+  const [wallets, messagesData] = await Promise.all([
+    getUserWalletData(token),
+    getUserMessagesData(token),
+  ]);
+  console.log(messagesData, "data");
   return (
     <div
       key={searchParams.content || "all"}
@@ -122,7 +136,7 @@ const SettingMainPage = async ({
               </div>
             </div>
             <div className="text-[12px] text-black flex items-center justify-center leading-none w-[18px] aspect-square rounded-full bg-white">
-              2
+              {messagesData?.data.data.length}
             </div>
           </Link>
           <Link

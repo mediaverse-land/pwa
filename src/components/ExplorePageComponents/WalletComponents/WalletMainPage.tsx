@@ -8,6 +8,7 @@ import ConnetToStripeButton from "./ConnetToStripeButton";
 import { Suspense } from "react";
 import { getCurrencySymbol } from "@/lib/getSymbolForCurrency";
 import AddInventoryButton from "./AddInventoryButton";
+import { revalidateTag } from "next/cache";
 
 const getUserData = async (token: string) => {
   try {
@@ -22,6 +23,7 @@ const getUserData = async (token: string) => {
   }
 };
 const getUserBalacneData = async (token: string) => {
+  revalidateTag("getUserBalance");
   try {
     const req = await getUserBalance({ token });
     return {

@@ -66,7 +66,7 @@ const EditUserInfoForm = () => {
     const request = await signUpCompletion({
       data: data,
       token: userCookie && JSON.parse(userCookie).token,
-    }).finally(() => setLoading(false));
+    });
     const response = await request.json();
     // console.log(request, "signUpCompletion");
     if (request.ok) {
@@ -89,11 +89,13 @@ const EditUserInfoForm = () => {
           token: userCookie && JSON.parse(userCookie).token,
         })
       );
-      router.push("/explore");
+      router.refresh();
+      router.replace("/explore");
     } else {
       // console.log("failed");
       setServerErrors(response.error || response.message);
     }
+    setLoading(false);
   });
   return (
     <div>

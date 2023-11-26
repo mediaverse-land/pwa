@@ -10,7 +10,7 @@ import SubSectionHeader from "../shared/SubSectionHeader";
 import { SPINNER } from "@/components/SVG/svgs";
 import Cookies from "js-cookie";
 import { getUserProfile, putUserProfile } from "@/services/contactService";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 const putUserProfileData = async ({
   data,
   token,
@@ -112,6 +112,17 @@ const SettingGeneralInformation = () => {
   } = useForm({ resolver: zodResolver(schema) });
   const handleEditUserInfo = handleSubmit(async (data) => {
     // console.log(data);
+    setInputErrors({
+      username: "",
+      // password: "",
+      email: "",
+      cellphone: "",
+      // address: "",
+      first_name: "",
+      last_name: "",
+    });
+    setServerErrors("");
+    setMessage("");
     const token = userCookie && JSON.parse(userCookie).token;
     const res = await putUserProfileData({ data, token });
     // console.log(res, "edit info");
@@ -121,12 +132,15 @@ const SettingGeneralInformation = () => {
         email: res.data.email,
         cellphone: res.data.cellphone,
       });
+      // console.log(res);
+      // revalidatePath("/explore?section=wallet");
+
       setRefetch(!refetch);
       setMessage("Profile updated successfully");
       setTimeout(() => {
         setMessage("");
       }, 2000);
-      // router.push(`/explore?section=setting`);
+      router.refresh();
     }
     if (res?.status !== 200) {
       setServerErrors(res?.data.message);

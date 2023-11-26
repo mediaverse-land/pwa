@@ -205,6 +205,36 @@ export const getUserWallets = (token: string) => {
     },
   });
 };
+export const getUserMessages = (token: string) => {
+  const url = `${URL}/notifications`;
+  return fetch(url, {
+    next: { revalidate: process.env.NODE_ENV === "production" ? 10 : 0 },
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const getUserSingleMessage = ({
+  id,
+  token,
+}: {
+  token: string;
+  id: string;
+}) => {
+  const url = `${URL}/notifications/${id}`;
+  return fetch(url, {
+    next: { revalidate: process.env.NODE_ENV === "production" ? 10 : 0 },
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 export const getTerms = () => {
   const url = `${URL}/terms`;
@@ -267,7 +297,8 @@ export const getOwnershipAssets = ({
 export const getUserBalance = ({ token }: { token: string }) => {
   const url = `${URL}/stripe/balance`;
   return fetch(url, {
-    next: { revalidate: 0 },
+    next: { revalidate: 0, tags: ["getUserBalance"] },
+    // cache: "no-store",
     method: "GET",
     headers: {
       "Accept-Language": "en-US",
@@ -293,10 +324,11 @@ export const getUserStripeAccount = ({ token }: { token: string }) => {
 export const getUserProfile = ({ token }: { token: string }) => {
   const url = `${URL}/profile`;
   return fetch(url, {
-    next: {
-      revalidate: process.env.NODE_ENV === "production" ? 0 : 0,
-      tags: ["getUserProfile"],
-    },
+    // next: {
+    //   revalidate: process.env.NODE_ENV === "production" ? 0 : 0,
+    //   tags: ["getUserProfile"],
+    // },
+    cache: "no-store",
     method: "GET",
     headers: {
       "Accept-Language": "en-US",

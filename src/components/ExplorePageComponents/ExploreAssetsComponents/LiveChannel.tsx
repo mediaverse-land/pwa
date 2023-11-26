@@ -41,12 +41,13 @@ export const ExploreLiveChannel = ({ liveData }: { liveData: any }) => {
         <div className="flex w-full">
           <div className="flex w-full overflow-x-auto items-center">
             {liveData.map((item: any, i: number) => (
-              <div
+              <Link
+                href={`/explore?section=explore&content=single-live&id=${item.id}`}
                 key={i}
-                className="relative rounded-[8px] min-w-[190px] w-[190px] h-[125px] mr-[8px] overflow-hidden"
+                className="relative rounded-[8px] min-w-[190px] w-[190px] h-[125px] min-h-[190px] mr-[8px] overflow-hidden"
               >
                 <Image className="" src={item.thumbnail} alt="" fill />
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -95,8 +96,7 @@ export const AllLiveChanells = async ({
         <div className="flex flex-col items-stretch h-full overflow-y-auto gap-2">
           {channels.map((item: any) => (
             <Link
-              target="_blank"
-              href={item.link}
+              href={`/explore?section=explore&content=single-live&id=${item.id}`}
               className="p-4 rounded-2xl bg-[rgba(78,78,97,0.50)] backdrop-blur-sm flex items-center"
             >
               <div className="mr-auto flex items-center gap-4">

@@ -69,7 +69,7 @@ const SingleAssetComments = ({
           const req = await getComments({ id: `${assetID}`, token });
           if (req.ok) {
             const res = await req.json();
-            console.log(res);
+            // console.log(res);
             setComments(res.data);
             setCommentsNumber(res.data.length);
             return res;

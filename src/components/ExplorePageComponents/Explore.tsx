@@ -25,6 +25,7 @@ import ExploreRecently from "./Recently";
 import ExploreSearchSection from "./Search";
 import { AllLiveChanells } from "./ExploreAssetsComponents/LiveChannel";
 import AssetSinglePage from "./SingleAssetPages/SinglePageMain";
+import SignleLiveChannel from "./ExploreAssetsComponents/SingleLiveChannel";
 type IExploreSectionNavs = {
   id: number;
   name: string;
@@ -145,6 +146,9 @@ const ExploreSection = ({
     },
     "live-channels": {
       component: <AllLiveChanells searchParams={searchParams} />,
+    },
+    "single-live": {
+      component: <SignleLiveChannel searchParams={searchParams} />,
     },
     "asset-single-page": {
       component: <AssetSinglePage searchParams={searchParams} />,

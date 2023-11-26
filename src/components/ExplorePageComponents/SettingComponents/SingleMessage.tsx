@@ -1,33 +1,52 @@
-const SettingSingleMessage = ({ id }: { id: number }) => {
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { convertISOToDateAndTime } from "@/lib/convertISOToDateAndTime";
+import { getUserSingleMessage } from "@/services/contactService";
+import { getServerSession } from "next-auth";
+
+const getSingleMessageDate = async ({
+  id,
+  token,
+}: {
+  token: string;
+  id: string;
+}) => {
+  try {
+    const req = await getUserSingleMessage({ token, id });
+    return {
+      data: await req.json(),
+      status: req.status,
+    };
+  } catch (error) {
+    console.error(error);
+  }
+};
+const SettingSingleMessage = async ({ id }: { id: number }) => {
+  const session = await getServerSession(authOptions);
+  const token = session?.user?.token || "";
+  const [messagesData] = await Promise.all([
+    getSingleMessageDate({ token, id: `${id}` }),
+  ]);
+  if (messagesData?.status !== 200) {
+    return (
+      <div className="text-center pt-10 font-semibold text-[20px] text-white">
+        Message Not Found
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col items-stretch gap-4 h-full overflow-y-auto pb-10">
       <div className="flex items-center justify-between">
-        <div className="text-white leading-[19px]">New updates</div>
+        <div className="text-white leading-[19px]">New Message</div>
         <div className="text-[14px] text-[#666680] leading-4">
-          April 26 13:23
+          {convertISOToDateAndTime(`${messagesData?.data.created_at}`)}
         </div>
       </div>
       <div className="text-[14px] text-[#666680] leading-4">
-        Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet lit
-        non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-        officia...Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-        amet sint. Velit officia... aliqua dolor do amet sint. Velit officia...
-        aliqua dolor do amet sint. Velit officia... aliqua dolor do amet sint.
-        Velit officia... aliqua dolor do amet sint. Velit officia... aliqua
-        dolor do amet sint. Velit officia... aliqua dolor do amet sint. Velit
-        officia... Amet minim mollit non deserunt ullamco est sit aliqua dolor
-        do amet sint. Velit officia...Amet minim mollit non deserunt ullamco est
-        sit aliqua dolor do amet sint. Velit officia... aliqua dolor do amet
-        sint. Velit officia... aliqua dolor do amet sint. Velit officia...
-        aliqua dolor do amet sint. Velit officia... aliqua dolor do amet sint.
-        Velit officia... aliqua dolor do amet sint. Velit officia... aliqua
-        dolor do amet sint. Velit officia...
+        {messagesData?.data.message}
       </div>
-      <div className="flex items-center gap-2 flex-wrap">
-        <span className="text-[14px] leading-4 text-[#597AFF]">#asdfsadf</span>
-        <span className="text-[14px] leading-4 text-[#597AFF]">#asdfsadf</span>
-        <span className="text-[14px] leading-4 text-[#597AFF]">#asdfsadf</span>
-      </div>
+      {/* <div className="flex items-center gap-2 flex-wrap">
+        <span className="text-[14px] leading-4 text-[#597AFF]">#tag</span>
+      </div> */}
     </div>
   );
 };
