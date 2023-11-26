@@ -116,8 +116,12 @@ const VideoSinglePage = async ({
               </div>
             )
           ) : (
-            <div className="flex items-center justify-center">
-              Please Login to see the video
+            <div className="relative w-full h-full">
+              <Image
+                src={`${singleVideoData?.asset.thumbnails["336x366"] || ""}`}
+                alt=""
+                fill
+              />
             </div>
           )}
         </div>
