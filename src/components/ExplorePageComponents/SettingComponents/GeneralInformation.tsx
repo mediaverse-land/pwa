@@ -81,29 +81,31 @@ const SettingGeneralInformation = () => {
   });
   const router = useRouter();
   useEffect(() => {
-    const getUserProfileData = async () => {
-      try {
-        const req = await getUserProfile({
-          token,
-        });
-        if (req.status === 200) {
-          const res = await req.json();
-          setInputValues({
-            ...inputValues,
-            username: res.username,
-            email: res.email || "",
-            cellphone: res.cellphone || "",
-            first_name: res.first_name || "",
-            last_name: res.last_name || "",
+    if (session.status === "authenticated") {
+      const getUserProfileData = async () => {
+        try {
+          const req = await getUserProfile({
+            token,
           });
-          setLoading(false);
+          if (req.status === 200) {
+            const res = await req.json();
+            setInputValues({
+              ...inputValues,
+              username: res.username,
+              email: res.email || "",
+              cellphone: res.cellphone || "",
+              first_name: res.first_name || "",
+              last_name: res.last_name || "",
+            });
+            setLoading(false);
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getUserProfileData();
-  }, [refetch]);
+      };
+      getUserProfileData();
+    }
+  }, [refetch, session.status]);
   const {
     register,
     reset,
@@ -143,7 +145,7 @@ const SettingGeneralInformation = () => {
         first_name: res.data.first_name || "",
         last_name: res.data.last_name || "",
       });
-      console.log(res);
+      // console.log(res);
       setMessage("Profile updated successfully");
       setTimeout(() => {
         setMessage("");
