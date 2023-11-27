@@ -7,7 +7,9 @@ async function getFAQData() {
   const faq = await getFAQ();
 
   if (!faq.ok) {
-    throw new Error("Failed to fetch data", { cause: `${faq.status} Error` });
+    throw new Error(`Failed to fetch data with ${faq.status}`, {
+      cause: `${faq.status} Error`,
+    });
   }
   return faq.json();
 }
