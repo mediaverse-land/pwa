@@ -5,6 +5,7 @@ import AddCardAndInventory from "../shared/AddCardAndInventory";
 import WalletMainPage from "./WalletComponents/WalletMainPage";
 import WalletHistory from "./WalletComponents/WalletHistory";
 import BuyAsset from "./WalletComponents/BuyAsset";
+import PurchaseResult from "./WalletComponents/PurchaseResult";
 
 const WalletSection = ({
   searchParams,
@@ -26,6 +27,9 @@ const WalletSection = ({
     },
     buy: {
       component: <BuyAsset searchParams={searchParams} />,
+    },
+    result: {
+      component: <PurchaseResult searchParams={searchParams} />,
     },
   };
   const page = searchParams.page || "main";

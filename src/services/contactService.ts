@@ -266,7 +266,10 @@ export const getSubscribeAssets = ({
 }) => {
   const url = `${URL}/profile/subscriptions${params}`;
   return fetch(url, {
-    next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+    next: {
+      revalidate: process.env.NODE_ENV === "production" ? 2 : 50,
+      tags: ["getSubscribeAssets"],
+    },
     headers: {
       "Accept-Language": "en-US",
       accept: "application/json",
@@ -284,7 +287,10 @@ export const getOwnershipAssets = ({
 }) => {
   const url = `${URL}/profile${params}`;
   return fetch(url, {
-    next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+    next: {
+      revalidate: process.env.NODE_ENV === "production" ? 2 : 60,
+      tags: ["getOwnershipAssets"],
+    },
     method: "GET",
     headers: {
       "Accept-Language": "en-US",
@@ -394,7 +400,7 @@ export const putUserProfile = ({
 }) => {
   const url = `${URL}/profile`;
   return fetch(url, {
-    next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
+    next: { revalidate: process.env.NODE_ENV === "production" ? 10 : 0 },
     method: "PUT",
     headers: {
       "Accept-Language": "en-US",

@@ -41,11 +41,15 @@ const BuyAssetComponent = ({
     const req = await buyAsset({ id, token });
     // console.log(req, "req");
     if (req?.status === 200) {
-      if (assetData.asset.plan === 2) {
-        router.push("/explore?section=account&type=ownership");
-      } else if (assetData.asset.plan === 3) {
-        router.push("/explore?section=account&type=subscribe");
-      }
+      console.log(req, "req");
+      router.push(
+        `/explore?section=wallet&page=result&type=${assetData.asset.plan}`
+      );
+      // if (assetData.asset.plan === 2) {
+      // router.push("/explore?section=account&type=ownership");
+      // } else if (assetData.asset.plan === 3) {
+      //   router.push("/explore?section=account&type=subscribe");
+      // }
     } else {
       // console.log(req, "error");
       if (req?.status === 403) {

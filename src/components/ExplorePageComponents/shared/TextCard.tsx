@@ -6,7 +6,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 const ExploreTextCard = async ({ data }: { data: any }) => {
   const session = await getServerSession(authOptions);
-  console.log(data);
+  // console.log(data);
   const authorImage = () => {
     if (!data.asset.user?.image_url) {
       if (session?.user?.image && data.asset.user_id === session.user.id) {

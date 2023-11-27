@@ -39,7 +39,9 @@ const BuySection = ({
         >
           <div className="flex items-center gap-4 mr-auto leading-4">
             <div className="text-[#CCCCFF]">{selectedMethod}</div>
-            <div className="text-white font-semibold">{price} $</div>
+            <div className="text-white font-semibold">
+              {(price / 100).toFixed(2)} €
+            </div>
           </div>
           <div
             className={`w-[18px] aspect-square border border-[#CCCCFF] rounded-full bg-[#597AFF]`}

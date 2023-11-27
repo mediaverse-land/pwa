@@ -147,7 +147,7 @@ const BuyAsset = async ({
                   {AssetPurchasePlan[assetData.asset.plan]}
                 </span>
                 <span className="leading-4 text-white">
-                  {assetData.asset.price}$
+                  {(assetData.asset.price / 100).toFixed(2)} €
                 </span>
               </div>
             </div>
@@ -174,7 +174,10 @@ const BuyAsset = async ({
                         Wallet
                       </div>
                       <div className="text-[#666680] text-[12px] leading-[14.5px]">
-                        Inventory: {userBalance?.data.available[0].amount}
+                        Inventory:{" "}
+                        {(userBalance?.data.available[0].amount / 100).toFixed(
+                          2
+                        )}{" "}
                         {getCurrencySymbol(
                           `${userBalance?.data.available[0].currency}`
                         )}
