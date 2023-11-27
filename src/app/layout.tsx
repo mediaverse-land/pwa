@@ -34,7 +34,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} min-h-screen flex flex-col justify-between [&_>_*:nth-child(2)]:grow`}
       >
-        <NextTopLoader />
+        <NextTopLoader showSpinner={false} />
         <NextAuthSessionProvider>
           <Navbar />
           {children}

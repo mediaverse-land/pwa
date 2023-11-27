@@ -9,6 +9,7 @@ import { SPINNER } from "../SVG/svgs";
 import Cookies from "js-cookie";
 import { redirect, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const schema = z.object({
   username: z
@@ -38,6 +39,7 @@ const schema = z.object({
 });
 const EditUserInfoForm = () => {
   const userCookie = Cookies.get("user");
+  const [checked, setChecked] = useState(false);
   const session = useSession();
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState("");
@@ -186,6 +188,27 @@ const EditUserInfoForm = () => {
               {errors.last_name?.message?.toString() || inputErrors.last_name}
             </p>
           </div>
+          <div className="mr-auto text-white">
+            <span className="mr-2">
+              <input
+                className="rounded-lg"
+                type="checkbox"
+                checked={checked}
+                onClick={() => {
+                  setChecked(!checked);
+                }}
+              />
+            </span>
+            <span>
+              I'm Agree With{" "}
+              <Link
+                href={`/terms`}
+                className="underline text-blue-500 hover:text-blue-600"
+              >
+                Terms
+              </Link>
+            </span>
+          </div>
         </div>
         <div>
           <div>
@@ -194,8 +217,8 @@ const EditUserInfoForm = () => {
             </p>
           </div>
           <button
-            disabled={loading}
-            className="bg-[#4E4E61] bg-opacity-50 w-full mt-5 rounded-full h-[40px] text-[14px] leading-4 text-white font-semibold flex items-center justify-center"
+            disabled={loading || !checked}
+            className="bg-[#4E4E61] bg-opacity-50 w-full mt-5 rounded-full h-[40px] text-[14px] leading-4 text-white font-semibold flex items-center justify-center disabled:bg-[#212129c5] disabled:cursor-not-allowed disabled:text-slate-600"
             type="submit"
           >
             {loading ? (
