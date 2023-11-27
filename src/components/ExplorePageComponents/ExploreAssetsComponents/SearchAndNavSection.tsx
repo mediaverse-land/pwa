@@ -58,7 +58,7 @@ const ExploreSearchAndNavSection = ({
 }: {
   activeTab: "All" | "Images" | "Videos" | "Audios" | "Texts";
 }) => {
-  console.log(cookies().get("user"));
+  // console.log(cookies().get("user"));
   return (
     <div className="flex flex-col items-stretch gap-6 sticky top-0 left-0 w-full z-50">
       {/* search section */}

@@ -1,7 +1,7 @@
+import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
+import ExploreTextCard from "@/components/ExplorePageComponents/shared/TextCard";
 import { getMostViewedText, getRecentlyTexts } from "@/services/contactService";
-import ExploreTextCard from "../shared/TextCard";
 import Link from "next/link";
-import ExploreSearchAndNavSection from "./SearchAndNavSection";
 
 const audioData = [
   {
@@ -45,13 +45,13 @@ const getRecentlyTextsData = async () => {
   }
 };
 
-const ExploreTextsAssets = async ({ activeTab }: { activeTab: string }) => {
+const WebAppExploreTextsAssets = async () => {
   const [mostViewedTexts] = await Promise.all([getMostViewedTextsData()]);
 
   return (
-    <>
+    <div className="h-full overflow-y-auto">
       <ExploreSearchAndNavSection activeTab={"Texts"} />
-      <div className="flex flex-col items-stretch gap-6 pb-8 px-10">
+      <div className="flex flex-col items-stretch gap-6 py-8 px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}
@@ -90,11 +90,11 @@ const ExploreTextsAssets = async ({ activeTab }: { activeTab: string }) => {
           <RecentlyTexts />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default ExploreTextsAssets;
+export default WebAppExploreTextsAssets;
 
 export const RecentlyTexts = async () => {
   const rececentlyTextsData = await getRecentlyTextsData();

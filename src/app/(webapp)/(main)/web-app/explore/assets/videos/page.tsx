@@ -1,13 +1,11 @@
-import Image from "next/image";
-import ExploreAssetsCard from "../shared/AllAssetsCard";
-import { VIDEO_ICON } from "@/components/SVG/svgs";
-import ExploreVideoCard from "../shared/VideoCard";
+import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
+import ExploreAssetsCard from "@/components/ExplorePageComponents/shared/AllAssetsCard";
+import ExploreVideoCard from "@/components/ExplorePageComponents/shared/VideoCard";
 import {
   getMostViewedVideos,
   getRecentlyVideos,
 } from "@/services/contactService";
 import Link from "next/link";
-import ExploreSearchAndNavSection from "./SearchAndNavSection";
 
 const videoData = [
   {
@@ -52,13 +50,17 @@ const getRecentlyVideosData = async () => {
   }
 };
 
-const ExploreVideoAssets = async ({ activeTab }: { activeTab: string }) => {
+const WebAppExploreVideoAssets = async ({
+  activeTab,
+}: {
+  activeTab: string;
+}) => {
   const [mostViewedVideos] = await Promise.all([getMostViewedVideosData()]);
 
   return (
-    <>
+    <div className="h-full overflow-y-auto">
       <ExploreSearchAndNavSection activeTab={"Videos"} />
-      <div className="flex flex-col items-stretch gap-6 pb-8 px-10">
+      <div className="flex flex-col items-stretch gap-6 py-8 px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}
@@ -105,11 +107,11 @@ const ExploreVideoAssets = async ({ activeTab }: { activeTab: string }) => {
           <RecentlyVideos />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default ExploreVideoAssets;
+export default WebAppExploreVideoAssets;
 
 export const RecentlyVideos = async () => {
   const rececentlyVideosData = await getRecentlyVideosData();

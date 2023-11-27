@@ -1,22 +1,23 @@
-import Image from "next/image";
-import ExploreAssetsCard from "../shared/AllAssetsCard";
-import { VIDEO_ICON } from "@/components/SVG/svgs";
-import ExploreVideoCard from "../shared/VideoCard";
+import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
+import ExploreAssetsCard from "@/components/ExplorePageComponents/shared/AllAssetsCard";
+import ExploreAudioCard from "@/components/ExplorePageComponents/shared/AudioCard";
 import {
-  getMostViewedVideos,
-  getRecentlyVideos,
+  getMostViewedSongs,
+  getRecentlySongs,
 } from "@/services/contactService";
 import Link from "next/link";
-import ExploreSearchAndNavSection from "./SearchAndNavSection";
 
-const videoData = [
+export const audioData = [
   {
     id: 1,
     title: "Velit officia",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut libero.",
-    author: "Ralph",
-    time: "8:15",
+    author: {
+      name: "auth",
+      picture: "",
+    },
+    time: 560,
     image: "/images/nasa.png",
   },
   {
@@ -24,41 +25,48 @@ const videoData = [
     title: "Velit officia",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut libero.",
-    author: "Ralph",
-    time: "8:15",
-    image: "/images/nasa.png",
+    author: {
+      name: "auth",
+      picture: "",
+    },
+    time: 560,
   },
   {
     id: 3,
     title: "Velit officia",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut libero.",
-    author: "Ralph",
-    time: "8:15",
+    author: {
+      name: "auth",
+      picture: "",
+    },
+    time: 560,
     image: "/images/nasa.png",
   },
 ];
-
-const getMostViewedVideosData = async () => {
-  const liveData = await getMostViewedVideos();
+const getMostViewedSongsData = async () => {
+  const liveData = await getMostViewedSongs();
   if (liveData.ok) {
     return liveData.json();
   }
 };
-const getRecentlyVideosData = async () => {
-  const liveData = await getRecentlyVideos();
+const getRecentlySongsData = async () => {
+  const liveData = await getRecentlySongs();
   if (liveData.ok) {
     return liveData.json();
   }
 };
-
-const ExploreVideoAssets = async ({ activeTab }: { activeTab: string }) => {
-  const [mostViewedVideos] = await Promise.all([getMostViewedVideosData()]);
+const WebAppExploreAudioAssets = async ({
+  activeTab,
+}: {
+  activeTab: string;
+}) => {
+  const [mostViewedSongs] = await Promise.all([getMostViewedSongsData()]);
 
   return (
-    <>
-      <ExploreSearchAndNavSection activeTab={"Videos"} />
-      <div className="flex flex-col items-stretch gap-6 pb-8 px-10">
+    <div className="h-full overflow-y-auto">
+      <ExploreSearchAndNavSection activeTab={"Audios"} />
+      <div className="flex flex-col items-stretch gap-6 py-8 px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}
@@ -70,12 +78,12 @@ const ExploreVideoAssets = async ({ activeTab }: { activeTab: string }) => {
           </div>
           <div>
             <div className="overflow-x-hidden">
-              <div className="flex items-stretch gap-4 overflow-x-auto">
-                {mostViewedVideos.slice(0, 10).map((item: any) => (
+              <div className="flex items-stretch gap-4 overflow-x-auto [&_>_*]:w-[200px]">
+                {mostViewedSongs.slice(0, 10).map((item: any) => (
                   <ExploreAssetsCard
                     id={item.id}
                     key={item.id}
-                    type="video"
+                    type="audio"
                     cover={item.asset.thumbnails["336x366"]}
                     title={item.name}
                     author={{
@@ -96,28 +104,28 @@ const ExploreVideoAssets = async ({ activeTab }: { activeTab: string }) => {
               <p className="text-white text-sm ">Recently</p>
             </div>
             <Link
-              href={`/explore?section=explore&content=recently&type=videos`}
+              href={`/explore?section=explore&content=recently&type=audios`}
               className="text-[14px] text-[#597AFF]"
             >
               View all
             </Link>
           </div>
-          <RecentlyVideos />
+          <RecentlyAudio />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default ExploreVideoAssets;
+export default WebAppExploreAudioAssets;
 
-export const RecentlyVideos = async () => {
-  const rececentlyVideosData = await getRecentlyVideosData();
+export const RecentlyAudio = async () => {
+  const rececentlySongsData = await getRecentlySongsData();
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6">
-      {rececentlyVideosData.map((items: any, index: number) => {
+      {rececentlySongsData.map((items: any, index: number) => {
         return (
-          <ExploreVideoCard
+          <ExploreAudioCard
             id={items.id}
             key={items.id}
             author={{

@@ -135,7 +135,7 @@ const Home = async () => {
               </Link>
             </div>
             <Link
-              href={`/explore`}
+              href={`/web-app/explore`}
               className="w-[278px] h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm leading-none flex justify-center items-center py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]"
             >
               Web App

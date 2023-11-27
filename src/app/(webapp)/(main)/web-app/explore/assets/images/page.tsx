@@ -153,7 +153,7 @@ const WebAppImageAssets = async () => {
   return (
     <div className="w-full overflow-y-auto">
       <ExploreSearchAndNavSection activeTab={"Images"} />
-      <div className="flex flex-col items-stretch gap-6 py-6 px-10">
+      <div className="flex flex-col items-stretch gap-6 py-8 px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}

@@ -37,7 +37,7 @@ const WebAppSearchForm = () => {
     //   }`
     // );
     router.push(
-      `/web-app/explore/search-results&q=${data.q}${
+      `/web-app/explore/search-result?q=${data.q}${
         data.searchIn && `&${contentType}=${data.searchIn}`
       }`
     );

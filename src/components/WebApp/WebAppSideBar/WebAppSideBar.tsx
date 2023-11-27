@@ -2,6 +2,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import WebAppMainNavbar from "./WebAppMainNavbar";
+import WebAppSideBarBottomSection from "./WebAppSibeBarBottomSection";
 
 const WebAppSideBar = async () => {
   const session = await getServerSession(authOptions);
@@ -42,42 +43,7 @@ const WebAppSideBar = async () => {
           <WebAppMainNavbar />
         </div>
       </div>
-      <div className="flex flex-col items-stretch gap-6">
-        {/* <Link
-  href={`/explore?section=setting&page=main`}
-  className="flex items-center gap-4"
->
-  {activeSection === "setting" ? (
-    <ACTIVE_SETTING />
-  ) : (
-    <INACTIVE_SETTING />
-  )}
-  <div
-    className={`text-[14px] ${
-      activeSection === "setting" ? "font-medium text-white" : ""
-    }`}
-  >
-    Setting
-  </div>
-</Link> */}
-        {/* <Link
-  href={`/explore?section=logout`}
-  className="flex items-center gap-4 group"
->
-  {activeSection === "logout" ? (
-    <ACTIVE_LOGOUT />
-  ) : (
-    <INACTIVE_LOGOUT />
-  )}
-  <div
-    className={`text-[14px] ${
-      activeSection === "logout" ? "font-medium text-white" : ""
-    }`}
-  >
-    Logout
-  </div>
-</Link> */}
-      </div>
+      <WebAppSideBarBottomSection />
     </aside>
   );
 };
