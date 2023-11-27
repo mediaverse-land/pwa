@@ -32,7 +32,7 @@ export default function RootLayout({
   gtag('config', 'G-667BH3TKMH');`}
       </Script>
       <body
-        className={`${inter.className} min-h-screen flex flex-col justify-between [&_>_*:nth-child(2)]:grow`}
+        className={`${inter.className} min-h-screen flex flex-col justify-between gap-10 [&_>_*:nth-child(2)]:grow`}
       >
         <NextTopLoader />
         <NextAuthSessionProvider>

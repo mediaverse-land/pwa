@@ -5,7 +5,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <div className="mt-auto">
-      <div className="w-full flex justify-between px-2 sm:px-72 items-center py-6 bg-blue-950 mt-5">
+      <div className="w-full flex justify-between px-2 sm:px-72 items-center py-6 bg-blue-950">
         <p className="text-white">Haven't tried the app yet?</p>
         <div className="flex space-x-5">
           {socialMedia.map((item) => (

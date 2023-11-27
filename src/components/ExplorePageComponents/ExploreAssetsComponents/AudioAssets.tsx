@@ -2,10 +2,10 @@ import {
   getMostViewedSongs,
   getRecentlySongs,
 } from "@/services/contactService";
-import ExploreAssetsCard from "../shared/AllAssetsCard";
-import ExploreAudioCard from "../shared/AudioCard";
-import Link from "next/link";
 import ExploreSearchAndNavSection from "./SearchAndNavSection";
+import ExploreAssetsCard from "../shared/AllAssetsCard";
+import Link from "next/link";
+import ExploreAudioCard from "../shared/AudioCard";
 
 export const audioData = [
   {
@@ -61,7 +61,7 @@ const ExploreAudioAssets = async ({ activeTab }: { activeTab: string }) => {
 
   return (
     <>
-      <ExploreSearchAndNavSection activeTab={activeTab} />
+      <ExploreSearchAndNavSection activeTab={"Audios"} />
       <div className="flex flex-col items-stretch gap-6 pb-8 px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">

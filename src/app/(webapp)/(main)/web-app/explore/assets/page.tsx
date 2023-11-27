@@ -1,19 +1,14 @@
-import Image from "next/image";
 import {
   getLives,
   getMostViewedImages,
   getMostViewedText,
 } from "@/services/contactService";
-
-import ExploreDailyRecommended from "./DailyRecommended";
-import ExploreMostViewd from "./MostViewed";
-import ExploreTopTexts from "./TopTexts";
-import ExploreChillSongs from "./ChillSongs";
-import Link from "next/link";
-import { SEARCH_ICON } from "@/components/SVG/svgs";
-import { ExploreSectionNavs } from "../Explore";
-import ExploreSearchAndNavSection from "./SearchAndNavSection";
-import { ExploreLiveChannel } from "./LiveChannel";
+import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
+import { ExploreLiveChannel } from "@/components/ExplorePageComponents/ExploreAssetsComponents/LiveChannel";
+import ExploreDailyRecommended from "@/components/ExplorePageComponents/ExploreAssetsComponents/DailyRecommended";
+import ExploreMostViewd from "@/components/ExplorePageComponents/ExploreAssetsComponents/MostViewed";
+import ExploreTopTexts from "@/components/ExplorePageComponents/ExploreAssetsComponents/TopTexts";
+import ExploreChillSongs from "@/components/ExplorePageComponents/ExploreAssetsComponents/ChillSongs";
 
 const getLiveData = async () => {
   const liveData = await getLives({ params: "" });
@@ -33,7 +28,7 @@ const getTopTextsData = async () => {
     return liveData.json();
   }
 };
-const ExploreAllAssets = async ({ activeTab }: { activeTab: string }) => {
+const WebAppExploreAssets = async () => {
   // const liveData = await getLiveData();
   const [liveData, mostViewedImages] = await Promise.all([
     getLiveData(),
@@ -59,4 +54,4 @@ const ExploreAllAssets = async ({ activeTab }: { activeTab: string }) => {
   );
 };
 
-export default ExploreAllAssets;
+export default WebAppExploreAssets;

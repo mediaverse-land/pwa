@@ -27,8 +27,9 @@ import AccountSection from "@/components/ExplorePageComponents/Account";
 import { notFound, redirect } from "next/navigation";
 import ExploreRecently from "@/components/ExplorePageComponents/Recently";
 import Setting from "@/components/ExplorePageComponents/Setting";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+
 import Logout from "@/components/ExplorePageComponents/Logout";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 type IexploreSections = {
   id: string;
   name: string;

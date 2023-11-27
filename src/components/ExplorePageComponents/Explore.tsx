@@ -38,7 +38,7 @@ export const ExploreSectionNavs: IExploreSectionNavs[] = [
   {
     id: 1,
     name: "All",
-    link: "all",
+    link: "",
     active_icon: <span className="text-[14px] text-[#D9D9FF]">All</span>,
     inactive_icon: <span className="text-[#666680] text-[14px]">All</span>,
   },
@@ -98,7 +98,7 @@ const ExploreSection = ({
       component: (
         <div key="ExploreImageAssets" className="w-full h-full overflow-y-auto">
           <div className="flex flex-col items-stretch gap-8">
-            <ExploreImageAssets activeTab={activeTab} />
+            <ExploreImageAssets />
           </div>
         </div>
       ),

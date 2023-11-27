@@ -1,11 +1,11 @@
 import Image from "next/image";
-import ExploreAssetsCard from "../shared/AllAssetsCard";
 import Link from "next/link";
 import {
   getMostViewedImages,
   getRecentlyImages,
 } from "@/services/contactService";
-import ExploreSearchAndNavSection from "./SearchAndNavSection";
+import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
+import ExploreAssetsCard from "@/components/ExplorePageComponents/shared/AllAssetsCard";
 const imageData = [
   {
     asset: {
@@ -148,12 +148,12 @@ const getRecentlyImagesData = async () => {
   }
 };
 
-const ExploreImageAssets = async () => {
+const WebAppImageAssets = async () => {
   const [mostViewedImages] = await Promise.all([getMostViewedImagesData()]);
   return (
-    <div className="h-full overflow-y-auto">
+    <div className="w-full overflow-y-auto">
       <ExploreSearchAndNavSection activeTab={"Images"} />
-      <div className="flex flex-col items-stretch gap-6 py-8 px-10">
+      <div className="flex flex-col items-stretch gap-6 py-6 px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}
@@ -204,7 +204,7 @@ const ExploreImageAssets = async () => {
   );
 };
 
-export default ExploreImageAssets;
+export default WebAppImageAssets;
 
 export const RecentlyImages = async () => {
   const data = await getRecentlyImagesData();
