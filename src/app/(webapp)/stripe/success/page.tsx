@@ -9,7 +9,7 @@ const StripeSuccess = () => {
           successfully charged, and you're ready to make seamless transactions
           and enjoy our services hassle-free.
         </p>
-        <Link href={`/explore?section=account`} className="flex mx-auto">
+        <Link href={`/web-app/wallet`} className="flex mx-auto">
           <div
             style={{
               background: `linear-gradient(0deg, #597AFF, #597AFF),

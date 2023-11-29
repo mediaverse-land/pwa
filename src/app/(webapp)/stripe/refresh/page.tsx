@@ -11,7 +11,7 @@ const StripeRefresh = () => {
           start the account creation process again. Just click the button below,
           and you'll be on your way to enjoying all the benefits of our service.
         </p>
-        <Link href={`/explore?section=account`} className="flex mx-auto">
+        <Link href={`/web-app/wallet`} className="flex mx-auto">
           <div
             style={{
               background: `linear-gradient(0deg, #597AFF, #597AFF),

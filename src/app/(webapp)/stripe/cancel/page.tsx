@@ -5,7 +5,7 @@ const StripeCancel = () => {
     <div className="h-screen w-screen flex items-center justify-center">
       <div className="flex flex-col items-stretch gap-6 bg-[rgba(78,78,97,0.50)] border rounded-2xl py-14 px-8 text-[14px] max-w-[286px] lg:px-16 lg:py-16 text-white lg:text-[18px] font-semibold  md:max-w-[568px] md:text-[16px] lg:max-w-[768px] mx-auto text-center">
         <p className="">We're sorry, but it seems your session has canceled.</p>
-        <Link href={`/explore?section=account`} className="flex mx-auto">
+        <Link href={`/web-app/wallet`} className="flex mx-auto">
           <div
             style={{
               background: `linear-gradient(0deg, #597AFF, #597AFF),

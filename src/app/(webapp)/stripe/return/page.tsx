@@ -9,7 +9,7 @@ const StripeRetrun = () => {
           successful, and you're all set to explore everything MediaVerse has to
           offer. Get ready for an amazing experience!
         </p>
-        <Link href={`/explore?section=account`} className="flex mx-auto">
+        <Link href={`/web-app/wallet`} className="flex mx-auto">
           <div
             style={{
               background: `linear-gradient(0deg, #597AFF, #597AFF),
