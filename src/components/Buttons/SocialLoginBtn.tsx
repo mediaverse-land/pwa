@@ -13,7 +13,8 @@ const SocialLoginBtn = ({
   const callbackUrlParams = params.get("refer");
   const handleSignIn = (callbackUrl?: string) => {
     signIn(variant, {
-      callbackUrl: callbackUrl || callbackUrlParams || "/explore",
+      callbackUrl:
+        callbackUrl || callbackUrlParams || "/web-app/explore/assets",
     });
   };
   switch (variant) {
