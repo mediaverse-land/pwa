@@ -105,7 +105,7 @@ const BuyAsset = async ({
     getAssetData({ id, type }),
     getUserData(token),
   ]);
-
+  //   console.log(assetData?.data.asset);
   if (assetData?.data?.asset.plan === 1) redirect("/web-app/explore/assets");
   const userBalance = await getUserBalacneData(token);
   return (
@@ -190,7 +190,7 @@ const BuyAsset = async ({
           </div>
           {
             <BuyAssetComponent
-              assetData={assetData}
+              assetData={assetData?.data}
               id={assetData?.data?.asset_id}
               token={token}
               disableed={userBalance?.status === 404 ? true : false}
