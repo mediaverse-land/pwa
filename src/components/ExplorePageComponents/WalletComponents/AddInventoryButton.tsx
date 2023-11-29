@@ -21,11 +21,11 @@ const AddInventoryButton = async () => {
   if (!session?.user.name || !session.user.email) {
     return (
       <div className="w-full text-center bg-[#666680] rounded-2xl py-2 space-x-2">
-        <span className="font-semibold">
+        <span className="text-white">
           Please complete your informatoin first:
         </span>
         <Link
-          href={`/explore?section=setting&page=info`}
+          href={`/web-app/setting/account/general-info`}
           className="underline hover:text-[#3f3f6f]"
         >
           Click Here

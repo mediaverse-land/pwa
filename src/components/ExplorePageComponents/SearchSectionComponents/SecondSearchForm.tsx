@@ -19,7 +19,7 @@ const SecondSearchForm = ({
     e.preventDefault();
     if (inputValue.length > 1 && inputValue.length < 100) {
       router.push(
-        `/explore?section=explore&content=search&q=${inputValue}${
+        `/web-app/explore/search-result?q=${inputValue}${
           plan ? `&plan=${plan}` : ""
         }${tag ? `&tag=${tag}` : ""}`
       );

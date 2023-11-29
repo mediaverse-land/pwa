@@ -40,7 +40,7 @@ const ExploreTextCard = async ({ data }: { data: any }) => {
   };
   return (
     <Link
-      href={`/explore?section=explore&content=asset-single-page&name=${data.name}&id=${data.id}&type=text`}
+      href={`/web-app/assets/text/${data.name}?id=${data.id}`}
       className="max-w-full min-w-full w-full aspect-square block max-h-[190px]"
     >
       <div className="text-card w-full h-full px-4 py-6 flex flex-col items-stretch leading-none">

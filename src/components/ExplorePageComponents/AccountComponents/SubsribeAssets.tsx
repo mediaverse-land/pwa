@@ -6,6 +6,9 @@ import ExploreTextCard from "../shared/TextCard";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import LogoutNoUser from "./Logout";
 
 const getSubscribeData = async ({
   params,
@@ -16,9 +19,10 @@ const getSubscribeData = async ({
 }) => {
   try {
     const req = await getSubscribeAssets({ params, token });
-    if (req.ok) {
-      return req.json();
-    }
+    return {
+      data: await req.json(),
+      status: req.status,
+    };
   } catch (error) {
     console.error(error);
   }
@@ -31,15 +35,27 @@ export const SubscribeAllAssets = async ({
     [key: string]: string;
   };
 }) => {
-  const cookie = cookies().get("user");
-  const token = cookie && JSON.parse(cookie?.value)?.token;
-  const searchResults = await getSubscribeData({ params: "", token: token });
+  const session = await getServerSession(authOptions);
+  const token = session?.user.token || "";
+  const searchResults = await getSubscribeData({ params: "", token });
+  if (searchResults?.status === 406) {
+    return (
+      <Link
+        href={`/sign-up/info`}
+        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
+      >
+        Please Complete Your Information To See This Section
+      </Link>
+    );
+  } else if (searchResults?.status === 401) {
+    return <LogoutNoUser />;
+  }
   const concatData = () => {
     const data = [
-      ...searchResults.images,
-      ...searchResults.videos,
-      ...searchResults.texts,
-      ...searchResults.audios,
+      ...searchResults?.data.images,
+      ...searchResults?.data.videos,
+      ...searchResults?.data.texts,
+      ...searchResults?.data.audios,
     ];
     return data;
   };
@@ -77,7 +93,7 @@ export const SubscribeAllAssets = async ({
           );
         })
       ) : (
-        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3">
+        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
           No Content To Show
         </div>
       )}
@@ -91,16 +107,28 @@ export const SubscribeImageAssets = async ({
     [key: string]: string;
   };
 }) => {
-  const cookie = cookies().get("user");
-  const token = cookie && JSON.parse(cookie?.value)?.token;
+  const session = await getServerSession(authOptions);
+  const token = session?.user.token || "";
   const searchResults = await getSubscribeData({
     params: "/images",
-    token: token,
+    token,
   });
+  if (searchResults?.status === 406) {
+    return (
+      <Link
+        href={`/sign-up/info`}
+        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
+      >
+        Please Complete Your Information To See This Section
+      </Link>
+    );
+  } else if (searchResults?.status === 401) {
+    return <LogoutNoUser />;
+  }
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2 px-6 py-7 h-full overflow-y-auto">
-      {searchResults.data.length > 0 ? (
-        searchResults.data.map((items: any, index: number) => {
+      {searchResults?.data.data.length > 0 ? (
+        searchResults?.data.data.map((items: any, index: number) => {
           return (
             <Link
               href={`/explore?section=explore&content=asset-single-page&name=${items.name}&id=${items.id}&type=image`}
@@ -116,7 +144,7 @@ export const SubscribeImageAssets = async ({
           );
         })
       ) : (
-        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3">
+        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
           No Content To Show
         </div>
       )}
@@ -130,16 +158,28 @@ export const SubscribeVideoAssets = async ({
     [key: string]: string;
   };
 }) => {
-  const cookie = cookies().get("user");
-  const token = cookie && JSON.parse(cookie?.value)?.token;
+  const session = await getServerSession(authOptions);
+  const token = session?.user.token || "";
   const searchResults = await getSubscribeData({
     params: "/videos",
-    token: token,
+    token,
   });
+  if (searchResults?.status === 406) {
+    return (
+      <Link
+        href={`/sign-up/info`}
+        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
+      >
+        Please Complete Your Information To See This Section
+      </Link>
+    );
+  } else if (searchResults?.status === 401) {
+    return <LogoutNoUser />;
+  }
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
-      {searchResults.data.length > 0 ? (
-        searchResults.data.map((items: any, index: number) => {
+      {searchResults?.data.data.length > 0 ? (
+        searchResults?.data.data.map((items: any, index: number) => {
           return (
             <ExploreVideoCard
               id={items.id}
@@ -156,7 +196,7 @@ export const SubscribeVideoAssets = async ({
           );
         })
       ) : (
-        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3">
+        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
           No Content To Show
         </div>
       )}
@@ -170,17 +210,28 @@ export const SubscribeAudioAssets = async ({
     [key: string]: string;
   };
 }) => {
-  const cookie = cookies().get("user");
-  const token = cookie && JSON.parse(cookie?.value)?.token;
+  const session = await getServerSession(authOptions);
+  const token = session?.user.token || "";
   const searchResults = await getSubscribeData({
     params: "/audios",
-    token: token,
+    token,
   });
-
+  if (searchResults?.status === 406) {
+    return (
+      <Link
+        href={`/sign-up/info`}
+        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
+      >
+        Please Complete Your Information To See This Section
+      </Link>
+    );
+  } else if (searchResults?.status === 401) {
+    return <LogoutNoUser />;
+  }
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
-      {searchResults.data.length > 0 ? (
-        searchResults.data.map((items: any, index: number) => {
+      {searchResults?.data.data.length > 0 ? (
+        searchResults?.data.data.map((items: any, index: number) => {
           return (
             <ExploreAudioCard
               id={items.id}
@@ -197,7 +248,7 @@ export const SubscribeAudioAssets = async ({
           );
         })
       ) : (
-        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3">
+        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
           No Content To Show
         </div>
       )}
@@ -211,20 +262,32 @@ export const SubscribeTextAssets = async ({
     [key: string]: string;
   };
 }) => {
-  const cookie = cookies().get("user");
-  const token = cookie && JSON.parse(cookie?.value)?.token;
+  const session = await getServerSession(authOptions);
+  const token = session?.user.token || "";
   const searchResults = await getSubscribeData({
     params: "/texts",
-    token: token,
+    token,
   });
+  if (searchResults?.status === 406) {
+    return (
+      <Link
+        href={`/sign-up/info`}
+        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
+      >
+        Please Complete Your Information To See This Section
+      </Link>
+    );
+  } else if (searchResults?.status === 401) {
+    return <LogoutNoUser />;
+  }
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
-      {searchResults.data.length > 0 ? (
-        searchResults.data.map((item: any) => (
+      {searchResults?.data.data.length > 0 ? (
+        searchResults?.data.data.map((item: any) => (
           <ExploreTextCard key={item.id} data={item} />
         ))
       ) : (
-        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3">
+        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
           No Content To Show
         </div>
       )}

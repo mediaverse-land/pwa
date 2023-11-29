@@ -41,6 +41,7 @@ const EditUserInfoForm = () => {
   const userCookie = Cookies.get("user");
   const [checked, setChecked] = useState(false);
   const session = useSession();
+  const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState("");
   const [inputErrors, setInputErrors] = useState({
@@ -92,7 +93,7 @@ const EditUserInfoForm = () => {
         })
       );
       router.refresh();
-      router.replace("/explore");
+      router.replace("/web-app/explore/assets");
     } else {
       // console.log("failed");
       setServerErrors(response.error || response.message);
@@ -188,23 +189,19 @@ const EditUserInfoForm = () => {
               {errors.last_name?.message?.toString() || inputErrors.last_name}
             </p>
           </div>
-          <div className="mr-auto text-white">
-            <span className="mr-2">
+          <div className="mr-auto space-x-2">
+            <span>
               <input
-                className="rounded-lg"
                 type="checkbox"
-                checked={checked}
+                checked={isChecked}
                 onClick={() => {
-                  setChecked(!checked);
+                  setIsChecked(!isChecked);
                 }}
               />
             </span>
-            <span>
+            <span className="text-white">
               I'm Agree With{" "}
-              <Link
-                href={`/terms`}
-                className="underline text-blue-500 hover:text-blue-600"
-              >
+              <Link className="underline text-blue-600" href={`/terms`}>
                 Terms
               </Link>
             </span>
@@ -217,8 +214,8 @@ const EditUserInfoForm = () => {
             </p>
           </div>
           <button
-            disabled={loading || !checked}
-            className="bg-[#4E4E61] bg-opacity-50 w-full mt-5 rounded-full h-[40px] text-[14px] leading-4 text-white font-semibold flex items-center justify-center disabled:bg-[#212129c5] disabled:cursor-not-allowed disabled:text-slate-600"
+            disabled={loading || !isChecked}
+            className="bg-[#4E4E61] bg-opacity-50 w-full mt-5 rounded-full h-[40px] text-[14px] leading-4 text-white font-semibold flex items-center justify-center disabled:text-gray-600 disabled:bg-[#4e4e6148] disabled:cursor-not-allowed"
             type="submit"
           >
             {loading ? (

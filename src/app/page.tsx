@@ -135,7 +135,7 @@ const Home = async () => {
               </Link>
             </div>
             <Link
-              href={`/explore`}
+              href={`/web-app/explore`}
               className="w-[278px] h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm leading-none flex justify-center items-center py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]"
             >
               Web App
@@ -177,12 +177,13 @@ const Home = async () => {
           <div className="relative flex overflow-x-hidden w-full animate-marquee-container">
             <div className="animate-marquee whitespace-nowrap flex flex-row w-full">
               {liveData.map((item: any, i: number) => (
-                <img
-                  key={i}
-                  className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
-                  src={item.thumbnail}
-                  alt=""
-                />
+                <Link href={`/web-app/live-channel/${item.id}`} key={item.id}>
+                  <img
+                    className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
+                    src={item.thumbnail}
+                    alt=""
+                  />
+                </Link>
               ))}
             </div>
 
@@ -224,16 +225,21 @@ const Home = async () => {
             <div className="grid grid-rows-4 grid-cols-3 grid-flow-row gap-4 mt-10 grow max-h-[510px]">
               {imageData.slice(0, 9).map((items: any, index: number) => {
                 return (
-                  <ClientImage
-                    key={index}
-                    className={`${
+                  <Link
+                    href={`/web-app/assets/image/${items.name}?id=${items.id}`}
+                    key={items.id}
+                    className={`relative overflow-hidden ${
                       index === 1
                         ? "rounded-[15%] w-full aspect-square col-span-2 row-span-2"
                         : "rounded-[15%] w-full aspect-square"
                     }`}
-                    src={items.asset.thumbnails["336x366"]}
-                    alt={items.name}
-                  />
+                  >
+                    <Image
+                      src={items.asset.thumbnails["336x366"]}
+                      alt={items.name}
+                      fill
+                    />
+                  </Link>
                 );
               })}
             </div>
@@ -253,29 +259,34 @@ const Home = async () => {
               {textData.slice(0, 6).map((items: any, index: number) => {
                 return (
                   <BorderGradient
-                    className="flex flex-col w-full aspect-square box-border rounded-3xl  "
+                    key={items.id}
+                    className="flex flex-col w-full aspect-square box-border rounded-3xl"
                     to="90deg"
                     sColor="#CFCFFC4D"
                     tColor="#CFCFFC00"
                   >
-                    <div key={index} className="h-full flex flex-col">
-                      <p className="text-white text-lg">{items.name}</p>
-                      <p className="text-gray-500 mt-4">
-                        {items.description?.slice(0, 65)}
-                      </p>
-                      <div className="flex mt-auto space-x-2">
-                        <Image
-                          src="/images/mini-avatar.png"
-                          alt="avatar"
-                          width={16}
-                          height={16}
-                          quality={100}
-                        />
-                        <p className="text-xs text-gray-500">
-                          {items.asset.user.username}
+                    <Link
+                      href={`/web-app/assets/text/${items.name}?id=${items.id}`}
+                    >
+                      <div key={index} className="h-full flex flex-col">
+                        <p className="text-white text-lg">{items.name}</p>
+                        <p className="text-gray-500 mt-4">
+                          {items.description?.slice(0, 65)}
                         </p>
+                        <div className="flex mt-auto space-x-2">
+                          <Image
+                            src="/images/mini-avatar.png"
+                            alt="avatar"
+                            width={16}
+                            height={16}
+                            quality={100}
+                          />
+                          <p className="text-xs text-gray-500">
+                            {items.asset.user.username}
+                          </p>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </BorderGradient>
                 );
               })}

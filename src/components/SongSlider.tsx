@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { getMostViewedSongs } from "@/services/contactService";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from "next/link";
 const SongSlider = () => {
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [songoData, setSongData] = useState([]);
@@ -50,27 +51,29 @@ const SongSlider = () => {
           {songoData.map((item: any, index) => {
             return (
               <SwiperSlide className="w-[140px] h-[120px]" key={item.id}>
-                <div className="relative w-[140px] h-[120px]">
-                  <Image
-                    src={item.asset.thumbnails["226x226"]}
-                    className="rounded-xl"
-                    alt="Music Cover"
-                    fill
-                  />
-                </div>
-                <p className="mt-2 ml-1 text-gray-600 text-sm">{item.name}</p>
-                <div className="flex ml-1 mt-1 space-x-2">
-                  <Image
-                    src="/images/mini-avatar.png"
-                    alt="avatar"
-                    width={16}
-                    height={16}
-                    quality={100}
-                  />
-                  <p className="text-xs text-gray-500">
-                    {item.asset.user.username}
-                  </p>
-                </div>
+                <Link href={`/web-app/assets/audio/${item.name}?id=${item.id}`}>
+                  <div className="relative w-[140px] h-[120px]">
+                    <Image
+                      src={item.asset.thumbnails["226x226"]}
+                      className="rounded-xl"
+                      alt="Music Cover"
+                      fill
+                    />
+                  </div>
+                  <p className="mt-2 ml-1 text-gray-600 text-sm">{item.name}</p>
+                  <div className="flex ml-1 mt-1 space-x-2">
+                    <Image
+                      src="/images/mini-avatar.png"
+                      alt="avatar"
+                      width={16}
+                      height={16}
+                      quality={100}
+                    />
+                    <p className="text-xs text-gray-500">
+                      {item.asset.user.username}
+                    </p>
+                  </div>
+                </Link>
               </SwiperSlide>
             );
           })}

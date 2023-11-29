@@ -70,7 +70,7 @@ const ExploreAssetsCard = async ({
 
   return (
     <Link
-      href={`/explore?section=explore&content=asset-single-page&name=${title}&id=${id}&type=${type}`}
+      href={`/web-app/assets/${type}/${title}?id=${id}`}
       className="flex flex-col items-stretch gap-4 min-w-[190px] overflow-hidden max-w-full"
     >
       {/* image */}
