@@ -7,7 +7,7 @@ import {
 } from "@/services/contactService";
 import Link from "next/link";
 
-export const audioData = [
+const audioData = [
   {
     id: 1,
     title: "Velit officia",
@@ -56,11 +56,7 @@ const getRecentlySongsData = async () => {
     return liveData.json();
   }
 };
-const WebAppExploreAudioAssets = async ({
-  activeTab,
-}: {
-  activeTab: string;
-}) => {
+const WebAppExploreAudioAssets = async () => {
   const [mostViewedSongs] = await Promise.all([getMostViewedSongsData()]);
 
   return (
@@ -104,7 +100,7 @@ const WebAppExploreAudioAssets = async ({
               <p className="text-white text-sm ">Recently</p>
             </div>
             <Link
-              href={`/explore?section=explore&content=recently&type=audios`}
+              href={`/web-app/explore/recently/audios`}
               className="text-[14px] text-[#597AFF]"
             >
               View all
@@ -119,7 +115,7 @@ const WebAppExploreAudioAssets = async ({
 
 export default WebAppExploreAudioAssets;
 
-export const RecentlyAudio = async () => {
+const RecentlyAudio = async () => {
   const rececentlySongsData = await getRecentlySongsData();
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6">

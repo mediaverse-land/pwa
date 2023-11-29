@@ -42,9 +42,7 @@ const BuyAssetComponent = ({
     // console.log(req, "req");
     if (req?.status === 200) {
       console.log(req, "req");
-      router.push(
-        `/explore?section=wallet&page=result&type=${assetData.asset.plan}`
-      );
+      router.push(`/web-app/account/buy-asset?type=${assetData.asset.plan}`);
       // if (assetData.asset.plan === 2) {
       // router.push("/explore?section=account&type=ownership");
       // } else if (assetData.asset.plan === 3) {

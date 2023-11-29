@@ -81,7 +81,7 @@ const WebAppExploreTextsAssets = async () => {
               <p className="text-white text-sm ">Recently</p>
             </div>
             <Link
-              href={`/explore?section=explore&content=recently&type=texts`}
+              href={`/web-app/explore/recently/texts`}
               className="text-[14px] text-[#597AFF]"
             >
               View all
@@ -96,7 +96,7 @@ const WebAppExploreTextsAssets = async () => {
 
 export default WebAppExploreTextsAssets;
 
-export const RecentlyTexts = async () => {
+const RecentlyTexts = async () => {
   const rececentlyTextsData = await getRecentlyTextsData();
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-4">

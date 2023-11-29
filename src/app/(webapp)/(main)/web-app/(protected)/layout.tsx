@@ -7,7 +7,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   if (!session?.user) {
     return (
       <div className="w-full h-full">
-        <div className="p-10 mt-10 flex flex-col justify-center items-center gap-6">
+        <div className="p-10 mt-28 flex flex-col justify-center items-center gap-6">
           <div className="text-white font-semibold text-[24px]">
             Please Login To See This Page.
           </div>

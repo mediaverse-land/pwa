@@ -9,6 +9,7 @@ import { SPINNER } from "../SVG/svgs";
 import Cookies from "js-cookie";
 import { redirect, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const schema = z.object({
   username: z
@@ -39,6 +40,7 @@ const schema = z.object({
 const EditUserInfoForm = () => {
   const userCookie = Cookies.get("user");
   const session = useSession();
+  const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState("");
   const [inputErrors, setInputErrors] = useState({
@@ -90,7 +92,7 @@ const EditUserInfoForm = () => {
         })
       );
       router.refresh();
-      router.replace("/explore");
+      router.replace("/web-app/explore/assets");
     } else {
       // console.log("failed");
       setServerErrors(response.error || response.message);
@@ -186,6 +188,23 @@ const EditUserInfoForm = () => {
               {errors.last_name?.message?.toString() || inputErrors.last_name}
             </p>
           </div>
+          <div className="mr-auto space-x-2">
+            <span>
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onClick={() => {
+                  setIsChecked(!isChecked);
+                }}
+              />
+            </span>
+            <span className="text-white">
+              I'm Agree With{" "}
+              <Link className="underline text-blue-600" href={`/terms`}>
+                Terms
+              </Link>
+            </span>
+          </div>
         </div>
         <div>
           <div>
@@ -194,8 +213,8 @@ const EditUserInfoForm = () => {
             </p>
           </div>
           <button
-            disabled={loading}
-            className="bg-[#4E4E61] bg-opacity-50 w-full mt-5 rounded-full h-[40px] text-[14px] leading-4 text-white font-semibold flex items-center justify-center"
+            disabled={loading || !isChecked}
+            className="bg-[#4E4E61] bg-opacity-50 w-full mt-5 rounded-full h-[40px] text-[14px] leading-4 text-white font-semibold flex items-center justify-center disabled:text-gray-600 disabled:bg-[#4e4e6148] disabled:cursor-not-allowed"
             type="submit"
           >
             {loading ? (

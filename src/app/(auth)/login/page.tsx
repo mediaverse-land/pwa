@@ -14,7 +14,7 @@ const Login = async (props: any) => {
   const session = await getServerSession(authOptions);
   // console.log(session, "server session");
   if (session) {
-    redirect("/explore");
+    redirect("/web-app/explore/assets");
   }
   return (
     <Motion>

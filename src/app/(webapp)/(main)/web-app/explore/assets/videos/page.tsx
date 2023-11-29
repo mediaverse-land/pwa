@@ -50,11 +50,7 @@ const getRecentlyVideosData = async () => {
   }
 };
 
-const WebAppExploreVideoAssets = async ({
-  activeTab,
-}: {
-  activeTab: string;
-}) => {
+const WebAppExploreVideoAssets = async () => {
   const [mostViewedVideos] = await Promise.all([getMostViewedVideosData()]);
 
   return (
@@ -98,7 +94,7 @@ const WebAppExploreVideoAssets = async ({
               <p className="text-white text-sm ">Recently</p>
             </div>
             <Link
-              href={`/explore?section=explore&content=recently&type=videos`}
+              href={`/web-app/explore/recently/videos`}
               className="text-[14px] text-[#597AFF]"
             >
               View all
@@ -113,7 +109,7 @@ const WebAppExploreVideoAssets = async ({
 
 export default WebAppExploreVideoAssets;
 
-export const RecentlyVideos = async () => {
+const RecentlyVideos = async () => {
   const rececentlyVideosData = await getRecentlyVideosData();
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6">

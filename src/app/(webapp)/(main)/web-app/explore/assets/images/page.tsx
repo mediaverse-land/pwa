@@ -191,7 +191,7 @@ const WebAppImageAssets = async () => {
               <p className="text-white text-sm ">Recently</p>
             </div>
             <Link
-              href={`/explore?section=explore&content=recently&type=images`}
+              href={`/web-app/explore/recently/images`}
               className="text-[14px] text-[#597AFF]"
             >
               View all
@@ -205,15 +205,14 @@ const WebAppImageAssets = async () => {
 };
 
 export default WebAppImageAssets;
-
-export const RecentlyImages = async () => {
+const RecentlyImages = async () => {
   const data = await getRecentlyImagesData();
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2">
       {data.map((items: any, index: number) => {
         return (
           <Link
-            href={`/explore?section=explore&content=asset-single-page&name=${items.name}&id=${items.id}&type=image`}
+            href={`/web-app/assets/image/${items.name}?id=${items.id}`}
             key={items.id}
             className={`relative overflow-hidden rounded-lg w-full aspect-square `}
           >

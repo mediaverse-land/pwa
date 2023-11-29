@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import Image from "next/image";
 import WebAppMainNavbar from "./WebAppMainNavbar";
 import WebAppSideBarBottomSection from "./WebAppSibeBarBottomSection";
+import Link from "next/link";
 
 const WebAppSideBar = async () => {
   const session = await getServerSession(authOptions);
@@ -43,7 +44,20 @@ const WebAppSideBar = async () => {
           <WebAppMainNavbar />
         </div>
       </div>
-      <WebAppSideBarBottomSection />
+      {session?.user ? (
+        <WebAppSideBarBottomSection />
+      ) : (
+        <Link
+          href={`/login`}
+          style={{
+            background: `linear-gradient(0deg, #597AFF, #597AFF), linear-gradient(126.58deg, rgba(255, 255, 255, 0.3) 23.2%, rgba(255, 255, 255, 0) 71.3%)`,
+            boxShadow: `0px 0px 25px 0px rgba(89, 122, 255, 0.3)`,
+          }}
+          className="px-10 py-2 rounded-full text-center text-white font-semibold"
+        >
+          Login
+        </Link>
+      )}
     </aside>
   );
 };

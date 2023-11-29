@@ -102,7 +102,7 @@ const LoginWithPhone = () => {
       if (res.ok && response) {
         signIn(
           "loginWithOTP",
-          { callbackUrl: params.get("refer") || "/explore" },
+          { callbackUrl: params.get("refer") || "/web-app/explore/assets" },
           { user: JSON.stringify(response) }
         );
         // console.log(response);
@@ -282,7 +282,7 @@ const LoginWithUsername = () => {
     if (req.ok && res) {
       signIn(
         "loginWithUsername",
-        { callbackUrl: params.get("refer") || "/explore" },
+        { callbackUrl: params.get("refer") || "/web-app/explore/assets" },
         { user: JSON.stringify(res) }
       );
     } else {

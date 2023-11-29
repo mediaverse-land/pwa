@@ -1,18 +1,18 @@
 "use client";
-
 import {
   ACTIVE_LOGOUT,
   ACTIVE_SETTING,
   INACTIVE_LOGOUT,
   INACTIVE_SETTING,
 } from "@/components/SVG/svgs";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const WebAppSideBarBottomSection = () => {
   const pathname = usePathname();
   const activeSection = pathname.split("/")[2];
-  console.log(activeSection, "activeSection");
+
   return (
     <div className="flex flex-col items-stretch gap-6">
       <Link href={`/web-app/setting`} className="flex items-center gap-4">

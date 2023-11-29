@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
     }
     case "/web-app/account": {
       return NextResponse.redirect(
-        new URL("/web-app/account/subsribe", request.url)
+        new URL("/web-app/account/subscribe", request.url)
       );
     }
     default:

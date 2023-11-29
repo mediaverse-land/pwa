@@ -28,7 +28,7 @@ const ExploreAudioCard = ({
 }) => {
   return (
     <Link
-      href={`/explore?section=explore&content=asset-single-page&name=${title}&id=${id}&type=audio`}
+      href={`/web-app/assets/audio/${title}?id=${id}`}
       className="flex flex-col items-stretch gap-3"
     >
       <div
