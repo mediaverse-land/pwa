@@ -6,5 +6,8 @@ services:
       context: ./
       dockerfile: Dockerfile
     restart: always
+    volumes:
+      - /app/node_modules
+      - /app/.next
     ports:
       - ${APP_EXPOSED_PORT:-0}:3000
