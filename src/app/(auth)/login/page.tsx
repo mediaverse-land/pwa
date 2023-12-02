@@ -10,6 +10,7 @@ import { LoginWithPhone, LoginWithUsername } from "@/components/LoginInputs";
 
 const Login = async (props: any) => {
   let loginType = props.searchParams.type || "phone";
+  let refer = props.searchParams.refer;
 
   const session = await getServerSession(authOptions);
   // console.log(session, "server session");
@@ -58,14 +59,14 @@ const Login = async (props: any) => {
                   </div>
                   {loginType === "phone" ? (
                     <Link
-                      href={`/login?type=account`}
+                      href={{ pathname: '/login', query: { type: 'account', refer: refer, } }}
                       className="text-[12px] leading-3 text-[#597AFF]"
                     >
                       Log in with password?
                     </Link>
                   ) : (
                     <Link
-                      href={`/login?type=phone`}
+                      href={{ pathname: '/login', query: { type: 'phone', refer: refer, } }}
                       className="text-[12px] leading-3 text-[#597AFF]"
                     >
                       Log in with code?
