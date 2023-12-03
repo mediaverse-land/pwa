@@ -27,7 +27,6 @@ RUN npm run build
 FROM base AS runner
 WORKDIR /app
 
-COPY --from=builder /app/.next ./test
 COPY --from=builder /app/.next/standalone ./standalone
 COPY --from=builder /app/public /app/standalone/public
 COPY --from=builder /app/.next/static /app/standalone/.next/static
