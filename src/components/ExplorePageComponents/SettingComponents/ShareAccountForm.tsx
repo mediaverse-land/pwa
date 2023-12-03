@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import Cookies from "js-cookie";
 const schema = z.object({
   username: z.string().min(1, {
     message: "*Please Enter Your Username",
@@ -23,7 +22,6 @@ const ShareAccountForm = () => {
     isOpen: false,
     info: {},
   });
-  const userCookie = Cookies.get("user");
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState("");
   const [inputErrors, setInputErrors] = useState({

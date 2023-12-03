@@ -5,7 +5,6 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import TwitterProvider from "next-auth/providers/twitter";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { cookies } from "next/headers";
 
 export const authOptions: AuthOptions = {
   pages: {
@@ -63,7 +62,6 @@ export const authOptions: AuthOptions = {
           const res = await req.json();
           // console.log(res, "res");
           if (req.ok) {
-            cookies().set("user", JSON.stringify(res));
             data.user.token = res.token;
             data.user.cellphone = res.user.cellphone;
             data.user.id = res.user.id;
@@ -88,7 +86,6 @@ export const authOptions: AuthOptions = {
           const res = await req.json();
           // console.log(res, "res");
           if (req.ok) {
-            cookies().set("user", JSON.stringify(res));
             return data;
           } else {
             throw new Error("Failed to login");
@@ -146,7 +143,6 @@ export const authOptions: AuthOptions = {
           //   code: reqInfo.user.status,
           //   id: reqInfo.user.id,
           // };
-          cookies().set("user", JSON.stringify(userInfo));
           const user = {
             id: userInfo.user.id,
             name: `${userInfo.user.first_name || ""} ${
@@ -183,7 +179,6 @@ export const authOptions: AuthOptions = {
           //   code: reqInfo.user.status,
           //   id: reqInfo.user.id,
           // };
-          cookies().set("user", JSON.stringify(userInfo));
           const user = {
             id: userInfo.user.id,
             token: userInfo.token,
@@ -220,7 +215,6 @@ export const authOptions: AuthOptions = {
           //   code: reqInfo.user.status,
           //   id: reqInfo.user.id,
           // };
-          cookies().set("user", JSON.stringify(userInfo));
           const user = {
             id: userInfo.user.id,
             token: userInfo.token,
@@ -239,6 +233,9 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+  session: {
+    maxAge: 60 * 60 * 24 * 365 * 100,
+  },
 };
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

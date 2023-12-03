@@ -38,7 +38,6 @@ const schema = z.object({
     .min(1),
 });
 const EditUserInfoForm = () => {
-  const userCookie = Cookies.get("user");
   const [checked, setChecked] = useState(false);
   const session = useSession();
   const [isChecked, setIsChecked] = useState(false);
@@ -68,15 +67,11 @@ const EditUserInfoForm = () => {
     });
     const request = await signUpCompletion({
       data: data,
-      token: userCookie && JSON.parse(userCookie).token,
+      token: session.data?.user.token || "",
     });
     const response = await request.json();
     // console.log(request, "signUpCompletion");
     if (request.ok) {
-      // console.log("success");
-      Cookies.set("isLogin", "true", {
-        expires: 1,
-      });
       Cookies.set("EditUserInfo", "false", {
         expires: 1,
       });
@@ -85,13 +80,6 @@ const EditUserInfoForm = () => {
         picture: response.image,
         email: response.email,
       });
-      Cookies.set(
-        "user",
-        JSON.stringify({
-          user: { ...response },
-          token: userCookie && JSON.parse(userCookie).token,
-        })
-      );
       router.refresh();
       router.replace("/web-app/explore/assets");
     } else {

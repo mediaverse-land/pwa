@@ -9,7 +9,6 @@ import {
 } from "@/components/SVG/svgs";
 import { getUserMessages, getUserWallets } from "@/services/contactService";
 import { getServerSession } from "next-auth";
-import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 const getUserWalletData = async (token: string) => {

@@ -4,10 +4,10 @@ import ExploreVideoCard from "../shared/VideoCard";
 import ExploreAudioCard from "../shared/AudioCard";
 import ExploreTextCard from "../shared/TextCard";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
-import { cookies } from "next/headers";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import LogoutNoUser from "./Logout";
 
 const getOwnership = async ({
   params,
@@ -19,35 +19,31 @@ const getOwnership = async ({
   try {
     const req = await getOwnershipAssets({ params, token });
     // console.log(req);
-    if (req.ok) {
-      return req.json();
-    } else {
-      throw new Error("Unauthorized");
-    }
+    return {
+      data: await req.json(),
+      status: req.status,
+    };
   } catch (error) {
-    throw new Error(`${error}`);
+    console.log(error);
   }
 };
 
-export const OwnershipAllAssets = async ({
-  searchParams,
-}: {
-  searchParams: {
-    [key: string]: string;
-  };
-}) => {
-  const cookie = cookies().get("user");
-  const token = cookie && JSON.parse(cookie?.value)?.token;
+export const OwnershipAllAssets = async () => {
+  const session = await getServerSession(authOptions);
+  const token = session?.user.token || "";
   const searchResults = await getOwnership({
     params: "/assets",
     token: `${token}`,
   });
+  if (searchResults?.status === 401) {
+    return <LogoutNoUser />;
+  }
   const concatData = () => {
     const data = [
-      ...searchResults?.images,
-      ...searchResults?.videos,
-      ...searchResults?.texts,
-      ...searchResults?.audios,
+      ...searchResults?.data?.images,
+      ...searchResults?.data?.videos,
+      ...searchResults?.data?.texts,
+      ...searchResults?.data?.audios,
     ];
     return data;
   };
@@ -94,23 +90,20 @@ export const OwnershipAllAssets = async ({
     </div>
   );
 };
-export const OwnershipImageAssets = async ({
-  searchParams,
-}: {
-  searchParams: {
-    [key: string]: string;
-  };
-}) => {
-  const cookie = cookies().get("user");
-  const token = cookie && JSON.parse(cookie?.value)?.token;
+export const OwnershipImageAssets = async () => {
+  const session = await getServerSession(authOptions);
+  const token = session?.user.token || "";
   const searchResults = await getOwnership({
     params: "/images",
     token: `${token}`,
   });
+  if (searchResults?.status === 401) {
+    return <LogoutNoUser />;
+  }
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2 px-6 py-7 h-full overflow-y-auto">
-      {searchResults.data.length > 0 ? (
-        searchResults.data.map((items: any, index: number) => {
+      {searchResults?.data.data.length > 0 ? (
+        searchResults?.data.data.map((items: any, index: number) => {
           return (
             <Link
               href={`/explore?section=explore&content=asset-single-page&name=${items.name}&id=${items.id}&type=image`}
@@ -133,24 +126,20 @@ export const OwnershipImageAssets = async ({
     </div>
   );
 };
-export const OwnershipVideoAssets = async ({
-  searchParams,
-}: {
-  searchParams: {
-    [key: string]: string;
-  };
-}) => {
-  const cookie = cookies().get("user");
-  const token = cookie && JSON.parse(cookie?.value)?.token;
+export const OwnershipVideoAssets = async () => {
+  const session = await getServerSession(authOptions);
+  const token = session?.user.token || "";
   const searchResults = await getOwnership({
     params: "/videos",
     token: token,
   });
-  const session = await getServerSession(authOptions);
+  if (searchResults?.status === 401) {
+    return <LogoutNoUser />;
+  }
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
-      {searchResults.data.length > 0 ? (
-        searchResults.data.map((items: any, index: number) => {
+      {searchResults?.data.data.length > 0 ? (
+        searchResults?.data.data.map((items: any, index: number) => {
           return (
             <ExploreVideoCard
               id={items.id}
@@ -174,24 +163,20 @@ export const OwnershipVideoAssets = async ({
     </div>
   );
 };
-export const OwnershipAudioAssets = async ({
-  searchParams,
-}: {
-  searchParams: {
-    [key: string]: string;
-  };
-}) => {
-  const cookie = cookies().get("user");
-  const token = cookie && JSON.parse(cookie?.value)?.token;
+export const OwnershipAudioAssets = async () => {
+  const session = await getServerSession(authOptions);
+  const token = session?.user.token || "";
   const searchResults = await getOwnership({
     params: "/audios",
     token: token,
   });
-  const session = await getServerSession(authOptions);
+  if (searchResults?.status === 401) {
+    return <LogoutNoUser />;
+  }
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
-      {searchResults.data.length > 0 ? (
-        searchResults.data.map((items: any, index: number) => {
+      {searchResults?.data.data.length > 0 ? (
+        searchResults?.data.data.map((items: any, index: number) => {
           return (
             <ExploreAudioCard
               id={items.id}
@@ -215,23 +200,20 @@ export const OwnershipAudioAssets = async ({
     </div>
   );
 };
-export const OwnershipTextAssets = async ({
-  searchParams,
-}: {
-  searchParams: {
-    [key: string]: string;
-  };
-}) => {
-  const cookie = cookies().get("user");
-  const token = cookie && JSON.parse(cookie?.value)?.token;
+export const OwnershipTextAssets = async () => {
+  const session = await getServerSession(authOptions);
+  const token = session?.user.token || "";
   const searchResults = await getOwnership({
     params: "/texts",
     token: token,
   });
+  if (searchResults?.status === 401) {
+    return <LogoutNoUser />;
+  }
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
-      {searchResults.data.length > 0 ? (
-        searchResults.data.map((item: any) => (
+      {searchResults?.data.data.length > 0 ? (
+        searchResults?.data.data.map((item: any) => (
           <ExploreTextCard key={item.id} data={item} />
         ))
       ) : (

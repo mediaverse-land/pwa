@@ -71,7 +71,6 @@ const OTPForm = () => {
         Cookies.set("EditUserInfo", "true", {
           expires: 1,
         });
-        Cookies.set("user", JSON.stringify(response));
         signIn(
           "loginWithOTP",
           { callbackUrl: "/sign-up/info" },

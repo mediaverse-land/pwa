@@ -5,7 +5,6 @@ import {
   TEXT_ICON,
   VIDEO_ICON,
 } from "@/components/SVG/svgs";
-import { cookies } from "next/headers";
 import Link from "next/link";
 type IExploreSectionNavs = {
   id: number;
@@ -58,7 +57,6 @@ const ExploreSearchAndNavSection = ({
 }: {
   activeTab: "All" | "Images" | "Videos" | "Audios" | "Texts";
 }) => {
-  // console.log(cookies().get("user"));
   return (
     <div className="flex flex-col items-stretch gap-6 sticky top-0 left-0 w-full z-50">
       {/* search section */}

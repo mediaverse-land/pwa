@@ -1,7 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getProfileStatics } from "@/services/contactService";
 import { getServerSession } from "next-auth";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import LogoutNoUser from "./Logout";
 

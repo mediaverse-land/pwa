@@ -8,7 +8,6 @@ import { set, useForm } from "react-hook-form";
 import { z } from "zod";
 import SubSectionHeader from "../shared/SubSectionHeader";
 import { SPINNER } from "@/components/SVG/svgs";
-import Cookies from "js-cookie";
 import { getUserProfile, putUserProfile } from "@/services/contactService";
 import { revalidatePath, revalidateTag } from "next/cache";
 const putUserProfileData = async ({
@@ -54,7 +53,6 @@ const schema = z.object({
   // }),
 });
 const SettingGeneralInformation = () => {
-  const userCookie = Cookies.get("user");
   const session = useSession();
   const [loading, setLoading] = useState(true);
   const [serverErrors, setServerErrors] = useState("");
@@ -125,7 +123,7 @@ const SettingGeneralInformation = () => {
     });
     setServerErrors("");
     setMessage("");
-    const token = userCookie && JSON.parse(userCookie).token;
+    const token = session.data?.user.token || "";
     const res = await putUserProfileData({ data, token });
     // console.log(res, "edit info");
     if (res?.status === 200) {

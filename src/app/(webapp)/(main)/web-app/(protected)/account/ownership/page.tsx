@@ -68,19 +68,19 @@ const WebAppAccountOwnership = (params: any) => {
     };
   } = {
     All: {
-      component: <OwnershipAllAssets searchParams={params.searchParams} />,
+      component: <OwnershipAllAssets />,
     },
     Images: {
-      component: <OwnershipImageAssets searchParams={params.searchParams} />,
+      component: <OwnershipImageAssets />,
     },
     Texts: {
-      component: <OwnershipTextAssets searchParams={params.searchParams} />,
+      component: <OwnershipTextAssets />,
     },
     Audios: {
-      component: <OwnershipAudioAssets searchParams={params.searchParams} />,
+      component: <OwnershipAudioAssets />,
     },
     Videos: {
-      component: <OwnershipVideoAssets searchParams={params.searchParams} />,
+      component: <OwnershipVideoAssets />,
     },
   };
   return (

@@ -2,7 +2,6 @@
 
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
 
 const WebAppLogout = () => {
   const router = useRouter();
@@ -18,8 +17,6 @@ const WebAppLogout = () => {
             <div
               onClick={async (e) => {
                 e.preventDefault();
-                Cookies.set("isLogin", "false");
-                Cookies.remove("user");
                 signOut({ callbackUrl: "/" });
               }}
               className="bg-[rgba(78,78,97,0.50)] rounded-full py-4 text-center cursor-pointer w-full"
