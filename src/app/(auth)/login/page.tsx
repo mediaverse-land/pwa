@@ -15,7 +15,9 @@ const Login = async (props: any) => {
   const session = await getServerSession(authOptions);
   // console.log(session, "server session");
   if (session) {
-    redirect(refer ? `${refer}?token=${session.user.token}` :"/web-app/explore/assets");
+    redirect(
+      refer ? `${refer}?token=${session.user.token}` : "/web-app/explore/assets"
+    );
   }
   return (
     <Motion>
@@ -59,14 +61,20 @@ const Login = async (props: any) => {
                   </div>
                   {loginType === "phone" ? (
                     <Link
-                      href={{ pathname: '/login', query: { type: 'account', refer: refer, } }}
+                      href={{
+                        pathname: "/login",
+                        query: { type: "account", refer: refer },
+                      }}
                       className="text-[12px] leading-3 text-[#597AFF]"
                     >
                       Log in with password?
                     </Link>
                   ) : (
                     <Link
-                      href={{ pathname: '/login', query: { type: 'phone', refer: refer, } }}
+                      href={{
+                        pathname: "/login",
+                        query: { type: "phone", refer: refer },
+                      }}
                       className="text-[12px] leading-3 text-[#597AFF]"
                     >
                       Log in with code?
