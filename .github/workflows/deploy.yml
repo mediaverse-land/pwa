@@ -11,13 +11,13 @@ jobs:
     - name: Deploy
       uses: appleboy/ssh-action@master
       with:
-        host: vm02
-        port: 22
-        username: root
+        host: ${{ vars.PRODUCTION_SERVER_HOST }}
+        port: ${{ vars.PRODUCTION_SERVER_PORT }}
+        username: ${{ vars.PRODUCTION_SERVER_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        proxy_host: 13.37.197.59
-        proxy_port: 22
-        proxy_username: root
+        proxy_host: ${{ vars.PRODUCTION_PROXY_HOST }}
+        proxy_port: ${{ vars.PRODUCTION_PROXY_PORT }}
+        proxy_username: ${{ vars.PRODUCTION_PROXY_USER }}
         proxy_key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd /srv/pwa
