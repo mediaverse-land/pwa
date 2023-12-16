@@ -7,6 +7,7 @@ import {
   INACTIVE_EXPLORE,
   INACTIVE_WALLET,
 } from "@/components/SVG/svgs";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
@@ -77,34 +78,44 @@ const exploreSections: IexploreSections[] = [
 const WebAppMainNavbar = () => {
   const pathname = usePathname();
   const activeSection = pathname.split("/")[2];
+  const session = useSession();
   return (
     <nav>
       <ul className="flex flex-col gap-6">
-        {exploreSections.map((item) => (
-          <li key={item.id} className="">
-            <Link
-              className="flex items-center gap-4 cursor-pointer text-[14px] font-normal"
-              href={`/web-app/${item.link}`}
-            >
-              <div
-                className={`${
-                  activeSection === item.link ? "font-semibold" : "duration-150"
-                }`}
+        {exploreSections.map((item) => {
+          if (
+            (item.name !== "Explore" && session.status === "unauthenticated") ||
+            session.status === "loading"
+          )
+            return;
+          return (
+            <li key={item.id} className="">
+              <Link
+                className="flex items-center gap-4 cursor-pointer text-[14px] font-normal"
+                href={`/web-app/${item.link}`}
               >
-                {activeSection === item.link
-                  ? item.active_icon
-                  : item.inactive_icon}
-              </div>
-              <div
-                className={`duration-150 ${
-                  activeSection === item.link ? "font-medium text-white" : ""
-                }`}
-              >
-                {item.name}
-              </div>
-            </Link>
-          </li>
-        ))}
+                <div
+                  className={`${
+                    activeSection === item.link
+                      ? "font-semibold"
+                      : "duration-150"
+                  }`}
+                >
+                  {activeSection === item.link
+                    ? item.active_icon
+                    : item.inactive_icon}
+                </div>
+                <div
+                  className={`duration-150 ${
+                    activeSection === item.link ? "font-medium text-white" : ""
+                  }`}
+                >
+                  {item.name}
+                </div>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
