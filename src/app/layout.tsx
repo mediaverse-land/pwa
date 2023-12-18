@@ -23,13 +23,13 @@ export default function RootLayout({
     <html lang="en">
       <Script
         async
-        src="https://www.googletagmanager.com/gtag/js?id=G-667BH3TKMH"
+        src="https://www.googletagmanager.com/gtag/js?id=GTM-WPLNXH7D"
       ></Script>
       <Script>
         {`window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-667BH3TKMH');`}
+  gtag('config', 'GTM-WPLNXH7D');`}
       </Script>
       <body
         className={`${inter.className} min-h-screen flex flex-col justify-between [&_>_*:nth-child(2)]:grow`}
