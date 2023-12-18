@@ -105,7 +105,7 @@ const LoginWithPhone = () => {
           {
             callbackUrl: params.get("refer")
               ? params.get("refer") + "?token=" + response.token
-              : "/web-app/explore/assets",
+              : "/app/explore/",
           },
           { user: JSON.stringify(response) }
         );
@@ -289,7 +289,7 @@ const LoginWithUsername = () => {
         {
           callbackUrl: params.get("refer")
             ? params.get("refer") + "?token=" + res.token
-            : "/web-app/explore/assets",
+            : "/app/explore/",
         },
         { user: JSON.stringify(res) }
       );

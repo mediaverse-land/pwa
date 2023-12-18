@@ -67,7 +67,9 @@ const ExploreMostViewd = ({
         {mostViewedImages.slice(0, 6).map((items: any, index: number) => {
           return (
             <Link
-              href={`/web-app/assets/image/${items.name}?id=${items.id}`}
+              href={`/app/assets/image/${items.name.replaceAll(" ", "-")}?id=${
+                items.id
+              }`}
               key={items.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square ${
                 index === 1 ? " col-span-2 row-span-2" : ""

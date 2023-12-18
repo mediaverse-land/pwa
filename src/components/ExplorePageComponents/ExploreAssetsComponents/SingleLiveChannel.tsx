@@ -23,7 +23,7 @@ const SignleLiveChannel = async ({
     [key: string]: string;
   };
 }) => {
-  const id = searchParams.id || redirect("/explore?section=explore");
+  const id = searchParams.id || redirect("/app/explore");
   const singleLiveData = await getSingleLiveData({ id });
   // console.log(singleLiveData, "live channel data");
   return (

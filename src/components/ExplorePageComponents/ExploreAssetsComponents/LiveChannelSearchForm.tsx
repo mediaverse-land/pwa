@@ -18,10 +18,10 @@ const LiveChannelSearchFrom = ({
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputValue.length > 1 && inputValue.length < 100) {
-      router.push(`/web-app/live-channel?title=${inputValue}`);
+      router.push(`/app/lives?title=${inputValue.replaceAll(" ", "-")}`);
     }
     if (inputValue.trim().length === 0) {
-      router.push(`/web-app/live-channel`);
+      router.push(`/app/lives`);
     }
   };
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

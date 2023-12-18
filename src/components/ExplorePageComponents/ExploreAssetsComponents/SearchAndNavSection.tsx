@@ -61,7 +61,7 @@ const ExploreSearchAndNavSection = ({
     <div className="flex flex-col items-stretch gap-6 sticky top-0 left-0 w-full z-50">
       {/* search section */}
       <Link
-        href={`/web-app/explore/search-form`}
+        href={`/app/explore/search-form`}
         className="bg-[#0E0E124D] p-6 backdrop-blur-md rounded-b-[45px_35px] select-none"
       >
         <div className="h-[40px] rounded-lg px-4 py-3 border border-[#353542] flex gap-8 items-center">
@@ -77,7 +77,7 @@ const ExploreSearchAndNavSection = ({
       <div className="rounded-lg grid grid-flow-col grid-rows-1 bg-[#0E0E1280] backdrop-blur-md mx-10">
         {ExploreSectionNavs.slice(0, 5).map((tab) => (
           <Link
-            href={`/web-app/explore/assets${tab.link}`}
+            href={`/app/explore${tab.link}`}
             key={tab.id}
             className="text-center flex flex-col items-center justify-center cursor-pointer h-full"
           >

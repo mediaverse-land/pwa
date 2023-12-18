@@ -51,7 +51,12 @@ const SongSlider = () => {
           {songoData.map((item: any, index) => {
             return (
               <SwiperSlide className="w-[140px] h-[120px]" key={item.id}>
-                <Link href={`/web-app/assets/audio/${item.name}?id=${item.id}`}>
+                <Link
+                  href={`/app/assets/audio/${item.name.replaceAll(
+                    " ",
+                    "-"
+                  )}?id=${item.id}`}
+                >
                   <div className="relative w-[140px] h-[120px]">
                     <Image
                       src={item.asset.thumbnails["226x226"]}

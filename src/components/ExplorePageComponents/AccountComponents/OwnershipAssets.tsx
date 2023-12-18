@@ -35,7 +35,17 @@ export const OwnershipAllAssets = async () => {
     params: "/assets",
     token: `${token}`,
   });
-  if (searchResults?.status === 401) {
+
+  if (searchResults?.status === 406) {
+    return (
+      <Link
+        href={`/sign-up/info`}
+        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
+      >
+        Please Complete Your Information To See This Section
+      </Link>
+    );
+  } else if (searchResults?.status === 401) {
     return <LogoutNoUser />;
   }
   const concatData = () => {
@@ -97,7 +107,16 @@ export const OwnershipImageAssets = async () => {
     params: "/images",
     token: `${token}`,
   });
-  if (searchResults?.status === 401) {
+  if (searchResults?.status === 406) {
+    return (
+      <Link
+        href={`/sign-up/info`}
+        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
+      >
+        Please Complete Your Information To See This Section
+      </Link>
+    );
+  } else if (searchResults?.status === 401) {
     return <LogoutNoUser />;
   }
   return (
@@ -106,7 +125,9 @@ export const OwnershipImageAssets = async () => {
         searchResults?.data.data.map((items: any, index: number) => {
           return (
             <Link
-              href={`/explore?section=explore&content=asset-single-page&name=${items.name}&id=${items.id}&type=image`}
+              href={`/app/assets/image/${items.name.replaceAll(" ", "-")}?id=${
+                items.id
+              }`}
               key={items.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
@@ -133,7 +154,16 @@ export const OwnershipVideoAssets = async () => {
     params: "/videos",
     token: token,
   });
-  if (searchResults?.status === 401) {
+  if (searchResults?.status === 406) {
+    return (
+      <Link
+        href={`/sign-up/info`}
+        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
+      >
+        Please Complete Your Information To See This Section
+      </Link>
+    );
+  } else if (searchResults?.status === 401) {
     return <LogoutNoUser />;
   }
   return (
@@ -170,7 +200,16 @@ export const OwnershipAudioAssets = async () => {
     params: "/audios",
     token: token,
   });
-  if (searchResults?.status === 401) {
+  if (searchResults?.status === 406) {
+    return (
+      <Link
+        href={`/sign-up/info`}
+        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
+      >
+        Please Complete Your Information To See This Section
+      </Link>
+    );
+  } else if (searchResults?.status === 401) {
     return <LogoutNoUser />;
   }
   return (
@@ -207,7 +246,16 @@ export const OwnershipTextAssets = async () => {
     params: "/texts",
     token: token,
   });
-  if (searchResults?.status === 401) {
+  if (searchResults?.status === 406) {
+    return (
+      <Link
+        href={`/sign-up/info`}
+        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
+      >
+        Please Complete Your Information To See This Section
+      </Link>
+    );
+  } else if (searchResults?.status === 401) {
     return <LogoutNoUser />;
   }
   return (

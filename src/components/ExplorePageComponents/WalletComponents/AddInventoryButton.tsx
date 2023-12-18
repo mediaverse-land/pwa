@@ -25,7 +25,7 @@ const AddInventoryButton = async () => {
           Please complete your informatoin first:
         </span>
         <Link
-          href={`/web-app/setting/account/general-info`}
+          href={`/app/setting/account/general-info`}
           className="underline hover:text-[#3f3f6f]"
         >
           Click Here

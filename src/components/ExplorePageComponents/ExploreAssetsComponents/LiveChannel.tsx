@@ -23,10 +23,7 @@ export const ExploreLiveChannel = ({ liveData }: { liveData: any }) => {
           />
           <p className="text-white text-sm ">live channel</p>
         </div>
-        <Link
-          href={`/web-app/live-channel`}
-          className="text-[14px] text-[#597AFF]"
-        >
+        <Link href={`/app/lives`} className="text-[14px] text-[#597AFF]">
           View all
         </Link>
       </div>
@@ -35,7 +32,7 @@ export const ExploreLiveChannel = ({ liveData }: { liveData: any }) => {
           <div className="flex w-full overflow-x-auto items-center">
             {liveData.map((item: any, i: number) => (
               <Link
-                href={`/web-app/live-channel/${item.id}`}
+                href={`/app/lives/${item.id}`}
                 key={i}
                 className="relative rounded-[8px] min-w-[190px] w-[190px] h-[125px] min-h-[190px] mr-[8px] overflow-hidden"
               >

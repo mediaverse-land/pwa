@@ -1,6 +1,6 @@
 import { PostCommentData } from "@/types";
 
-export const URL = process.env.BASE_URL;
+export const URL = process.env.BASE_URL ?? "https://api.mediaverse.land/v2";
 
 const fetchInstance = (url: string) => {
   if (process.env.NODE_ENV === "production")

@@ -81,7 +81,7 @@ const EditUserInfoForm = () => {
         email: response.email,
       });
       router.refresh();
-      router.replace("/web-app/explore/assets");
+      router.replace("/app/explore/");
     } else {
       // console.log("failed");
       setServerErrors(response.error || response.message);

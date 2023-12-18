@@ -135,7 +135,7 @@ const Home = async () => {
               </Link>
             </div>
             <Link
-              href={`/web-app/explore`}
+              href={`/app/explore`}
               className="w-[278px] h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm leading-none flex justify-center items-center py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]"
             >
               Web App
@@ -177,7 +177,7 @@ const Home = async () => {
           <div className="relative flex overflow-x-hidden w-full animate-marquee-container">
             <div className="animate-marquee whitespace-nowrap flex flex-row w-full">
               {liveData.map((item: any, i: number) => (
-                <Link href={`/web-app/live-channel/${item.id}`} key={item.id}>
+                <Link href={`/app/lives/${item.id}`} key={item.id}>
                   <img
                     className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
                     src={item.thumbnail}
@@ -226,7 +226,10 @@ const Home = async () => {
               {imageData.slice(0, 9).map((items: any, index: number) => {
                 return (
                   <Link
-                    href={`/web-app/assets/image/${items.name}?id=${items.id}`}
+                    href={`/app/assets/image/${items.name.replaceAll(
+                      " ",
+                      "-"
+                    )}?id=${items.id}`}
                     key={items.id}
                     className={`relative overflow-hidden ${
                       index === 1
@@ -266,7 +269,10 @@ const Home = async () => {
                     tColor="#CFCFFC00"
                   >
                     <Link
-                      href={`/web-app/assets/text/${items.name}?id=${items.id}`}
+                      href={`/app/assets/text/${items.name.replaceAll(
+                        " ",
+                        "-"
+                      )}?id=${items.id}`}
                     >
                       <div key={index} className="h-full flex flex-col">
                         <p className="text-white text-lg">{items.name}</p>

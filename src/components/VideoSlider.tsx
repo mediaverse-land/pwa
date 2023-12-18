@@ -56,7 +56,12 @@ const VideoSlider = () => {
                 style={{}}
                 className="w-[200px] max-w-[200px] h-[250px] cursor-pointer rounded-2xl"
               >
-                <Link href={`/web-app/assets/video/${item.name}?id=${item.id}`}>
+                <Link
+                  href={`/app/assets/video/${item.name.replaceAll(
+                    " ",
+                    "-"
+                  )}?id=${item.id}`}
+                >
                   <div className="relative w-full aspect-square">
                     <Image
                       src={item.asset.thumbnails["226x226"]}

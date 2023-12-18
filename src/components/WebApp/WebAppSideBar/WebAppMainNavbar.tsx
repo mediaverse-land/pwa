@@ -92,7 +92,7 @@ const WebAppMainNavbar = () => {
             <li key={item.id} className="">
               <Link
                 className="flex items-center gap-4 cursor-pointer text-[14px] font-normal"
-                href={`/web-app/${item.link}`}
+                href={`/app/${item.link}`}
               >
                 <div
                   className={`${

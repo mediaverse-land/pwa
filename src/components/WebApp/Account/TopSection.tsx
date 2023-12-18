@@ -65,7 +65,7 @@ const WebAppAccountTopSection = async ({
         <div className="flex items-stretch justify-around w-[420px] mx-auto">
           {accountTypes.map((item) => (
             <Link
-              href={`/web-app/account/${item.link}`}
+              href={`/app/account/${item.link}`}
               key={item.id}
               className={`py-4 relative after:content-[''] duration-150 transition-all after:absolute after:bottom-0 after:left-0 after:bg-[#597AFF] ${
                 type === item.link

@@ -45,7 +45,7 @@ const BuySection = async ({
         </div>
       </div>
       <Link
-        href={`/web-app/account/buy-asset/${asset}?type=${type}`}
+        href={`/app/account/buy-asset/${asset}?type=${type}`}
         className="rounded-full text-white text-center font-semibold bg-[#597AFF] py-2"
       >
         Buy

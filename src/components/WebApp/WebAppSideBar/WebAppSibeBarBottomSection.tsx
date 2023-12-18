@@ -15,7 +15,7 @@ const WebAppSideBarBottomSection = () => {
 
   return (
     <div className="flex flex-col items-stretch gap-6">
-      <Link href={`/web-app/setting`} className="flex items-center gap-4">
+      <Link href={`/app/setting`} className="flex items-center gap-4">
         {activeSection === "setting" ? (
           <ACTIVE_SETTING />
         ) : (
@@ -29,7 +29,7 @@ const WebAppSideBarBottomSection = () => {
           Setting
         </div>
       </Link>
-      <Link href={`/web-app/logout`} className="flex items-center gap-4 group">
+      <Link href={`/app/logout`} className="flex items-center gap-4 group">
         {activeSection === "logout" ? <ACTIVE_LOGOUT /> : <INACTIVE_LOGOUT />}
         <div
           className={`text-[14px] ${

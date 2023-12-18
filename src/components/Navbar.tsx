@@ -34,7 +34,7 @@ const Navbar = () => {
         </Link>
         {session.data?.user ? (
           <Link
-            href={`/web-app/explore`}
+            href={`/app/explore`}
             className="w-[50px] md:order-2 pt-2 pb-[7px] relative aspect-square rounded-full overflow-hidden shadow border border-white border-opacity-30 justify-center items-center inline-flex"
           >
             {session.data.user.image && (
@@ -47,7 +47,7 @@ const Navbar = () => {
           </Link>
         ) : (
           <Link
-            href={`/web-app/explore`}
+            href={`/app/explore`}
             className="flex md:order-2 justify-between"
           >
             <div

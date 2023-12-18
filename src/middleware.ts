@@ -4,19 +4,12 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   // console.log(request.url);
   switch (request.nextUrl.pathname) {
-    case "/web-app/explore": {
-      return NextResponse.redirect(
-        new URL("/web-app/explore/assets", request.url)
-      );
+    case "/app": {
+      return NextResponse.redirect(new URL("/app/explore/", request.url));
     }
-    case "/web-app": {
+    case "/app/account": {
       return NextResponse.redirect(
-        new URL("/web-app/explore/assets", request.url)
-      );
-    }
-    case "/web-app/account": {
-      return NextResponse.redirect(
-        new URL("/web-app/account/subscribe", request.url)
+        new URL("/app/account/subscribe", request.url)
       );
     }
     default:
@@ -26,5 +19,5 @@ export async function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/web-app", "/web-app/explore", "/web-app/account"],
+  matcher: ["/app", "/app/explore", "/app/account"],
 };

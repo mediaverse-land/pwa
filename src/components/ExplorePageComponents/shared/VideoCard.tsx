@@ -24,7 +24,7 @@ const ExploreVideoCard = ({
 }) => {
   return (
     <Link
-      href={`/web-app/assets/video/${title}?id=${id}`}
+      href={`/app/assets/video/${title.replaceAll(" ", "-")}?id=${id}`}
       className="flex flex-col items-stretch gap-3"
     >
       <div
