@@ -620,3 +620,11 @@ export const signInWithUsername = async (data: any) => {
     return req;
   }
 };
+export const getSitemap = () => {
+  const url = `https://api.mediaverse.land/v2/sitemap`;
+  return fetchInstance(url);
+};
+export const getBlogsSitemap = () => {
+  const url = `https://blog.mediaverse.land/api/sitemap`;
+  return fetchInstance(url);
+};
