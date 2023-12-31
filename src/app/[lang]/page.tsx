@@ -238,7 +238,9 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                           {items.name}
                         </p>
                         <p className="text-gray-500 mt-4">
-                          {items.description?.slice(0, 62) + "..."}
+                          {items.description?.length > 70
+                            ? items.description?.slice(0, 62)
+                            : items.description}
                         </p>
                         <div className="flex mt-auto space-x-2">
                           <Image
