@@ -2,9 +2,13 @@
 
 import { Locale } from "@/types/dictionary-types";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 
-const languages = [
+const languages: {
+  id: number;
+  name: string;
+  code: Locale;
+  icon: JSX.Element;
+}[] = [
   {
     id: 1,
     name: "English",
@@ -26,7 +30,6 @@ const languages = [
 ];
 
 const SelectLanguage = () => {
-  const params = useParams().lang as Locale;
   return (
     <div>
       <ul className="flex items-center gap-4">
