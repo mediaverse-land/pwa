@@ -1,9 +1,14 @@
 import Motion from "@/components/motion";
 import { getPrivacy } from "@/services/contactService";
+import {
+  FullLocaleNames,
+  Locale,
+  TFullLocales,
+} from "@/types/dictionary-types";
 
-async function getPrivacyData() {
+async function getPrivacyData(lang: TFullLocales) {
   try {
-    const privacy = await getPrivacy();
+    const privacy = await getPrivacy(lang);
     if (privacy.ok) {
       return privacy.json();
     } else {
@@ -13,8 +18,8 @@ async function getPrivacyData() {
     console.error(error);
   }
 }
-const Privacy = async () => {
-  const privacyData = await getPrivacyData();
+const Privacy = async ({ params: { lang } }: { params: { lang: Locale } }) => {
+  const privacyData = await getPrivacyData(FullLocaleNames[lang]);
 
   return (
     <Motion>

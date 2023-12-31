@@ -1,9 +1,17 @@
 import Motion from "@/components/motion";
+import { getDictionary } from "@/dictionary";
 import { getTerms } from "@/services/contactService";
+import {
+  FullLocaleNames,
+  Locale,
+  TFullLocales,
+} from "@/types/dictionary-types";
 
-async function getTermsData() {
+async function getTermsData({ lang }: { lang: TFullLocales }) {
   try {
-    const terms = await getTerms();
+    const terms = await getTerms({
+      lang,
+    });
     if (terms.ok) {
       return terms.json();
     } else {
@@ -14,8 +22,8 @@ async function getTermsData() {
   }
 }
 
-const Terms = async () => {
-  const termsData = await getTermsData();
+const Terms = async ({ params: { lang } }: { params: { lang: Locale } }) => {
+  const termsData = await getTermsData({ lang: FullLocaleNames[lang] });
   return (
     <Motion>
       <div className="w-[80rem] max-w-screen-lg mx-auto flex mt-36 pb-16 justify-center px-4 min-h-[90vh]">

@@ -1,13 +1,14 @@
 import { PostCommentData } from "@/types";
+import { TFullLocales } from "@/types/dictionary-types";
 
 export const URL = process.env.BASE_URL ?? "https://api.mediaverse.land/v2";
 
-const fetchInstance = (url: string) => {
+const fetchInstance = (url: string, lang?: TFullLocales) => {
   if (process.env.NODE_ENV === "production")
     return fetch(url, {
       next: { revalidate: 60 },
       headers: {
-        "Accept-Language": "en-US",
+        "Accept-Language": lang || "en-US",
         accept: "application/json",
         "x-app": "_Web",
       },
@@ -16,7 +17,7 @@ const fetchInstance = (url: string) => {
     return fetch(url, {
       cache: "no-store",
       headers: {
-        "Accept-Language": "en-US",
+        "Accept-Language": lang || "en-US",
         accept: "application/json",
         "x-app": "_Web",
       },
@@ -236,22 +237,22 @@ export const getUserSingleMessage = ({
   });
 };
 
-export const getTerms = () => {
+export const getTerms = ({ lang }: { lang: TFullLocales }) => {
   const url = `${URL}/terms`;
-  return fetchInstance(url);
+  return fetchInstance(url, lang);
 };
 
-export const getPrivacy = () => {
+export const getPrivacy = (lang: TFullLocales) => {
   const url = `${URL}/privacy`;
-  return fetchInstance(url);
+  return fetchInstance(url, lang);
 };
 export const getLives = async (args: { params?: string }) => {
   const url = `${URL}/lives${args.params}`;
   return fetchInstance(url);
 };
-export const getFAQ = () => {
+export const getFAQ = (lang: TFullLocales) => {
   const url = `${URL}/faq`;
-  return fetchInstance(url);
+  return fetchInstance(url, lang);
 };
 export const getSearch = (params: string) => {
   const url = `${URL}/search?${params}`;

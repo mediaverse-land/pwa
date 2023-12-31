@@ -1,13 +1,16 @@
 import Link from "next/link";
 import { CHEVRON_LEFT, CHEVRON_RIGHT } from "./SVG/svgs";
-import { BlogsPageData } from "@/app/blogs/page";
+import { BlogsPageData } from "@/app/[lang]/blogs/page";
+import { Locale } from "@/types/dictionary-types";
 
 const BlogsPagination = ({
   currentPage,
   links,
   meta,
+  lang,
 }: {
   currentPage: number;
+  lang: Locale;
   links?: BlogsPageData["links"];
   meta: BlogsPageData["meta"];
 }) => {
@@ -15,7 +18,6 @@ const BlogsPagination = ({
   for (let i = 1; i <= meta.last_page; i++) {
     pages.push(i);
   }
-  // console.log(pages);
 
   return (
     <div className="flex justify-center gap-7 items-center my-8 w-full min-w-[250px]">
@@ -23,7 +25,7 @@ const BlogsPagination = ({
         className={`select-none aspect-square h-[25px] text-white ${
           currentPage <= 1 && "hidden"
         }`}
-        href={`/blogs?page=${currentPage - 1}`}
+        href={`/${lang}/blogs?page=${currentPage - 1}`}
       >
         <CHEVRON_RIGHT />
       </Link>
@@ -32,7 +34,7 @@ const BlogsPagination = ({
           {pages.slice(0, 3).map((page, i) => {
             return (
               <Link
-                href={`/blogs?page=${page}`}
+                href={`/${lang}/blogs?page=${page}`}
                 key={page}
                 className={`rounded-full m-auto aspect-square min-w-[32px] text-[16px] flex justify-center items-center leading-none ${
                   currentPage === page
@@ -52,7 +54,7 @@ const BlogsPagination = ({
           {pages.slice(-3).map((page, i) => {
             return (
               <Link
-                href={`/blogs?page=${page}`}
+                href={`/${lang}/blogs?page=${page}`}
                 key={page}
                 className={`rounded-full m-auto aspect-square min-w-[32px] text-[16px] flex justify-center items-center leading-none ${
                   currentPage === page
@@ -68,7 +70,7 @@ const BlogsPagination = ({
       ) : (
         <>
           <Link
-            href={`/blogs?page=${currentPage - 1}`}
+            href={`/${lang}/blogs?page=${currentPage - 1}`}
             className="rounded-full m-auto aspect-square m50-w-[34px] text-[16px] flex justify-center items-center leading-none text-white"
           >
             {currentPage - 1}
@@ -77,7 +79,7 @@ const BlogsPagination = ({
             {currentPage}
           </div>
           <Link
-            href={`/blogs?page=${currentPage + 1}`}
+            href={`/${lang}/blogs?page=${currentPage + 1}`}
             className="rounded-full m-auto aspect-square m50-w-[34px] text-[16px] flex justify-center items-center leading-none text-white"
           >
             {currentPage + 1}
@@ -89,7 +91,7 @@ const BlogsPagination = ({
         className={`select-none aspect-square h-[25px] text-white ${
           currentPage >= meta.last_page && "hidden"
         }`}
-        href={`/blogs?page=${currentPage + 1}`}
+        href={`/${lang}/blogs?page=${currentPage + 1}`}
       >
         <CHEVRON_LEFT />
       </Link>

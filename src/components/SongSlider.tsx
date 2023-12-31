@@ -6,9 +6,11 @@ import { useCallback, useEffect, useState } from "react";
 import { getMostViewedSongs } from "@/services/contactService";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 const SongSlider = () => {
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [songoData, setSongData] = useState([]);
+  const lang = useParams().lang;
 
   useEffect(() => {
     const getData = async () => {
@@ -52,7 +54,7 @@ const SongSlider = () => {
             return (
               <SwiperSlide className="w-[140px] h-[120px]" key={item.id}>
                 <Link
-                  href={`/app/assets/audio/${item.name.replaceAll(
+                  href={`/${lang}/app/assets/audio/${item.name.replaceAll(
                     " ",
                     "-"
                   )}?id=${item.id}`}

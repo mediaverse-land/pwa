@@ -1,10 +1,11 @@
 import Motion from "@/components/motion";
 import { getBlog } from "@/services/contactService";
+import { Locale } from "@/types/dictionary-types";
 import Image from "next/image";
 import Link from "next/link";
 
-async function getBlogsData(props: any) {
-  const blogs = await getBlog(props.params.blog);
+async function getBlogsData({ id }: { id: string }) {
+  const blogs = await getBlog(id);
   if (!blogs.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -12,9 +13,15 @@ async function getBlogsData(props: any) {
 }
 const regex = /\b(\w{3}), (\w{3}) (\d{2}),/;
 
-const Blog = async (props: any) => {
-  const data = await getBlogsData(props);
-  // console.log(data.data.created_at, "creat");
+const Blog = async ({
+  params: { blog, lang },
+}: {
+  params: {
+    blog: string;
+    lang: Locale;
+  };
+}) => {
+  const data = await getBlogsData({ id: blog });
   let date = new Date(data.data.created_at);
 
   // Extract the month and day
@@ -23,9 +30,6 @@ const Blog = async (props: any) => {
 
   // Construct the output string
   let outputDateString = `${month} ${day}`;
-
-  // console.log(outputDateString);
-  // const date = data.data.created_at.match(regex) || "";
 
   return (
     <Motion>
@@ -58,7 +62,7 @@ const Blog = async (props: any) => {
             />
           </div>
           <Link
-            href={"./"}
+            href={`./`}
             className="flex items-center justify-center py-2 rounded-3xl w-80 bg-card mt-6 space-x-2"
           >
             <Image

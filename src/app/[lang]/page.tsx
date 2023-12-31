@@ -1,61 +1,16 @@
 import { SongSlider, VideoSlider } from "@/components";
 import BorderGradient from "@/components/BorderGradient";
 import ScrollToBottomBtn from "@/components/Buttons/ScrollToBottom";
-import ClientImage from "@/components/ClientImage";
-import LiveSlider from "@/components/LiveSlider";
 import Motion from "@/components/motion";
+import { getDictionary } from "@/dictionary";
 import {
   getLives,
   getMostViewedImages,
   getMostViewedText,
 } from "@/services/contactService";
+import { Locale } from "@/types/dictionary-types";
 import Image from "next/image";
 import Link from "next/link";
-
-// const imageData = [
-//   {
-//     asset: {
-//       thumbnails: {
-//         "336x366": "/images/car.png",
-//       },
-//     },
-//   },
-//   {
-//     asset: {
-//       thumbnails: {
-//         "336x366": "/images/car.png",
-//       },
-//     },
-//   },
-//   {
-//     asset: {
-//       thumbnails: {
-//         "336x366": "/images/car.png",
-//       },
-//     },
-//   },
-//   {
-//     asset: {
-//       thumbnails: {
-//         "336x366": "/images/car.png",
-//       },
-//     },
-//   },
-//   {
-//     asset: {
-//       thumbnails: {
-//         "336x366": "/images/car.png",
-//       },
-//     },
-//   },
-//   {
-//     asset: {
-//       thumbnails: {
-//         "336x366": "/images/car.png",
-//       },
-//     },
-//   },
-// ];
 
 async function getImageData() {
   const image = await getMostViewedImages();
@@ -82,7 +37,8 @@ async function getSliderData() {
   }
   return text.json();
 }
-const Home = async () => {
+const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
+  const dic = await getDictionary(lang);
   const imageData = await getImageData();
   const textData = await getTextData();
   const liveData = await getSliderData();
@@ -101,13 +57,10 @@ const Home = async () => {
         <div className="max-w-screen-2xl mx-auto flex justify-evenly flex-wrap px-4">
           <div className="flex flex-col t-10">
             <h1 className="text-3xl font-semibold whitespace-nowrap text-white mt-16">
-              What is MediaVerse?
+              {dic.homepage.whatIsMediaverse}
             </h1>
             <p className="text-gray-500 mt-4 self-center">
-              Mediaverse Platform is the next generation of media asset
-              management tools for social TVs (or social media) that helps users
-              manage the content cycle from procurement (or production) to
-              distribution.
+              {dic.homepage.description}
             </p>
             <div className="grid grid-cols-2 mt-[28px] w-[278px] gap-[8px]">
               <div className="app-store-container cursor-pointer py-[4px] px-[19px] flex items-center">
@@ -135,7 +88,7 @@ const Home = async () => {
               </Link>
             </div>
             <Link
-              href={`/app/explore`}
+              href={`/${lang}/app/explore`}
               className="w-[278px] h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm leading-none flex justify-center items-center py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]"
             >
               Web App
@@ -161,7 +114,7 @@ const Home = async () => {
           </div>
         </div>
         <div className="w-full flex items-center justify-center mt-20">
-          <ScrollToBottomBtn />
+          <ScrollToBottomBtn title={dic.homepage.exploreLimitless} />
         </div>
         <div className="w-full flex items-center justify-center mt-10 space-x-1">
           <Image
@@ -171,13 +124,13 @@ const Home = async () => {
             height={20}
             alt="camera icon"
           />
-          <p className="text-white text-sm ">live channel</p>
+          <p className="text-white text-sm ">{dic.homepage.liveTvChannels}</p>
         </div>
         <div className=" max-w-screen-2xl mx-auto flex items-center justify-center py-4 w-[80rem]">
           <div className="relative flex overflow-x-hidden w-full animate-marquee-container">
             <div className="animate-marquee whitespace-nowrap flex flex-row w-full">
               {liveData.map((item: any, i: number) => (
-                <Link href={`/app/lives/${item.id}`} key={item.id}>
+                <Link href={`/${lang}/app/lives/${item.id}`} key={item.id}>
                   <img
                     className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
                     src={item.thumbnail}
@@ -207,7 +160,7 @@ const Home = async () => {
             height={16}
             alt="camera icon"
           />
-          <p className="text-white text-sm ">Best videos</p>
+          <p className="text-white text-sm ">{dic.homepage.bestVideos}</p>
         </div>
         <VideoSlider />
         <div className="flex max-w-screen-2xl w-[80rem] mx-auto mt-16 justify-between flex-col items-start sm:flex-row sm:px-0 px-2 h-[570px]">
@@ -220,13 +173,15 @@ const Home = async () => {
                 height={10}
                 alt="galery"
               />
-              <p className="text-white text-sm ">Most viewed</p>
+              <p className="text-white text-sm ">
+                {dic.homepage.mostViewedImages}
+              </p>
             </div>
             <div className="grid grid-rows-4 grid-cols-3 grid-flow-row gap-4 mt-10 grow max-h-[510px]">
               {imageData.slice(0, 9).map((items: any, index: number) => {
                 return (
                   <Link
-                    href={`/app/assets/image/${items.name.replaceAll(
+                    href={`/${lang}/app/assets/image/${items.name.replaceAll(
                       " ",
                       "-"
                     )}?id=${items.id}`}
@@ -256,7 +211,7 @@ const Home = async () => {
                 height={10}
                 alt="galery"
               />
-              <p className="text-white text-sm ">Top texts</p>
+              <p className="text-white text-sm ">{dic.homepage.topTexts}</p>
             </div>
             <div className="flex md:grid lg:grid-cols-3 md:grid-cols-2 gap-2 grid-rows-1 md:grid-rows-2 mt-10 w-full grow">
               {textData.slice(0, 6).map((items: any, index: number) => {
@@ -269,7 +224,7 @@ const Home = async () => {
                     tColor="#CFCFFC00"
                   >
                     <Link
-                      href={`/app/assets/text/${items.name.replaceAll(
+                      href={`/${lang}/app/assets/text/${items.name.replaceAll(
                         " ",
                         "-"
                       )}?id=${items.id}`}
@@ -307,7 +262,7 @@ const Home = async () => {
             height={16}
             alt="camera icon"
           />
-          <p className="text-white text-sm ">Best songs</p>
+          <p className="text-white text-sm ">{dic.homepage.bestSongs}</p>
         </div>
         <SongSlider />
       </div>

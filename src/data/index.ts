@@ -1,39 +1,43 @@
 import { socialMediaLinks } from "@/types";
 
-export const navbar = [
+export const navbar: {
+  title: "home" | "blog" | "terms" | "privacy" | "api" | "faq" | "about";
+  href: string;
+  query: string;
+}[] = [
   {
-    title: "Home",
-    href: "/",
+    title: "home",
+    href: "",
     query: "",
   },
   {
-    title: "Blog",
-    href: "/blogs",
+    title: "blog",
+    href: "blogs",
     query: "?page=1",
   },
   {
-    title: "Terms",
-    href: "/terms",
+    title: "terms",
+    href: "terms",
     query: "",
   },
   {
-    title: "Privacy",
-    href: "/privacy",
+    title: "privacy",
+    href: "privacy",
     query: "",
   },
   {
-    title: "API",
-    href: "/APIs",
+    title: "api",
+    href: "APIs",
     query: "",
   },
   {
-    title: "FAQ",
-    href: "/faq",
+    title: "faq",
+    href: "faq",
     query: "",
   },
   {
-    title: "About",
-    href: "/about-us",
+    title: "about",
+    href: "about-us",
     query: "",
   },
 ];

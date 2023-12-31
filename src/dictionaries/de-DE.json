@@ -1,0 +1,57 @@
+{
+  "header": {
+    "slogan": "Inhalt ist Reichtum",
+    "home": "Heim",
+    "blog": "Blog",
+    "terms": "Bedingungen",
+    "privacy": "Privatsphäre",
+    "api": "API",
+    "faq": "FAQ",
+    "about": "Über uns"
+  },
+  "homepage": {
+    "whatIsMediaverse": "Was ist Mediaverse?",
+    "description": "Die Mediaverse-Plattform ist die nächste Generation von Media-Asset-Management-Tools für Social TVs (oder soziale Medien), die Benutzern hilft, den Inhaltszyklus von der Beschaffung (oder Produktion) bis zur Verteilung zu verwalten.",
+    "exploreLimitless": "Entdecken Sie grenzenlos!",
+    "liveTvChannels": "Live-TV-Kanäle",
+    "bestVideos": "Die besten Videos",
+    "mostViewedImages": "Am häufigsten angesehene Bilder",
+    "topTexts": "Top Texte",
+    "bestSongs": "Beste Lieder"
+  },
+  "footer": {
+    "haveNotTriedTheAppYet": "Sie haben die App noch nicht ausprobiert?"
+  },
+  "blogSection": {
+    "mediaverseNews": "MediaVerse Nachrichten",
+    "alwaysBeUpdate": "Seien Sie immer auf dem Laufenden!"
+  },
+  "faqSection": {
+    "title": "MediaVers-Funktionen"
+  },
+  "aboutUs": {
+    "office": "Büro",
+    "phone": "Telefon",
+    "email": "Email"
+  },
+  "appSidebar": {
+    "explore": "Erkunden",
+    "account": "Konto",
+    "wallet": "Geldbörse",
+    "settings": "Einstellungen",
+    "logout": "Abmelden"
+  },
+  "appAccounts": {
+    "assets": "Vermögenswerte",
+    "sales": "Verkaufsmenge",
+    "volume": "Verkaufsvolumen",
+    "subscribes": "Abonnieren",
+    "myAssets": "Mein Vermögen",
+    "all": "Alle",
+    "noContentToShow": "Kein Inhalt zum Anzeigen"
+  },
+  "appWallet": {
+    "inventory": "Kontostand",
+    "addInventory": "Kontostand erhöhen"
+  }
+}

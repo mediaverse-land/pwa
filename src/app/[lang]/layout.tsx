@@ -5,8 +5,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { NextAuthSessionProvider } from "@/components/nextauthProvider";
 import Script from "next/script";
-import Head from "next/head";
 import NextTopLoader from "nextjs-toploader";
+import { getDictionary } from "@/dictionary";
+import { Locale } from "@/types/dictionary-types";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,13 +15,16 @@ export const metadata: Metadata = {
   title: "MediaVerse",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params: { lang },
 }: {
   children: React.ReactNode;
+  params: { lang: Locale };
 }) {
+  const dic = await getDictionary(lang);
   return (
-    <html lang="en">
+    <html lang={`${lang}`}>
       <Script
         async
         src="https://www.googletagmanager.com/gtag/js?id=GTM-WPLNXH7D"
@@ -36,9 +40,9 @@ export default function RootLayout({
       >
         <NextTopLoader showSpinner={false} />
         <NextAuthSessionProvider>
-          <Navbar />
+          <Navbar dic={dic} />
           {children}
-          <Footer />
+          <Footer title={dic.footer.haveNotTriedTheAppYet} />
         </NextAuthSessionProvider>
       </body>
     </html>

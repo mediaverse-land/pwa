@@ -1,10 +1,16 @@
 import Accordion from "@/components/Accordion";
 import Motion from "@/components/motion";
+import { getDictionary } from "@/dictionary";
 import { getFAQ } from "@/services/contactService";
+import {
+  FullLocaleNames,
+  Locale,
+  TFullLocales,
+} from "@/types/dictionary-types";
 import React from "react";
 
-async function getFAQData() {
-  const faq = await getFAQ();
+async function getFAQData(lang: TFullLocales) {
+  const faq = await getFAQ(lang);
 
   if (!faq.ok) {
     throw new Error(`Failed to fetch data with ${faq.status}`, {
@@ -14,14 +20,15 @@ async function getFAQData() {
   return faq.json();
 }
 
-const Faq = async () => {
-  const faqData = await getFAQData();
-
+const Faq = async ({ params: { lang } }: { params: { lang: Locale } }) => {
+  const dic = await getDictionary(lang);
+  const faqData = await getFAQData(FullLocaleNames[lang]);
+  console.log(faqData);
   return (
     <Motion>
       <div className="w-full flex mt-36 pb-16 justify-center px-4 min-h-[75vh]">
         <div className="sm:w-6/12 w-full flex flex-col">
-          <h1 className="text-white text-2xl">MediaVers Features</h1>
+          <h1 className="text-white text-2xl">{dic.faqSection.title}</h1>
           {/* <p className="text-base text-blue-500">{item.question}</p> */}
           <div></div>
           {faqData.data.map((item: any, i: number) => (
