@@ -8,12 +8,16 @@ import {
   getMostViewedImages,
   getMostViewedText,
 } from "@/services/contactService";
-import { Locale } from "@/types/dictionary-types";
+import {
+  FullLocaleNames,
+  Locale,
+  TFullLocales,
+} from "@/types/dictionary-types";
 import Image from "next/image";
 import Link from "next/link";
 
-async function getImageData() {
-  const image = await getMostViewedImages();
+async function getImageData(lang: TFullLocales) {
+  const image = await getMostViewedImages(lang);
 
   if (!image.ok) {
     throw new Error("Failed to fetch data");
@@ -21,8 +25,8 @@ async function getImageData() {
   return image.json();
 }
 
-async function getTextData() {
-  const text = await getMostViewedText();
+async function getTextData(lang: TFullLocales) {
+  const text = await getMostViewedText(lang);
 
   if (!text.ok) {
     throw new Error("Failed to fetch data");
@@ -30,8 +34,8 @@ async function getTextData() {
   return text.json();
 }
 
-async function getSliderData() {
-  const text = await getLives({ params: "" });
+async function getSliderData(lang: TFullLocales) {
+  const text = await getLives({ params: "", lang });
   if (!text.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -39,9 +43,9 @@ async function getSliderData() {
 }
 const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
   const dic = await getDictionary(lang);
-  const imageData = await getImageData();
-  const textData = await getTextData();
-  const liveData = await getSliderData();
+  const imageData = await getImageData(FullLocaleNames[lang]);
+  const textData = await getTextData(FullLocaleNames[lang]);
+  const liveData = await getSliderData(FullLocaleNames[lang]);
 
   return (
     <Motion>
@@ -230,9 +234,11 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                       )}?id=${items.id}`}
                     >
                       <div key={index} className="h-full flex flex-col">
-                        <p className="text-white text-lg">{items.name}</p>
+                        <p className="text-white text-lg line-clamp-3">
+                          {items.name}
+                        </p>
                         <p className="text-gray-500 mt-4">
-                          {items.description?.slice(0, 65)}
+                          {items.description?.slice(0, 62) + "..."}
                         </p>
                         <div className="flex mt-auto space-x-2">
                           <Image

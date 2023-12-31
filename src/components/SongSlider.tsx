@@ -7,14 +7,15 @@ import { getMostViewedSongs } from "@/services/contactService";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { FullLocaleNames, Locale } from "@/types/dictionary-types";
 const SongSlider = () => {
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [songoData, setSongData] = useState([]);
-  const lang = useParams().lang;
+  const lang = useParams().lang as Locale;
 
   useEffect(() => {
     const getData = async () => {
-      const songData = await getMostViewedSongs();
+      const songData = await getMostViewedSongs(FullLocaleNames[lang]);
       const data = await songData.json();
       setSongData(data);
     };

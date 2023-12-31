@@ -1,11 +1,15 @@
 import Motion from "@/components/motion";
 import { getBlog } from "@/services/contactService";
-import { Locale } from "@/types/dictionary-types";
+import {
+  FullLocaleNames,
+  Locale,
+  TFullLocales,
+} from "@/types/dictionary-types";
 import Image from "next/image";
 import Link from "next/link";
 
-async function getBlogsData({ id }: { id: string }) {
-  const blogs = await getBlog(id);
+async function getBlogsData({ id, lang }: { id: string; lang: TFullLocales }) {
+  const blogs = await getBlog({ id, lang });
   if (!blogs.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -21,7 +25,7 @@ const Blog = async ({
     lang: Locale;
   };
 }) => {
-  const data = await getBlogsData({ id: blog });
+  const data = await getBlogsData({ id: blog, lang: FullLocaleNames[lang] });
   let date = new Date(data.data.created_at);
 
   // Extract the month and day

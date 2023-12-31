@@ -24,9 +24,9 @@ const fetchInstance = (url: string, lang?: TFullLocales) => {
     });
 };
 
-export const getMostViewedImages = async () => {
+export const getMostViewedImages = async (lang: TFullLocales) => {
   const url = `${URL}/images/most-viewed`;
-  return fetchInstance(url);
+  return fetchInstance(url, lang);
 };
 export const getRecentlyImages = async () => {
   const url = `${URL}/images/newest`;
@@ -144,9 +144,9 @@ export const getSingleAudio = async ({
         },
       });
 };
-export const getMostViewedText = async () => {
+export const getMostViewedText = async (lang: TFullLocales) => {
   const url = `${URL}/texts/most-viewed`;
-  return fetchInstance(url);
+  return fetchInstance(url, lang);
 };
 export const getRecentlyTexts = async () => {
   const url = `${URL}/texts/newest`;
@@ -157,9 +157,9 @@ export const getRecommendedTexts = async () => {
   return fetchInstance(url);
 };
 
-export const getMostViewedVideos = () => {
+export const getMostViewedVideos = (lang: TFullLocales) => {
   const url = `${URL}/videos/most-viewed`;
-  return fetchInstance(url);
+  return fetchInstance(url, lang);
 };
 export const getRecentlyVideos = () => {
   const url = `${URL}/videos/newest`;
@@ -170,9 +170,9 @@ export const getRecommendedVideos = () => {
   return fetchInstance(url);
 };
 
-export const getMostViewedSongs = () => {
+export const getMostViewedSongs = (lang: TFullLocales) => {
   const url = `${URL}/audios/most-viewed`;
-  return fetchInstance(url);
+  return fetchInstance(url, lang);
 };
 export const getRecentlySongs = () => {
   const url = `${URL}/audios/newest`;
@@ -246,9 +246,15 @@ export const getPrivacy = (lang: TFullLocales) => {
   const url = `${URL}/privacy`;
   return fetchInstance(url, lang);
 };
-export const getLives = async (args: { params?: string }) => {
-  const url = `${URL}/lives${args.params}`;
-  return fetchInstance(url);
+export const getLives = async ({
+  params,
+  lang,
+}: {
+  params?: string;
+  lang: TFullLocales;
+}) => {
+  const url = `${URL}/lives${params}`;
+  return fetchInstance(url, lang);
 };
 export const getFAQ = (lang: TFullLocales) => {
   const url = `${URL}/faq`;
@@ -485,14 +491,20 @@ export const getSessions = async ({ token }: { token: string }) => {
   });
 };
 
-export const getBlogs = (page: number) => {
+export const getBlogs = ({
+  page,
+  lang,
+}: {
+  page: number;
+  lang: TFullLocales;
+}) => {
   const url = `https://blog.mediaverse.land/api/posts?page=${page}`;
-  return fetchInstance(url);
+  return fetchInstance(url, lang);
 };
 
-export const getBlog = (id: string) => {
+export const getBlog = ({ id, lang }: { id: string; lang: TFullLocales }) => {
   const url = `https://blog.mediaverse.land/api/posts/${id}`;
-  return fetchInstance(url);
+  return fetchInstance(url, lang);
 };
 
 export const requestOTP = async (data: any) => {

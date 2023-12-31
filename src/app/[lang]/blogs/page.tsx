@@ -2,7 +2,11 @@ import BlogsPagination from "@/components/BlogsPagination";
 import Motion from "@/components/motion";
 import { getDictionary } from "@/dictionary";
 import { getBlogs } from "@/services/contactService";
-import { Locale } from "@/types/dictionary-types";
+import {
+  FullLocaleNames,
+  Locale,
+  TFullLocales,
+} from "@/types/dictionary-types";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -59,8 +63,14 @@ export interface LinksEntity {
   active: boolean;
 }
 
-async function getBlogsData(page: number) {
-  const blogs = await getBlogs(page);
+async function getBlogsData({
+  page,
+  lang,
+}: {
+  page: number;
+  lang: TFullLocales;
+}) {
+  const blogs = await getBlogs({ page, lang });
 
   // console.info(blogs);
 
@@ -86,7 +96,10 @@ const Blogs = async ({
   }
   let page = +searchParams.page;
 
-  const blogsData: BlogsPageData = await getBlogsData(page);
+  const blogsData: BlogsPageData = await getBlogsData({
+    page,
+    lang: FullLocaleNames[lang],
+  });
 
   if (blogsData?.data && blogsData.data.length === 0 && page !== 1) {
     redirect(`/${lang}/blogs?page=1`);
