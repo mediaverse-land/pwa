@@ -24,7 +24,7 @@ const Faq = async () => {
           <h1 className="text-white text-2xl">MediaVers Features</h1>
           {/* <p className="text-base text-blue-500">{item.question}</p> */}
           <div></div>
-          {faqData.data.map((item: any, i: number) => (
+          {faqData?.questions.map((item: any, i: number) => (
             <React.Fragment key={i}>
               <Accordion item={item} />
             </React.Fragment>
