@@ -24,16 +24,17 @@ async function getTermsData({ lang }: { lang: TFullLocales }) {
 
 const Terms = async ({ params: { lang } }: { params: { lang: Locale } }) => {
   const termsData = await getTermsData({ lang: FullLocaleNames[lang] });
+  console.log(termsData);
   return (
     <Motion>
       <div className="w-[80rem] max-w-screen-lg mx-auto flex mt-36 pb-16 justify-center px-4 min-h-[90vh]">
         <div className="w-full flex flex-col">
           <h1 className="text-white capitalize mb-[43px] font-bold text-[25px]">
-            {termsData.name}
+            {termsData?.name}
           </h1>
           <article
             className="text-white max-w-full w-full prose"
-            dangerouslySetInnerHTML={{ __html: termsData.content }}
+            dangerouslySetInnerHTML={{ __html: termsData?.content || "" }}
           ></article>
         </div>
       </div>
