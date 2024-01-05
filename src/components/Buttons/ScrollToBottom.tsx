@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-const ScrollToBottomBtn = () => {
+const ScrollToBottomBtn = ({ title }: { title: string }) => {
   const scrollToBottom = () => {
     window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
   };
@@ -11,7 +11,7 @@ const ScrollToBottomBtn = () => {
       onClick={scrollToBottom}
       className="flex flex-col items-center justify-center"
     >
-      <a className="text-white text-2xl font-semibold">Explore limitless!</a>
+      <a className="text-white text-2xl font-semibold">{title}</a>
       <Image
         src="/icons/down-icon.png"
         className="mt-2 animate-icon relative"

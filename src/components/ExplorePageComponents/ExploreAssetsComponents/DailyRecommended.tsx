@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Locale } from "@/types/dictionary-types";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
 import {
   getRecentlyVideos,
@@ -34,7 +34,7 @@ const getDailyRecommendedData = async () => {
   }
 };
 
-const ExploreDailyRecommended = async () => {
+const ExploreDailyRecommended = async ({ lang }: { lang: Locale }) => {
   const data = await getDailyRecommendedData();
   return (
     <div className="flex items-stretch flex-col gap-4">
@@ -66,6 +66,7 @@ const ExploreDailyRecommended = async () => {
               };
               return (
                 <ExploreAssetsCard
+                  lang={lang}
                   key={item.id}
                   id={item.id}
                   author={{

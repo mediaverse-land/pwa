@@ -3,8 +3,9 @@ import "./styles.css";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { Locale } from "@/types/dictionary-types";
 
-const ExploreTextCard = async ({ data }: { data: any }) => {
+const ExploreTextCard = async ({ data, lang }: { data: any; lang: Locale }) => {
   const session = await getServerSession(authOptions);
   // console.log(data);
   const authorImage = () => {
@@ -40,7 +41,9 @@ const ExploreTextCard = async ({ data }: { data: any }) => {
   };
   return (
     <Link
-      href={`/app/assets/text/${data.name.replaceAll(" ", "-")}?id=${data.id}`}
+      href={`/${lang}/app/assets/text/${data.name.replaceAll(" ", "-")}?id=${
+        data.id
+      }`}
       className="max-w-full min-w-full w-full aspect-square block max-h-[190px]"
     >
       <div className="text-card w-full h-full px-4 py-6 flex flex-col items-stretch leading-none">

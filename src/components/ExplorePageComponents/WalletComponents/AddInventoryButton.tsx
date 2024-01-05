@@ -1,6 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { INACTIVE_PLUS } from "@/components/SVG/svgs";
 import { getStripeGateway } from "@/services/contactService";
+import { DicProperties, Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 const getGatewayData = async (token: string) => {
@@ -15,7 +16,13 @@ const getGatewayData = async (token: string) => {
   }
 };
 
-const AddInventoryButton = async () => {
+const AddInventoryButton = async ({
+  dic,
+  lang,
+}: {
+  dic: DicProperties;
+  lang: Locale;
+}) => {
   const session = await getServerSession(authOptions);
   // check to see user info is complete or not
   if (!session?.user.name || !session.user.email) {
@@ -25,7 +32,7 @@ const AddInventoryButton = async () => {
           Please complete your informatoin first:
         </span>
         <Link
-          href={`/app/setting/account/general-info`}
+          href={`/${lang}/app/setting/account/general-info`}
           className="underline hover:text-[#3f3f6f]"
         >
           Click Here
@@ -41,7 +48,7 @@ const AddInventoryButton = async () => {
       href={`${gateway?.data.url}`}
       className="rounded-2xl border border-dashed border-[#666680] text-[14px] leading-none capitalize text-center text-[#A2A2B5] flex items-center justify-center gap-2 py-5"
     >
-      <span>Add Inventory</span>
+      <span>{dic.appWallet.addInventory}</span>
       <span>
         <INACTIVE_PLUS fill="#A2A2B5" />
       </span>

@@ -8,6 +8,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LogoutNoUser from "./Logout";
+import { DicProperties, Locale } from "@/types/dictionary-types";
 
 const getSubscribeData = async ({
   params,
@@ -29,10 +30,14 @@ const getSubscribeData = async ({
 
 export const SubscribeAllAssets = async ({
   searchParams,
+  params,
+  dic,
 }: {
   searchParams: {
     [key: string]: string;
   };
+  params: { lang: Locale };
+  dic: DicProperties;
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
@@ -40,7 +45,7 @@ export const SubscribeAllAssets = async ({
   if (searchResults?.status === 406) {
     return (
       <Link
-        href={`/sign-up/info`}
+        href={`/${params.lang}/sign-up/info`}
         className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
       >
         Please Complete Your Information To See This Section
@@ -79,6 +84,7 @@ export const SubscribeAllAssets = async ({
           };
           return (
             <ExploreAssetsCard
+              lang={params.lang}
               id={item.id}
               key={item.id}
               author={{
@@ -93,7 +99,7 @@ export const SubscribeAllAssets = async ({
         })
       ) : (
         <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
-          No Content To Show
+          {dic.appAccounts.noContentToShow}
         </div>
       )}
     </div>
@@ -101,10 +107,14 @@ export const SubscribeAllAssets = async ({
 };
 export const SubscribeImageAssets = async ({
   searchParams,
+  params,
+  dic,
 }: {
   searchParams: {
     [key: string]: string;
   };
+  params: { lang: Locale };
+  dic: DicProperties;
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
@@ -115,7 +125,7 @@ export const SubscribeImageAssets = async ({
   if (searchResults?.status === 406) {
     return (
       <Link
-        href={`/sign-up/info`}
+        href={`/${params.lang}/sign-up/info`}
         className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
       >
         Please Complete Your Information To See This Section
@@ -130,7 +140,10 @@ export const SubscribeImageAssets = async ({
         searchResults?.data.data.map((items: any, index: number) => {
           return (
             <Link
-              href={`/explore?section=explore&content=asset-single-page&name=${items.name}&id=${items.id}&type=image`}
+              href={`/${params.lang}/app/assets/image/${items.replaceAll(
+                " ",
+                "-"
+              )}?id=${items.id}`}
               key={items.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
@@ -144,7 +157,7 @@ export const SubscribeImageAssets = async ({
         })
       ) : (
         <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
-          No Content To Show
+          {dic.appAccounts.noContentToShow}
         </div>
       )}
     </div>
@@ -152,10 +165,14 @@ export const SubscribeImageAssets = async ({
 };
 export const SubscribeVideoAssets = async ({
   searchParams,
+  params,
+  dic,
 }: {
   searchParams: {
     [key: string]: string;
   };
+  params: { lang: Locale };
+  dic: DicProperties;
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
@@ -166,7 +183,7 @@ export const SubscribeVideoAssets = async ({
   if (searchResults?.status === 406) {
     return (
       <Link
-        href={`/sign-up/info`}
+        href={`/${params.lang}/sign-up/info`}
         className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
       >
         Please Complete Your Information To See This Section
@@ -181,6 +198,7 @@ export const SubscribeVideoAssets = async ({
         searchResults?.data.data.map((items: any, index: number) => {
           return (
             <ExploreVideoCard
+              lang={params.lang}
               id={items.id}
               key={items.id}
               author={{
@@ -196,7 +214,7 @@ export const SubscribeVideoAssets = async ({
         })
       ) : (
         <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
-          No Content To Show
+          {dic.appAccounts.noContentToShow}
         </div>
       )}
     </div>
@@ -204,10 +222,14 @@ export const SubscribeVideoAssets = async ({
 };
 export const SubscribeAudioAssets = async ({
   searchParams,
+  params,
+  dic,
 }: {
   searchParams: {
     [key: string]: string;
   };
+  params: { lang: Locale };
+  dic: DicProperties;
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
@@ -218,7 +240,7 @@ export const SubscribeAudioAssets = async ({
   if (searchResults?.status === 406) {
     return (
       <Link
-        href={`/sign-up/info`}
+        href={`/${params.lang}/sign-up/info`}
         className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
       >
         Please Complete Your Information To See This Section
@@ -233,6 +255,7 @@ export const SubscribeAudioAssets = async ({
         searchResults?.data.data.map((items: any, index: number) => {
           return (
             <ExploreAudioCard
+              lang={params.lang}
               id={items.id}
               key={items.id}
               author={{
@@ -248,7 +271,7 @@ export const SubscribeAudioAssets = async ({
         })
       ) : (
         <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
-          No Content To Show
+          {dic.appAccounts.noContentToShow}
         </div>
       )}
     </div>
@@ -256,10 +279,14 @@ export const SubscribeAudioAssets = async ({
 };
 export const SubscribeTextAssets = async ({
   searchParams,
+  params,
+  dic,
 }: {
   searchParams: {
     [key: string]: string;
   };
+  params: { lang: Locale };
+  dic: DicProperties;
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
@@ -270,7 +297,7 @@ export const SubscribeTextAssets = async ({
   if (searchResults?.status === 406) {
     return (
       <Link
-        href={`/sign-up/info`}
+        href={`/${params.lang}/sign-up/info`}
         className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
       >
         Please Complete Your Information To See This Section
@@ -283,11 +310,11 @@ export const SubscribeTextAssets = async ({
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
       {searchResults?.data.data.length > 0 ? (
         searchResults?.data.data.map((item: any) => (
-          <ExploreTextCard key={item.id} data={item} />
+          <ExploreTextCard lang={params.lang} key={item.id} data={item} />
         ))
       ) : (
         <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
-          No Content To Show
+          {dic.appAccounts.noContentToShow}
         </div>
       )}
     </div>

@@ -4,9 +4,12 @@ import Image from "next/image";
 import WebAppMainNavbar from "./WebAppMainNavbar";
 import WebAppSideBarBottomSection from "./WebAppSibeBarBottomSection";
 import Link from "next/link";
+import { getDictionary } from "@/dictionary";
+import { Locale } from "@/types/dictionary-types";
 
-const WebAppSideBar = async () => {
+const WebAppSideBar = async ({ lang }: { lang: Locale }) => {
   const session = await getServerSession(authOptions);
+  const dic = await getDictionary(lang);
   // console.log(session);
   return (
     <aside className="col-span-2 rounded-2xl bg-[rgba(78,78,97,0.20)] border border-[#CFCFFC] border-opacity-20 py-8 px-6 flex flex-col items-stretch justify-between">
@@ -41,14 +44,14 @@ const WebAppSideBar = async () => {
         </div>
         {/* main nav */}
         <div>
-          <WebAppMainNavbar />
+          <WebAppMainNavbar dic={dic} />
         </div>
       </div>
       {session?.user ? (
-        <WebAppSideBarBottomSection />
+        <WebAppSideBarBottomSection dic={dic} />
       ) : (
         <Link
-          href={`/login`}
+          href={`/${lang}/login`}
           style={{
             background: `linear-gradient(0deg, #597AFF, #597AFF), linear-gradient(126.58deg, rgba(255, 255, 255, 0.3) 23.2%, rgba(255, 255, 255, 0) 71.3%)`,
             boxShadow: `0px 0px 25px 0px rgba(89, 122, 255, 0.3)`,

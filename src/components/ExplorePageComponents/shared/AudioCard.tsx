@@ -7,6 +7,7 @@ import Image from "next/image";
 import "./styles.css";
 import { secondsToHMS } from "@/lib/convertSecondsToHMS";
 import Link from "next/link";
+import { Locale } from "@/types/dictionary-types";
 
 const ExploreAudioCard = ({
   author,
@@ -14,9 +15,11 @@ const ExploreAudioCard = ({
   image,
   time,
   title,
+  lang,
   id,
 }: {
   image?: string;
+  lang: Locale;
   title: string;
   description: string;
   id: number;
@@ -28,7 +31,7 @@ const ExploreAudioCard = ({
 }) => {
   return (
     <Link
-      href={`/app/assets/audio/${title.replaceAll(" ", "-")}?id=${id}`}
+      href={`/${lang}/app/assets/audio/${title.replaceAll(" ", "-")}?id=${id}`}
       className="flex flex-col items-stretch gap-3"
     >
       <div

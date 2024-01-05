@@ -5,14 +5,17 @@ import { getMostViewedVideos } from "@/services/contactService";
 import "swiper/css";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import { FullLocaleNames, Locale } from "@/types/dictionary-types";
 
 const VideoSlider = () => {
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [videoData, setVideoData] = useState([]);
+  const lang = useParams().lang as Locale;
 
   useEffect(() => {
     const getData = async () => {
-      const videoData = await getMostViewedVideos();
+      const videoData = await getMostViewedVideos(FullLocaleNames[lang]);
       const data = await videoData.json();
       setVideoData(data);
     };
@@ -57,7 +60,7 @@ const VideoSlider = () => {
                 className="w-[200px] max-w-[200px] h-[250px] cursor-pointer rounded-2xl"
               >
                 <Link
-                  href={`/app/assets/video/${item.name.replaceAll(
+                  href={`/${lang}/app/assets/video/${item.name.replaceAll(
                     " ",
                     "-"
                   )}?id=${item.id}`}

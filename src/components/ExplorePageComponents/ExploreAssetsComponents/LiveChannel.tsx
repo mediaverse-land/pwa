@@ -1,15 +1,17 @@
 import { getLives } from "@/services/contactService";
+import { DicProperties, Locale } from "@/types/dictionary-types";
 import Image from "next/image";
 import Link from "next/link";
 
-const getLiveData = async (params?: string) => {
-  const liveData = await getLives({ params });
-  if (liveData.ok) {
-    return liveData.json();
-  }
-};
-
-export const ExploreLiveChannel = ({ liveData }: { liveData: any }) => {
+export const ExploreLiveChannel = ({
+  liveData,
+  dic,
+  lang,
+}: {
+  liveData: any;
+  dic: DicProperties;
+  lang: Locale;
+}) => {
   return (
     <div className="flex items-stretch flex-col gap-4">
       <div className="w-full flex items-center justify-between">
@@ -21,9 +23,12 @@ export const ExploreLiveChannel = ({ liveData }: { liveData: any }) => {
             height={20}
             alt="camera icon"
           />
-          <p className="text-white text-sm ">live channel</p>
+          <p className="text-white text-sm ">{dic.homepage.liveTvChannels}</p>
         </div>
-        <Link href={`/app/lives`} className="text-[14px] text-[#597AFF]">
+        <Link
+          href={`/${lang}/app/lives`}
+          className="text-[14px] text-[#597AFF]"
+        >
           View all
         </Link>
       </div>
@@ -32,7 +37,7 @@ export const ExploreLiveChannel = ({ liveData }: { liveData: any }) => {
           <div className="flex w-full overflow-x-auto items-center">
             {liveData.map((item: any, i: number) => (
               <Link
-                href={`/app/lives/${item.id}`}
+                href={`/${lang}/app/lives/${item.id}`}
                 key={i}
                 className="relative rounded-[8px] min-w-[190px] w-[190px] h-[125px] min-h-[190px] mr-[8px] overflow-hidden"
               >

@@ -2,6 +2,7 @@ import Image from "next/image";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
 import { AUDIO_ICON } from "@/components/SVG/svgs";
 import { getRecentlySongs } from "@/services/contactService";
+import { DicProperties, Locale } from "@/types/dictionary-types";
 
 const getChillSongs = async () => {
   try {
@@ -14,7 +15,13 @@ const getChillSongs = async () => {
   }
 };
 
-const ExploreChillSongs = async () => {
+const ExploreChillSongs = async ({
+  dic,
+  lang,
+}: {
+  lang: Locale;
+  dic: DicProperties;
+}) => {
   const chillSongs = await getChillSongs();
   return (
     <div className="flex items-stretch flex-col gap-4">
@@ -22,7 +29,7 @@ const ExploreChillSongs = async () => {
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <AUDIO_ICON />
-          <p className="text-white text-sm ">Chill Songs</p>
+          <p className="text-white text-sm ">{dic.homepage.bestSongs}</p>
         </div>
         <div className="text-[14px] text-[#597AFF]">View all</div>
       </div>
@@ -31,6 +38,7 @@ const ExploreChillSongs = async () => {
           <div className="flex items-stretch gap-4 overflow-x-auto">
             {chillSongs.slice(0, 10).map((item: any) => (
               <ExploreAssetsCard
+                lang={lang}
                 key={item.id}
                 id={item.id}
                 type="audio"

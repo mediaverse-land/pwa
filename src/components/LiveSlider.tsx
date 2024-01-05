@@ -1,15 +1,22 @@
-import Image from "next/image";
-import { useCallback, useEffect, useMemo, useState } from "react";
 import { getLives } from "@/services/contactService";
+import {
+  FullLocaleNames,
+  Locale,
+  TFullLocales,
+} from "@/types/dictionary-types";
 
-const getData = async () => {
-  const liveData = await getLives({ params: "" });
+const getData = async ({ lang }: { lang: TFullLocales }) => {
+  const liveData = await getLives({ params: "", lang });
   if (liveData.ok) {
     return liveData.json();
   }
 };
-const LiveSlider = async () => {
-  const liveData = await getData();
+const LiveSlider = async ({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}) => {
+  const liveData = await getData({ lang: FullLocaleNames[lang] });
 
   return (
     <div className="flex space-x-0 sm:space-x-4 justify-center items-center mt-10 marquee w-full">

@@ -5,6 +5,7 @@ import ExploreAudioCard from "../shared/AudioCard";
 import ExploreTextCard from "../shared/TextCard";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
 import Link from "next/link";
+import { Locale } from "@/types/dictionary-types";
 
 const getSearchResults = async (params: string) => {
   try {
@@ -19,10 +20,12 @@ const getSearchResults = async (params: string) => {
 
 export const SearchForAll = async ({
   searchParams,
+  params,
 }: {
   searchParams: {
     [key: string]: string;
   };
+  params: { lang: Locale };
 }) => {
   const searchResults = await getSearchResults(
     `q=${searchParams.q}${
@@ -58,6 +61,7 @@ export const SearchForAll = async ({
         };
         return (
           <ExploreAssetsCard
+            lang={params.lang}
             id={item.id}
             key={item.id}
             author={{
@@ -75,10 +79,12 @@ export const SearchForAll = async ({
 };
 export const SearchForImages = async ({
   searchParams,
+  params,
 }: {
   searchParams: {
     [key: string]: string;
   };
+  params: { lang: Locale };
 }) => {
   const searchResults = await getSearchResults(
     `q=${searchParams.q}${
@@ -90,7 +96,10 @@ export const SearchForImages = async ({
       {searchResults.images.map((items: any, index: number) => {
         return (
           <Link
-            href={`/explore?section=explore&content=asset-single-page&name=${items.name}&id=${items.id}&type=image`}
+            href={`/${params.lang}/app/assets/image/${items.name.replaceAll(
+              " ",
+              "-"
+            )}?id=${items.id}`}
             key={items.id}
             className={`relative overflow-hidden rounded-lg w-full aspect-square `}
           >
@@ -107,10 +116,12 @@ export const SearchForImages = async ({
 };
 export const SearchForVideos = async ({
   searchParams,
+  params,
 }: {
   searchParams: {
     [key: string]: string;
   };
+  params: { lang: Locale };
 }) => {
   const searchResults = await getSearchResults(
     `q=${searchParams.q}${
@@ -122,6 +133,7 @@ export const SearchForVideos = async ({
       {searchResults.videos.map((items: any, index: number) => {
         return (
           <ExploreVideoCard
+            lang={params.lang}
             id={items.id}
             key={items.id}
             author={{
@@ -140,10 +152,12 @@ export const SearchForVideos = async ({
 };
 export const SearchForAudios = async ({
   searchParams,
+  params,
 }: {
   searchParams: {
     [key: string]: string;
   };
+  params: { lang: Locale };
 }) => {
   const searchResults = await getSearchResults(
     `q=${searchParams.q}${
@@ -156,6 +170,7 @@ export const SearchForAudios = async ({
       {searchResults.audios.map((items: any, index: number) => {
         return (
           <ExploreAudioCard
+            lang={params.lang}
             key={items.id}
             id={items.id}
             author={{
@@ -174,10 +189,12 @@ export const SearchForAudios = async ({
 };
 export const SearchForTexts = async ({
   searchParams,
+  params,
 }: {
   searchParams: {
     [key: string]: string;
   };
+  params: { lang: Locale };
 }) => {
   const searchResults = await getSearchResults(
     `q=${searchParams.q}${
@@ -187,7 +204,7 @@ export const SearchForTexts = async ({
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-4">
       {searchResults.texts.map((item: any) => (
-        <ExploreTextCard key={item.id} data={item} />
+        <ExploreTextCard lang={params.lang} key={item.id} data={item} />
       ))}
     </div>
   );

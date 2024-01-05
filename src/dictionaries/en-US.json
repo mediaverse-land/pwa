@@ -1,0 +1,57 @@
+{
+  "header": {
+    "slogan": "Content is Wealth",
+    "home": "Home",
+    "blog": "Blog",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "api": "API",
+    "faq": "FAQ",
+    "about": "About"
+  },
+  "homepage": {
+    "whatIsMediaverse": "What is Mediaverse?",
+    "description": "Mediaverse Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.",
+    "exploreLimitless": "Explore limitless!",
+    "liveTvChannels": "Live TV Channels",
+    "bestVideos": "Best Videos",
+    "mostViewedImages": "Most Viewed Images",
+    "topTexts": "Top Texts",
+    "bestSongs": "Best Songs"
+  },
+  "footer": {
+    "haveNotTriedTheAppYet": "Haven't tried the app yet?"
+  },
+  "blogSection": {
+    "mediaverseNews": "MediaVerse News",
+    "alwaysBeUpdate": "Always be update!"
+  },
+  "faqSection": {
+    "title": "MediaVers Features"
+  },
+  "aboutUs": {
+    "office": "Office",
+    "phone": "Phone",
+    "email": "Email"
+  },
+  "appSidebar": {
+    "explore": "Explore",
+    "account": "Account",
+    "wallet": "Wallet",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "appAccounts": {
+    "assets": "Assets",
+    "sales": "Sales",
+    "volume": "Volume",
+    "subscribes": "Subscribe",
+    "myAssets": "Ownership -> My Assets",
+    "all": "All",
+    "noContentToShow": "No Content To Show"
+  },
+  "appWallet": {
+    "inventory": "Inventory",
+    "addInventory": "Add Inventory"
+  }
+}

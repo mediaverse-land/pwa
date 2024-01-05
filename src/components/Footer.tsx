@@ -1,12 +1,14 @@
 import { socialMedia } from "@/data";
 import Image from "next/image";
 import Link from "next/link";
+import SelectLanguage from "./SelectLanguage";
 
-const Footer = () => {
+const Footer = ({ title }: { title: string }) => {
   return (
     <div className="mt-auto">
       <div className="w-full flex justify-between px-2 sm:px-72 items-center py-6 mt-8 bg-blue-950">
-        <p className="text-white">Haven't tried the app yet?</p>
+        <p className="text-white">{title}</p>
+        <SelectLanguage />
         <div className="flex space-x-5">
           {socialMedia.map((item) => (
             <Link

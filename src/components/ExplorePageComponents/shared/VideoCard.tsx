@@ -3,6 +3,7 @@ import Image from "next/image";
 import "./styles.css";
 import { secondsToHMS } from "@/lib/convertSecondsToHMS";
 import Link from "next/link";
+import { Locale } from "@/types/dictionary-types";
 
 const ExploreVideoCard = ({
   author,
@@ -10,8 +11,10 @@ const ExploreVideoCard = ({
   image,
   time,
   title,
+  lang,
   id,
 }: {
+  lang: Locale;
   image: string;
   title: string;
   description: string;
@@ -24,7 +27,7 @@ const ExploreVideoCard = ({
 }) => {
   return (
     <Link
-      href={`/app/assets/video/${title.replaceAll(" ", "-")}?id=${id}`}
+      href={`/${lang}/app/assets/video/${title.replaceAll(" ", "-")}?id=${id}`}
       className="flex flex-col items-stretch gap-3"
     >
       <div

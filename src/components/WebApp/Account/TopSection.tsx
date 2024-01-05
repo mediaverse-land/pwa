@@ -1,11 +1,16 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import UserStatics from "@/components/ExplorePageComponents/AccountComponents/UserStatics";
+import { DicProperties, Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-const accountTypes = [
+type TaccountTypes = {
+  id: number;
+  name: "Subscribe" | "Ownership";
+  link: "subscribe" | "ownership";
+};
+const accountTypes: TaccountTypes[] = [
   {
     id: 1,
     name: "Subscribe",
@@ -20,8 +25,12 @@ const accountTypes = [
 
 const WebAppAccountTopSection = async ({
   type,
+  lang,
+  dic,
 }: {
   type: "subscribe" | "ownership";
+  dic: DicProperties;
+  lang: Locale;
 }) => {
   const session = await getServerSession(authOptions);
   return (
@@ -60,12 +69,12 @@ const WebAppAccountTopSection = async ({
           </div>
         </div>
         {/* statistics */}
-        <UserStatics />
+        <UserStatics lang={lang} />
         {/* tabs */}
         <div className="flex items-stretch justify-around w-[420px] mx-auto">
           {accountTypes.map((item) => (
             <Link
-              href={`/app/account/${item.link}`}
+              href={`/${lang}/app/account/${item.link}`}
               key={item.id}
               className={`py-4 relative after:content-[''] duration-150 transition-all after:absolute after:bottom-0 after:left-0 after:bg-[#597AFF] ${
                 type === item.link
@@ -73,7 +82,9 @@ const WebAppAccountTopSection = async ({
                   : "after:w-[0%] after:h-[0px] text-[#666680]"
               }`}
             >
-              {item.name}
+              {item.name === "Subscribe"
+                ? dic.appAccounts.subscribes
+                : dic.appAccounts.myAssets}
             </Link>
           ))}
         </div>

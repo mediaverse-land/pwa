@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { redirect, useParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import Image from "next/image";
@@ -21,6 +21,7 @@ const requestOtpSchema = z.object({
 });
 
 const OTPForm = () => {
+  const params = useParams();
   const [inputErrors, setInputErrors] = useState({
     cellphone: "",
     otp: "",
@@ -267,7 +268,7 @@ const OTPForm = () => {
                   Have an account?
                 </span>
                 <Link
-                  href={`/login`}
+                  href={`/${params.lang}/login`}
                   className="text-[#597AFF] font-semibold text-[14px]"
                 >
                   Log in

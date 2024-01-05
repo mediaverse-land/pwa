@@ -7,7 +7,7 @@ import { useState } from "react";
 import { signUpCompletion } from "@/services/contactService";
 import { SPINNER } from "../SVG/svgs";
 import Cookies from "js-cookie";
-import { redirect, useRouter } from "next/navigation";
+import { redirect, useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
@@ -39,6 +39,7 @@ const schema = z.object({
 });
 const EditUserInfoForm = () => {
   const [checked, setChecked] = useState(false);
+  const params = useParams();
   const session = useSession();
   const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -81,7 +82,7 @@ const EditUserInfoForm = () => {
         email: response.email,
       });
       router.refresh();
-      router.replace("/app/explore/");
+      router.replace(`/${params.lang}/app/explore/`);
     } else {
       // console.log("failed");
       setServerErrors(response.error || response.message);
@@ -189,7 +190,10 @@ const EditUserInfoForm = () => {
             </span>
             <span className="text-white">
               I'm Agree With{" "}
-              <Link className="underline text-blue-600" href={`/terms`}>
+              <Link
+                className="underline text-blue-600"
+                href={`/${params.lang}/terms`}
+              >
                 Terms
               </Link>
             </span>

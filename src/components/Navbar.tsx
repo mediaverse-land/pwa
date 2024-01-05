@@ -1,20 +1,20 @@
 "use client";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { navbar } from "@/data";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
+import { DicProperties } from "@/types/dictionary-types";
 
-const Navbar = () => {
+const Navbar = ({ dic }: { dic: DicProperties }) => {
   const pathname = usePathname();
   const session = useSession();
-  // console.log(session, "session");
-  // console.log(pathname, "pathname");
+  const locale = useParams();
 
   return (
     <nav className="nav fixed top-0 w-full z-[90]">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <Link href={"/"} className="flex items-center">
+        <Link href={`${locale.lang}/`} className="flex items-center">
           <Image
             src="/images/media-verse-logo.png"
             quality={100}
@@ -28,13 +28,13 @@ const Navbar = () => {
               MediaVerse
             </span>
             <span className="self-center text-xs top-0 text-gray-500 whitespace-nowrap">
-              content is wealth
+              {dic?.header.slogan}
             </span>
           </div>
         </Link>
         {session.data?.user ? (
           <Link
-            href={`/app/explore`}
+            href={`/${locale.lang}/app/explore`}
             className="w-[50px] md:order-2 pt-2 pb-[7px] relative aspect-square rounded-full overflow-hidden shadow border border-white border-opacity-30 justify-center items-center inline-flex"
           >
             {session.data.user.image && (
@@ -47,7 +47,7 @@ const Navbar = () => {
           </Link>
         ) : (
           <Link
-            href={`/app/explore`}
+            href={`/${locale.lang}/app/explore`}
             className="flex md:order-2 justify-between"
           >
             <div
@@ -72,13 +72,13 @@ const Navbar = () => {
             {navbar.map((item, index) => (
               <li key={index}>
                 <Link
-                  href={`${item.href}${item.query}`}
+                  href={`/${locale.lang}/${item.href}${item.query}`}
                   key={index}
-                  className={`text-gray-400 hover:text-white md:bg-transparent pb-2 rounded-[2px] ${
-                    pathname === item.href ? "active" : ""
+                  className={`text-gray-400 flex flex-col hover:text-white md:bg-transparent pb-2 rounded-[2px] ${
+                    pathname === `/${locale.lang}/${item.href}` ? "active" : ""
                   }`}
                 >
-                  {item.title}
+                  {dic.header[item.title]}
                 </Link>
               </li>
             ))}
