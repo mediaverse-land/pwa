@@ -3,6 +3,8 @@ import { getProfileStatics } from "@/services/contactService";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import LogoutNoUser from "./Logout";
+import { getDictionary } from "@/dictionary";
+import { DicProperties, Locale } from "@/types/dictionary-types";
 
 const getStatics = async (token: string) => {
   try {
@@ -16,8 +18,9 @@ const getStatics = async (token: string) => {
     console.error(error);
   }
 };
-const UserStatics = async () => {
+const UserStatics = async ({ lang }: { lang: Locale }) => {
   const session = await getServerSession(authOptions);
+  const dic = await getDictionary(lang);
   if (!session?.user) {
     return <LogoutNoUser />;
   }
@@ -41,19 +44,25 @@ const UserStatics = async () => {
         <div className="leading-5 font-semibold text-[#D9D9FF] line-clamp-1">
           {statics?.data.assets || 0}
         </div>
-        <div className="leading-4 text-[12px] text-[#83839C]">Assets</div>
+        <div className="leading-4 text-[12px] text-[#83839C]">
+          {dic.appAccounts.assets}
+        </div>
       </div>
       <div className="rounded-2xl bg-[rgba(78,78,97,0.20)] backdrop-blur-sm h-full before:content-[''] before:absolute before:w-[45%] before:left-1/2 before:-translate-x-1/2 before:h-[1px] before:bg-[#597AFF] before:top-0 w-full flex flex-col items-center justify-center gap-1 leading-none">
         <div className="leading-5 font-semibold text-[#D9D9FF] line-clamp-1">
           {(statics?.data.sales_number || 0 / 1000).toFixed(1)} k
         </div>
-        <div className="leading-4 text-[12px] text-[#83839C]">Sales</div>
+        <div className="leading-4 text-[12px] text-[#83839C]">
+          {dic.appAccounts.sales}
+        </div>
       </div>
       <div className="rounded-2xl bg-[rgba(78,78,97,0.20)] backdrop-blur-sm h-full before:content-[''] before:absolute before:w-[45%] before:left-1/2 before:-translate-x-1/2 before:h-[1px] before:bg-[#597AFF] before:top-0 w-full flex flex-col items-center justify-center gap-1 leading-none">
         <div className="leading-5 font-semibold text-[#D9D9FF] line-clamp-1">
           {(statics?.data.sales_volume || 0 / 1000).toFixed(0)}k $
         </div>
-        <div className="leading-4 text-[12px] text-[#83839C]">Volume</div>
+        <div className="leading-4 text-[12px] text-[#83839C]">
+          {dic.appAccounts.volume}
+        </div>
       </div>
     </div>
   );

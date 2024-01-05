@@ -11,7 +11,7 @@ function getLocale(request: NextRequest) {
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  console.log(request.nextUrl);
+  // console.log(request.nextUrl);
   if (pathname.endsWith("/sitemap.xml")) {
     return NextResponse.rewrite(
       `${request.nextUrl.origin}/${locales[0]}${pathname}`

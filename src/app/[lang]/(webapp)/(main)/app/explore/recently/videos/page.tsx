@@ -1,6 +1,7 @@
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import ExploreVideoCard from "@/components/ExplorePageComponents/shared/VideoCard";
 import { getRecentlyVideos } from "@/services/contactService";
+import { Locale } from "@/types/dictionary-types";
 
 const getRecentlyVideosData = async () => {
   try {
@@ -14,7 +15,11 @@ const getRecentlyVideosData = async () => {
   }
 };
 
-const WebAppRecentlyVideos = async () => {
+const WebAppRecentlyVideos = async ({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}) => {
   const rececentlyVideosData = await getRecentlyVideosData();
   return (
     <div className="h-full w-full p-10 overflow-y-auto">
@@ -23,6 +28,7 @@ const WebAppRecentlyVideos = async () => {
         {rececentlyVideosData?.data.map((items: any, index: number) => {
           return (
             <ExploreVideoCard
+              lang={lang}
               id={items.id}
               key={items.id}
               author={{

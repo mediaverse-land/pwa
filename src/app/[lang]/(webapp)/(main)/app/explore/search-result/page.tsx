@@ -14,6 +14,7 @@ import {
   TEXT_ICON,
   VIDEO_ICON,
 } from "@/components/SVG/svgs";
+import { Locale } from "@/types/dictionary-types";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 type IExploreSearchResultNav = {
@@ -62,11 +63,19 @@ const ExploreSearchResultNav: IExploreSearchResultNav[] = [
   },
 ];
 
-const SearchSectionResultFrom = async (params: any) => {
-  const searchQuery = params.searchParams.q;
-  const plan = params.searchParams.plan;
-  const tag = params.searchParams.tag;
-  const dataType = params.searchParams.type || ExploreSearchResultNav[0].link;
+const SearchSectionResultFrom = async ({
+  params,
+  searchParams,
+}: {
+  params: { lang: Locale };
+  searchParams: {
+    [key: string]: string;
+  };
+}) => {
+  const searchQuery = searchParams.q;
+  const plan = searchParams.plan;
+  const tag = searchParams.tag;
+  const dataType = searchParams.type || ExploreSearchResultNav[0].link;
 
   const searchResultsComponents: {
     [key: string]: {
@@ -74,19 +83,25 @@ const SearchSectionResultFrom = async (params: any) => {
     };
   } = {
     all: {
-      component: <SearchForAll searchParams={params.searchParams} />,
+      component: <SearchForAll params={params} searchParams={searchParams} />,
     },
     images: {
-      component: <SearchForImages searchParams={params.searchParams} />,
+      component: (
+        <SearchForImages params={params} searchParams={searchParams} />
+      ),
     },
     videos: {
-      component: <SearchForVideos searchParams={params.searchParams} />,
+      component: (
+        <SearchForVideos params={params} searchParams={searchParams} />
+      ),
     },
     audios: {
-      component: <SearchForAudios searchParams={params.searchParams} />,
+      component: (
+        <SearchForAudios params={params} searchParams={searchParams} />
+      ),
     },
     texts: {
-      component: <SearchForTexts searchParams={params.searchParams} />,
+      component: <SearchForTexts params={params} searchParams={searchParams} />,
     },
   };
   return (
@@ -95,12 +110,12 @@ const SearchSectionResultFrom = async (params: any) => {
         {/* input section */}
         <div className="flex items-center h-[40px]">
           <div className="mr-6">
-            <Link href={`/app/explore/search-form`}>
+            <Link href={`/${params.lang}/app/explore/search-form`}>
               <BACK_ICON fill="#666680" />
             </Link>
           </div>
           <div className="bg-[rgba(14,14,18,0.20)] h-full border border-[#353542] rounded-lg px-4 py-3 flex items-center justify-between grow mr-4">
-            <SecondSearchForm searchParams={params.searchParams} />
+            <SecondSearchForm searchParams={searchParams} />
           </div>
           <div className="rounded-lg p-2 aspect-square border border-[#353542] bg-[rgba(14,14,18,0.20)] h-full">
             <SEARCH_SETTING_ICON
@@ -117,9 +132,11 @@ const SearchSectionResultFrom = async (params: any) => {
           {ExploreSearchResultNav.map((item) => (
             <Link
               key={item.id}
-              href={`/app/explore/search-result?q=${searchQuery}&type=${
-                item.link
-              }${plan ? `&plan=${plan}` : ""}${tag ? `&tag=${tag}` : ""}`}
+              href={`/${
+                params.lang
+              }/app/explore/search-result?q=${searchQuery}&type=${item.link}${
+                plan ? `&plan=${plan}` : ""
+              }${tag ? `&tag=${tag}` : ""}`}
             >
               <div
                 className={`relative after:bg-[#597AFF] after:m-auto after:absolute after:left-0 after:rounded-full after:bottom-0 after:origin-center px-2 py-2 after:content-[''] flex items-center justify-between h-full ${
@@ -136,7 +153,7 @@ const SearchSectionResultFrom = async (params: any) => {
       </div>
       <div>
         {searchResultsComponents[dataType]?.component ||
-          redirect("/app/explore/search-form")}
+          redirect(`/${params.lang}/app/explore/search-form`)}
       </div>
     </div>
   );

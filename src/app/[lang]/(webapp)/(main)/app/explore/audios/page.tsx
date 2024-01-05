@@ -1,10 +1,16 @@
 import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
 import ExploreAssetsCard from "@/components/ExplorePageComponents/shared/AllAssetsCard";
 import ExploreAudioCard from "@/components/ExplorePageComponents/shared/AudioCard";
+import { getDictionary } from "@/dictionary";
 import {
   getMostViewedSongs,
   getRecentlySongs,
 } from "@/services/contactService";
+import {
+  FullLocaleNames,
+  Locale,
+  TFullLocales,
+} from "@/types/dictionary-types";
 import Link from "next/link";
 
 const audioData = [
@@ -44,8 +50,8 @@ const audioData = [
     image: "/images/nasa.png",
   },
 ];
-const getMostViewedSongsData = async () => {
-  const liveData = await getMostViewedSongs();
+const getMostViewedSongsData = async (lang: TFullLocales) => {
+  const liveData = await getMostViewedSongs(lang);
   if (liveData.ok) {
     return liveData.json();
   }
@@ -56,12 +62,19 @@ const getRecentlySongsData = async () => {
     return liveData.json();
   }
 };
-const WebAppExploreAudioAssets = async () => {
-  const [mostViewedSongs] = await Promise.all([getMostViewedSongsData()]);
+const WebAppExploreAudioAssets = async ({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}) => {
+  const [mostViewedSongs] = await Promise.all([
+    getMostViewedSongsData(FullLocaleNames[lang]),
+  ]);
+  const dic = await getDictionary(lang);
 
   return (
     <div className="h-full overflow-y-auto">
-      <ExploreSearchAndNavSection activeTab={"Audios"} />
+      <ExploreSearchAndNavSection dic={dic} lang={lang} activeTab={"Audios"} />
       <div className="flex flex-col items-stretch gap-6 py-8 px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
@@ -77,6 +90,7 @@ const WebAppExploreAudioAssets = async () => {
               <div className="flex items-stretch gap-4 overflow-x-auto [&_>_*]:w-[200px]">
                 {mostViewedSongs.slice(0, 10).map((item: any) => (
                   <ExploreAssetsCard
+                    lang={lang}
                     id={item.id}
                     key={item.id}
                     type="audio"
@@ -100,13 +114,13 @@ const WebAppExploreAudioAssets = async () => {
               <p className="text-white text-sm ">Recently</p>
             </div>
             <Link
-              href={`/app/explore/recently/audios`}
+              href={`/${lang}/app/explore/recently/audios`}
               className="text-[14px] text-[#597AFF]"
             >
               View all
             </Link>
           </div>
-          <RecentlyAudio />
+          <RecentlyAudio lang={lang} />
         </div>
       </div>
     </div>
@@ -115,13 +129,14 @@ const WebAppExploreAudioAssets = async () => {
 
 export default WebAppExploreAudioAssets;
 
-const RecentlyAudio = async () => {
+const RecentlyAudio = async ({ lang }: { lang: Locale }) => {
   const rececentlySongsData = await getRecentlySongsData();
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6">
       {rececentlySongsData.map((items: any, index: number) => {
         return (
           <ExploreAudioCard
+            lang={lang}
             id={items.id}
             key={items.id}
             author={{

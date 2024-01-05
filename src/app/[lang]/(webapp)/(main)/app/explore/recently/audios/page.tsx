@@ -1,6 +1,7 @@
 import ExploreAudioCard from "@/components/ExplorePageComponents/shared/AudioCard";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import { getRecentlySongs } from "@/services/contactService";
+import { Locale } from "@/types/dictionary-types";
 
 const getRecentlySongsData = async () => {
   try {
@@ -14,7 +15,11 @@ const getRecentlySongsData = async () => {
   }
 };
 
-const WebAppRecentlyAudios = async () => {
+const WebAppRecentlyAudios = async ({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}) => {
   const rececentlySongsData = await getRecentlySongsData();
   return (
     <div className="w-full h-full p-10 overflow-y-auto">
@@ -23,6 +28,7 @@ const WebAppRecentlyAudios = async () => {
         {rececentlySongsData?.data.map((items: any, index: number) => {
           return (
             <ExploreAudioCard
+              lang={lang}
               id={items.id}
               key={items.id}
               author={{

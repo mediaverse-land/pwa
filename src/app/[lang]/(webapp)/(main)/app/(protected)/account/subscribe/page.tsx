@@ -14,6 +14,8 @@ import {
   VIDEO_ICON,
 } from "@/components/SVG/svgs";
 import WebAppAccountTopSection from "@/components/WebApp/Account/TopSection";
+import { getDictionary } from "@/dictionary";
+import { Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
@@ -75,39 +77,77 @@ const accountTypes = [
     link: "ownership",
   },
 ];
-const AccountSubscribeSection = async (params: any) => {
-  const session = await getServerSession(authOptions);
-  // const type = searchParams["type"] || "subscribe";
-  const activeTab = params.searchParams.type || ExploreSectionNavs[0].name;
+const AccountSubscribeSection = async ({
+  searchParams,
+  params,
+}: {
+  searchParams: {
+    [key: string]: string;
+  };
+  params: { lang: Locale };
+}) => {
+  // const session = await getServerSession(authOptions);
+  const dic = await getDictionary(params.lang);
+  const activeTab = searchParams.type || ExploreSectionNavs[0].name;
   const assetComponents: {
     [key: string]: {
       component: JSX.Element;
     };
   } = {
     All: {
-      component: <SubscribeAllAssets searchParams={params.searchParams} />,
+      component: (
+        <SubscribeAllAssets
+          dic={dic}
+          params={params}
+          searchParams={searchParams}
+        />
+      ),
     },
     Images: {
-      component: <SubscribeImageAssets searchParams={params.searchParams} />,
+      component: (
+        <SubscribeImageAssets
+          dic={dic}
+          params={params}
+          searchParams={searchParams}
+        />
+      ),
     },
     Texts: {
-      component: <SubscribeTextAssets searchParams={params.searchParams} />,
+      component: (
+        <SubscribeTextAssets
+          dic={dic}
+          params={params}
+          searchParams={searchParams}
+        />
+      ),
     },
     Audios: {
-      component: <SubscribeAudioAssets searchParams={params.searchParams} />,
+      component: (
+        <SubscribeAudioAssets
+          dic={dic}
+          params={params}
+          searchParams={searchParams}
+        />
+      ),
     },
     Videos: {
-      component: <SubscribeVideoAssets searchParams={params.searchParams} />,
+      component: (
+        <SubscribeVideoAssets
+          dic={dic}
+          params={params}
+          searchParams={searchParams}
+        />
+      ),
     },
   };
   return (
     <div className="w-full h-full overflow-y-auto">
-      <WebAppAccountTopSection type="subscribe" />
+      <WebAppAccountTopSection dic={dic} lang={params.lang} type="subscribe" />
       <div className="flex flex-col items-stretch gap-6 mt-3 w-full px-8">
         <div className="rounded-lg grid grid-flow-col grid-rows-1 bg-[#0E0E1280] backdrop-blur-md">
           {ExploreSectionNavs.map((tab) => (
             <Link
-              href={`/app/account/subscribe${
+              href={`/${params.lang}/app/account/subscribe${
                 tab.link ? `?type=${tab.name}` : ""
               }`}
               key={tab.id}
@@ -127,7 +167,7 @@ const AccountSubscribeSection = async (params: any) => {
         </div>
         <div className="">
           {assetComponents[activeTab]?.component ||
-            redirect("/app/account/subscribe")}
+            redirect(`/${params.lang}/app/account/subscribe`)}
         </div>
       </div>
     </div>

@@ -7,14 +7,15 @@ import {
   INACTIVE_EXPLORE,
   INACTIVE_WALLET,
 } from "@/components/SVG/svgs";
+import { DicProperties, Locale } from "@/types/dictionary-types";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
 type IexploreSections = {
   id: string;
-  name: string;
-  link: string;
+  name: "Explore" | "Account" | "Wallet";
+  link: "explore" | "account" | "wallet";
   active_icon?: JSX.Element;
   inactive_icon?: JSX.Element;
   component?: JSX.Element;
@@ -75,8 +76,10 @@ const exploreSections: IexploreSections[] = [
   },
 ];
 
-const WebAppMainNavbar = () => {
+const WebAppMainNavbar = ({ dic }: { dic: DicProperties }) => {
   const pathname = usePathname();
+  const params = useParams();
+  const lang = params.lang as Locale;
   const activeSection = pathname.split("/")[2];
   const session = useSession();
   return (
@@ -92,7 +95,7 @@ const WebAppMainNavbar = () => {
             <li key={item.id} className="">
               <Link
                 className="flex items-center gap-4 cursor-pointer text-[14px] font-normal"
-                href={`/app/${item.link}`}
+                href={`/${lang}/app/${item.link}`}
               >
                 <div
                   className={`${
@@ -110,7 +113,7 @@ const WebAppMainNavbar = () => {
                     activeSection === item.link ? "font-medium text-white" : ""
                   }`}
                 >
-                  {item.name}
+                  {dic.appSidebar[item.link]}
                 </div>
               </Link>
             </li>

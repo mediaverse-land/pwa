@@ -6,137 +6,15 @@ import {
 } from "@/services/contactService";
 import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
 import ExploreAssetsCard from "@/components/ExplorePageComponents/shared/AllAssetsCard";
-const imageData = [
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-  {
-    asset: {
-      thumbnails: {
-        "336x366": "/images/car.png",
-      },
-    },
-  },
-];
+import {
+  FullLocaleNames,
+  Locale,
+  TFullLocales,
+} from "@/types/dictionary-types";
+import { getDictionary } from "@/dictionary";
 
-const getMostViewedImagesData = async () => {
-  const liveData = await getMostViewedImages();
+const getMostViewedImagesData = async (lang: TFullLocales) => {
+  const liveData = await getMostViewedImages(lang);
   if (liveData.ok) {
     return liveData.json();
   }
@@ -148,11 +26,18 @@ const getRecentlyImagesData = async () => {
   }
 };
 
-const WebAppImageAssets = async () => {
-  const [mostViewedImages] = await Promise.all([getMostViewedImagesData()]);
+const WebAppImageAssets = async ({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}) => {
+  const [mostViewedImages] = await Promise.all([
+    getMostViewedImagesData(FullLocaleNames[lang]),
+  ]);
+  const dic = await getDictionary(lang);
   return (
     <div className="w-full overflow-y-auto">
-      <ExploreSearchAndNavSection activeTab={"Images"} />
+      <ExploreSearchAndNavSection dic={dic} lang={lang} activeTab={"Images"} />
       <div className="flex flex-col items-stretch gap-6 py-8 px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
@@ -168,6 +53,7 @@ const WebAppImageAssets = async () => {
               <div className="flex items-stretch gap-4 overflow-x-auto">
                 {mostViewedImages.slice(0, 10).map((item: any) => (
                   <ExploreAssetsCard
+                    lang={lang}
                     key={item.id}
                     id={item.id}
                     type="image"
@@ -191,13 +77,13 @@ const WebAppImageAssets = async () => {
               <p className="text-white text-sm ">Recently</p>
             </div>
             <Link
-              href={`/app/explore/recently/images`}
+              href={`/${lang}/app/explore/recently/images`}
               className="text-[14px] text-[#597AFF]"
             >
               View all
             </Link>
           </div>
-          <RecentlyImages />
+          <RecentlyImages lang={lang} />
         </div>
       </div>
     </div>
@@ -205,16 +91,17 @@ const WebAppImageAssets = async () => {
 };
 
 export default WebAppImageAssets;
-const RecentlyImages = async () => {
+const RecentlyImages = async ({ lang }: { lang: Locale }) => {
   const data = await getRecentlyImagesData();
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2">
       {data.map((items: any, index: number) => {
         return (
           <Link
-            href={`/app/assets/image/${items.name.replaceAll(" ", "-")}?id=${
-              items.id
-            }`}
+            href={`/${lang}/app/assets/image/${items.name.replaceAll(
+              " ",
+              "-"
+            )}?id=${items.id}`}
             key={items.id}
             className={`relative overflow-hidden rounded-lg w-full aspect-square `}
           >

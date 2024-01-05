@@ -1,44 +1,20 @@
 import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
 import ExploreAssetsCard from "@/components/ExplorePageComponents/shared/AllAssetsCard";
 import ExploreVideoCard from "@/components/ExplorePageComponents/shared/VideoCard";
+import { getDictionary } from "@/dictionary";
 import {
   getMostViewedVideos,
   getRecentlyVideos,
 } from "@/services/contactService";
+import {
+  FullLocaleNames,
+  Locale,
+  TFullLocales,
+} from "@/types/dictionary-types";
 import Link from "next/link";
 
-const videoData = [
-  {
-    id: 1,
-    title: "Velit officia",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut libero.",
-    author: "Ralph",
-    time: "8:15",
-    image: "/images/nasa.png",
-  },
-  {
-    id: 2,
-    title: "Velit officia",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut libero.",
-    author: "Ralph",
-    time: "8:15",
-    image: "/images/nasa.png",
-  },
-  {
-    id: 3,
-    title: "Velit officia",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut libero.",
-    author: "Ralph",
-    time: "8:15",
-    image: "/images/nasa.png",
-  },
-];
-
-const getMostViewedVideosData = async () => {
-  const liveData = await getMostViewedVideos();
+const getMostViewedVideosData = async (lang: TFullLocales) => {
+  const liveData = await getMostViewedVideos(lang);
   if (liveData.ok) {
     return liveData.json();
   }
@@ -50,12 +26,18 @@ const getRecentlyVideosData = async () => {
   }
 };
 
-const WebAppExploreVideoAssets = async () => {
-  const [mostViewedVideos] = await Promise.all([getMostViewedVideosData()]);
-
+const WebAppExploreVideoAssets = async ({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}) => {
+  const [mostViewedVideos] = await Promise.all([
+    getMostViewedVideosData(FullLocaleNames[lang]),
+  ]);
+  const dic = await getDictionary(lang);
   return (
     <div className="h-full overflow-y-auto">
-      <ExploreSearchAndNavSection activeTab={"Videos"} />
+      <ExploreSearchAndNavSection dic={dic} lang={lang} activeTab={"Videos"} />
       <div className="flex flex-col items-stretch gap-6 py-8 px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
@@ -71,6 +53,7 @@ const WebAppExploreVideoAssets = async () => {
               <div className="flex items-stretch gap-4 overflow-x-auto">
                 {mostViewedVideos.slice(0, 10).map((item: any) => (
                   <ExploreAssetsCard
+                    lang={lang}
                     id={item.id}
                     key={item.id}
                     type="video"
@@ -94,13 +77,13 @@ const WebAppExploreVideoAssets = async () => {
               <p className="text-white text-sm ">Recently</p>
             </div>
             <Link
-              href={`/app/explore/recently/videos`}
+              href={`/${lang}/app/explore/recently/videos`}
               className="text-[14px] text-[#597AFF]"
             >
               View all
             </Link>
           </div>
-          <RecentlyVideos />
+          <RecentlyVideos lang={lang} />
         </div>
       </div>
     </div>
@@ -109,13 +92,14 @@ const WebAppExploreVideoAssets = async () => {
 
 export default WebAppExploreVideoAssets;
 
-const RecentlyVideos = async () => {
+const RecentlyVideos = async ({ lang }: { lang: Locale }) => {
   const rececentlyVideosData = await getRecentlyVideosData();
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6">
       {rececentlyVideosData.map((items: any, index: number) => {
         return (
           <ExploreVideoCard
+            lang={lang}
             id={items.id}
             key={items.id}
             author={{

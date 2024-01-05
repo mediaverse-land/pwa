@@ -7,10 +7,19 @@ import Image from "next/image";
 import Link from "next/link";
 import SocialLoginBtn from "@/components/Buttons/SocialLoginBtn";
 import { LoginWithPhone, LoginWithUsername } from "@/components/LoginInputs";
+import { Locale } from "@/types/dictionary-types";
 
-const Login = async (props: any) => {
-  let loginType = props.searchParams.type || "phone";
-  let refer = props.searchParams.refer;
+const Login = async ({
+  searchParams,
+  params: { lang },
+}: {
+  searchParams: {
+    [key: string]: string;
+  };
+  params: { lang: Locale };
+}) => {
+  let loginType = searchParams.type || "phone";
+  let refer = searchParams.refer;
 
   const session = await getServerSession(authOptions);
   // console.log(session, "server session");
@@ -51,7 +60,7 @@ const Login = async (props: any) => {
                       Dont have an account?
                     </span>
                     <Link
-                      href={`/sign-up`}
+                      href={`/${lang}/sign-up`}
                       className="text-[#597AFF] font-semibold text-[14px]"
                     >
                       Sign up
@@ -60,7 +69,7 @@ const Login = async (props: any) => {
                   {loginType === "phone" ? (
                     <Link
                       href={{
-                        pathname: "/login",
+                        pathname: `/${lang}/login`,
                         query: { type: "account", refer: refer },
                       }}
                       className="text-[12px] leading-3 text-[#597AFF]"
@@ -70,7 +79,7 @@ const Login = async (props: any) => {
                   ) : (
                     <Link
                       href={{
-                        pathname: "/login",
+                        pathname: `/${lang}/login`,
                         query: { type: "phone", refer: refer },
                       }}
                       className="text-[12px] leading-3 text-[#597AFF]"

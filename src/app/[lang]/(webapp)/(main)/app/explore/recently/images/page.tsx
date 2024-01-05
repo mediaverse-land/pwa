@@ -1,5 +1,6 @@
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import { getRecentlyImages } from "@/services/contactService";
+import { Locale } from "@/types/dictionary-types";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,7 +11,11 @@ const getRecentlyImagesData = async () => {
     status: liveData.status,
   };
 };
-const WebAppRecentlyImages = async () => {
+const WebAppRecentlyImages = async ({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}) => {
   const data = await getRecentlyImagesData();
   return (
     <div className="h-full w-full p-10 overflow-y-auto">
@@ -19,9 +24,10 @@ const WebAppRecentlyImages = async () => {
         {data?.data.map((items: any, index: number) => {
           return (
             <Link
-              href={`/app/assets/image/${items.name.replaceAll(" ", "-")}?id=${
-                items.id
-              }`}
+              href={`/${lang}/app/assets/image/${items.name.replaceAll(
+                " ",
+                "-"
+              )}?id=${items.id}`}
               key={items.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >

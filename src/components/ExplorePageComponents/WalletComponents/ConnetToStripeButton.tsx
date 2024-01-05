@@ -1,5 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { connetToStripe_Fetch } from "@/services/contactService";
+import { Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 
@@ -14,7 +15,7 @@ const connectToStripe = async (token: string) => {
     console.error(error);
   }
 };
-const ConnetToStripeButton = async () => {
+const ConnetToStripeButton = async ({ lang }: { lang: Locale }) => {
   const session = await getServerSession(authOptions);
   // check to see user info is complete or not
   if (!session?.user.name || !session.user.email) {
@@ -24,7 +25,7 @@ const ConnetToStripeButton = async () => {
           Please complete your informatoin first:
         </span>
         <Link
-          href={`/app/setting/account/general-info`}
+          href={`/${lang}/app/setting/account/general-info`}
           className="underline hover:text-[#3f3f6f]"
         >
           Click Here

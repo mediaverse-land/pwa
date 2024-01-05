@@ -3,10 +3,21 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import HLSPlayer from "@/components/ExplorePageComponents/shared/HLSPlayer";
+import {
+  FullLocaleNames,
+  Locale,
+  TFullLocales,
+} from "@/types/dictionary-types";
 
-const getSingleLiveData = async ({ id }: { id: string }) => {
+const getSingleLiveData = async ({
+  id,
+  lang,
+}: {
+  id: string;
+  lang: TFullLocales;
+}) => {
   try {
-    const req = await getLives({ params: `/${id}` });
+    const req = await getLives({ params: `/${id}`, lang });
     return {
       data: await req.json(),
       status: req.status,
@@ -16,9 +27,16 @@ const getSingleLiveData = async ({ id }: { id: string }) => {
   }
 };
 
-const WebAppSingleLiveChannel = async (params: any) => {
-  const id = params.params.id || redirect("/app/explore/");
-  const singleLiveData = await getSingleLiveData({ id });
+const WebAppSingleLiveChannel = async ({
+  params: { lang, id },
+}: {
+  params: { lang: Locale; id: string };
+}) => {
+  const liveID = id || redirect(`/${lang}/app/explore/`);
+  const singleLiveData = await getSingleLiveData({
+    id: liveID,
+    lang: FullLocaleNames[lang],
+  });
   // console.log(singleLiveData, "live channel data");
   return (
     <div className="w-full h-full overflow-y-auto px-10 py-6">

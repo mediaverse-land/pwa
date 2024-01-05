@@ -9,46 +9,61 @@ import ExploreDailyRecommended from "@/components/ExplorePageComponents/ExploreA
 import ExploreMostViewd from "@/components/ExplorePageComponents/ExploreAssetsComponents/MostViewed";
 import ExploreTopTexts from "@/components/ExplorePageComponents/ExploreAssetsComponents/TopTexts";
 import ExploreChillSongs from "@/components/ExplorePageComponents/ExploreAssetsComponents/ChillSongs";
+import {
+  FullLocaleNames,
+  Locale,
+  TFullLocales,
+} from "@/types/dictionary-types";
+import { getDictionary } from "@/dictionary";
 
-const getLiveData = async () => {
-  const liveData = await getLives({ params: "" });
+const getLiveData = async (lang: TFullLocales) => {
+  const liveData = await getLives({ params: "", lang });
   if (liveData.ok) {
     return liveData.json();
   }
 };
-const getMostViewedImagesData = async () => {
-  const liveData = await getMostViewedImages();
+const getMostViewedImagesData = async (lang: TFullLocales) => {
+  const liveData = await getMostViewedImages(lang);
   if (liveData.ok) {
     return liveData.json();
   }
 };
-const getTopTextsData = async () => {
-  const liveData = await getMostViewedText();
+const getTopTextsData = async (lang: TFullLocales) => {
+  const liveData = await getMostViewedText(lang);
   if (liveData.ok) {
     return liveData.json();
   }
 };
-const WebAppExploreAssets = async () => {
+const WebAppExploreAssets = async ({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}) => {
   // const liveData = await getLiveData();
   const [liveData, mostViewedImages] = await Promise.all([
-    getLiveData(),
-    getMostViewedImagesData(),
+    getLiveData(FullLocaleNames[lang]),
+    getMostViewedImagesData(FullLocaleNames[lang]),
   ]);
-  const topTextsData = await getTopTextsData();
+  const topTextsData = await getTopTextsData(FullLocaleNames[lang]);
+  const dic = await getDictionary(lang);
   return (
     <div className="h-full overflow-y-auto">
-      <ExploreSearchAndNavSection activeTab={"All"} />
+      <ExploreSearchAndNavSection dic={dic} lang={lang} activeTab={"All"} />
       <div className="flex flex-col items-stretch gap-6 py-8 px-10">
         {/* live chanel */}
-        <ExploreLiveChannel liveData={liveData} />
+        <ExploreLiveChannel dic={dic} lang={lang} liveData={liveData} />
         {/* daily recommended */}
-        <ExploreDailyRecommended />
+        <ExploreDailyRecommended lang={lang} />
         {/* Most viewed  */}
-        <ExploreMostViewd mostViewedImages={mostViewedImages} />
+        <ExploreMostViewd
+          dic={dic}
+          lang={lang}
+          mostViewedImages={mostViewedImages}
+        />
         {/* Top 10 texts */}
-        <ExploreTopTexts topTextsData={topTextsData} />
+        <ExploreTopTexts dic={dic} lang={lang} topTextsData={topTextsData} />
         {/* Chill songs */}
-        <ExploreChillSongs />
+        <ExploreChillSongs dic={dic} lang={lang} />
       </div>
     </div>
   );

@@ -6,19 +6,19 @@ import {
   SEARCH_ICON,
   SEARCH_TEXT_ICON,
 } from "@/components/SVG/svgs";
-import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 const formSchema = z.object({
   q: z.string().min(1),
   searchIn: z.string(),
 });
 
 const WebAppSearchForm = () => {
+  const params = useParams();
   const [contentType, setContentType] = useState<"tag" | "plan">("tag");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
@@ -37,7 +37,7 @@ const WebAppSearchForm = () => {
     //   }`
     // );
     router.push(
-      `/app/explore/search-result?q=${data.q}${
+      `/${params.lang}/app/explore/search-result?q=${data.q}${
         data.searchIn && `&${contentType}=${data.searchIn}`
       }`
     );

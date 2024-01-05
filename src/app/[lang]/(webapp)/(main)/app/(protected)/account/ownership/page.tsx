@@ -12,6 +12,8 @@ import {
   VIDEO_ICON,
 } from "@/components/SVG/svgs";
 import WebAppAccountTopSection from "@/components/WebApp/Account/TopSection";
+import { getDictionary } from "@/dictionary";
+import { Locale } from "@/types/dictionary-types";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 type IExploreSectionNavs = {
@@ -60,37 +62,46 @@ const ExploreSectionNavs: IExploreSectionNavs[] = [
   },
 ];
 
-const WebAppAccountOwnership = (params: any) => {
-  const activeTab = params.searchParams.type || ExploreSectionNavs[0].name;
+const WebAppAccountOwnership = async ({
+  searchParams,
+  params,
+}: {
+  searchParams: {
+    [key: string]: string;
+  };
+  params: { lang: Locale };
+}) => {
+  const activeTab = searchParams.type || ExploreSectionNavs[0].name;
+  const dic = await getDictionary(params.lang);
   const assetComponents: {
     [key: string]: {
       component: JSX.Element;
     };
   } = {
     All: {
-      component: <OwnershipAllAssets />,
+      component: <OwnershipAllAssets params={params} dic={dic} />,
     },
     Images: {
-      component: <OwnershipImageAssets />,
+      component: <OwnershipImageAssets params={params} dic={dic} />,
     },
     Texts: {
-      component: <OwnershipTextAssets />,
+      component: <OwnershipTextAssets params={params} dic={dic} />,
     },
     Audios: {
-      component: <OwnershipAudioAssets />,
+      component: <OwnershipAudioAssets params={params} dic={dic} />,
     },
     Videos: {
-      component: <OwnershipVideoAssets />,
+      component: <OwnershipVideoAssets params={params} dic={dic} />,
     },
   };
   return (
     <div className="w-full h-full overflow-y-auto">
-      <WebAppAccountTopSection type="ownership" />
+      <WebAppAccountTopSection dic={dic} lang={params.lang} type="ownership" />
       <div className="flex flex-col items-stretch gap-6 mt-3 w-full px-8">
         <div className="rounded-lg grid grid-flow-col grid-rows-1 bg-[#0E0E1280] backdrop-blur-md">
           {ExploreSectionNavs.map((tab) => (
             <Link
-              href={`/app/account/ownership${
+              href={`/${params.lang}/app/account/ownership${
                 tab.link ? `?type=${tab.name}` : ""
               }`}
               key={tab.id}

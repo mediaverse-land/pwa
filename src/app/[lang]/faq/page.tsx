@@ -23,7 +23,7 @@ async function getFAQData(lang: TFullLocales) {
 const Faq = async ({ params: { lang } }: { params: { lang: Locale } }) => {
   const dic = await getDictionary(lang);
   const faqData = await getFAQData(FullLocaleNames[lang]);
-  console.log(faqData);
+  // console.log(faqData);
   return (
     <Motion>
       <div className="w-full flex mt-36 pb-16 justify-center px-4 min-h-[75vh]">

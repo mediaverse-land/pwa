@@ -1,6 +1,7 @@
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import ExploreTextCard from "@/components/ExplorePageComponents/shared/TextCard";
 import { getRecentlyTexts } from "@/services/contactService";
+import { Locale } from "@/types/dictionary-types";
 
 const getRecentlyTextsData = async () => {
   try {
@@ -14,7 +15,11 @@ const getRecentlyTextsData = async () => {
   }
 };
 
-const WebAppRecentlyTexts = async () => {
+const WebAppRecentlyTexts = async ({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}) => {
   const rececentlyTextsData = await getRecentlyTextsData();
   return (
     <div className="h-full w-full p-10 overflow-y-auto">
@@ -22,7 +27,7 @@ const WebAppRecentlyTexts = async () => {
       <div className="grid grid-cols-3 grid-flow-row gap-4 mt-8">
         {rececentlyTextsData?.data.map((item: any) => (
           <div key={item.id} className="max-w-[220px]">
-            <ExploreTextCard data={item} />
+            <ExploreTextCard lang={lang} data={item} />
           </div>
         ))}
       </div>

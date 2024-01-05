@@ -2,7 +2,7 @@
 
 import { SPINNER } from "@/components/SVG/svgs";
 import { buyAsset_Fetch } from "@/services/contactService";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
 const buyAsset = async ({ id, token }: { id: string; token: string }) => {
@@ -29,6 +29,7 @@ const BuyAssetComponent = ({
   id: string;
   token: string;
 }) => {
+  const params = useParams();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const router = useRouter();
@@ -42,7 +43,9 @@ const BuyAssetComponent = ({
     // console.log(req, "req");
     if (req?.status === 200) {
       // console.log(req, "req");
-      router.push(`/app/account/buy-asset/result?type=${assetData.asset.plan}`);
+      router.push(
+        `/${params.lang}/app/account/buy-asset/result?type=${assetData.asset.plan}`
+      );
       // if (assetData.asset.plan === 2) {
       // router.push("/explore?section=account&type=ownership");
       // } else if (assetData.asset.plan === 3) {

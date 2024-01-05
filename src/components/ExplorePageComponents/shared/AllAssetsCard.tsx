@@ -9,6 +9,7 @@ import "./styles.css";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { Locale } from "@/types/dictionary-types";
 
 const icons: { [key: string]: JSX.Element } = {
   video: <VIDEO_ICON fill="#83839C" />,
@@ -24,8 +25,10 @@ const ExploreAssetsCard = async ({
   type,
   id,
   ownershipcard = false,
+  lang,
 }: {
   cover?: string;
+  lang: Locale;
   id: number;
   ownershipcard?: boolean;
   type?: "video" | "image" | "text" | "audio";
@@ -70,7 +73,10 @@ const ExploreAssetsCard = async ({
 
   return (
     <Link
-      href={`/app/assets/${type}/${title?.replaceAll(" ", "-")}?id=${id}`}
+      href={`/${lang}/app/assets/${type}/${title?.replaceAll(
+        " ",
+        "-"
+      )}?id=${id}`}
       className="flex flex-col items-stretch gap-4 min-w-[190px] overflow-hidden max-w-full"
     >
       {/* image */}

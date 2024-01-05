@@ -8,6 +8,7 @@ import {
   SHARE_ICON,
 } from "@/components/SVG/svgs";
 import { getUserMessages, getUserWallets } from "@/services/contactService";
+import { Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,10 +37,12 @@ const getUserMessagesData = async (token: string) => {
 
 const WebAppSessting = async ({
   searchParams,
+  params: { lang },
 }: {
   searchParams: {
     [key: string]: string;
   };
+  params: { lang: Locale };
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user?.token || "";
@@ -96,7 +99,10 @@ const WebAppSessting = async ({
       <div className="flex flex-col items-stretch gap-2 px-10 leading-none">
         {/* first section */}
         <div className="flex flex-col items-stretch gap-5 bg-[rgba(78,78,97,0.30)] backdrop-blur-sm border rounded-2xl border-[#cfcffc36] px-6 py-4">
-          <Link href={`/app/setting/account`} className="flex items-center">
+          <Link
+            href={`/${lang}/app/setting/account`}
+            className="flex items-center"
+          >
             <div className="flex items-center gap-3 mr-auto">
               <div className="flex items-center justify-center">
                 <INACTIVE_ACCOUNT
@@ -115,7 +121,10 @@ const WebAppSessting = async ({
               {session?.user?.name}
             </div>
           </Link>
-          <Link href={`/app/setting/messages`} className="flex items-center">
+          <Link
+            href={`/${lang}/app/setting/messages`}
+            className="flex items-center"
+          >
             <div className="flex items-center gap-3 mr-auto">
               <div className="flex items-center justify-center">
                 <MESSAGE_ICON
@@ -134,7 +143,7 @@ const WebAppSessting = async ({
               {messagesData?.data.data.length}
             </div>
           </Link>
-          <Link href={`/app/wallet`} className="flex items-center">
+          <Link href={`/${lang}/app/wallet`} className="flex items-center">
             <div className="flex items-center gap-3 mr-auto">
               <div className="flex items-center justify-center">
                 <INACTIVE_WALLET

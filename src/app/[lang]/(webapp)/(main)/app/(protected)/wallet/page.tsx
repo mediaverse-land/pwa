@@ -3,8 +3,10 @@ import AddInventoryButton from "@/components/ExplorePageComponents/WalletCompone
 import ConnetToStripeButton from "@/components/ExplorePageComponents/WalletComponents/ConnetToStripeButton";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import { SPINNER } from "@/components/SVG/svgs";
+import { getDictionary } from "@/dictionary";
 import { getCurrencySymbol } from "@/lib/getSymbolForCurrency";
 import { getUserBalance, getUserProfile } from "@/services/contactService";
+import { Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
 import { revalidateTag } from "next/cache";
 import { Suspense } from "react";
@@ -32,8 +34,17 @@ const getUserBalacneData = async (token: string) => {
   }
 };
 
-const WebAppWallet = async () => {
+const WebAppWallet = async ({
+  searchParams,
+  params,
+}: {
+  searchParams: {
+    [key: string]: string;
+  };
+  params: { lang: Locale };
+}) => {
   const session = await getServerSession(authOptions);
+  const dic = await getDictionary(params.lang);
   const token = session?.user.token || "";
   // console.log(token, "token");
   const [userBalance, profile] = await Promise.all([
@@ -49,7 +60,9 @@ const WebAppWallet = async () => {
       {/* top section */}
       <div className="flex flex-col items-stretch gap-14">
         <div className="flex items-center gap-4 bg-[rgba(78,78,97,0.75)] rounded-lg px-4 py-3">
-          <div className="text-[14px] text-[#83839C]">Inventory</div>
+          <div className="text-[14px] text-[#83839C]">
+            {dic.appWallet.inventory}
+          </div>
           <div className="w-[1px] h-full bg-[#83839C]"></div>
           <div className="grow line-clamp-1 font-bold text-[18px] text-white">
             {userBalance?.status === 200
@@ -83,10 +96,12 @@ const WebAppWallet = async () => {
                 </div>
               }
             >
-              <ConnetToStripeButton />
+              <ConnetToStripeButton lang={params.lang} />
             </Suspense>
           )}
-          {userBalance?.status === 200 ? <AddInventoryButton /> : null}
+          {userBalance?.status === 200 ? (
+            <AddInventoryButton lang={params.lang} dic={dic} />
+          ) : null}
         </div>
       </div>
     </div>

@@ -13,6 +13,7 @@ import {
   getUserProfile,
   getUserStripeAccount,
 } from "@/services/contactService";
+import { Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
@@ -65,17 +66,6 @@ const getUserData = async (token: string) => {
     console.error(error);
   }
 };
-const getUserStripeAccountData = async (token: string) => {
-  try {
-    const req = await getUserStripeAccount({ token });
-    return {
-      data: req.status === 200 ? await req.json() : [],
-      status: req.status,
-    };
-  } catch (error) {
-    console.error(error);
-  }
-};
 const getUserBalacneData = async (token: string) => {
   try {
     const req = await getUserBalance({ token });
@@ -95,10 +85,10 @@ const BuyAsset = async ({
   searchParams: {
     [key: string]: string;
   };
-  params: { id: string };
+  params: { id: string; lang: Locale };
 }) => {
-  const id = params.id || redirect("/app/explore/");
-  const type = searchParams.type || redirect("/app/explore/");
+  const id = params.id || redirect(`/${params.lang}/app/explore`);
+  const type = searchParams.type || redirect(`/${params.lang}/app/explore`);
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const [assetData, profile] = await Promise.all([
@@ -106,7 +96,8 @@ const BuyAsset = async ({
     getUserData(token),
   ]);
   //   console.log(assetData?.data.asset);
-  if (assetData?.data?.asset.plan === 1) redirect("/app/explore/");
+  if (assetData?.data?.asset.plan === 1)
+    redirect(`/${params.lang}/app/explore`);
   const userBalance = await getUserBalacneData(token);
   return (
     <div className="w-full h-full overflow-y-auto">
@@ -181,7 +172,7 @@ const BuyAsset = async ({
                 )}
               </div>
               <Link
-                href={`/app/wallet`}
+                href={`/${params.lang}/app/wallet`}
                 className="text-[#666680] text-[14px] leading-[17px]"
               >
                 Add inventory

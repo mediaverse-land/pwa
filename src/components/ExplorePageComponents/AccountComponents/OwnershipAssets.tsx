@@ -1,4 +1,4 @@
-import { getOwnershipAssets, getSearch } from "@/services/contactService";
+import { getOwnershipAssets } from "@/services/contactService";
 import Image from "next/image";
 import ExploreVideoCard from "../shared/VideoCard";
 import ExploreAudioCard from "../shared/AudioCard";
@@ -8,6 +8,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LogoutNoUser from "./Logout";
+import { DicProperties, Locale } from "@/types/dictionary-types";
 
 const getOwnership = async ({
   params,
@@ -28,7 +29,13 @@ const getOwnership = async ({
   }
 };
 
-export const OwnershipAllAssets = async () => {
+export const OwnershipAllAssets = async ({
+  params,
+  dic,
+}: {
+  params: { lang: Locale };
+  dic: DicProperties;
+}) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const searchResults = await getOwnership({
@@ -39,7 +46,7 @@ export const OwnershipAllAssets = async () => {
   if (searchResults?.status === 406) {
     return (
       <Link
-        href={`/sign-up/info`}
+        href={`/${params.lang}/sign-up/info`}
         className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
       >
         Please Complete Your Information To See This Section
@@ -79,6 +86,7 @@ export const OwnershipAllAssets = async () => {
           };
           return (
             <ExploreAssetsCard
+              lang={params.lang}
               ownershipcard
               key={item.id}
               id={item.id}
@@ -94,13 +102,19 @@ export const OwnershipAllAssets = async () => {
         })
       ) : (
         <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3">
-          No Content To Show
+          {dic.appAccounts.noContentToShow}
         </div>
       )}
     </div>
   );
 };
-export const OwnershipImageAssets = async () => {
+export const OwnershipImageAssets = async ({
+  params,
+  dic,
+}: {
+  params: { lang: Locale };
+  dic: DicProperties;
+}) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const searchResults = await getOwnership({
@@ -110,7 +124,7 @@ export const OwnershipImageAssets = async () => {
   if (searchResults?.status === 406) {
     return (
       <Link
-        href={`/sign-up/info`}
+        href={`/${params.lang}/sign-up/info`}
         className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
       >
         Please Complete Your Information To See This Section
@@ -125,9 +139,10 @@ export const OwnershipImageAssets = async () => {
         searchResults?.data.data.map((items: any, index: number) => {
           return (
             <Link
-              href={`/app/assets/image/${items.name.replaceAll(" ", "-")}?id=${
-                items.id
-              }`}
+              href={`/${params.lang}/app/assets/image/${items.name.replaceAll(
+                " ",
+                "-"
+              )}?id=${items.id}`}
               key={items.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
@@ -141,13 +156,19 @@ export const OwnershipImageAssets = async () => {
         })
       ) : (
         <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3">
-          No Content To Show
+          {dic.appAccounts.noContentToShow}
         </div>
       )}
     </div>
   );
 };
-export const OwnershipVideoAssets = async () => {
+export const OwnershipVideoAssets = async ({
+  params,
+  dic,
+}: {
+  params: { lang: Locale };
+  dic: DicProperties;
+}) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const searchResults = await getOwnership({
@@ -157,7 +178,7 @@ export const OwnershipVideoAssets = async () => {
   if (searchResults?.status === 406) {
     return (
       <Link
-        href={`/sign-up/info`}
+        href={`/${params.lang}/sign-up/info`}
         className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
       >
         Please Complete Your Information To See This Section
@@ -172,6 +193,7 @@ export const OwnershipVideoAssets = async () => {
         searchResults?.data.data.map((items: any, index: number) => {
           return (
             <ExploreVideoCard
+              lang={params.lang}
               id={items.id}
               key={items.id}
               author={{
@@ -187,13 +209,19 @@ export const OwnershipVideoAssets = async () => {
         })
       ) : (
         <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3">
-          No Content To Show
+          {dic.appAccounts.noContentToShow}
         </div>
       )}
     </div>
   );
 };
-export const OwnershipAudioAssets = async () => {
+export const OwnershipAudioAssets = async ({
+  params,
+  dic,
+}: {
+  params: { lang: Locale };
+  dic: DicProperties;
+}) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const searchResults = await getOwnership({
@@ -203,7 +231,7 @@ export const OwnershipAudioAssets = async () => {
   if (searchResults?.status === 406) {
     return (
       <Link
-        href={`/sign-up/info`}
+        href={`/${params.lang}/sign-up/info`}
         className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
       >
         Please Complete Your Information To See This Section
@@ -218,6 +246,7 @@ export const OwnershipAudioAssets = async () => {
         searchResults?.data.data.map((items: any, index: number) => {
           return (
             <ExploreAudioCard
+              lang={params.lang}
               id={items.id}
               key={items.id}
               author={{
@@ -233,13 +262,19 @@ export const OwnershipAudioAssets = async () => {
         })
       ) : (
         <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3">
-          No Content To Show
+          {dic.appAccounts.noContentToShow}
         </div>
       )}
     </div>
   );
 };
-export const OwnershipTextAssets = async () => {
+export const OwnershipTextAssets = async ({
+  params,
+  dic,
+}: {
+  params: { lang: Locale };
+  dic: DicProperties;
+}) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const searchResults = await getOwnership({
@@ -249,7 +284,7 @@ export const OwnershipTextAssets = async () => {
   if (searchResults?.status === 406) {
     return (
       <Link
-        href={`/sign-up/info`}
+        href={`/${params.lang}/sign-up/info`}
         className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
       >
         Please Complete Your Information To See This Section
@@ -262,11 +297,11 @@ export const OwnershipTextAssets = async () => {
     <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
       {searchResults?.data.data.length > 0 ? (
         searchResults?.data.data.map((item: any) => (
-          <ExploreTextCard key={item.id} data={item} />
+          <ExploreTextCard lang={params.lang} key={item.id} data={item} />
         ))
       ) : (
         <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3">
-          No Content To Show
+          {dic.appAccounts.noContentToShow}
         </div>
       )}
     </div>

@@ -1,4 +1,5 @@
 import { PICTURE_ICON } from "@/components/SVG/svgs";
+import { DicProperties, Locale } from "@/types/dictionary-types";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -49,8 +50,12 @@ import Link from "next/link";
 
 const ExploreMostViewd = ({
   mostViewedImages,
+  dic,
+  lang,
 }: {
   mostViewedImages: any[];
+  dic: DicProperties;
+  lang: Locale;
 }) => {
   // console.log(mostViewedImages);
   return (
@@ -59,7 +64,7 @@ const ExploreMostViewd = ({
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <PICTURE_ICON />
-          <p className="text-white text-sm ">Most Viewed</p>
+          <p className="text-white text-sm ">{dic.homepage.mostViewedImages}</p>
         </div>
         <div className="text-[14px] text-[#597AFF]">View all</div>
       </div>
@@ -67,9 +72,10 @@ const ExploreMostViewd = ({
         {mostViewedImages.slice(0, 6).map((items: any, index: number) => {
           return (
             <Link
-              href={`/app/assets/image/${items.name.replaceAll(" ", "-")}?id=${
-                items.id
-              }`}
+              href={`/${lang}/app/assets/image/${items.name.replaceAll(
+                " ",
+                "-"
+              )}?id=${items.id}`}
               key={items.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square ${
                 index === 1 ? " col-span-2 row-span-2" : ""

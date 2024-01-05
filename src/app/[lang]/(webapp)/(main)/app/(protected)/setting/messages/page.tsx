@@ -2,6 +2,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import { convertISOToDateAndTime } from "@/lib/convertISOToDateAndTime";
 import { getUserMessages } from "@/services/contactService";
+import { Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 const getUserMessagesData = async (token: string) => {
@@ -15,7 +16,15 @@ const getUserMessagesData = async (token: string) => {
     console.error(error);
   }
 };
-const WebAppSettingAllMessages = async () => {
+const WebAppSettingAllMessages = async ({
+  searchParams,
+  params: { lang },
+}: {
+  searchParams: {
+    [key: string]: string;
+  };
+  params: { lang: Locale };
+}) => {
   const session = await getServerSession(authOptions);
   const token = session?.user?.token || "";
   const [messagesData] = await Promise.all([getUserMessagesData(token)]);
@@ -34,7 +43,7 @@ const WebAppSettingAllMessages = async () => {
       {messagesData?.data.data.map((item: any) => (
         <Link
           key={item.id}
-          href={`/app/setting/messages/${item.id}`}
+          href={`/${lang}/app/setting/messages/${item.id}`}
           className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md rounded-2xl p-6 flex flex-col items-stretch gap-2 leading-none"
         >
           <div className="flex items-center justify-between">
