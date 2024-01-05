@@ -1,13 +1,16 @@
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import { CHEVRON_LEFT } from "@/components/SVG/svgs";
+import { Locale } from "@/types/dictionary-types";
 import Link from "next/link";
 
 const WebAppSettingAccount = ({
   searchParams,
+  params: { lang },
 }: {
   searchParams: {
     [key: string]: string;
   };
+  params: { lang: Locale };
 }) => {
   return (
     <div className="flex flex-col items-stretch gap-10 p-10">
@@ -15,7 +18,7 @@ const WebAppSettingAccount = ({
       <div className="flex flex-col items-stretch gap-2">
         <div className="bg-[rgba(78,78,97,0.30)] backdrop-blur-sm rounded-2xl p-6 flex flex-col items-stretch gap-4">
           <Link
-            href={`/app/setting/account/general-info`}
+            href={`/${lang}/app/setting/account/general-info`}
             className="flex items-center justify-between"
           >
             <div className="text-white">General information</div>
@@ -29,7 +32,7 @@ const WebAppSettingAccount = ({
             </div>
           </Link>
           <Link
-            href={`/app/setting/account/sign-ins`}
+            href={`/${lang}/app/setting/account/sign-ins`}
             className="flex items-center justify-between"
           >
             <div className="text-white">Sign ins</div>
@@ -43,7 +46,7 @@ const WebAppSettingAccount = ({
             </div>
           </Link>
           <Link
-            href={`/app/setting/account/sessions`}
+            href={`/${lang}/app/setting/account/sessions`}
             className="flex items-center justify-between"
           >
             <div className="text-white">Sessions</div>
@@ -59,7 +62,7 @@ const WebAppSettingAccount = ({
         </div>
         <div className="bg-[rgba(78,78,97,0.30)] backdrop-blur-sm rounded-2xl p-6">
           <Link
-            href={`/app/logout`}
+            href={`/${lang}/app/logout`}
             className="flex items-center justify-between"
           >
             <div className="text-white">Log out</div>
