@@ -119,7 +119,7 @@ const MobileMenu = ({
                 key={item.id}
                 className="py-3 text-[rgba(162,162,181,1)] last:border-b-0"
               >
-                <Link href={`${lang}${item.link}`}>
+                <Link href={`/${lang}${item.link}`}>
                   {dic.header[item.dicName]}
                 </Link>
               </li>
