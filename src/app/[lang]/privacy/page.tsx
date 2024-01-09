@@ -38,9 +38,9 @@ const Privacy = async ({ params: { lang } }: { params: { lang: Locale } }) => {
 
   return (
     <Motion>
-      <div className="w-[80rem] max-w-screen-lg mx-auto flex mt-36 pb-16 justify-center px-4 min-h-screen">
+      <div className="lg:w-[80rem] max-w-screen-lg mx-auto flex mt-28 lg:mt-36 pb-16 justify-center px-6 lg:px-4 min-h-screen">
         <div className="w-full flex flex-col">
-          <h1 className="text-white mt-8 sm:mt-0 mb-[43px] capitalize font-bold text-[25px]">
+          <h1 className="text-white mt-8 sm:mt-0 mb-[43px] capitalize font-bold text-[25px] text-center">
             {dic.header.privacy}
           </h1>
           <article

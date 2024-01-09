@@ -24,9 +24,9 @@ const WebAppRecentlyTexts = async ({
   return (
     <div className="h-full w-full p-10 overflow-y-auto">
       <SubSectionHeader name="Recently" />
-      <div className="grid grid-cols-3 grid-flow-row gap-4 mt-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-4 mt-8">
         {rececentlyTextsData?.data.map((item: any) => (
-          <div key={item.id} className="max-w-[220px]">
+          <div key={item.id} className="lg:max-w-[220px]">
             <ExploreTextCard lang={lang} data={item} />
           </div>
         ))}

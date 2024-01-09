@@ -12,7 +12,7 @@ const WebAppSideBar = async ({ lang }: { lang: Locale }) => {
   const dic = await getDictionary(lang);
   // console.log(session);
   return (
-    <aside className="col-span-2 rounded-2xl bg-[rgba(78,78,97,0.20)] border border-[#CFCFFC] border-opacity-20 py-8 px-6 flex flex-col items-stretch justify-between">
+    <aside className="hidden col-span-2 rounded-2xl bg-[rgba(78,78,97,0.20)] border border-[#CFCFFC] border-opacity-20 py-8 px-6 lg:flex flex-col items-stretch justify-between">
       <div className="flex flex-col items-stretch gap-8">
         {/* user info */}
         <div

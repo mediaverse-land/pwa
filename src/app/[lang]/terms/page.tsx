@@ -39,9 +39,9 @@ const Terms = async ({ params: { lang } }: { params: { lang: Locale } }) => {
   const dic = await getDictionary(lang);
   return (
     <Motion>
-      <div className="w-[80rem] max-w-screen-lg mx-auto flex mt-36 pb-16 justify-center px-4 min-h-[90vh]">
+      <div className="lg:w-[80rem] max-w-screen-lg mx-auto flex mt-28 lg:mt-36 pb-16 justify-center px-6 lg:px-4 min-h-[90vh]">
         <div className="w-full flex flex-col">
-          <h1 className="text-white capitalize mb-[43px] font-bold text-[25px]">
+          <h1 className="text-white capitalize mb-6 lg:mb-[43px] font-bold text-[25px] text-center">
             {dic.header.terms}
           </h1>
           <article

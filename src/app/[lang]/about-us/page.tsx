@@ -8,7 +8,7 @@ const AboutUs = async ({ params: { lang } }: { params: { lang: Locale } }) => {
 
   return (
     <Motion>
-      <div className="w-full flex justify-center flex-col items-center sm:items-start sm:flex-row mt-36 space-x-0 px-4  sm:space-x-10 mb-10">
+      <div className="w-full flex justify-center flex-col items-center lg:items-start lg:flex-row mt-36 space-x-0 px-4 lg:space-x-10 mb-10">
         <div className="flex flex-col">
           <div className="w-80 h-80 ">
             <iframe
@@ -57,19 +57,19 @@ const AboutUs = async ({ params: { lang } }: { params: { lang: Locale } }) => {
             <p className="text-white text-xs">Mediaverseland</p>
           </div>
         </div>
-        <div>
-          <h1 className="text-white text-4xl mt-8 sm:mt-0">
+        <div className="px-6 md:px-8">
+          <h1 className="text-white text-4xl mt-8 mb-2 lg:mt-0">
             {dic.header.about}
           </h1>
-          <p className="text-white w-full sm:w-[650px] mt-6">
+          <p className="text-white w-full lg:w-[500px] xl:w-[650px] mt-6">
             Mediaverse is a privately owned company based in Paris, France. The
             company started its operations in 2019, primarily dealing in audio
             and video products. As technology advanced, Mediaverse shifted its
             focus towards providing a platform that specializes in managing the
             content cycle.
           </p>
-          <p className="text-white text-xl mt-8">Audiences</p>
-          <p className="text-sm text-white w-full sm:w-[650px]">
+          <p className="text-white text-xl mt-8 mb-2">Audiences</p>
+          <p className="text-lg text-white w-full lg:w-[500px] xl:w-[650px]">
             Mediaverse is designed to cater to non-professional and
             semi-professional users. It acts as a bridge between traditional
             content production, such as TV and radio, and new generative
@@ -80,8 +80,8 @@ const AboutUs = async ({ params: { lang } }: { params: { lang: Locale } }) => {
             platform also offers services to publish the content on social TV
             and social networks.
           </p>
-          <p className="text-white text-xl mt-8">Contact Us</p>
-          <p className="text-white w-full sm:w-[650px]">
+          <p className="text-white text-xl mt-8 mb-2">Contact Us</p>
+          <p className="text-white w-full lg:w-[500px] xl:w-[650px]">
             Mediaverse's primary audience includes anyone interested in
             generating income from content, such as social content managers of
             television channels, bloggers, branding experts of companies, and

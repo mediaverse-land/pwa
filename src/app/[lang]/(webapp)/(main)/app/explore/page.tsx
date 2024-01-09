@@ -49,7 +49,7 @@ const WebAppExploreAssets = async ({
   return (
     <div className="h-full overflow-y-auto">
       <ExploreSearchAndNavSection dic={dic} lang={lang} activeTab={"All"} />
-      <div className="flex flex-col items-stretch gap-6 py-8 px-10">
+      <div className="flex flex-col items-stretch gap-6 py-8 px-4 lg:px-10">
         {/* live chanel */}
         <ExploreLiveChannel dic={dic} lang={lang} liveData={liveData} />
         {/* daily recommended */}

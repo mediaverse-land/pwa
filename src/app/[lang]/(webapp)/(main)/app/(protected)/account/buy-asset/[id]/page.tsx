@@ -101,7 +101,7 @@ const BuyAsset = async ({
   const userBalance = await getUserBalacneData(token);
   return (
     <div className="w-full h-full overflow-y-auto">
-      <div className="w-full h-full flex flex-col items-stretch gap-10 p-10">
+      <div className="w-full h-full flex flex-col items-stretch gap-10 p-5 lg:p-10">
         <SubSectionHeader name="Buy Asset" />
         <div className="grow flex flex-col items-stretch gap-8">
           <div className="flex flex-col items-stretch gap-2">

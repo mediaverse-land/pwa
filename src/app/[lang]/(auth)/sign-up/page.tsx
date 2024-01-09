@@ -6,7 +6,7 @@ import Link from "next/link";
 const SignUp = () => {
   return (
     <Motion>
-      <div className="mt-28">
+      <div className="mt-36 lg:mt-28">
         <OTPForm />
       </div>
     </Motion>

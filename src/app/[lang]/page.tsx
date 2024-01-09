@@ -49,24 +49,24 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
 
   return (
     <Motion>
-      <div className=" mt-28">
-        <Image
-          src="/images/media-verse-background-image.png"
-          height={1000}
-          width={460}
-          alt="background Image"
-          className="absolute top-4 -z-10 "
-          quality={100}
-        />
-        <div className="max-w-screen-2xl mx-auto flex justify-evenly flex-wrap px-4">
+      <div className="mt-16 lg:mt-28 w-full overflow-x-hidden">
+        <div className="absolute top-28 left-[24px] right-[24px] lg:right-auto lg:-left-[200px] lg:top-4 -z-[10] h-[420px] lg:w-[740px] lg:h-[625px]">
+          <Image
+            src="/images/media-verse-background-image.svg"
+            alt="background Image"
+            quality={100}
+            fill
+          />
+        </div>
+        <div className="lg:max-w-screen-2xl mx-auto flex justify-evenly flex-wrap-reverse lg:flex-wrap px-8 lg:px-4">
           <div className="flex flex-col t-10">
-            <h1 className="text-3xl font-semibold whitespace-nowrap text-white mt-16">
+            <h1 className="text-[25px] lg:text-3xl font-bold lg:font-semibold whitespace-nowrap text-white mt-16 text-center lg:text-start">
               {dic.homepage.whatIsMediaverse}
             </h1>
-            <p className="text-gray-500 mt-4 self-center">
+            <p className="text-gray-500 mt-4 self-center text-start">
               {dic.homepage.description}
             </p>
-            <div className="grid grid-cols-2 mt-[28px] w-[278px] gap-[8px]">
+            <div className="grid grid-cols-2 mt-[28px] w-[278px] mx-auto lg:mx-0 gap-[8px]">
               <div className="app-store-container cursor-pointer py-[4px] px-[19px] flex items-center">
                 <div className="relative w-full aspect-[135/48]">
                   <Image
@@ -93,44 +93,49 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
             </div>
             <Link
               href={`/${lang}/app/explore`}
-              className="w-[278px] h-10 text-white focus:ring-4 focus:outline-none font-medium rounded-full text-sm leading-none flex justify-center items-center py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]"
+              className="lg:w-[278px] h-10 text-white focus:ring-4 focus:outline-none font-semibold lg:font-medium rounded-full text-sm leading-none flex justify-center items-center py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mt-[28px]"
             >
               Web App
             </Link>
           </div>
           <div className="flex space-x-4 mt-8 sm:mt-0 animate-container">
-            <Image
-              src="/images/phone-image-1.png"
-              className="phone-animate-2 relative z-20 "
-              width={170}
-              height={500}
-              quality={100}
-              alt="phone photo"
-            />
-            <Image
-              src="/images/phone-image-2.png"
-              className="phone-animate-1 relative"
-              width={170}
-              height={500}
-              quality={100}
-              alt="phone photo"
-            />
+            <div className="relative phone-animate-2 z-20 w-[111px] h-[286px] lg:w-[200px] lg:h-[550px]">
+              <Image
+                src="/images/phone-image-1.png"
+                fill
+                quality={100}
+                alt="phone photo"
+              />
+            </div>
+            <div className="phone-animate-1 relative z-20 w-[111px] h-[286px] lg:w-[170px] lg:h-[500px]">
+              <Image
+                src="/images/phone-image-2.png"
+                className="phone-animate-1 relative"
+                fill
+                quality={100}
+                alt="phone photo"
+              />
+            </div>
           </div>
         </div>
-        <div className="w-full flex items-center justify-center mt-20">
+        <div className="w-full hidden lg:flex items-center justify-center mt-20">
           <ScrollToBottomBtn title={dic.homepage.exploreLimitless} />
         </div>
-        <div className="w-full flex items-center justify-center mt-10 space-x-1">
-          <Image
-            src="/icons/live-icon.png"
-            quality={100}
-            width={20}
-            height={20}
-            alt="camera icon"
-          />
-          <p className="text-white text-sm ">{dic.homepage.liveTvChannels}</p>
+        {/* live channels */}
+        <div className="w-full flex items-center justify-center mt-10 space-x-2">
+          <div className="w-[24px] lg:w-[20px] lg:h-[20px] h-[24px] relative">
+            <Image
+              src="/icons/live-icon.png"
+              quality={100}
+              fill
+              alt="camera icon"
+            />
+          </div>
+          <p className="text-white text-[18px] font-bold lg:text-sm">
+            {dic.homepage.liveTvChannels}
+          </p>
         </div>
-        <div className=" max-w-screen-2xl mx-auto flex items-center justify-center py-4 w-[80rem]">
+        <div className="lg:max-w-screen-2xl mx-auto flex items-center justify-center py-4 w-[80rem]">
           <div className="relative flex overflow-x-hidden w-full animate-marquee-container">
             <div className="animate-marquee whitespace-nowrap flex flex-row w-full">
               {liveData.map((item: any, i: number) => (
@@ -156,20 +161,26 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
             </div>
           </div>
         </div>
-        <div className="w-full flex items-center justify-center mt-16 space-x-1">
-          <Image
-            src="/icons/video-icon.png"
-            quality={100}
-            width={16}
-            height={16}
-            alt="camera icon"
-          />
-          <p className="text-white text-sm ">{dic.homepage.bestVideos}</p>
+        {/* videos */}
+        <div className="w-full flex items-center justify-center mt-10 space-x-2">
+          <div className="w-[21px] lg:w-[20px] h-[16px] lg:h-[18px] relative">
+            <Image
+              src="/icons/video-icon.png"
+              quality={100}
+              fill
+              alt="camera icon"
+            />
+          </div>
+          <p className="text-white text-[18px] font-bold lg:text-sm">
+            {dic.homepage.bestVideos}
+          </p>
         </div>
         <VideoSlider />
-        <div className="flex max-w-screen-2xl w-[80rem] mx-auto mt-16 justify-between flex-col items-start sm:flex-row sm:px-0 px-2 h-[570px]">
-          <div className="flex flex-col w-[30%] h-full">
-            <div className="flex space-x-2 ml-1 w-full">
+        {/* images and texts */}
+        <div className="flex w-full max-w-[700px] xl:w-[80rem] lg:max-w-screen-2xl mx-auto mt-16 justify-between gap-10 flex-col items-start lg:flex-row sm:px-0 px-2">
+          {/* images */}
+          <div className="flex flex-col w-full lg:w-[33%] h-full">
+            <div className="flex space-x-2 ml-1 w-full items-center justify-center">
               <Image
                 src="/icons/gallery.png"
                 quality={100}
@@ -177,11 +188,11 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                 height={10}
                 alt="galery"
               />
-              <p className="text-white text-sm ">
+              <p className="text-white text-[18px] font-bold lg:text-sm">
                 {dic.homepage.mostViewedImages}
               </p>
             </div>
-            <div className="grid grid-rows-4 grid-cols-3 grid-flow-row gap-4 mt-10 grow max-h-[510px]">
+            <div className="grid grid-rows-4 grid-cols-3 grid-flow-row gap-2 mt-10 grow px-6 min-w-full">
               {imageData.slice(0, 9).map((items: any, index: number) => {
                 return (
                   <Link
@@ -190,10 +201,10 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                       "-"
                     )}?id=${items.id}`}
                     key={items.id}
-                    className={`relative overflow-hidden ${
+                    className={`relative overflow-hidden aspect-square ${
                       index === 1
-                        ? "rounded-[15%] w-full aspect-square col-span-2 row-span-2"
-                        : "rounded-[15%] w-full aspect-square"
+                        ? "rounded-md lg:rounded-[15%] col-span-2 row-span-2"
+                        : "rounded-md lg:rounded-[15%]"
                     }`}
                   >
                     <Image
@@ -206,8 +217,9 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
               })}
             </div>
           </div>
-          <div className="flex flex-col w-[60%] h-full">
-            <div className="flex space-x-2 ml-1 sm:mt-0">
+          {/* texts */}
+          <div className="flex flex-col w-full lg:w-[60%] h-full md:pr-4 xl:pr-0">
+            <div className="flex w-full items-center justify-center space-x-2 ml-1 sm:mt-0">
               <Image
                 src="/icons/text.png"
                 quality={100}
@@ -215,9 +227,12 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                 height={10}
                 alt="galery"
               />
-              <p className="text-white text-sm ">{dic.homepage.topTexts}</p>
+              <p className="text-white text-[18px] font-bold lg:text-sm">
+                {dic.homepage.topTexts}
+              </p>
             </div>
-            <div className="flex md:grid lg:grid-cols-3 md:grid-cols-2 gap-2 grid-rows-1 md:grid-rows-2 mt-10 w-full grow">
+
+            <div className="grid grid-flow-col lg:grid-cols-3 md:grid-cols-3 gap-2 grid-rows-1 md:grid-rows-2 lg:grid-rows-2 mt-10 w-full grow overflow-x-scroll lg:overflow-visible">
               {textData.slice(0, 6).map((items: any, index: number) => {
                 return (
                   <BorderGradient
@@ -234,10 +249,10 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                       )}?id=${items.id}`}
                     >
                       <div key={index} className="h-full flex flex-col">
-                        <p className="text-white text-lg line-clamp-3">
+                        <p className="text-white text-lg lg:text-[16px] xl:text-[20px] line-clamp-2 md:line-clamp-2 lg:line-clamp-1 xl:line-clamp-2">
                           {items.name}
                         </p>
-                        <p className="text-gray-500 mt-4">
+                        <p className="text-gray-500 mt-2 lg:mt-0 xl:mt-4 line-clamp-4 md:line-clamp-3 lg:line-clamp-3">
                           {items.description?.length > 70
                             ? items.description?.slice(0, 62)
                             : items.description}
@@ -262,7 +277,8 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
             </div>
           </div>
         </div>
-        <div className="w-full flex items-center justify-center mt-16 space-x-1">
+        {/* songs */}
+        <div className="w-full flex items-center justify-center mt-16 space-x-2">
           <Image
             src="/icons/songs.png"
             quality={100}
@@ -270,7 +286,9 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
             height={16}
             alt="camera icon"
           />
-          <p className="text-white text-sm ">{dic.homepage.bestSongs}</p>
+          <p className="text-white text-[18px] font-bold lg:text-sm">
+            {dic.homepage.bestSongs}
+          </p>
         </div>
         <SongSlider />
       </div>

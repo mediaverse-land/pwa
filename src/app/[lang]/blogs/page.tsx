@@ -107,7 +107,7 @@ const Blogs = async ({
   const dic = await getDictionary(lang);
   return (
     <Motion>
-      <div className="mt-28 flex flex-col items-center w-[80rem] max-w-screen-lg mx-auto">
+      <div className="mt-28 flex flex-col items-center lg:w-[80rem] max-w-screen-lg mx-auto">
         <div className="w-full flex flex-col items-center justify-center">
           <h1 className="text-2xl font-semibold  text-white">
             {dic.blogSection.mediaverseNews}
@@ -120,10 +120,9 @@ const Blogs = async ({
             <span className="border-b-2 border-blue-600 w-6"></span>
           </div>
         </div>
-
         {blogsData.data.length !== 0 ? (
           <>
-            <div className="grid grid-cols-4 gap-6 w-full justify-center sm:justify-between items-center mt-6">
+            <div className="grid grid-cols-1 px-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full justify-center sm:justify-between items-center mt-6">
               {blogsData.data.map((item: any, index: number) => {
                 return (
                   <Link
@@ -171,7 +170,7 @@ const Blogs = async ({
                 );
               })}
             </div>
-            <div className="my-20 text-white">
+            <div className="mt-6 text-white">
               <BlogsPagination
                 lang={lang}
                 currentPage={+page}

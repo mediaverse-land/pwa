@@ -77,7 +77,7 @@ const ExploreAssetsCard = async ({
         " ",
         "-"
       )}?id=${id}`}
-      className="flex flex-col items-stretch gap-4 min-w-[190px] overflow-hidden max-w-full"
+      className="flex flex-col items-stretch gap-4 min-w-[140px] lg:min-w-[190px] overflow-hidden max-w-full"
     >
       {/* image */}
       <div className="relative w-full aspect-square rounded-2xl overflow-hidden">

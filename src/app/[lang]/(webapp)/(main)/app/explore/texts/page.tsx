@@ -35,7 +35,7 @@ const WebAppExploreTextsAssets = async ({
   return (
     <div className="h-full overflow-y-auto">
       <ExploreSearchAndNavSection dic={dic} lang={lang} activeTab={"Texts"} />
-      <div className="flex flex-col items-stretch gap-6 py-8 px-10">
+      <div className="flex flex-col items-stretch gap-6 py-8 px-4 lg:px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}
@@ -83,9 +83,9 @@ export default WebAppExploreTextsAssets;
 const RecentlyTexts = async ({ lang }: { lang: Locale }) => {
   const rececentlyTextsData = await getRecentlyTextsData();
   return (
-    <div className="grid grid-cols-3 grid-flow-row gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-4">
       {rececentlyTextsData.map((item: any) => (
-        <div key={item.id} className="max-w-[220px]">
+        <div key={item.id} className="lg:max-w-[220px]">
           <ExploreTextCard lang={lang} data={item} />
         </div>
       ))}

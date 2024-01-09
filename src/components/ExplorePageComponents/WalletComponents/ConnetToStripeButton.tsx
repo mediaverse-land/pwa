@@ -20,7 +20,7 @@ const ConnetToStripeButton = async ({ lang }: { lang: Locale }) => {
   // check to see user info is complete or not
   if (!session?.user.name || !session.user.email) {
     return (
-      <div className="w-full text-center bg-[#666680] rounded-2xl py-2 space-x-2">
+      <div className="w-full text-center bg-[#666680] rounded-xl py-2 space-x-2 px-4">
         <span className="text-white">
           Please complete your informatoin first:
         </span>
@@ -44,7 +44,7 @@ const ConnetToStripeButton = async ({ lang }: { lang: Locale }) => {
       <span>Connet To Stripe</span>
     </Link>
   ) : (
-    <div className="w-full text-center bg-[#666680] rounded-2xl py-2 space-x-2">
+    <div className="w-full text-center bg-[#666680] rounded-2xl py-2 space-x-2 px-4">
       Can not connet to Stripe at this moment. Please try again later.
     </div>
   );

@@ -71,7 +71,7 @@ const WebAppAccountTopSection = async ({
         {/* statistics */}
         <UserStatics lang={lang} />
         {/* tabs */}
-        <div className="flex items-stretch justify-around w-[420px] mx-auto">
+        <div className="flex items-stretch justify-around gap-16 lg:w-[420px] mx-auto">
           {accountTypes.map((item) => (
             <Link
               href={`/${lang}/app/account/${item.link}`}

@@ -63,13 +63,13 @@ const ExploreSearchAndNavSection = ({
   dic: DicProperties;
 }) => {
   return (
-    <div className="flex flex-col items-stretch gap-6 sticky top-0 left-0 w-full z-50">
+    <div className="flex flex-col items-stretch gap-2 lg:gap-6 sticky top-0 left-0 w-full z-50">
       {/* search section */}
       <Link
         href={`/${lang}/app/explore/search-form`}
         className="bg-[#0E0E124D] p-6 backdrop-blur-md rounded-b-[45px_35px] select-none"
       >
-        <div className="h-[40px] rounded-lg px-4 py-3 border border-[#353542] flex gap-8 items-center">
+        <div className="h-[40px] rounded-b-lg px-4 py-3 border border-[#353542] flex gap-8 items-center">
           <div className="outline-none grow bg-transparent text-[14px]">
             Search
           </div>
@@ -79,7 +79,7 @@ const ExploreSearchAndNavSection = ({
         </div>
       </Link>
       {/* tabs */}
-      <div className="rounded-lg grid grid-flow-col grid-rows-1 bg-[#0E0E1280] backdrop-blur-md mx-10">
+      <div className="rounded-lg grid grid-flow-col grid-rows-1 bg-[#0E0E1280] backdrop-blur-md mx-4 lg:mx-10">
         {ExploreSectionNavs.slice(0, 5).map((tab) => (
           <Link
             href={`/${lang}/app/explore${tab.link}`}
@@ -87,7 +87,7 @@ const ExploreSearchAndNavSection = ({
             className="text-center flex flex-col items-center justify-center cursor-pointer h-full"
           >
             <div
-              className={`py-2 w-fit h-full flex items-center justify-center px-2 transition-all duration-500 after:content-[''] relative after:absolute after:bg-[#597AFF] after:rounded-full after:left-0 after:bottom-0 ${
+              className={`py-3 lg:py-2 w-fit h-full flex items-center justify-center px-2 transition-all duration-500 after:content-[''] relative after:absolute after:bg-[#597AFF] after:rounded-full after:left-0 after:bottom-0 ${
                 activeTab === tab.name
                   ? "after:w-full after:h-[2px]"
                   : "after:w-[0%] after:h-[0px]"

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 const WebAppLogout = () => {
   const router = useRouter();
   return (
-    <div className="flex flex-col items-stretch p-10 h-full w-full">
+    <div className="flex flex-col items-stretch p-10 h-full w-full gap-16 lg:gap-4">
       <div className="text-white text-center leading-5">Logout</div>
       <div className="grow flex items-center justify-center gap-8">
         <div className="flex flex-col items-stretch justify-center gap-8 w-[290px] mx-auto">

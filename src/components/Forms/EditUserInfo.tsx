@@ -189,7 +189,7 @@ const EditUserInfoForm = () => {
               />
             </span>
             <span className="text-white">
-              I'm Agree With{" "}
+              I Agree With{" "}
               <Link
                 className="underline text-blue-600"
                 href={`/${params.lang}/terms`}

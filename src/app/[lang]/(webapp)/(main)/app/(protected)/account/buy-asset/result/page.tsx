@@ -21,7 +21,7 @@ const PurchaseResult = ({
     revalidateTag("getSubscribeAssets");
   }
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full pt-16 lg:pt-0">
       <div className="w-full h-full flex flex-col items-center justify-center gap-6">
         <div className="flex flex-col items-center gap-2">
           <div className="my-4">

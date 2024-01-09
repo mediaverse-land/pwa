@@ -161,7 +161,7 @@ const SingleAssetComments = ({
       <div
         className={`${
           modalStatus.isOpen ? "flex" : "hidden"
-        } fixed top-[350px] left-[60%] z-[9999] w-[790px] max-h-[520px] p-8 -translate-x-1/2 -translate-y-1/2 bg-[rgba(78,78,97,0.75)] backdrop-blur-md rounded-2xl flex-col items-stretch gap-8 overflow-y-auto`}
+        } fixed top-1/3 lg:top-[350px] left-1/2 lg:left-[60%] z-[9999] lg:w-[790px] lg:max-h-[520px] p-6 lg:p-8 -translate-x-1/2 -translate-y-1/2 bg-[rgba(78,78,97,0.75)] backdrop-blur-md rounded-2xl flex-col items-stretch gap-4 lg:gap-8 overflow-y-auto`}
       >
         <div className="flex items-center">
           <div className="mr-auto text-[#D9D9FF]">Comments</div>
@@ -184,7 +184,7 @@ const SingleAssetComments = ({
           onSubmit={handleAddComment}
           className="flex flex-col items-stretch gap-2"
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 lg:gap-4">
             <div className="relative w-[40px] h-[40px] aspect-square overflow-hidden rounded-full">
               {userImage ? (
                 <Image src={`${userImage}`} alt={`${username}`} fill />

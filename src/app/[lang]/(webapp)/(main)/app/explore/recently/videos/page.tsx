@@ -24,7 +24,7 @@ const WebAppRecentlyVideos = async ({
   return (
     <div className="h-full w-full p-10 overflow-y-auto">
       <SubSectionHeader name="Recently" />
-      <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 mt-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 mt-8">
         {rececentlyVideosData?.data.map((items: any, index: number) => {
           return (
             <ExploreVideoCard

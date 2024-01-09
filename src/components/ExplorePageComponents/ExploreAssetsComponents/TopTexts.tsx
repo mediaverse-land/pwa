@@ -19,7 +19,9 @@ const ExploreTopTexts = ({
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <TEXT_ICON />
-          <p className="text-white text-sm ">{dic.homepage.topTexts}</p>
+          <p className="text-white font-semibold lg:font-normal lg:text-sm">
+            {dic.homepage.topTexts}
+          </p>
         </div>
         <div className="text-[14px] text-[#597AFF]">View all</div>
       </div>

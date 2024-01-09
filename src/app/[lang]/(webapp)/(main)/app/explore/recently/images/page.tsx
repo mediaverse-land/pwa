@@ -18,7 +18,7 @@ const WebAppRecentlyImages = async ({
 }) => {
   const data = await getRecentlyImagesData();
   return (
-    <div className="h-full w-full p-10 overflow-y-auto">
+    <div className="h-full w-full p-4 lg:p-10 overflow-y-auto">
       <SubSectionHeader name="Recently" />
       <div className="grid grid-cols-3 grid-flow-row gap-2 mt-8 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2">
         {data?.data.map((items: any, index: number) => {

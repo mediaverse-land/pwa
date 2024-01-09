@@ -37,11 +37,11 @@ const Blog = async ({
 
   return (
     <Motion>
-      <div className="w-full flex justify-center flex-col items-center sm:items-start sm:flex-row mt-36 space-x-0 px-4  sm:space-x-10 mb-10">
-        <div className="flex flex-col">
+      <div className="w-full flex justify-center flex-col items-center lg:items-start lg:flex-row mt-36 space-x-0 px-6 lg:px-4 lg:space-x-10 mb-10 max-w-screen-lg lg:mx-auto">
+        <div className="flex flex-col w-full">
           {/* <div className="w-80 h-80 bg-cover bg-[url('/images/image-room.png')]">
          </div> */}
-          <div className="relative w-80 aspect-square">
+          <div className="relative w-full md:w-[500px] lg:w-80 aspect-square mx-auto lg:mx-0">
             <div className="absolute bottom-[1.5rem] left-[1.5rem] right-[1.5rem] flex justify-between items-center z-50 text-white">
               {/* author */}
               <div className="flex justify-between items-center gap-3">
@@ -67,7 +67,7 @@ const Blog = async ({
           </div>
           <Link
             href={`./`}
-            className="flex items-center justify-center py-2 rounded-3xl w-80 bg-card mt-6 space-x-2"
+            className="hidden lg:flex items-center justify-center py-2 rounded-3xl w-80 bg-card mt-6 space-x-2"
           >
             <Image
               src="/icons/back.png"
@@ -80,12 +80,12 @@ const Blog = async ({
           </Link>
         </div>
         <div className="min-h-screen">
-          <h1 className="text-white text-4xl mt-8 sm:mt-0">
+          <h1 className="text-white text-4xl mt-8 lg:mt-0">
             {data.data.title}
           </h1>
           {/* <p className="text-blue-500 mt-2">About Basic Display API</p> */}
           <div
-            className="text-white w-full sm:w-[650px] mt-4"
+            className="text-white w-full lg:w-[650px] mt-4"
             dangerouslySetInnerHTML={{ __html: data.data.body }}
           />
         </div>

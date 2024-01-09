@@ -63,5 +63,38 @@ export type DicProperties = {
   appWallet: {
     inventory: string;
     addInventory: string;
+    notConnetToStripe: string;
+  };
+  generalApp: {
+    viewAll: string;
+    dailyRecommended: string;
+    recently: string;
+    bestInMonth: string;
+    search: string;
+    login: string;
+    logout: string;
+    webApp: string;
+    tag: string;
+    searchInTag: string;
+    searchInMore: string;
+  };
+  setting: {
+    account: string;
+    message: string;
+    wallet: string;
+    analytics: string;
+    shareAccount: string;
+    messages: string;
+    noMessage: string;
+    generalInforamtion: string;
+    signIns: string;
+    sessions: string;
+  };
+  auth: {
+    firstName: string;
+    lastName: string;
+    password: string;
+    email: string;
+    cellPhone: string;
   };
 };

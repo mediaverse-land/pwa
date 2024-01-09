@@ -64,7 +64,9 @@ const ExploreMostViewd = ({
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <PICTURE_ICON />
-          <p className="text-white text-sm ">{dic.homepage.mostViewedImages}</p>
+          <p className="text-white font-semibold lg:font-normal lg:text-sm">
+            {dic.homepage.mostViewedImages}
+          </p>
         </div>
         <div className="text-[14px] text-[#597AFF]">View all</div>
       </div>

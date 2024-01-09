@@ -38,7 +38,7 @@ const WebAppExploreVideoAssets = async ({
   return (
     <div className="h-full overflow-y-auto">
       <ExploreSearchAndNavSection dic={dic} lang={lang} activeTab={"Videos"} />
-      <div className="flex flex-col items-stretch gap-6 py-8 px-10">
+      <div className="flex flex-col items-stretch gap-6 py-8 px-4 lg:px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}
@@ -95,7 +95,7 @@ export default WebAppExploreVideoAssets;
 const RecentlyVideos = async ({ lang }: { lang: Locale }) => {
   const rececentlyVideosData = await getRecentlyVideosData();
   return (
-    <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-x-4 gap-y-6">
       {rececentlyVideosData.map((items: any, index: number) => {
         return (
           <ExploreVideoCard

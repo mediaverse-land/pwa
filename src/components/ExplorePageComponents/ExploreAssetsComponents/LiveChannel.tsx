@@ -16,14 +16,17 @@ export const ExploreLiveChannel = ({
     <div className="flex items-stretch flex-col gap-4">
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <Image
-            src="/icons/live-icon.png"
-            quality={100}
-            width={20}
-            height={20}
-            alt="camera icon"
-          />
-          <p className="text-white text-sm ">{dic.homepage.liveTvChannels}</p>
+          <div className="relative overflow-hidden w-[30px] h-[26px] lg:w-[20px] lg:h-[20px]">
+            <Image
+              src="/icons/live-icon.png"
+              quality={100}
+              fill
+              alt="camera icon"
+            />
+          </div>
+          <p className="text-white font-semibold lg:font-normal lg:text-sm">
+            {dic.homepage.liveTvChannels}
+          </p>
         </div>
         <Link
           href={`/${lang}/app/lives`}
@@ -39,7 +42,7 @@ export const ExploreLiveChannel = ({
               <Link
                 href={`/${lang}/app/lives/${item.id}`}
                 key={i}
-                className="relative rounded-[8px] min-w-[190px] w-[190px] h-[125px] min-h-[190px] mr-[8px] overflow-hidden"
+                className="relative rounded-[8px] min-w-[110px] lg:min-w-[190px] lg:w-[190px] lg:h-[125px] min-h-[72px] lg:min-h-[190px] mr-[8px] overflow-hidden"
               >
                 <Image className="" src={item.thumbnail} alt="" fill />
               </Link>

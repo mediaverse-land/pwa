@@ -42,7 +42,7 @@ export const SearchForAll = async ({
     return data;
   };
   return (
-    <div className="py-7 px-6 grid grid-cols-3 grid-flow-row gap-4">
+    <div className="py-7 px-6 grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-4">
       {concatData().map((item) => {
         const dataType = () => {
           switch (item.asset.type) {
@@ -92,7 +92,7 @@ export const SearchForImages = async ({
     }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
   return (
-    <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2 px-6 py-7 h-full overflow-y-auto">
+    <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2 px-6 py-7 h-full overflow-y-auto">
       {searchResults.images.map((items: any, index: number) => {
         return (
           <Link
@@ -129,7 +129,7 @@ export const SearchForVideos = async ({
     }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
   return (
-    <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
+    <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
       {searchResults.videos.map((items: any, index: number) => {
         return (
           <ExploreVideoCard
@@ -166,7 +166,7 @@ export const SearchForAudios = async ({
   );
 
   return (
-    <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
+    <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
       {searchResults.audios.map((items: any, index: number) => {
         return (
           <ExploreAudioCard
@@ -202,7 +202,7 @@ export const SearchForTexts = async ({
     }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
   return (
-    <div className="grid grid-cols-3 grid-flow-row gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-4">
       {searchResults.texts.map((item: any) => (
         <ExploreTextCard lang={params.lang} key={item.id} data={item} />
       ))}

@@ -11,14 +11,16 @@ export default function Layout({
 }) {
   return (
     <Motion center>
-      <div className="mt-28 mx-auto flex items-center justify-center">
-        <div className="grid grid-cols-8 grid-rows-1 gap-4 h-[604px] w-[1062px] text-[#C1C1CD]">
+      <div className="mt-[95px] lg:mt-28 mx-auto flex items-center justify-center w-full h-full">
+        <div
+          className="grid grid-cols-6 lg:grid-cols-8 grid-rows-1 gap-4 lg:h-[604px] w-full max-w-[600px] lg:max-w-[900px] xl:max-w-none
+         xl:w-[1062px] text-[#C1C1CD]"
+        >
           {/* sidebar */}
           <WebAppSideBar lang={lang} />
           <div
             key={"SettingSection"}
-            className="col-span-6 rounded-2xl border border-[#CFCFFC] border-opacity-20 overflow-hidden flex flex-col items-stretch gap-4"
-            style={{ background: `rgba(78, 78, 97, 0.20)` }}
+            className="col-span-6 lg:rounded-2xl xl:border border-[#CFCFFC] border-opacity-20 overflow-hidden flex flex-col items-stretch gap-4 lg:bg-[rgba(78,78,97,0.20)]"
           >
             {children}
           </div>

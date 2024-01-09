@@ -70,7 +70,7 @@ const WebAppTextAssetSinglePage = async (params: any) => {
           </div>
         </div>
         {/* back */}
-        <div className="absolute z-30 left-10 top-10">
+        <div className="absolute z-30 left-5 lg:left-10 top-5 lg:top-10">
           <BackButton fill="#597AFF" />
         </div>
       </div>

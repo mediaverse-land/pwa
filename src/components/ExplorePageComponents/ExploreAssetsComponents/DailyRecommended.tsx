@@ -41,7 +41,9 @@ const ExploreDailyRecommended = async ({ lang }: { lang: Locale }) => {
       {/* header */}
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center space-x-1">
-          <p className="text-white text-sm ">Daily recommended</p>
+          <p className="text-white font-semibold lg:font-normal lg:text-sm">
+            Daily recommended
+          </p>
         </div>
         <div className="text-[14px] text-[#597AFF]">View all</div>
       </div>

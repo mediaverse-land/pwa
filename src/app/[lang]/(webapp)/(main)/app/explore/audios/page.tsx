@@ -75,7 +75,7 @@ const WebAppExploreAudioAssets = async ({
   return (
     <div className="h-full overflow-y-auto">
       <ExploreSearchAndNavSection dic={dic} lang={lang} activeTab={"Audios"} />
-      <div className="flex flex-col items-stretch gap-6 py-8 px-10">
+      <div className="flex flex-col items-stretch gap-6 py-8 px-4 lg:px-10">
         {/* best in month */}
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}
@@ -132,7 +132,7 @@ export default WebAppExploreAudioAssets;
 const RecentlyAudio = async ({ lang }: { lang: Locale }) => {
   const rececentlySongsData = await getRecentlySongsData();
   return (
-    <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-x-4 gap-y-6">
       {rececentlySongsData.map((items: any, index: number) => {
         return (
           <ExploreAudioCard

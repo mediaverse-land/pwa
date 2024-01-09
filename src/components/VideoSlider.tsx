@@ -65,7 +65,7 @@ const VideoSlider = () => {
                     "-"
                   )}?id=${item.id}`}
                 >
-                  <div className="relative w-full aspect-square">
+                  <div className="relative w-[194px] lg:w-full aspect-square">
                     <Image
                       src={item.asset.thumbnails["226x226"]}
                       className="rounded-xl object-cover"
@@ -73,7 +73,9 @@ const VideoSlider = () => {
                       fill
                     />
                   </div>
-                  <p className="mt-2 ml-1 text-gray-600 text-sm">{item.name}</p>
+                  <p className="mt-2 ml-1 text-gray-600 text-[16px] lg:text-sm line-clamp-1 ">
+                    {item.name}
+                  </p>
                   <div className="flex ml-1 mt-1 space-x-2">
                     <Image
                       src="/images/mini-avatar.png"

@@ -74,7 +74,7 @@ const OTPForm = () => {
         });
         signIn(
           "loginWithOTP",
-          { callbackUrl: "/sign-up/info" },
+          { callbackUrl: `/${params.lang}/sign-up/info` },
           { user: JSON.stringify(response) }
         );
       }
@@ -140,12 +140,9 @@ const OTPForm = () => {
   return (
     <form
       onSubmit={onSubmitForRequestOtp}
-      style={{
-        background: `rgba(78, 78, 97, 0.20)`,
-      }}
-      className="mx-auto max-w-[674px] auth-border-image-source rounded-3xl px-[8rem] pt-[3.5rem] pb-[3rem] backdrop-blur-[5px]"
+      className="mx-auto max-w-[674px] lg:auth-border-image-source lg:bg-[rgba(78,78,97,0.20)] lg:rounded-3xl px-[2rem] lg:px-[8rem] lg:pt-[3.5rem] lg:pb-[3rem] lg:backdrop-blur-[5px]"
     >
-      <div className="flex flex-col items-stretch h-full justify-between gap-[6rem] text-center">
+      <div className="flex flex-col items-stretch h-full justify-between gap-[2.5rem] lg:gap-[6rem] text-center">
         {/* input */}
         <div className="flex items-stretch justify-between flex-col gap-12">
           {/* heading */}

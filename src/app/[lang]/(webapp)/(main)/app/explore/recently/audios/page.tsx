@@ -24,7 +24,7 @@ const WebAppRecentlyAudios = async ({
   return (
     <div className="w-full h-full p-10 overflow-y-auto">
       <SubSectionHeader name="Recently" />
-      <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 mt-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 mt-8">
         {rececentlySongsData?.data.map((items: any, index: number) => {
           return (
             <ExploreAudioCard

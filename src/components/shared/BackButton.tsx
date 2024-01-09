@@ -16,7 +16,7 @@ const BackButton = ({
   const router = useRouter();
   return (
     <div
-      className="cursor-pointer"
+      className="cursor-pointer bg-[rgba(14,14,18,0.5)] lg:bg-transparent px-6 lg:px-0 py-2 lg:py-0 rounded-2xl lg:rounded-none"
       onClick={(e) => {
         e.stopPropagation();
         router.back();

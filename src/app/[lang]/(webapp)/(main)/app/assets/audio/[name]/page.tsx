@@ -101,11 +101,11 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
           </>
         )}
         {/* back */}
-        <div className="absolute z-30 left-10 top-10">
+        <div className="absolute z-30 left-5 lg:left-10 top-5 lg:top-10">
           <BackButton fill="#597AFF" />
         </div>
         {singleAudioData?.data?.asset.thumbnails["336x366"] ? (
-          <div className="absolute z-30 left-10 bottom-10">
+          <div className="absolute z-30 left-5 lg:left-10 bottom-5 lg:bottom-10">
             <AUDIO_ICON />
           </div>
         ) : null}

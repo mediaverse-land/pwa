@@ -41,9 +41,9 @@ const ImageSinglePage = async (params: any) => {
     );
   }
   return (
-    <div className="flex flex-col items-stretch h-full overflow-y-auto">
+    <div className="flex flex-col items-stretch h-full overflow-y-auto mt-1 lg:mt-0">
       {/* top section */}
-      <div className="rounded-b-2xl h-[450px] min-h-[450px] relative overflow-hidden">
+      <div className="rounded-b-2xl sm:rounded-2xl lg:rounded-b-2xl aspect-video lg:min-h-[450px] relative overflow-hidden">
         {/* overlay */}
         <div
           style={{
@@ -61,16 +61,16 @@ const ImageSinglePage = async (params: any) => {
           />
         </div>
         {/* back */}
-        <div className="absolute z-30 left-10 top-10">
+        <div className="absolute z-30 left-5 lg:left-10 top-5 lg:top-10">
           <BackButton fill="#597AFF" />
         </div>
         {/* icon */}
-        <div className="absolute z-30 left-10 bottom-10">
+        <div className="absolute z-30 left-5 lg:left-10 bottom-5 lg:bottom-10">
           <PICTURE_ICON />
         </div>
       </div>
       {/* content */}
-      <div className="py-8 px-10 flex flex-col items-stretch gap-6">
+      <div className="py-8 px-4 lg:px-10 flex flex-col items-stretch gap-6">
         {/* info */}
         <div className="flex flex-col items-stretch gap-2">
           <AssetSinglePageTitleAndDescription

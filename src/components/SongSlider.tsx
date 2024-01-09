@@ -45,22 +45,25 @@ const SongSlider = () => {
         <Swiper
           centerInsufficientSlides
           className="w-full"
-          slidesPerView={7.5}
           spaceBetween={16}
+          slidesPerView={7.5}
           onSwiper={setSwiperRef}
           loop={true}
           rewind={true}
         >
           {songoData.map((item: any, index) => {
             return (
-              <SwiperSlide className="w-[140px] h-[120px]" key={item.id}>
+              <SwiperSlide
+                className="min-w-[194px] lg:min-w-[140px] min-h-[194px] lg:min-h-[120px]"
+                key={item.id}
+              >
                 <Link
                   href={`/${lang}/app/assets/audio/${item.name.replaceAll(
                     " ",
                     "-"
                   )}?id=${item.id}`}
                 >
-                  <div className="relative w-[140px] h-[120px]">
+                  <div className="relative w-full aspect-square">
                     <Image
                       src={item.asset.thumbnails["226x226"]}
                       className="rounded-xl"

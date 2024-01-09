@@ -64,7 +64,7 @@ export const SubscribeAllAssets = async ({
     return data;
   };
   return (
-    <div className="py-7 px-6 grid grid-cols-3 grid-flow-row gap-4">
+    <div className="py-7 xl:px-6 grid grid-cols-2 lg:grid-cols-3 grid-flow-row gap-4">
       {concatData().length > 0 ? (
         concatData().map((item) => {
           const dataType = () => {
@@ -135,7 +135,7 @@ export const SubscribeImageAssets = async ({
     return <LogoutNoUser />;
   }
   return (
-    <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2 px-6 py-7 h-full overflow-y-auto">
+    <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2 xl:px-6 py-7 h-full overflow-y-auto">
       {searchResults?.data.data.length > 0 ? (
         searchResults?.data.data.map((items: any, index: number) => {
           return (
@@ -193,7 +193,7 @@ export const SubscribeVideoAssets = async ({
     return <LogoutNoUser />;
   }
   return (
-    <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
+    <div className="grid grid-cols-2 lg:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 xl:px-6 py-7 h-full overflow-y-auto">
       {searchResults?.data.data.length > 0 ? (
         searchResults?.data.data.map((items: any, index: number) => {
           return (
@@ -250,7 +250,7 @@ export const SubscribeAudioAssets = async ({
     return <LogoutNoUser />;
   }
   return (
-    <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
+    <div className="grid grid-cols-2 lg:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 xl:px-6 py-7 h-full overflow-y-auto">
       {searchResults?.data.data.length > 0 ? (
         searchResults?.data.data.map((items: any, index: number) => {
           return (
@@ -307,7 +307,7 @@ export const SubscribeTextAssets = async ({
     return <LogoutNoUser />;
   }
   return (
-    <div className="grid grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
+    <div className="grid grid-cols-2 lg:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 xl:px-6 py-7 h-full overflow-y-auto">
       {searchResults?.data.data.length > 0 ? (
         searchResults?.data.data.map((item: any) => (
           <ExploreTextCard lang={params.lang} key={item.id} data={item} />
