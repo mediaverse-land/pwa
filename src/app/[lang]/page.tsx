@@ -232,12 +232,12 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
               </p>
             </div>
 
-            <div className="grid grid-flow-col lg:grid-cols-3 md:grid-cols-3 gap-2 grid-rows-1 md:grid-rows-2 lg:grid-rows-2 mt-10 w-full grow overflow-x-scroll lg:overflow-visible">
+            <div className="grid grid-flow-col lg:grid-cols-3 md:grid-cols-3 gap-2 grid-rows-1 md:grid-rows-2 lg:grid-rows-2 mt-10 w-full grow overflow-x-scroll lg:overflow-visible px-4">
               {textData.slice(0, 6).map((items: any, index: number) => {
                 return (
                   <BorderGradient
                     key={items.id}
-                    className="flex flex-col w-full aspect-square box-border rounded-3xl"
+                    className="flex flex-col w-full min-w-[250px] md:min-w-0 aspect-square box-border rounded-3xl"
                     to="90deg"
                     sColor="#CFCFFC4D"
                     tColor="#CFCFFC00"

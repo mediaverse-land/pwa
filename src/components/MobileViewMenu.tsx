@@ -3,6 +3,7 @@
 import { DicProperties, Locale } from "@/types/dictionary-types";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { Dispatch, SetStateAction } from "react";
 
 type THomeMenuItems = {
   id: number;
@@ -104,10 +105,12 @@ const MobileMenu = ({
   page,
   lang,
   dic,
+  closeMenu,
 }: {
   page: "Home" | "App";
   lang: Locale;
   dic: DicProperties;
+  closeMenu: Dispatch<SetStateAction<boolean>>;
 }) => {
   const session = useSession();
   return (
@@ -117,9 +120,16 @@ const MobileMenu = ({
           ? HomeMenuItems.map((item) => (
               <li
                 key={item.id}
-                className="py-3 text-[rgba(162,162,181,1)] last:border-b-0"
+                className="flex text-[rgba(162,162,181,1)] last:border-b-0"
               >
-                <Link href={`/${lang}${item.link}`}>
+                <Link
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    closeMenu(false);
+                  }}
+                  href={`/${lang}${item.link}`}
+                  className="min-w-full py-3"
+                >
                   {dic.header[item.dicName]}
                 </Link>
               </li>
@@ -133,17 +143,31 @@ const MobileMenu = ({
               return (
                 <li
                   key={item.id}
-                  className="py-3 text-[rgba(162,162,181,1)] last:border-b-0"
+                  className="flex items-stretch text-[rgba(162,162,181,1)] last:border-b-0"
                 >
-                  <Link href={`/${lang}/app/${item.link}`}>
+                  <Link
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      closeMenu(false);
+                    }}
+                    href={`/${lang}/app/${item.link}`}
+                    className="min-w-full py-3"
+                  >
                     {dic.appSidebar[item.dicName]}
                   </Link>
                 </li>
               );
             })}
         {page === "App" && session.status === "unauthenticated" && (
-          <li className="py-3 text-[rgba(162,162,181,1)] last:border-b-0">
-            <Link href={`/${lang}/login`} className="">
+          <li className="flex items-stretch text-[rgba(162,162,181,1)] last:border-b-0">
+            <Link
+              onClick={(e) => {
+                e.stopPropagation();
+                closeMenu(false);
+              }}
+              href={`/${lang}/login`}
+              className="min-w-full py-3"
+            >
               Login
             </Link>
           </li>
@@ -151,8 +175,12 @@ const MobileMenu = ({
       </ul>
       {page === "Home" && (
         <Link
+          onClick={(e) => {
+            e.stopPropagation();
+            closeMenu(false);
+          }}
           href={`/${lang}/app/explore`}
-          className="py-3 bg-[rgba(89,122,255,1)]"
+          className="bg-[rgba(89,122,255,1)] min-w-full py-3"
         >
           Web app
         </Link>

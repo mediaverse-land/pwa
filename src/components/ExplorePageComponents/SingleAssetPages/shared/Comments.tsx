@@ -132,7 +132,7 @@ const SingleAssetComments = ({
             });
           }
         }}
-        className="p-8 rounded-2xl bg-[rgba(78,78,97,0.30)] backdrop-blur-sm flex flex-col items-stretch justify-between leading-none gap-6 select-none cursor-pointer"
+        className="p-6 lg:p-8 rounded-2xl bg-[rgba(78,78,97,0.30)] backdrop-blur-sm flex flex-col items-stretch justify-between leading-none gap-6 select-none cursor-pointer"
       >
         <div className="flex items-center">
           <div className="mr-auto text-[14px] text-white font-semibold">
@@ -161,7 +161,7 @@ const SingleAssetComments = ({
       <div
         className={`${
           modalStatus.isOpen ? "flex" : "hidden"
-        } fixed top-1/3 lg:top-[350px] left-1/2 lg:left-[60%] z-[9999] lg:w-[790px] lg:max-h-[520px] p-6 lg:p-8 -translate-x-1/2 -translate-y-1/2 bg-[rgba(78,78,97,0.75)] backdrop-blur-md rounded-2xl flex-col items-stretch gap-4 lg:gap-8 overflow-y-auto`}
+        } fixed top-[20%] lg:top-[150px] left-1/2 lg:left-[60%] z-[9999] lg:w-[790px] max-h-[400px] lg:max-h-[520px] p-6 lg:p-8 -translate-x-1/2 bg-[rgba(78,78,97,0.75)] backdrop-blur-md rounded-2xl flex-col items-stretch gap-4 lg:gap-8 overflow-y-auto`}
       >
         <div className="flex items-center">
           <div className="mr-auto text-[#D9D9FF]">Comments</div>

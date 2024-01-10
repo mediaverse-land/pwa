@@ -7,15 +7,17 @@ const Footer = ({ title }: { title: string }) => {
   return (
     <div className="mt-auto">
       <div className="bg-blue-950">
-        <div className="w-full flex justify-between gap-4 px-6 items-center py-6 lg:mt-8 max-w-screen-xl mx-auto">
+        <div className="w-full flex flex-col sm:flex-row justify-between gap-4 px-6 items-center py-6 lg:mt-8 max-w-screen-xl mx-auto">
           <p className="text-white">{title}</p>
-          <SelectLanguage />
-          <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 md:grid-rows-1 gap-4 place-items-center place-content-center w-[100px] max-h-[100px] md:w-[200px] md:max-h-none">
+          <div className="order-3 ">
+            <SelectLanguage />
+          </div>
+          <div className="grid grid-cols-4 grid-rows-1 gap-4">
             {socialMedia.map((item) => (
               <Link
                 href={item.link}
                 target="_blank"
-                className="relative w-full aspect-square"
+                className="relative w-[30px] aspect-square"
                 key={item.id}
               >
                 <Image

@@ -6,20 +6,30 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { DicProperties, Locale } from "@/types/dictionary-types";
 import { CLOSE_ICON, HAMBURGER_ICON } from "./SVG/svgs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MobileMenu from "./MobileViewMenu";
 
 const Navbar = ({ dic }: { dic: DicProperties }) => {
   const pathname = usePathname();
-  const session = useSession();
   const params = useParams();
   const isInWebAppSection = pathname?.includes("/app");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isMenuOpen]);
 
   return (
     <nav className="nav fixed top-0 w-full z-[90]">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pl-6 py-7 pr-8 lg:p-4">
-        <Link href={`/${params.lang}`} className="flex items-center">
+        <Link
+          onClick={() => setIsMenuOpen(false)}
+          href={`/${params.lang}`}
+          className="flex items-center"
+        >
           <Image
             src="/images/media-verse-logo.png"
             quality={100}
@@ -93,18 +103,13 @@ const Navbar = ({ dic }: { dic: DicProperties }) => {
           isMenuOpen ? "block h-screen" : "hidden overflow-hidden"
         }`}
       >
-        <div
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsMenuOpen(false);
-          }}
-          className="text-white bg-[rgba(35,32,51,0.6)] backdrop-blur-xl relative z-[65]"
-        >
-          {isInWebAppSection ? (
-            <MobileMenu lang={params.lang as Locale} page="App" dic={dic} />
-          ) : (
-            <MobileMenu lang={params.lang as Locale} page="Home" dic={dic} />
-          )}
+        <div className="text-white bg-[rgba(35,32,51,0.6)] backdrop-blur-xl relative z-[65]">
+          <MobileMenu
+            lang={params.lang as Locale}
+            page={isInWebAppSection ? "App" : "Home"}
+            dic={dic}
+            closeMenu={setIsMenuOpen}
+          />
         </div>
       </div>
     </nav>

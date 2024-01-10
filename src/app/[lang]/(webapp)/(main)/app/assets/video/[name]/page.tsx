@@ -69,7 +69,7 @@ const WebAppSingleVideoAsset = async (params: any) => {
   return (
     <div className="flex flex-col items-stretch h-full overflow-y-auto">
       {/* top section */}
-      <div className="rounded-b-2xl h-[450px] min-h-[450px] relative overflow-hidden">
+      <div className="rounded-b-2xl aspect-video lg:h-[450px] lg:min-h-[450px] relative overflow-hidden">
         {/* asset */}
         <div className="relative w-full h-full overflow-hidden z-10">
           {singleVideoData?.data?.asset?.file ? (
@@ -109,7 +109,7 @@ const WebAppSingleVideoAsset = async (params: any) => {
         )}
       </div>
       {/* content */}
-      <div className="py-8 px-10 flex flex-col items-stretch gap-6">
+      <div className="py-8 px-4 lg:px-10 flex flex-col items-stretch gap-6">
         {/* info */}
         <div className="flex flex-col items-stretch gap-2">
           <AssetSinglePageTitleAndDescription
@@ -122,7 +122,7 @@ const WebAppSingleVideoAsset = async (params: any) => {
             time={singleVideoData?.data?.length}
           />
           {/* genrel info */}
-          <div className="grid grid-cols-3 grid-rows-1 gap-4 mt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-1 gap-4 mt-2">
             <div className="flex items-center rounded-lg border border-[#666680] px-4 py-1 gap-4">
               <div className="text-[12px] text-[#666680]">Genre</div>
               <div className="h-[70%] w-[1px] bg-[#666680]"></div>
