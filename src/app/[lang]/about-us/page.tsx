@@ -10,9 +10,9 @@ const AboutUs = async ({ params: { lang } }: { params: { lang: Locale } }) => {
     <Motion>
       <div className="w-full flex justify-center flex-col items-center lg:items-start lg:flex-row mt-36 space-x-0 px-4 lg:space-x-10 mb-10">
         <div className="flex flex-col">
-          <div className="w-80 h-80 ">
+          <div className="w-[380px] p-4 md:p-0 md:w-[500px] lg:w-80 aspect-square">
             <iframe
-              className="w-80 h-80 rounded-xl"
+              className="w-full h-full rounded-xl"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.2189364946053!2d2.3144302419797746!3d48.87310274252804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x66ae4097ff6609bd!2sV8F8%2B6M!5e0!3m2!1str!2suk!4v1697876240547!5m2!1str!2suk"
               allowFullScreen={false}
               loading="lazy"

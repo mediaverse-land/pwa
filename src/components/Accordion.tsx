@@ -4,9 +4,9 @@ import { useState } from "react";
 export default function Accordion({ item }: any) {
   const [collapsed, setCollapsed] = useState<boolean>(true);
   return (
-    <div className="border-blue-500 border-b-2 ">
+    <div className="border-blue-500 border-b-2">
       <div
-        className="w-full pb-2 mt-11 flex justify-between cursor-pointer"
+        className="w-full pb-2 mt-6 lg:mt-11 flex justify-between cursor-pointer"
         onClick={() => {
           // console.log("clicked");
           setCollapsed((e) => !e);

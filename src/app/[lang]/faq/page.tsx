@@ -26,8 +26,8 @@ const Faq = async ({ params: { lang } }: { params: { lang: Locale } }) => {
   // console.log(faqData);
   return (
     <Motion>
-      <div className="w-full flex mt-28 lg:mt-36 pb-16 justify-center px-8 lg:px-4 min-h-[75vh]">
-        <div className="sm:w-6/12 w-full flex flex-col">
+      <div className="w-full max-w-screen-xl mx-auto flex mt-28 lg:mt-36 pb-16 justify-center px-8 lg:px-4 min-h-[75vh]">
+        <div className="max-w-[540px] lg:max-w-none w-full lg:w-6/12 flex flex-col">
           <h1 className="text-white text-2xl">{dic.faqSection.title}</h1>
           {/* <p className="text-base text-blue-500">{item.question}</p> */}
           <div></div>
