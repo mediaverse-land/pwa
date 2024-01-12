@@ -3,6 +3,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { convertISOToDateAndTime } from "@/lib/convertISOToDateAndTime";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
+import { Locale } from "@/types/dictionary-types";
+import { getDictionary } from "@/dictionary";
 const getSessionsData = async (token: string) => {
   try {
     const req = await getSessions({ token });
@@ -15,14 +17,19 @@ const getSessionsData = async (token: string) => {
   }
 };
 
-const WebAppSettingSessions = async () => {
+const WebAppSettingSessions = async ({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}) => {
   const session = await getServerSession(authOptions);
+  const dic = await getDictionary(lang);
   const token = session?.user?.token || "";
   const sessionsData = await getSessionsData(token);
   //   console.log(sessionsData?.data[0].details);
   return (
     <div className="flex flex-col items-stretch gap-10 p-10 w-full h-full overflow-y-auto">
-      <SubSectionHeader name="Sessions" />
+      <SubSectionHeader name={dic.setting.sessions} />
       <div className="flex flex-col items-stretch gap-2">
         {sessionsData?.data.map((item: any) => (
           <div

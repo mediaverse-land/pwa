@@ -7,6 +7,7 @@ import {
   MESSAGE_ICON,
   SHARE_ICON,
 } from "@/components/SVG/svgs";
+import { getDictionary } from "@/dictionary";
 import { getUserMessages, getUserWallets } from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
@@ -45,6 +46,7 @@ const WebAppSessting = async ({
   params: { lang: Locale };
 }) => {
   const session = await getServerSession(authOptions);
+  const dic = await getDictionary(lang);
   const token = session?.user?.token || "";
   const [wallets, messagesData] = await Promise.all([
     getUserWalletData(token),
@@ -114,7 +116,7 @@ const WebAppSessting = async ({
                 />
               </div>
               <div className="text-[14px] text-white flex items-center justify-center">
-                Account
+                {dic.appSidebar.account}
               </div>
             </div>
             <div className="text-[12px] text-[#A2A2B5]">
@@ -136,7 +138,7 @@ const WebAppSessting = async ({
                 />
               </div>
               <div className="text-[14px] text-white flex items-center justify-center">
-                Message
+                {dic.setting.message}
               </div>
             </div>
             <div className="text-[12px] text-black flex items-center justify-center leading-none w-[18px] aspect-square rounded-full bg-white">
@@ -155,7 +157,7 @@ const WebAppSessting = async ({
                 />
               </div>
               <div className="text-[14px] text-white flex items-center justify-center">
-                Wallet
+                {dic.appSidebar.wallet}
               </div>
             </div>
             <div className="text-[12px] text-[#A2A2B5]">
@@ -180,7 +182,7 @@ const WebAppSessting = async ({
                 />
               </div>
               <div className="text-[14px] text-[#555454] flex items-center justify-center">
-                Analytics
+                {dic.setting.analytics}
               </div>
             </div>
           </div>
@@ -199,7 +201,7 @@ const WebAppSessting = async ({
                 />
               </div>
               <div className="text-[14px] text-[#555454] flex items-center justify-center">
-                Share account
+                {dic.setting.shareAccount}
               </div>
             </div>
           </div>

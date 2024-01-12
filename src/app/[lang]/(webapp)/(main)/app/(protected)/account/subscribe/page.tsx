@@ -160,7 +160,21 @@ const AccountSubscribeSection = async ({
                     : "after:w-[0%] after:h-[0px]"
                 }`}
               >
-                {activeTab === tab.name ? tab.active_icon : tab.inactive_icon}
+                {activeTab === tab.name ? (
+                  tab.name === "All" ? (
+                    <span className="text-[14px] text-[#D9D9FF]">
+                      {dic.appAccounts.all}
+                    </span>
+                  ) : (
+                    tab.active_icon
+                  )
+                ) : tab.name === "All" ? (
+                  <span className="text-[#666680] text-[14px]">
+                    {dic.appAccounts.all}
+                  </span>
+                ) : (
+                  tab.inactive_icon
+                )}
               </div>
             </Link>
           ))}

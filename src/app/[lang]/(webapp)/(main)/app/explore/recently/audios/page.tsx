@@ -1,5 +1,6 @@
 import ExploreAudioCard from "@/components/ExplorePageComponents/shared/AudioCard";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
+import { getDictionary } from "@/dictionary";
 import { getRecentlySongs } from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";
 
@@ -20,10 +21,11 @@ const WebAppRecentlyAudios = async ({
 }: {
   params: { lang: Locale };
 }) => {
+  const dic = await getDictionary(lang);
   const rececentlySongsData = await getRecentlySongsData();
   return (
     <div className="w-full h-full p-10 overflow-y-auto">
-      <SubSectionHeader name="Recently" />
+      <SubSectionHeader name={dic.generalApp.recently} />
       <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 mt-8">
         {rececentlySongsData?.data.map((items: any, index: number) => {
           return (

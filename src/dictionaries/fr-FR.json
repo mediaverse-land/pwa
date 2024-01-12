@@ -52,6 +52,46 @@
   },
   "appWallet": {
     "inventory": "Solde",
-    "addInventory": "Augmenter le solde"
+    "addInventory": "Augmenter le solde",
+    "notConnetToStripe": "Impossible de se connecter à Stripe pour le moment. Veuillez réessayer plus tard.",
+    "completeInfo": "Veuillez d'abord compléter vos informations :",
+    "clickHere": "Cliquez ici",
+    "connectToStripe": "Se connecter à Stripe"
+  },
+  "generalApp": {
+    "viewAll": "Voir tout",
+    "dailyRecommended": "Quotidien recommandé",
+    "recently": "Récemment",
+    "bestInMonth": "Meilleur du mois",
+    "search": "Recherche",
+    "login": "Login",
+    "logout": "Logout",
+    "webApp": "Web App",
+    "tag": "Tag",
+    "searchIn": "Rechercher dans",
+    "searchInMore": "Recherchez dans plus de 2 000 000 de contenus"
+  },
+  "setting": {
+    "account": "Compte",
+    "message": "Message",
+    "wallet": "Portefeuille",
+    "analytics": "Analytique",
+    "shareAccount": "Partager le compte",
+    "messages": "Messages",
+    "noMessage": "Vous n'avez pas de messages",
+    "generalInforamtion": "Informations générales",
+    "signIns": "Connexions",
+    "sessions": "Séances"
+  },
+  "auth": {
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "email": "Email",
+    "password": "Mot de passe",
+    "cellPhone": "Téléphone portable",
+    "edit": "Modifier",
+    "confirmLogout": "Êtes-vous sûr de vouloir vous déconnecter?",
+    "yes": "Oui",
+    "no": "Non"
   }
 }

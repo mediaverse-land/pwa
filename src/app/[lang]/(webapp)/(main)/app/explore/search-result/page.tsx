@@ -14,6 +14,7 @@ import {
   TEXT_ICON,
   VIDEO_ICON,
 } from "@/components/SVG/svgs";
+import { getDictionary } from "@/dictionary";
 import { Locale } from "@/types/dictionary-types";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -72,6 +73,7 @@ const SearchSectionResultFrom = async ({
     [key: string]: string;
   };
 }) => {
+  const dic = await getDictionary(params.lang);
   const searchQuery = searchParams.q;
   const plan = searchParams.plan;
   const tag = searchParams.tag;
@@ -145,7 +147,21 @@ const SearchSectionResultFrom = async ({
                     : "after:w-[0%] after:h-[1px]"
                 }`}
               >
-                {dataType === item.link ? item.active_icon : item.inactive_icon}
+                {dataType === item.link ? (
+                  item.link === "all" ? (
+                    <span className="text-[14px] text-[#D9D9FF]">
+                      {dic.appAccounts.all}
+                    </span>
+                  ) : (
+                    item.active_icon
+                  )
+                ) : item.link === "all" ? (
+                  <span className="text-[#666680] text-[14px]">
+                    {dic.appAccounts.all}
+                  </span>
+                ) : (
+                  item.inactive_icon
+                )}
               </div>
             </Link>
           ))}

@@ -52,6 +52,46 @@
   },
   "appWallet": {
     "inventory": "Kontostand",
-    "addInventory": "Kontostand erhöhen"
+    "addInventory": "Kontostand erhöhen",
+    "notConnetToStripe": "Kan momenteel geen verbinding maken met Stripe. Probeer het later opnieuw.",
+    "completeInfo": "Vul eerst uw gegevens in:",
+    "clickHere": "Klik hier",
+    "connectToStripe": "Verbinding maken met Stripe"
+  },
+  "generalApp": {
+    "viewAll": "Bekijk alles",
+    "dailyRecommended": "Dagelijks aanbevolen",
+    "recently": "Onlangs",
+    "bestInMonth": "Beste in maand",
+    "search": "Zoekopdracht",
+    "login": "Login",
+    "logout": "Logout",
+    "webApp": "Web App",
+    "tag": "Tag",
+    "searchIn": "Zoek in",
+    "searchInMore": "Zoek in meer dan 2.000.000 inhoud"
+  },
+  "setting": {
+    "account": "Rekening",
+    "message": "Bericht",
+    "wallet": "Portemonnee",
+    "analytics": "Analyses",
+    "shareAccount": "Deel account",
+    "messages": "Messages",
+    "noMessage": "Je hebt geen berichten",
+    "generalInforamtion": "Algemene informatie",
+    "signIns": "Aanmelden",
+    "sessions": "Sessies"
+  },
+  "auth": {
+    "firstName": "Voornaam",
+    "lastName": "Achternaam",
+    "email": "Email",
+    "password": "Wachtwoord",
+    "cellPhone": "Mobiele",
+    "edit": "Bewerking",
+    "confirmLogout": "Weet u zeker dat u wilt uitloggen?",
+    "yes": "Ja",
+    "no": "Nee"
   }
 }

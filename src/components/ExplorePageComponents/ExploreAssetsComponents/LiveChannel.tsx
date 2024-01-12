@@ -32,7 +32,7 @@ export const ExploreLiveChannel = ({
           href={`/${lang}/app/lives`}
           className="text-[14px] text-[#597AFF]"
         >
-          View all
+          {dic.generalApp.viewAll}
         </Link>
       </div>
       <div className="">

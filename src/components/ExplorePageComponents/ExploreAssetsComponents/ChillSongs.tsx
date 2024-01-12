@@ -33,7 +33,9 @@ const ExploreChillSongs = async ({
             {dic.homepage.bestSongs}
           </p>
         </div>
-        <div className="text-[14px] text-[#597AFF]">View all</div>
+        <div className="text-[14px] text-[#597AFF]">
+          {dic.generalApp.viewAll}
+        </div>
       </div>
       <div>
         <div className="overflow-x-hidden">

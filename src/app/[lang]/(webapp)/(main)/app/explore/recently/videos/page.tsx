@@ -1,5 +1,6 @@
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import ExploreVideoCard from "@/components/ExplorePageComponents/shared/VideoCard";
+import { getDictionary } from "@/dictionary";
 import { getRecentlyVideos } from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";
 
@@ -21,9 +22,10 @@ const WebAppRecentlyVideos = async ({
   params: { lang: Locale };
 }) => {
   const rececentlyVideosData = await getRecentlyVideosData();
+  const dic = await getDictionary(lang);
   return (
     <div className="h-full w-full p-10 overflow-y-auto">
-      <SubSectionHeader name="Recently" />
+      <SubSectionHeader name={dic.generalApp.recently} />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 mt-8">
         {rececentlyVideosData?.data.map((items: any, index: number) => {
           return (

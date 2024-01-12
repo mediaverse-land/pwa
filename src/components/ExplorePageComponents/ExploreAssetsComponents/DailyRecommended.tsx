@@ -1,4 +1,4 @@
-import { Locale } from "@/types/dictionary-types";
+import { DicProperties, Locale } from "@/types/dictionary-types";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
 import {
   getRecentlyVideos,
@@ -34,7 +34,13 @@ const getDailyRecommendedData = async () => {
   }
 };
 
-const ExploreDailyRecommended = async ({ lang }: { lang: Locale }) => {
+const ExploreDailyRecommended = async ({
+  lang,
+  dic,
+}: {
+  lang: Locale;
+  dic: DicProperties;
+}) => {
   const data = await getDailyRecommendedData();
   return (
     <div className="flex items-stretch flex-col gap-4">
@@ -42,10 +48,12 @@ const ExploreDailyRecommended = async ({ lang }: { lang: Locale }) => {
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center space-x-1">
           <p className="text-white font-semibold lg:font-normal lg:text-sm">
-            Daily recommended
+            {dic.generalApp.dailyRecommended}
           </p>
         </div>
-        <div className="text-[14px] text-[#597AFF]">View all</div>
+        <div className="text-[14px] text-[#597AFF]">
+          {dic.generalApp.viewAll}
+        </div>
       </div>
       <div>
         <div className="overflow-x-hidden">

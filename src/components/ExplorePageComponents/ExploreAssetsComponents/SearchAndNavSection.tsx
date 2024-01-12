@@ -71,7 +71,7 @@ const ExploreSearchAndNavSection = ({
       >
         <div className="h-[40px] rounded-b-lg px-4 py-3 border border-[#353542] flex gap-8 items-center">
           <div className="outline-none grow bg-transparent text-[14px]">
-            Search
+            {dic.generalApp.search}
           </div>
           <div>
             <SEARCH_ICON fill="#666680" />
@@ -93,7 +93,11 @@ const ExploreSearchAndNavSection = ({
                   : "after:w-[0%] after:h-[0px]"
               }`}
             >
-              {activeTab === tab.name ? tab.active_icon : tab.inactive_icon}
+              {activeTab === tab.name
+                ? tab.name === "All"
+                  ? dic.appAccounts.all
+                  : tab.active_icon
+                : tab.inactive_icon}
             </div>
           </Link>
         ))}

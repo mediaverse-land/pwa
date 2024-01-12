@@ -56,7 +56,7 @@ const WebAppWallet = async ({
     <div
       className={`h-full w-full flex flex-col items-stretch justify-start gap-10 p-10`}
     >
-      <SubSectionHeader name="Wallet" />
+      <SubSectionHeader name={dic.setting.wallet} />
       {/* top section */}
       <div className="flex flex-col items-stretch gap-14">
         <div className="flex items-center gap-4 bg-[rgba(78,78,97,0.75)] rounded-lg px-4 py-3">
@@ -96,7 +96,7 @@ const WebAppWallet = async ({
                 </div>
               }
             >
-              <ConnetToStripeButton lang={params.lang} />
+              <ConnetToStripeButton lang={params.lang} dic={dic} />
             </Suspense>
           )}
           {userBalance?.status === 200 ? (

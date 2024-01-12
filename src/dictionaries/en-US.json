@@ -53,7 +53,10 @@
   "appWallet": {
     "inventory": "Inventory",
     "addInventory": "Add Inventory",
-    "notConnetToStripe": "Can not connet to Stripe at this moment. Please try again later."
+    "notConnetToStripe": "Can not connet to Stripe at this moment. Please try again later.",
+    "completeInfo": "Please complete your informatoin first:",
+    "clickHere": "Click here",
+    "connectToStripe": "Connect To Stripe"
   },
   "generalApp": {
     "viewAll": "View All",
@@ -65,7 +68,7 @@
     "logout": "Logout",
     "webApp": "Web App",
     "tag": "Tag",
-    "searchInTag": "Search in Tag",
+    "searchIn": "Search in",
     "searchInMore": "Search in More than 2.000.000 Content"
   },
   "setting": {
@@ -85,6 +88,10 @@
     "lastName": "Last Name",
     "email": "Email",
     "password": "Password",
-    "cellPhone": "Cell Phone"
+    "cellPhone": "Cell Phone",
+    "edit": "Edit",
+    "confirmLogout": "Are you sure you want to logout?",
+    "yes": "Yes",
+    "no": "No"
   }
 }

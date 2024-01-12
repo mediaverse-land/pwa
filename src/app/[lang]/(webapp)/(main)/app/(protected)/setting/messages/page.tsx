@@ -1,5 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
+import { getDictionary } from "@/dictionary";
 import { convertISOToDateAndTime } from "@/lib/convertISOToDateAndTime";
 import { getUserMessages } from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";
@@ -26,14 +27,15 @@ const WebAppSettingAllMessages = async ({
   params: { lang: Locale };
 }) => {
   const session = await getServerSession(authOptions);
+  const dic = await getDictionary(lang);
   const token = session?.user?.token || "";
   const [messagesData] = await Promise.all([getUserMessagesData(token)]);
   if (messagesData?.data.data.length === 0) {
     return (
       <div className="p-10">
-        <SubSectionHeader name="Messages" />
+        <SubSectionHeader name={dic.setting.messages} />
         <div className="text-white text-[22px] pt-20 font-semibold text-center">
-          You Have No Messages
+          {dic.setting.noMessage}
         </div>
       </div>
     );

@@ -53,8 +53,8 @@ const WebAppExploreAssets = async ({
         {/* live chanel */}
         <ExploreLiveChannel dic={dic} lang={lang} liveData={liveData} />
         {/* daily recommended */}
-        <ExploreDailyRecommended lang={lang} />
-        {/* Most viewed  */}
+        <ExploreDailyRecommended dic={dic} lang={lang} />
+        {/* Most viewed Images */}
         <ExploreMostViewd
           dic={dic}
           lang={lang}

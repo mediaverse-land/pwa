@@ -44,9 +44,13 @@ const WebAppImageAssets = async ({
           {/* header */}
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center space-x-1">
-              <p className="text-white text-sm ">Best in month</p>
+              <p className="text-white text-sm ">
+                {dic.generalApp.bestInMonth}
+              </p>
             </div>
-            <div className="text-[14px] text-[#597AFF]">View all</div>
+            <div className="text-[14px] text-[#597AFF]">
+              {dic.generalApp.viewAll}
+            </div>
           </div>
           <div>
             <div className="overflow-x-hidden">
@@ -74,13 +78,13 @@ const WebAppImageAssets = async ({
           {/* header */}
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center space-x-1">
-              <p className="text-white text-sm ">Recently</p>
+              <p className="text-white text-sm ">{dic.generalApp.recently}</p>
             </div>
             <Link
               href={`/${lang}/app/explore/recently/images`}
               className="text-[14px] text-[#597AFF]"
             >
-              View all
+              {dic.generalApp.viewAll}
             </Link>
           </div>
           <RecentlyImages lang={lang} />

@@ -63,7 +63,10 @@ export type DicProperties = {
   appWallet: {
     inventory: string;
     addInventory: string;
+    connectToStripe: string;
     notConnetToStripe: string;
+    completeInfo: string;
+    clickHere: string;
   };
   generalApp: {
     viewAll: string;
@@ -75,7 +78,7 @@ export type DicProperties = {
     logout: string;
     webApp: string;
     tag: string;
-    searchInTag: string;
+    searchIn: string;
     searchInMore: string;
   };
   setting: {
@@ -96,5 +99,9 @@ export type DicProperties = {
     password: string;
     email: string;
     cellPhone: string;
+    edit: string;
+    confirmLogout: string;
+    yes: string;
+    no: string;
   };
 };
