@@ -24,7 +24,9 @@ export async function middleware(request: NextRequest) {
   if (pathnameHasLocale) return;
   const locale = getLocale(request);
   return NextResponse.redirect(
-    `${request.nextUrl.origin}/${locale}${pathname}${request.nextUrl.search}`
+    `${request.nextUrl.origin}/${
+      locales.includes(locale || "") ? locale : locales[0]
+    }${pathname}${request.nextUrl.search}`
   );
 }
 
