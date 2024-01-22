@@ -253,7 +253,7 @@ export const getLives = async ({
   params?: string;
   lang: TFullLocales;
 }) => {
-  const url = `${URL}/lives${params}`;
+  const url = `${URL}/channels${params}`;
   return fetchInstance(url, lang);
 };
 export const getFAQ = (lang: TFullLocales) => {

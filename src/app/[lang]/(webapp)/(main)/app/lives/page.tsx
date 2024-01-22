@@ -72,7 +72,7 @@ const WebAppLiveChannelPage = async ({
         <div className="flex flex-col items-stretch h-full overflow-y-auto gap-2">
           {channels.map((item: any) => (
             <Link
-              href={`/${params.lang}/app/lives/${item.id}`}
+              href={`/${params.lang}/app/channels/${item.id}`}
               key={item.id}
               className="p-4 rounded-2xl bg-[rgba(78,78,97,0.50)] backdrop-blur-sm flex items-center"
             >
