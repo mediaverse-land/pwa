@@ -27,8 +27,17 @@ export async function generateMetadata({
   params: { lang: Locale };
 }): Promise<Metadata> {
   const privacyData = await getPrivacyData(FullLocaleNames[lang]);
+  const dic = await getDictionary(lang);
+
   return {
     description: privacyData.description,
+    title: dic.header.privacy,
+    keywords: privacyData.keywords,
+    openGraph: {
+      title: dic.header.privacy,
+      description: privacyData.description,
+      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+    },
   };
 }
 
@@ -45,7 +54,7 @@ const Privacy = async ({ params: { lang } }: { params: { lang: Locale } }) => {
           </h1>
           <article
             className="text-white max-w-full w-full prose "
-            dangerouslySetInnerHTML={{ __html: privacyData.html }}
+            dangerouslySetInnerHTML={{ __html: privacyData?.html || "" }}
           ></article>
         </div>
       </div>

@@ -73,7 +73,7 @@ const ExploreMostViewd = ({
         </div>
       </div>
       <div className="grid grid-rows-3 grid-cols-3 grid-flow-row gap-2">
-        {mostViewedImages.slice(0, 6).map((items: any, index: number) => {
+        {mostViewedImages?.slice(0, 6)?.map((items: any, index: number) => {
           return (
             <Link
               href={`/${lang}/app/assets/image/${items.name.replaceAll(

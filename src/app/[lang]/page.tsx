@@ -3,7 +3,9 @@ import BorderGradient from "@/components/BorderGradient";
 import ScrollToBottomBtn from "@/components/Buttons/ScrollToBottom";
 import Motion from "@/components/motion";
 import { getDictionary } from "@/dictionary";
+import { locales } from "@/middleware";
 import {
+  getHome,
   getLives,
   getMostViewedImages,
   getMostViewedText,
@@ -13,14 +15,38 @@ import {
   Locale,
   TFullLocales,
 } from "@/types/dictionary-types";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+const getHomeData = async (lang: Locale) => {
+  const homeDataReq = await getHome(FullLocaleNames[lang]);
+  const homeDataRes = await homeDataReq.json();
+  return homeDataRes;
+};
+
+export async function generateMetadata({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}): Promise<Metadata> {
+  const homeData = await getHomeData(lang);
+  return {
+    description: homeData.description,
+    keywords: homeData.keywords,
+    openGraph: {
+      description: homeData.description,
+      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+    },
+  };
+}
 
 async function getImageData(lang: TFullLocales) {
   const image = await getMostViewedImages(lang);
 
   if (!image.ok) {
-    throw new Error("Failed to fetch data");
+    // throw new Error("Failed to fetch data");
+    return [];
   }
   return image.json();
 }
@@ -29,7 +55,8 @@ async function getTextData(lang: TFullLocales) {
   const text = await getMostViewedText(lang);
 
   if (!text.ok) {
-    throw new Error("Failed to fetch data");
+    // throw new Error("Failed to fetch data");
+    return [];
   }
   return text.json();
 }
@@ -37,12 +64,15 @@ async function getTextData(lang: TFullLocales) {
 async function getSliderData(lang: TFullLocales) {
   const text = await getLives({ params: "", lang });
   if (!text.ok) {
-    throw new Error("Failed to fetch data");
+    // throw new Error("Failed to fetch data");
+    return [];
   }
   return text.json();
 }
 const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
-  const dic = await getDictionary(lang);
+  const dic = await getDictionary(
+    locales.find((item) => item === lang) ?? locales[0]
+  );
   const imageData = await getImageData(FullLocaleNames[lang]);
   const textData = await getTextData(FullLocaleNames[lang]);
   const liveData = await getSliderData(FullLocaleNames[lang]);
@@ -138,7 +168,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
         <div className="lg:max-w-screen-2xl mx-auto flex items-center justify-center py-4 w-[80rem]">
           <div className="relative flex overflow-x-hidden w-full animate-marquee-container">
             <div className="animate-marquee whitespace-nowrap flex flex-row w-full">
-              {liveData.map((item: any, i: number) => (
+              {liveData?.map((item: any, i: number) => (
                 <Link href={`/${lang}/app/lives/${item.id}`} key={item.id}>
                   <img
                     className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
@@ -150,7 +180,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
             </div>
 
             <div className="absolute top-0 animate-marquee2 whitespace-nowrap flex flex-row w-full ">
-              {liveData.map((item: any, i: number) => (
+              {liveData?.map((item: any, i: number) => (
                 <img
                   key={i}
                   className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
@@ -193,7 +223,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
               </p>
             </div>
             <div className="grid grid-rows-4 grid-cols-3 grid-flow-row gap-2 mt-10 grow px-6 min-w-full">
-              {imageData.slice(0, 9).map((items: any, index: number) => {
+              {imageData?.slice(0, 9)?.map((items: any, index: number) => {
                 return (
                   <Link
                     href={`/${lang}/app/assets/image/${items.name.replaceAll(
@@ -233,7 +263,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
             </div>
 
             <div className="grid grid-flow-col lg:grid-cols-3 md:grid-cols-3 gap-2 grid-rows-1 md:grid-rows-2 lg:grid-rows-2 mt-10 w-full grow overflow-x-scroll lg:overflow-visible px-4">
-              {textData.slice(0, 6).map((items: any, index: number) => {
+              {textData?.slice(0, 6)?.map((items: any, index: number) => {
                 return (
                   <BorderGradient
                     key={items.id}

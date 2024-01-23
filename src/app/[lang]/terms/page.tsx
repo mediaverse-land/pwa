@@ -29,8 +29,18 @@ export async function generateMetadata({
   params: { lang: Locale };
 }): Promise<Metadata> {
   const termsData = await getTermsData({ lang: FullLocaleNames[lang] });
+
+  const dic = await getDictionary(lang);
+
   return {
     description: termsData.description,
+    title: dic.header.terms,
+    keywords: termsData.keywords,
+    openGraph: {
+      title: dic.header.terms,
+      description: termsData.description,
+      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+    },
   };
 }
 

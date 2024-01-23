@@ -253,11 +253,19 @@ export const getLives = async ({
   params?: string;
   lang: TFullLocales;
 }) => {
-  const url = `${URL}/lives${params}`;
+  const url = `${URL}/channels${params}`;
   return fetchInstance(url, lang);
 };
 export const getFAQ = (lang: TFullLocales) => {
   const url = `${URL}/faq`;
+  return fetchInstance(url, lang);
+};
+export const getHome = (lang: TFullLocales) => {
+  const url = `${URL}/home`;
+  return fetchInstance(url, lang);
+};
+export const getAboutUs = (lang: TFullLocales) => {
+  const url = `${URL}/about-us`;
   return fetchInstance(url, lang);
 };
 export const getSearch = (params: string) => {

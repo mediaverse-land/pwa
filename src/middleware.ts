@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
-let locales = ["en", "fr", "de"];
+import { Locale } from "./types/dictionary-types";
+export let locales: Locale[] = ["en", "fr", "de"];
 
 // Get the preferred locale, similar to the above or using a library
 function getLocale(request: NextRequest) {
@@ -25,27 +26,12 @@ export async function middleware(request: NextRequest) {
   const locale = getLocale(request);
   return NextResponse.redirect(
     `${request.nextUrl.origin}/${
-      locales.includes(locale || "") ? locale : locales[0]
+      locales.find((item) => item === locale) ? locale : locales[0]
     }${pathname}${request.nextUrl.search}`
   );
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    {
-      source: "/((?!api|_next/static|_next/image|favicon.ico|icons|images).*)",
-      // missing: [
-      //   { type: "header", key: "next-router-prefetch" },
-      //   { type: "header", key: "purpose", value: "prefetch" },
-      // ],
-    },
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|icons|images|favicon.ico).*)"],
 };

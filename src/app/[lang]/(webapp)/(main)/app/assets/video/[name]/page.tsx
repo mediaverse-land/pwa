@@ -8,6 +8,8 @@ import BackButton from "@/components/shared/BackButton";
 import { VideoType } from "@/data";
 import { DeleteUserSession } from "@/lib/test";
 import { getComments, getSingleVideo } from "@/services/contactService";
+import { FullLocaleNames, Locale } from "@/types/dictionary-types";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 
@@ -50,6 +52,26 @@ const getCommentsData = async ({
     console.error(error);
   }
 };
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: { id: string };
+}): Promise<Metadata> {
+  const assetID = searchParams.id || "0";
+  const singleVideoData = await getSingleVideoData({ id: assetID, token: "" });
+
+  return {
+    title: singleVideoData?.data.name,
+    description: singleVideoData?.data.description,
+    openGraph: {
+      title: singleVideoData?.data.name,
+      description: singleVideoData?.data.description,
+      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+    },
+  };
+}
+
 const WebAppSingleVideoAsset = async (params: any) => {
   const assetID = params.searchParams.id || "0";
   const session = await getServerSession(authOptions);

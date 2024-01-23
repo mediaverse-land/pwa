@@ -31,7 +31,7 @@ const ExploreTopTexts = ({
         <div className="overflow-x-hidden">
           <div className="flex gap-4 overflow-x-auto">
             {/* card */}
-            {topTextsData.slice(0, 10).map((item) => (
+            {topTextsData?.slice(0, 10)?.map((item) => (
               <div key={item.id} className="min-w-[190px] max-w-[190px]">
                 <ExploreTextCard lang={lang} data={item} />
               </div>

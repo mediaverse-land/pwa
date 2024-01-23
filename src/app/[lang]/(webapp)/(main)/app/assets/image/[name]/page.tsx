@@ -5,6 +5,7 @@ import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponen
 import { PICTURE_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
 import { getSingleImage } from "@/services/contactService";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 
@@ -25,6 +26,25 @@ const getSingleImageData = async ({
     console.error(error);
   }
 };
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: { id: string };
+}): Promise<Metadata> {
+  const assetID = searchParams.id || "0";
+  const singleImageData = await getSingleImageData({ id: assetID, token: "" });
+
+  return {
+    title: singleImageData?.data.name,
+    description: singleImageData?.data.description,
+    openGraph: {
+      title: singleImageData?.data.name,
+      description: singleImageData?.data.description,
+      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+    },
+  };
+}
 
 const ImageSinglePage = async (params: any) => {
   // console.log(params);

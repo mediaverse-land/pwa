@@ -38,7 +38,7 @@ export const ExploreLiveChannel = ({
       <div className="">
         <div className="flex w-full">
           <div className="flex w-full overflow-x-auto items-center">
-            {liveData.map((item: any, i: number) => (
+            {liveData?.map((item: any, i: number) => (
               <Link
                 href={`/${lang}/app/lives/${item.id}`}
                 key={i}

@@ -8,6 +8,7 @@ import { z } from "zod";
 import { BACK_ICON, CHEVRON_LEFT, SEARCH_ICON } from "../SVG/svgs";
 import { motion } from "framer-motion";
 import { DicProperties } from "@/types/dictionary-types";
+import Link from "next/link";
 
 const formSchema = z.object({
   q: z.string().min(1),
@@ -45,15 +46,9 @@ const WebAppSearchForm = ({ dic }: { dic: DicProperties }) => {
     >
       {/* search input and back icon */}
       <div className="flex items-center justify-between gap-6">
-        <div
-          onClick={(e) => {
-            e.preventDefault();
-            router.back();
-          }}
-          className="cursor-pointer"
-        >
+        <Link href={`/${params.lang}/app/explore`} className="cursor-pointer">
           <BACK_ICON fill="#666680" />
-        </div>
+        </Link>
         <div className="bg-[rgba(14,14,18,0.50)] border border-[#353542] rounded-lg px-4 py-3 flex items-center justify-between grow">
           <input
             type="text"

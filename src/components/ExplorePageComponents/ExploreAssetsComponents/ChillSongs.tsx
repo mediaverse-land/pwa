@@ -40,7 +40,7 @@ const ExploreChillSongs = async ({
       <div>
         <div className="overflow-x-hidden">
           <div className="flex items-stretch gap-4 overflow-x-auto">
-            {chillSongs.slice(0, 10).map((item: any) => (
+            {chillSongs?.slice(0, 10)?.map((item: any) => (
               <ExploreAssetsCard
                 lang={lang}
                 key={item.id}

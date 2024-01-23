@@ -14,6 +14,7 @@ import {
   TEXT_ICON,
   VIDEO_ICON,
 } from "@/components/SVG/svgs";
+import BackButton from "@/components/shared/BackButton";
 import { getDictionary } from "@/dictionary";
 import { Locale } from "@/types/dictionary-types";
 import Link from "next/link";
@@ -112,9 +113,7 @@ const SearchSectionResultFrom = async ({
         {/* input section */}
         <div className="flex items-center h-[40px]">
           <div className="mr-6">
-            <Link href={`/${params.lang}/app/explore/search-form`}>
-              <BACK_ICON fill="#666680" />
-            </Link>
+            <BackButton fill="#597AFF" />
           </div>
           <div className="bg-[rgba(14,14,18,0.20)] h-full border border-[#353542] rounded-lg px-4 py-3 flex items-center justify-between grow mr-4">
             <SecondSearchForm searchParams={searchParams} />

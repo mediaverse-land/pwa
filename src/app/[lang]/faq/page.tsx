@@ -7,6 +7,7 @@ import {
   Locale,
   TFullLocales,
 } from "@/types/dictionary-types";
+import { Metadata } from "next";
 import React from "react";
 
 async function getFAQData(lang: TFullLocales) {
@@ -18,6 +19,25 @@ async function getFAQData(lang: TFullLocales) {
     });
   }
   return faq.json();
+}
+
+export async function generateMetadata({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}): Promise<Metadata> {
+  const faqData = await getFAQData(FullLocaleNames[lang]);
+  console.log(faqData);
+  const dic = await getDictionary(lang);
+  return {
+    // keywords: faqData.keywords,
+    title: dic.header.faq,
+    // description: faqData.description,
+    openGraph: {
+      title: dic.header.faq,
+      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+    },
+  };
 }
 
 const Faq = async ({ params: { lang } }: { params: { lang: Locale } }) => {

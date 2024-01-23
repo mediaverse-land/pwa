@@ -5,6 +5,8 @@ import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponen
 import { TEXT_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
 import { getSingleText } from "@/services/contactService";
+import { Locale } from "@/types/dictionary-types";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 
@@ -25,6 +27,25 @@ const getSingleTextData = async ({
     console.error(error);
   }
 };
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: { id: string };
+}): Promise<Metadata> {
+  const assetID = searchParams.id || "0";
+  const singleTextData = await getSingleTextData({ id: assetID, token: "" });
+
+  return {
+    title: singleTextData?.data.name,
+    description: singleTextData?.data.description,
+    openGraph: {
+      title: singleTextData?.data.name,
+      description: singleTextData?.data.description,
+      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+    },
+  };
+}
 
 const WebAppTextAssetSinglePage = async (params: any) => {
   const assetID = params.searchParams.id || "0";

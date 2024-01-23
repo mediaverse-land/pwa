@@ -5,6 +5,7 @@ import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponen
 import { AUDIO_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
 import { getSingleAudio } from "@/services/contactService";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 
@@ -25,6 +26,25 @@ const getSingleAudioData = async ({
     console.error(error);
   }
 };
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: { id: string };
+}): Promise<Metadata> {
+  const assetID = searchParams.id || "0";
+  const singleAudioData = await getSingleAudioData({ id: assetID, token: "" });
+
+  return {
+    title: singleAudioData?.data.name,
+    description: singleAudioData?.data.description,
+    openGraph: {
+      title: singleAudioData?.data.name,
+      description: singleAudioData?.data.description,
+      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+    },
+  };
+}
 
 const WebAppAudioAssetSinglePage = async (params: any) => {
   const assetID = params.searchParams.id || "0";
