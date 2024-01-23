@@ -55,7 +55,7 @@ const WebAppImageAssets = async ({
           <div>
             <div className="overflow-x-hidden">
               <div className="flex items-stretch gap-4 overflow-x-auto">
-                {mostViewedImages.slice(0, 10).map((item: any) => (
+                {mostViewedImages?.slice(0, 10)?.map((item: any) => (
                   <ExploreAssetsCard
                     lang={lang}
                     key={item.id}
@@ -99,7 +99,7 @@ const RecentlyImages = async ({ lang }: { lang: Locale }) => {
   const data = await getRecentlyImagesData();
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2">
-      {data.map((items: any, index: number) => {
+      {data?.map((items: any, index: number) => {
         return (
           <Link
             href={`/${lang}/app/assets/image/${items.name.replaceAll(

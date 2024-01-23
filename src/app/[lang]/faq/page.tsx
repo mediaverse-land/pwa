@@ -27,7 +27,6 @@ export async function generateMetadata({
   params: { lang: Locale };
 }): Promise<Metadata> {
   const faqData = await getFAQData(FullLocaleNames[lang]);
-  console.log(faqData);
   const dic = await getDictionary(lang);
   return {
     // keywords: faqData.keywords,
@@ -43,7 +42,7 @@ export async function generateMetadata({
 const Faq = async ({ params: { lang } }: { params: { lang: Locale } }) => {
   const dic = await getDictionary(lang);
   const faqData = await getFAQData(FullLocaleNames[lang]);
-  // console.log(faqData);
+
   return (
     <Motion>
       <div className="w-full max-w-screen-xl mx-auto flex mt-28 lg:mt-36 pb-16 justify-center px-8 lg:px-4 min-h-[75vh]">

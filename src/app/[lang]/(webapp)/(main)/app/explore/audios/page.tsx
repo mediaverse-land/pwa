@@ -92,7 +92,7 @@ const WebAppExploreAudioAssets = async ({
           <div>
             <div className="overflow-x-hidden">
               <div className="flex items-stretch gap-4 overflow-x-auto [&_>_*]:w-[200px]">
-                {mostViewedSongs.slice(0, 10).map((item: any) => (
+                {mostViewedSongs?.slice(0, 10)?.map((item: any) => (
                   <ExploreAssetsCard
                     lang={lang}
                     id={item.id}
