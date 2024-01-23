@@ -13,11 +13,11 @@ import { getHome } from "@/services/contactService";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export async function generateStaticParams() {
-  return locales.map((locale) => ({
-    lang: locale,
-  }));
-}
+// export async function generateStaticParams() {
+//   return locales.map((locale) => ({
+//     lang: locale,
+//   }));
+// }
 
 const getHomeData = async (lang: Locale) => {
   const homeDataReq = await getHome(FullLocaleNames[lang]);
