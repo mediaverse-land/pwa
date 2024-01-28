@@ -9,6 +9,7 @@ import {
   TwitterShareButton,
   WhatsappIcon,
   WhatsappShareButton,
+  XIcon,
 } from "react-share";
 
 const ShareButton = ({ url }: { url: string }) => {
@@ -34,7 +35,7 @@ const ShareButton = ({ url }: { url: string }) => {
         />
       </FacebookShareButton>
       <TwitterShareButton url={url}>
-        <TwitterIcon
+        <XIcon
           round
           pathLength={100}
           bgStyle={{
