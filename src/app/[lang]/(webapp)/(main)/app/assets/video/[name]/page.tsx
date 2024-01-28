@@ -5,6 +5,7 @@ import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponen
 import HLSPlayer from "@/components/ExplorePageComponents/shared/HLSPlayer";
 import { PLAY, VIDEO_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
+import ShareButton from "@/components/shared/ShareButton";
 import { VideoType } from "@/data";
 import { DeleteUserSession } from "@/lib/test";
 import { getComments, getSingleVideo } from "@/services/contactService";
@@ -186,6 +187,17 @@ const WebAppSingleVideoAsset = async (params: any) => {
             </div>
           </div>
         ) : null} */}
+        {/* share links */}
+        <div className="">
+          <ShareButton
+            url={`${process.env.NEXTAUTH_URL}/${
+              params.params.lang
+            }/app/assets/video/${singleVideoData?.data.name.replaceAll(
+              " ",
+              "-"
+            )}?id=${singleVideoData?.data.id}`}
+          />
+        </div>
         {/* comment */}
         <SingleAssetComments
           assetID={singleVideoData?.data?.asset_id}

@@ -4,6 +4,7 @@ import SingleAssetComments from "@/components/ExplorePageComponents/SingleAssetP
 import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponents/SingleAssetPages/shared/TitleAndDescription";
 import { TEXT_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
+import ShareButton from "@/components/shared/ShareButton";
 import { getSingleText } from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";
 import { Metadata } from "next";
@@ -122,6 +123,17 @@ const WebAppTextAssetSinglePage = async (params: any) => {
               </div>
             </div>
           ) : null} */}
+        {/* share links */}
+        <div className="">
+          <ShareButton
+            url={`${process.env.NEXTAUTH_URL}/${
+              params.params.lang
+            }/app/assets/text/${singleTextData?.data.name.replaceAll(
+              " ",
+              "-"
+            )}?id=${singleTextData?.data.id}`}
+          />
+        </div>
         {/* comment */}
         <SingleAssetComments
           assetID={singleTextData?.data?.asset_id}

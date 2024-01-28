@@ -4,6 +4,7 @@ import SingleAssetComments from "@/components/ExplorePageComponents/SingleAssetP
 import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponents/SingleAssetPages/shared/TitleAndDescription";
 import { AUDIO_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
+import ShareButton from "@/components/shared/ShareButton";
 import { getSingleAudio } from "@/services/contactService";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
@@ -157,6 +158,17 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
               </div>
             </div>
           ) : null} */}
+        {/* share links */}
+        <div className="">
+          <ShareButton
+            url={`${process.env.NEXTAUTH_URL}/${
+              params.params.lang
+            }/app/assets/audio/${singleAudioData?.data.name.replaceAll(
+              " ",
+              "-"
+            )}?id=${singleAudioData?.data.id}`}
+          />
+        </div>
         {/* comment */}
         <SingleAssetComments
           assetID={singleAudioData?.data?.asset_id}

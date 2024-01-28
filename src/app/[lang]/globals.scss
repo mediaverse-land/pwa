@@ -156,6 +156,18 @@ $animationSpeed: 7s;
   }
 }
 
+.animate-container {
+  .phone-animate-1 {
+    transform: rotate(0deg);
+    transition: 0.5s;
+  }
+
+  .phone-animate-2 {
+    transform: rotate(0deg);
+    transition: 0.5s;
+  }
+}
+
 .animate-container:hover {
   .phone-animate-1 {
     animation: none;

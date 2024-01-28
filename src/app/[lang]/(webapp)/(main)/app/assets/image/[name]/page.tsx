@@ -4,10 +4,13 @@ import SingleAssetComments from "@/components/ExplorePageComponents/SingleAssetP
 import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponents/SingleAssetPages/shared/TitleAndDescription";
 import { PICTURE_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
+import ShareButton from "@/components/shared/ShareButton";
 import { getSingleImage } from "@/services/contactService";
+import { Locale } from "@/types/dictionary-types";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
+import { WhatsappShareButton } from "react-share";
 
 const getSingleImageData = async ({
   id,
@@ -75,7 +78,7 @@ const ImageSinglePage = async (params: any) => {
         <div className="relative w-full h-full overflow-hidden z-10">
           <Image
             className="object-cover"
-            src={`${singleImageData?.data?.asset.thumbnails["523x304"]}`}
+            src={`${singleImageData?.data?.asset.thumbnails["523x304"] || "/"}`}
             alt=""
             fill
           />
@@ -117,6 +120,17 @@ const ImageSinglePage = async (params: any) => {
             </div>
           ) : null} */}
         {/* comment */}
+        {/* share links */}
+        <div className="">
+          <ShareButton
+            url={`${process.env.NEXTAUTH_URL}/${
+              params.params.lang
+            }/app/assets/image/${singleImageData?.data.name.replaceAll(
+              " ",
+              "-"
+            )}?id=${singleImageData?.data.id}`}
+          />
+        </div>
         <SingleAssetComments
           assetID={singleImageData?.data?.asset_id}
           userImage={session?.user?.image}
