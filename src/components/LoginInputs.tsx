@@ -5,16 +5,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import z from "zod";
 import { SPINNER } from "./SVG/svgs";
 import { useSearchParams } from "next/navigation";
 import { convertSecondsForTimer } from "@/lib/convertSecondToTimer";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+
 const loginWithPhoneSchema = z.object({
-  cellphone: z
-    .string()
-    .min(1, { message: "*This field is required" })
-    .regex(/^\d+$/, "*Please Enter Valid Numbers"),
+  cellphone: z.string().min(1, { message: "*This field is required" }),
 });
 const loginWithUsernameSchema = z.object({
   username: z.string().min(1, { message: "*This field is required" }),
@@ -36,6 +36,8 @@ const LoginWithPhone = () => {
   const {
     register,
     formState: { errors },
+    getValues,
+    control,
     handleSubmit,
   } = useForm({
     resolver: zodResolver(loginWithPhoneSchema),
@@ -60,7 +62,7 @@ const LoginWithPhone = () => {
     });
     if (!isCodeExist) {
       const request = await requestOTP({
-        cellphone: phone,
+        cellphone: data.cellphone,
         captcha: "mxmx",
       }).finally(() => setIsLoading(false));
       const response = await request.json();
@@ -86,7 +88,7 @@ const LoginWithPhone = () => {
       const res = await fetch(`${URL}/auth/otp/submit`, {
         method: "POST",
         body: JSON.stringify({
-          cellphone: phone,
+          cellphone: data.cellphone,
           otp: code,
         }),
         headers: {
@@ -121,7 +123,7 @@ const LoginWithPhone = () => {
 
   const handleSendCodeAgain = async () => {
     const request = await requestOTP({
-      cellphone: phone,
+      cellphone: getValues("cellphone"),
       captcha: "mxmx",
     }).finally(() => setIsLoading(false));
     const response = await request.json();
@@ -150,24 +152,18 @@ const LoginWithPhone = () => {
               background: `rgba(14, 14, 18, 0.50)`,
             }}
           >
-            <div className="flex items-center justify-between gap-2">
-              <div className="relative w-[1.4rem] h-[1rem]">
-                <Image src={"/images/france-flag.png"} alt="flage" fill />
-              </div>
-              <span className="">+33</span>
-            </div>
-            <div className="h-full w-[1px] bg-white"></div>
-            <input
-              className="bg-transparent grow placeholder:text-[#353542] outline-none"
-              placeholder="your number..."
-              type="tel"
-              disabled={isCodeExist}
-              {...register("cellphone", {
-                value: phone,
-                onChange(event) {
-                  setPhone(event.target.value);
-                },
-              })}
+            <Controller
+              name="cellphone"
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <PhoneInput
+                  placeholder="Enter phone number"
+                  defaultCountry="FR"
+                  addInternationalOption={false}
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
             />
           </div>
           <p className="mt-2 text-red-400 text-[12px] text-start">

@@ -6,7 +6,6 @@ import {
   INACTIVE_SETTING,
 } from "@/components/SVG/svgs";
 import { DicProperties, Locale } from "@/types/dictionary-types";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
@@ -14,7 +13,7 @@ const WebAppSideBarBottomSection = ({ dic }: { dic: DicProperties }) => {
   const pathname = usePathname();
   const params = useParams();
   const lang = params.lang as Locale;
-  const activeSection = pathname.split("/")[2];
+  const activeSection = pathname.split("/")[3];
 
   return (
     <div className="flex flex-col items-stretch gap-6">

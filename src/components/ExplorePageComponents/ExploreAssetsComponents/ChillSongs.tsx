@@ -3,6 +3,7 @@ import ExploreAssetsCard from "../shared/AllAssetsCard";
 import { AUDIO_ICON } from "@/components/SVG/svgs";
 import { getRecentlySongs } from "@/services/contactService";
 import { DicProperties, Locale } from "@/types/dictionary-types";
+import ExploreChillSongsSlider from "@/components/shared/ExploreChillSongsSldier";
 
 const getChillSongs = async () => {
   try {
@@ -40,20 +41,22 @@ const ExploreChillSongs = async ({
       <div>
         <div className="overflow-x-hidden">
           <div className="flex items-stretch gap-4 overflow-x-auto">
-            {chillSongs?.slice(0, 10)?.map((item: any) => (
-              <ExploreAssetsCard
-                lang={lang}
-                key={item.id}
-                id={item.id}
-                type="audio"
-                cover={item.asset.thumbnails["336x366"]}
-                title={item.name}
-                author={{
-                  name: item.asset.user.username,
-                  picture: item.asset.user.image_url,
-                }}
-              />
-            ))}
+            <ExploreChillSongsSlider
+              data={chillSongs?.slice(0, 10)?.map((item: any) => (
+                <ExploreAssetsCard
+                  lang={lang}
+                  key={item.id}
+                  id={item.id}
+                  type="audio"
+                  cover={item.asset.thumbnails["336x366"]}
+                  title={item.name}
+                  author={{
+                    name: item.asset.user.username,
+                    picture: item.asset.user.image_url,
+                  }}
+                />
+              ))}
+            />
           </div>
         </div>
       </div>

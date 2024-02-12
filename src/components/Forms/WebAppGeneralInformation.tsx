@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { set, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -55,6 +55,7 @@ const schema = z.object({
 });
 const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
   const session = useSession();
+  const params = useParams();
   const [loading, setLoading] = useState(true);
   const [serverErrors, setServerErrors] = useState("");
   const token = session.data?.user.token || "";
@@ -98,7 +99,7 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
             });
             setLoading(false);
           } else if (req.status === 406) {
-            router.push("/sign-up/info");
+            router.push(`/${params.lang}/sign-up/info`);
           }
         } catch (error) {
           console.error(error);
@@ -127,7 +128,7 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
     setServerErrors("");
     setMessage("");
     const res = await putUserProfileData({ data, token });
-    // console.log(res, "edit info");
+    console.log(res, "edit info");
     if (res?.status === 200) {
       // revalidatePath("/explore?section=wallet");
 

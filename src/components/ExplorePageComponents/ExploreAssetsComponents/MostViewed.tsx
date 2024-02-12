@@ -3,51 +3,6 @@ import { DicProperties, Locale } from "@/types/dictionary-types";
 import Image from "next/image";
 import Link from "next/link";
 
-// const imageData = [
-//   {
-//     asset: {
-//       thumbnails: {
-//         "336x366": "/images/car.png",
-//       },
-//     },
-//   },
-//   {
-//     asset: {
-//       thumbnails: {
-//         "336x366": "/images/car.png",
-//       },
-//     },
-//   },
-//   {
-//     asset: {
-//       thumbnails: {
-//         "336x366": "/images/car.png",
-//       },
-//     },
-//   },
-//   {
-//     asset: {
-//       thumbnails: {
-//         "336x366": "/images/car.png",
-//       },
-//     },
-//   },
-//   {
-//     asset: {
-//       thumbnails: {
-//         "336x366": "/images/car.png",
-//       },
-//     },
-//   },
-//   {
-//     asset: {
-//       thumbnails: {
-//         "336x366": "/images/car.png",
-//       },
-//     },
-//   },
-// ];
-
 const ExploreMostViewd = ({
   mostViewedImages,
   dic,
@@ -57,7 +12,6 @@ const ExploreMostViewd = ({
   dic: DicProperties;
   lang: Locale;
 }) => {
-  // console.log(mostViewedImages);
   return (
     <div className="flex items-stretch flex-col gap-4">
       {/* header */}

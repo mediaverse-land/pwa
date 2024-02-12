@@ -1,5 +1,7 @@
 import { socialMediaLinks } from "@/types";
 
+export const webAppDeepLink = "mediaverse://media.verse";
+
 export const navbar: {
   title: "home" | "blog" | "terms" | "privacy" | "api" | "faq" | "about";
   href: string;
@@ -98,4 +100,10 @@ export const AssetCommentStatus = {
   1: "Confirm Requested",
   2: "Accepted",
   3: "Rejected",
+};
+
+export const ChannelTypes = {
+  1: "Image",
+  2: "Sound",
+  3: "Text",
 };

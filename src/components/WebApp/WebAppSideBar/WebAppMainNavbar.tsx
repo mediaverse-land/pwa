@@ -80,7 +80,7 @@ const WebAppMainNavbar = ({ dic }: { dic: DicProperties }) => {
   const pathname = usePathname();
   const params = useParams();
   const lang = params.lang as Locale;
-  const activeSection = pathname.split("/")[2];
+  const activeSection = pathname.split("/")[3];
   const session = useSession();
   return (
     <nav>

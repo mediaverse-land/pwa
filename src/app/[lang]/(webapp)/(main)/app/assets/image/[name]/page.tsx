@@ -6,11 +6,9 @@ import { PICTURE_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
 import ShareButton from "@/components/shared/ShareButton";
 import { getSingleImage } from "@/services/contactService";
-import { Locale } from "@/types/dictionary-types";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
-import { WhatsappShareButton } from "react-share";
 
 const getSingleImageData = async ({
   id,
@@ -55,6 +53,7 @@ const ImageSinglePage = async (params: any) => {
   const session = await getServerSession(authOptions);
   const token = session?.user?.token || "";
   const singleImageData = await getSingleImageData({ id: assetID, token });
+  // console.log(singleImageData?.data);
 
   if (singleImageData?.data?.status === 404) {
     return (
@@ -78,7 +77,11 @@ const ImageSinglePage = async (params: any) => {
         <div className="relative w-full h-full overflow-hidden z-10">
           <Image
             className="object-cover"
-            src={`${singleImageData?.data?.asset.thumbnails["523x304"] || "/"}`}
+            src={`${
+              singleImageData?.data?.asset?.file
+                ? singleImageData?.data.asset.file?.url || "/"
+                : singleImageData?.data?.asset.thumbnails["523x304"] || "/"
+            }`}
             alt=""
             fill
           />

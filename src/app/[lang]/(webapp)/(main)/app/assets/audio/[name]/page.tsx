@@ -5,10 +5,12 @@ import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponen
 import { AUDIO_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
 import ShareButton from "@/components/shared/ShareButton";
+import { webAppDeepLink } from "@/data";
 import { getSingleAudio } from "@/services/contactService";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
+import Link from "next/link";
 
 const getSingleAudioData = async ({
   id,
@@ -159,7 +161,7 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
             </div>
           ) : null} */}
         {/* share links */}
-        <div className="">
+        <div className="flex justify-between items-center">
           <ShareButton
             url={`${process.env.NEXTAUTH_URL}/${
               params.params.lang
@@ -168,6 +170,15 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
               "-"
             )}?id=${singleAudioData?.data.id}`}
           />
+          <div className="lg:hidden">
+            <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
+              <Link
+                href={`${webAppDeepLink}/page=single&type=${singleAudioData?.data.asset.type}&id=${singleAudioData?.data.id}`}
+              >
+                View in App
+              </Link>
+            </button>
+          </div>
         </div>
         {/* comment */}
         <SingleAssetComments

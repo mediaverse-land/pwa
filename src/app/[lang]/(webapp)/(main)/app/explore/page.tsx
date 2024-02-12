@@ -15,6 +15,7 @@ import {
   TFullLocales,
 } from "@/types/dictionary-types";
 import { getDictionary } from "@/dictionary";
+import ExploreTextCard from "@/components/ExplorePageComponents/shared/TextCard";
 
 const getLiveData = async (lang: TFullLocales) => {
   const liveData = await getLives({ params: "", lang });
@@ -46,6 +47,7 @@ const WebAppExploreAssets = async ({
   ]);
   const topTextsData = await getTopTextsData(FullLocaleNames[lang]);
   const dic = await getDictionary(lang);
+
   return (
     <div className="h-full overflow-y-auto">
       <ExploreSearchAndNavSection dic={dic} lang={lang} activeTab={"All"} />
@@ -61,7 +63,15 @@ const WebAppExploreAssets = async ({
           mostViewedImages={mostViewedImages}
         />
         {/* Top 10 texts */}
-        <ExploreTopTexts dic={dic} lang={lang} topTextsData={topTextsData} />
+        <ExploreTopTexts
+          dic={dic}
+          lang={lang}
+          topTextsData={topTextsData?.slice(0, 10)?.map((item: any) => (
+            <div key={item.id} className="min-w-[190px] max-w-[190px]">
+              <ExploreTextCard lang={lang} data={item} />
+            </div>
+          ))}
+        />
         {/* Chill songs */}
         <ExploreChillSongs dic={dic} lang={lang} />
       </div>

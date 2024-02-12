@@ -23,8 +23,10 @@ const ConnetToStripeButton = async ({
   dic: DicProperties;
 }) => {
   const session = await getServerSession(authOptions);
-  // check to see user info is complete or not
-  if (!session?.user.name || !session.user.email) {
+  const token = session?.user.token || "";
+  const stripe = await connectToStripe(token);
+  // console.log(stripe?.data);
+  if (stripe?.status === 406) {
     return (
       <div className="w-full text-center bg-[#666680] rounded-xl py-2 space-x-2 px-4">
         <span className="text-white">{dic.appWallet.completeInfo}</span>
@@ -37,9 +39,6 @@ const ConnetToStripeButton = async ({
       </div>
     );
   }
-  const token = session?.user.token || "";
-  const stripe = await connectToStripe(token);
-  //   console.log(stripe, "stripe");
   return stripe?.status === 200 ? (
     <Link
       href={`${stripe?.data.url}`}

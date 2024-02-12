@@ -51,7 +51,7 @@ const WebAppWallet = async ({
     getUserBalacneData(token),
     getUserData(token),
   ]);
-  // console.log(userBalance, "userBalance");
+  // console.log(userBalance?.data, "userBalance");
   return (
     <div
       className={`h-full w-full flex flex-col items-stretch justify-start gap-10 p-10`}
@@ -64,14 +64,14 @@ const WebAppWallet = async ({
             {dic.appWallet.inventory}
           </div>
           <div className="w-[1px] h-full bg-[#83839C]"></div>
-          <div className="grow line-clamp-1 font-bold text-[18px] text-white">
+          <div className="grow line-clamp-1 font-bold text-[18px] text-white flex items-center">
             {userBalance?.status === 200
               ? `${(userBalance?.data.available[0].amount / 100).toFixed(
                   2
                 )} ${getCurrencySymbol(
-                  `${userBalance?.data.available[0].currency || "usd"}`
+                  `${userBalance?.data.available[0].currency || "eur"}`
                 )}`
-              : "------ €"}
+              : "---- €"}
           </div>
           {/* {userBalance?.status === 200 ? (
             <Link

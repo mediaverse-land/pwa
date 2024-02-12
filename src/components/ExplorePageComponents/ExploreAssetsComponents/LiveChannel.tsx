@@ -1,7 +1,8 @@
-import { getLives } from "@/services/contactService";
+"use client";
 import { DicProperties, Locale } from "@/types/dictionary-types";
 import Image from "next/image";
 import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export const ExploreLiveChannel = ({
   liveData,
@@ -29,7 +30,7 @@ export const ExploreLiveChannel = ({
           </p>
         </div>
         <Link
-          href={`/${lang}/app/lives`}
+          href={`/${lang}/app/channels`}
           className="text-[14px] text-[#597AFF]"
         >
           {dic.generalApp.viewAll}
@@ -37,16 +38,19 @@ export const ExploreLiveChannel = ({
       </div>
       <div className="">
         <div className="flex w-full">
-          <div className="flex w-full overflow-x-auto items-center">
-            {liveData?.map((item: any, i: number) => (
-              <Link
-                href={`/${lang}/app/lives/${item.id}`}
-                key={i}
-                className="relative rounded-[8px] min-w-[110px] lg:min-w-[190px] lg:w-[190px] lg:h-[125px] min-h-[72px] lg:min-h-[190px] mr-[8px] overflow-hidden"
-              >
-                <Image className="" src={item.thumbnail} alt="" fill />
-              </Link>
-            ))}
+          <div className="w-full">
+            <Swiper slidesPerView={3.5} spaceBetween={8}>
+              {liveData?.map((item: any, i: number) => (
+                <SwiperSlide key={item.id}>
+                  <Link
+                    href={`/${lang}/app/channels/${item.id}`}
+                    className="relative rounded-[8px] w-full aspect-[110/70] xl:aspect-[110/80] mr-[8px] overflow-hidden inline-block"
+                  >
+                    <Image className="" src={item.thumbnail} alt="" fill />
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       </div>

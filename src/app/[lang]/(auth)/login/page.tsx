@@ -1,13 +1,11 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import AppleBtn from "@/components/Buttons/SocialLoginBtn";
-import Motion from "@/components/motion";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
 import SocialLoginBtn from "@/components/Buttons/SocialLoginBtn";
 import { LoginWithPhone, LoginWithUsername } from "@/components/LoginInputs";
+import Motion from "@/components/motion";
 import { Locale } from "@/types/dictionary-types";
+import { getServerSession } from "next-auth";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const Login = async ({
   searchParams,

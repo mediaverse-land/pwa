@@ -1,8 +1,9 @@
-import BorderGradient from "@/components/BorderGradient";
+"use client";
+
 import { TEXT_ICON } from "@/components/SVG/svgs";
-import Image from "next/image";
-import ExploreTextCard from "../shared/TextCard";
 import { DicProperties, Locale } from "@/types/dictionary-types";
+import ExploreTextCard from "../shared/TextCard";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const ExploreTopTexts = ({
   topTextsData,
@@ -30,12 +31,26 @@ const ExploreTopTexts = ({
       <div>
         <div className="overflow-x-hidden">
           <div className="flex gap-4 overflow-x-auto">
-            {/* card */}
-            {topTextsData?.slice(0, 10)?.map((item) => (
-              <div key={item.id} className="min-w-[190px] max-w-[190px]">
-                <ExploreTextCard lang={lang} data={item} />
-              </div>
-            ))}
+            <Swiper
+              slidesPerView={1.9}
+              spaceBetween={8}
+              breakpoints={{
+                "500": {
+                  slidesPerView: 2.5,
+                  spaceBetween: 8,
+                },
+                "570": {
+                  slidesPerView: 2.7,
+                },
+                "1200": {
+                  slidesPerView: 3.5,
+                },
+              }}
+            >
+              {topTextsData?.map((item, inded) => (
+                <SwiperSlide key={inded}>{item}</SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       </div>

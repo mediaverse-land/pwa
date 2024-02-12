@@ -169,7 +169,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
           <div className="relative flex overflow-x-hidden w-full animate-marquee-container">
             <div className="animate-marquee whitespace-nowrap flex flex-row w-full">
               {liveData?.map((item: any, i: number) => (
-                <Link href={`/${lang}/app/lives/${item.id}`} key={item.id}>
+                <Link href={`/${lang}/app/channels/${item.id}`} key={item.id}>
                   <img
                     className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
                     src={item.thumbnail}

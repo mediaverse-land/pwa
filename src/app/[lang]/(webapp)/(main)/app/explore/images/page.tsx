@@ -1,17 +1,18 @@
-import Image from "next/image";
-import Link from "next/link";
+import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
+import ExploreAssetsCard from "@/components/ExplorePageComponents/shared/AllAssetsCard";
+import ShowAssetSlider from "@/components/shared/DailyRecommendedSlider";
+import { getDictionary } from "@/dictionary";
 import {
   getMostViewedImages,
   getRecentlyImages,
 } from "@/services/contactService";
-import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
-import ExploreAssetsCard from "@/components/ExplorePageComponents/shared/AllAssetsCard";
 import {
   FullLocaleNames,
   Locale,
   TFullLocales,
 } from "@/types/dictionary-types";
-import { getDictionary } from "@/dictionary";
+import Image from "next/image";
+import Link from "next/link";
 
 const getMostViewedImagesData = async (lang: TFullLocales) => {
   const liveData = await getMostViewedImages(lang);
@@ -55,20 +56,22 @@ const WebAppImageAssets = async ({
           <div>
             <div className="overflow-x-hidden">
               <div className="flex items-stretch gap-4 overflow-x-auto">
-                {mostViewedImages?.slice(0, 10)?.map((item: any) => (
-                  <ExploreAssetsCard
-                    lang={lang}
-                    key={item.id}
-                    id={item.id}
-                    type="image"
-                    cover={item.asset.thumbnails["336x366"]}
-                    title={item.name}
-                    author={{
-                      name: item.asset.user.username,
-                      picture: item.asset.user.image_url,
-                    }}
-                  />
-                ))}
+                <ShowAssetSlider
+                  data={mostViewedImages?.slice(0, 10)?.map((item: any) => (
+                    <ExploreAssetsCard
+                      lang={lang}
+                      key={item.id}
+                      id={item.id}
+                      type="image"
+                      cover={item.asset.thumbnails["336x366"]}
+                      title={item.name}
+                      author={{
+                        name: item.asset.user.username,
+                        picture: item.asset.user.image_url,
+                      }}
+                    />
+                  ))}
+                />
               </div>
             </div>
           </div>
