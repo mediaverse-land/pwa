@@ -14,6 +14,7 @@ import {
   VIDEO_ICON,
 } from "@/components/SVG/svgs";
 import WebAppAccountTopSection from "@/components/WebApp/Account/TopSection";
+import { webAppDeepLink } from "@/data";
 import { getDictionary } from "@/dictionary";
 import { Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
@@ -143,7 +144,12 @@ const AccountSubscribeSection = async ({
   return (
     <div className="w-full h-full overflow-y-auto">
       <WebAppAccountTopSection dic={dic} lang={params.lang} type="subscribe" />
-      <div className="flex flex-col items-stretch gap-6 mt-3 w-full px-8">
+      <div className="flex flex-col items-stretch gap-4 mt-6 w-full px-8">
+        <div className="lg:hidden mx-auto">
+          <button className="text-[16px] rounded-full px-8 py-1 text-center bg-blue-600">
+            <Link href={`${webAppDeepLink}?page=profile`}>View in App</Link>
+          </button>
+        </div>
         <div className="rounded-lg grid grid-flow-col grid-rows-1 bg-[#0E0E1280] backdrop-blur-md">
           {ExploreSectionNavs.map((tab) => (
             <Link

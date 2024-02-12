@@ -5,11 +5,12 @@ import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponen
 import { TEXT_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
 import ShareButton from "@/components/shared/ShareButton";
+import { webAppDeepLink } from "@/data";
 import { getSingleText } from "@/services/contactService";
-import { Locale } from "@/types/dictionary-types";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
+import Link from "next/link";
 
 const getSingleTextData = async ({
   id,
@@ -124,7 +125,7 @@ const WebAppTextAssetSinglePage = async (params: any) => {
             </div>
           ) : null} */}
         {/* share links */}
-        <div className="">
+        <div className="flex items-center justify-between">
           <ShareButton
             url={`${process.env.NEXTAUTH_URL}/${
               params.params.lang
@@ -133,6 +134,15 @@ const WebAppTextAssetSinglePage = async (params: any) => {
               "-"
             )}?id=${singleTextData?.data.id}`}
           />
+          <div className="lg:hidden">
+            <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
+              <Link
+                href={`${webAppDeepLink}?page=single&type=${singleTextData?.data.asset.type}&id=${singleTextData?.data.id}`}
+              >
+                View in App
+              </Link>
+            </button>
+          </div>
         </div>
         {/* comment */}
         <SingleAssetComments

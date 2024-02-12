@@ -5,10 +5,12 @@ import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponen
 import { PICTURE_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
 import ShareButton from "@/components/shared/ShareButton";
+import { webAppDeepLink } from "@/data";
 import { getSingleImage } from "@/services/contactService";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
+import Link from "next/link";
 
 const getSingleImageData = async ({
   id,
@@ -124,7 +126,7 @@ const ImageSinglePage = async (params: any) => {
           ) : null} */}
         {/* comment */}
         {/* share links */}
-        <div className="">
+        <div className="flex justify-between items-center">
           <ShareButton
             url={`${process.env.NEXTAUTH_URL}/${
               params.params.lang
@@ -133,6 +135,15 @@ const ImageSinglePage = async (params: any) => {
               "-"
             )}?id=${singleImageData?.data.id}`}
           />
+          <div className="lg:hidden">
+            <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
+              <Link
+                href={`${webAppDeepLink}?page=single&type=${singleImageData?.data.asset.type}&id=${singleImageData?.data.id}`}
+              >
+                View in App
+              </Link>
+            </button>
+          </div>
         </div>
         <SingleAssetComments
           assetID={singleImageData?.data?.asset_id}

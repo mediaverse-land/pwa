@@ -98,7 +98,7 @@ export const SubscribeAllAssets = async ({
           );
         })
       ) : (
-        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
+        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center">
           {dic.appAccounts.noContentToShow}
         </div>
       )}
@@ -156,7 +156,7 @@ export const SubscribeImageAssets = async ({
           );
         })
       ) : (
-        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
+        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center">
           {dic.appAccounts.noContentToShow}
         </div>
       )}
@@ -213,7 +213,7 @@ export const SubscribeVideoAssets = async ({
           );
         })
       ) : (
-        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
+        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center">
           {dic.appAccounts.noContentToShow}
         </div>
       )}
@@ -270,7 +270,7 @@ export const SubscribeAudioAssets = async ({
           );
         })
       ) : (
-        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
+        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center">
           {dic.appAccounts.noContentToShow}
         </div>
       )}
@@ -313,7 +313,7 @@ export const SubscribeTextAssets = async ({
           <ExploreTextCard lang={params.lang} key={item.id} data={item} />
         ))
       ) : (
-        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-8">
+        <div className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center">
           {dic.appAccounts.noContentToShow}
         </div>
       )}

@@ -6,13 +6,14 @@ import HLSPlayer from "@/components/ExplorePageComponents/shared/HLSPlayer";
 import { PLAY, VIDEO_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
 import ShareButton from "@/components/shared/ShareButton";
-import { VideoType } from "@/data";
+import { VideoType, webAppDeepLink } from "@/data";
 import { DeleteUserSession } from "@/lib/test";
 import { getComments, getSingleVideo } from "@/services/contactService";
 import { FullLocaleNames, Locale } from "@/types/dictionary-types";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
+import Link from "next/link";
 
 const getSingleVideoData = async ({
   id,
@@ -188,7 +189,7 @@ const WebAppSingleVideoAsset = async (params: any) => {
           </div>
         ) : null} */}
         {/* share links */}
-        <div className="">
+        <div className="flex items-center justify-between">
           <ShareButton
             url={`${process.env.NEXTAUTH_URL}/${
               params.params.lang
@@ -197,6 +198,15 @@ const WebAppSingleVideoAsset = async (params: any) => {
               "-"
             )}?id=${singleVideoData?.data.id}`}
           />
+          <div className="lg:hidden">
+            <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
+              <Link
+                href={`${webAppDeepLink}?page=single&type=${singleVideoData?.data.asset.type}&id=${singleVideoData?.data.id}`}
+              >
+                View in App
+              </Link>
+            </button>
+          </div>
         </div>
         {/* comment */}
         <SingleAssetComments

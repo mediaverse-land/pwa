@@ -7,6 +7,7 @@ import {
   MESSAGE_ICON,
   SHARE_ICON,
 } from "@/components/SVG/svgs";
+import { webAppDeepLink } from "@/data";
 import { getDictionary } from "@/dictionary";
 import { getUserMessages, getUserWallets } from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";
@@ -206,6 +207,11 @@ const WebAppSessting = async ({
             </div>
           </div>
         </div>
+      </div>
+      <div className="lg:hidden mx-auto">
+        <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
+          <Link href={`${webAppDeepLink}?page=setting`}>View in App</Link>
+        </button>
       </div>
     </div>
   );

@@ -54,7 +54,7 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
   const session = await getServerSession(authOptions);
   const token = session?.user?.token || "";
   const singleAudioData = await getSingleAudioData({ id: assetID, token });
-  //   console.log(singleAudioData);
+  // console.log(singleAudioData);
   //   console.log(session?.user.id);
   if (singleAudioData?.status === 404) {
     return (
@@ -173,7 +173,7 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
               <Link
-                href={`${webAppDeepLink}/page=single&type=${singleAudioData?.data.asset.type}&id=${singleAudioData?.data.id}`}
+                href={`${webAppDeepLink}?page=single&type=${singleAudioData?.data.asset.type}&id=${singleAudioData?.data.id}`}
               >
                 View in App
               </Link>
