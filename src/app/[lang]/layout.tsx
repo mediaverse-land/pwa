@@ -10,7 +10,6 @@ import { getDictionary } from "@/dictionary";
 import { FullLocaleNames, Locale } from "@/types/dictionary-types";
 import { locales } from "@/middleware";
 import { getHome } from "@/services/contactService";
-
 const inter = Inter({ subsets: ["latin"] });
 
 // export async function generateStaticParams() {
@@ -21,8 +20,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 const getHomeData = async (lang: Locale) => {
   const homeDataReq = await getHome(FullLocaleNames[lang]);
-  const homeDataRes = await homeDataReq.json();
-  return homeDataRes;
+  return await homeDataReq.json();
 };
 
 export async function generateMetadata({
@@ -52,17 +50,18 @@ export default async function RootLayout({
   const dic = await getDictionary(
     locales.find((item) => item === lang) ?? locales[0]
   );
+  const GTM_ID = 'GTM-WPLNXH7D';
+
   return (
     <html lang={`${lang}`}>
-      <Script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=GTM-WPLNXH7D"
-      ></Script>
-      <Script>
-        {`window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'GTM-WPLNXH7D');`}
+      <Script id="google-tag-manager" strategy="afterInteractive">
+        {`
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','${GTM_ID}');
+          `}
       </Script>
       <body
         className={`${inter.className} min-h-screen flex flex-col justify-between [&_>_*:nth-child(2)]:grow`}
@@ -73,6 +72,11 @@ export default async function RootLayout({
           {children}
           <Footer title={dic.footer.haveNotTriedTheAppYet} />
         </NextAuthSessionProvider>
+        <noscript
+            dangerouslySetInnerHTML={{
+              __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
+            }}
+        />
       </body>
     </html>
   );
