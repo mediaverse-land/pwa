@@ -17,7 +17,7 @@ const VideoSlider = () => {
     const getData = async () => {
       const videoData = await getMostViewedVideos(FullLocaleNames[lang]);
       const data = await videoData.json();
-      setVideoData(data);
+      setVideoData(data['data']);
     };
     getData();
   }, []);

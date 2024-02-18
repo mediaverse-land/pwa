@@ -17,7 +17,7 @@ const SongSlider = () => {
     const getData = async () => {
       const songData = await getMostViewedSongs(FullLocaleNames[lang]);
       const data = await songData.json();
-      setSongData(data);
+      setSongData(data['data']);
     };
     getData();
   }, []);
