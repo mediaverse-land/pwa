@@ -116,7 +116,7 @@ const WebAppTextAssetSinglePage = async (params: any) => {
               <div className="text-white font-semibold">Files</div>
               <div className="flex flex-col items-stretch gap-2">
                 <Link
-                  href={singleTextData.asset.file.url}
+                  href={singleTextData.file.url}
                   className="flex items-center rounded-lg bg-[rgba(78,78,97,0.30)] backdrop-blur-md px-6 py-4"
                 >
                   <div className="text-white mr-auto">{singleTextData.name}</div>
@@ -137,7 +137,7 @@ const WebAppTextAssetSinglePage = async (params: any) => {
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
               <Link
-                href={`${webAppDeepLink}?page=single&type=${singleTextData?.data.asset.type}&id=${singleTextData?.data.id}`}
+                href={`${webAppDeepLink}?page=single&type=${singleTextData?.data.type}&id=${singleTextData?.data.id}`}
               >
                 View in App
               </Link>
@@ -153,12 +153,12 @@ const WebAppTextAssetSinglePage = async (params: any) => {
         />
       </div>
       {/* buy */}
-      {singleTextData?.data?.asset.plan !== 1 && (
+      {singleTextData?.data?.plan !== 1 && (
         <BuySection
           asset={singleTextData?.data.id}
-          type={singleTextData?.data?.asset.type}
-          plan={singleTextData?.data?.asset.plan}
-          price={singleTextData?.data?.asset.price}
+          type={singleTextData?.data?.type}
+          plan={singleTextData?.data?.plan}
+          price={singleTextData?.data?.price}
         />
       )}
     </div>

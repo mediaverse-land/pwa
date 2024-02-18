@@ -168,7 +168,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
         <div className="lg:max-w-screen-2xl mx-auto flex items-center justify-center py-4 w-[80rem]">
           <div className="relative flex overflow-x-hidden w-full animate-marquee-container">
             <div className="animate-marquee whitespace-nowrap flex flex-row w-full">
-              {liveData?.map((item: any, i: number) => (
+              {liveData.data?.map((item: any, i: number) => (
                 <Link href={`/${lang}/app/channels/${item.id}`} key={item.id}>
                   <img
                     className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
@@ -180,7 +180,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
             </div>
 
             <div className="absolute top-0 animate-marquee2 whitespace-nowrap flex flex-row w-full ">
-              {liveData?.map((item: any, i: number) => (
+              {liveData.data?.map((item: any, i: number) => (
                 <img
                   key={i}
                   className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
@@ -223,7 +223,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
               </p>
             </div>
             <div className="grid grid-rows-4 grid-cols-3 grid-flow-row gap-2 mt-10 grow px-6 min-w-full">
-              {imageData?.slice(0, 9)?.map((items: any, index: number) => {
+              {imageData.data?.slice(0, 9)?.map((items: any, index: number) => {
                 return (
                   <Link
                     href={`/${lang}/app/assets/image/${items.name.replaceAll(
@@ -238,7 +238,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                     }`}
                   >
                     <Image
-                      src={items.asset.thumbnails["336x366"]}
+                      src={items.thumbnails["336x366"]}
                       alt={items.name}
                       fill
                     />
@@ -263,7 +263,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
             </div>
 
             <div className="grid grid-flow-col lg:grid-cols-3 md:grid-cols-3 gap-2 grid-rows-1 md:grid-rows-2 lg:grid-rows-2 mt-10 w-full grow overflow-x-scroll lg:overflow-visible px-4">
-              {textData?.slice(0, 6)?.map((items: any, index: number) => {
+              {textData.data?.slice(0, 6)?.map((items: any, index: number) => {
                 return (
                   <BorderGradient
                     key={items.id}
@@ -296,7 +296,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                             quality={100}
                           />
                           <p className="text-xs text-gray-500">
-                            {items.asset.user.username}
+                            {items.user.username}
                           </p>
                         </div>
                       </div>

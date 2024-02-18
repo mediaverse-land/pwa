@@ -41,7 +41,7 @@ const ExploreMostViewd = ({
             >
               <Image
                 className="object-cover"
-                src={items.asset.thumbnails["336x366"]}
+                src={items.thumbnails["336x366"]}
                 alt={items.name}
                 fill
               />

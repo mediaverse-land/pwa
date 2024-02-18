@@ -44,11 +44,11 @@ const BuyAssetComponent = ({
     if (req?.status === 200) {
       // console.log(req, "req");
       router.push(
-        `/${params.lang}/app/account/buy-asset/result?type=${assetData.asset.plan}`
+        `/${params.lang}/app/account/buy-asset/result?type=${assetData.plan}`
       );
-      // if (assetData.asset.plan === 2) {
+      // if (assetData.plan === 2) {
       // router.push("/explore?section=account&type=ownership");
-      // } else if (assetData.asset.plan === 3) {
+      // } else if (assetData.plan === 3) {
       //   router.push("/explore?section=account&type=subscribe");
       // }
     } else {

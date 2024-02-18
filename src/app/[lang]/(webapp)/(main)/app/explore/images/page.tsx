@@ -63,11 +63,11 @@ const WebAppImageAssets = async ({
                       key={item.id}
                       id={item.id}
                       type="image"
-                      cover={item.asset.thumbnails["336x366"]}
+                      cover={item.thumbnails["336x366"]}
                       title={item.name}
                       author={{
-                        name: item.asset.user.username,
-                        picture: item.asset.user.image_url,
+                        name: item.user.username,
+                        picture: item.user.image_url,
                       }}
                     />
                   ))}
@@ -113,7 +113,7 @@ const RecentlyImages = async ({ lang }: { lang: Locale }) => {
             className={`relative overflow-hidden rounded-lg w-full aspect-square `}
           >
             <Image
-              src={items.asset.thumbnails["336x366"]}
+              src={items.thumbnails["336x366"]}
               alt={items.name}
               fill
             />

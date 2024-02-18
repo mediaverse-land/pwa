@@ -9,8 +9,8 @@ const ExploreTextCard = async ({ data, lang }: { data: any; lang: Locale }) => {
   const session = await getServerSession(authOptions);
   // console.log(data);
   const authorImage = () => {
-    if (!data.asset.user?.image_url) {
-      if (session?.user?.image && data.asset.user_id === session.user.id) {
+    if (!data.user?.image_url) {
+      if (session?.user?.image && data.user_id === session.user.id) {
         return (
           <Image
             className="object-cover"
@@ -25,11 +25,11 @@ const ExploreTextCard = async ({ data, lang }: { data: any; lang: Locale }) => {
         );
       }
     } else {
-      if (data.asset.user?.image_url) {
+      if (data.user?.image_url) {
         <Image
           className="object-cover"
-          src={`${data.asset.user?.image_url}`}
-          alt={`${data.asset.user?.username}`}
+          src={`${data.user?.image_url}`}
+          alt={`${data.user?.username}`}
           fill
         />;
       } else {
@@ -58,7 +58,7 @@ const ExploreTextCard = async ({ data, lang }: { data: any; lang: Locale }) => {
             {authorImage()}
           </div>
           <div className="line-clamp-1">
-            {data.asset.user?.username || session?.user?.name || ""}
+            {data.user?.username || session?.user?.name || ""}
           </div>
         </div>
       </div>

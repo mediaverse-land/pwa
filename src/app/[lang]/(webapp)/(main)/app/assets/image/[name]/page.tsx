@@ -81,8 +81,8 @@ const ImageSinglePage = async (params: any) => {
             className="object-cover"
             src={`${
               singleImageData?.data?.asset?.file
-                ? singleImageData?.data.asset.file?.url || "/"
-                : singleImageData?.data?.asset.thumbnails["523x304"] || "/"
+                ? singleImageData?.data.file?.url || "/"
+                : singleImageData?.data?.thumbnails["523x304"] || "/"
             }`}
             alt=""
             fill
@@ -116,7 +116,7 @@ const ImageSinglePage = async (params: any) => {
               <div className="text-white font-semibold">Files</div>
               <div className="flex flex-col items-stretch gap-2">
                 <Link
-                  href={singleImageData?.data?.asset.file.url}
+                  href={singleImageData?.data?.file.url}
                   className="flex items-center rounded-lg bg-[rgba(78,78,97,0.30)] backdrop-blur-md px-6 py-4"
                 >
                   <div className="text-white mr-auto">{singleImageData?.data?.name}</div>
@@ -138,7 +138,7 @@ const ImageSinglePage = async (params: any) => {
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
               <Link
-                href={`${webAppDeepLink}?page=single&type=${singleImageData?.data.asset.type}&id=${singleImageData?.data.id}`}
+                href={`${webAppDeepLink}?page=single&type=${singleImageData?.data.type}&id=${singleImageData?.data.id}`}
               >
                 View in App
               </Link>
@@ -153,12 +153,12 @@ const ImageSinglePage = async (params: any) => {
         />
       </div>
       {/* buy */}
-      {singleImageData?.data?.asset.plan !== 1 && (
+      {singleImageData?.data?.plan !== 1 && (
         <BuySection
           asset={singleImageData?.data?.id}
-          type={singleImageData?.data?.asset.type}
-          plan={singleImageData?.data?.asset.plan}
-          price={singleImageData?.data?.asset.price}
+          type={singleImageData?.data?.type}
+          plan={singleImageData?.data?.plan}
+          price={singleImageData?.data?.price}
         />
       )}
     </div>

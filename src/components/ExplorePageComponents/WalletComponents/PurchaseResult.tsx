@@ -9,9 +9,9 @@ const PurchaseResult = ({
     [key: string]: string;
   };
 }) => {
-  // if (assetData.asset.plan === 2) {
+  // if (assetData.plan === 2) {
   //   router.push("/explore?section=account&type=ownership");
-  // } else if (assetData.asset.plan === 3) {
+  // } else if (assetData.plan === 3) {
   //   router.push("/explore?section=account&type=subscribe");
   // }
   if (searchParams.type === "2") {

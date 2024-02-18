@@ -63,7 +63,7 @@ const ExploreDailyRecommended = async ({
               data={
                 data?.map((item) => {
                   const dataType = () => {
-                    switch (item.asset.type) {
+                    switch (item.type) {
                       case 1:
                         return "text";
                       case 2:
@@ -83,10 +83,10 @@ const ExploreDailyRecommended = async ({
                       key={item.id}
                       id={item.id}
                       author={{
-                        name: item.asset.user.username,
-                        picture: item.asset.user.image_url,
+                        name: item.user.username,
+                        picture: item.user.image_url,
                       }}
-                      cover={item.asset.thumbnails["336x366"]}
+                      cover={item.thumbnails["336x366"]}
                       title={item.name}
                       type={dataType()}
                     />

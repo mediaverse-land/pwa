@@ -34,11 +34,11 @@ const WebAppRecentlyAudios = async ({
               id={items.id}
               key={items.id}
               author={{
-                name: items.asset.user.username,
-                picture: items.asset.user.image_url,
+                name: items.user.username,
+                picture: items.user.image_url,
               }}
               description={items.description}
-              image={items.asset.thumbnails["336x366"]}
+              image={items.thumbnails["336x366"]}
               time={items.length}
               title={items.name}
             />

@@ -68,7 +68,7 @@ export const SubscribeAllAssets = async ({
       {concatData().length > 0 ? (
         concatData().map((item) => {
           const dataType = () => {
-            switch (item.asset.type) {
+            switch (item.type) {
               case 1:
                 return "text";
               case 2:
@@ -88,10 +88,10 @@ export const SubscribeAllAssets = async ({
               id={item.id}
               key={item.id}
               author={{
-                name: item.asset.user.username,
-                picture: item.asset.user.image_url,
+                name: item.user.username,
+                picture: item.user.image_url,
               }}
-              cover={item.asset.thumbnails["336x366"]}
+              cover={item.thumbnails["336x366"]}
               title={item.name}
               type={dataType()}
             />
@@ -148,7 +148,7 @@ export const SubscribeImageAssets = async ({
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
               <Image
-                src={items.asset.thumbnails["336x366"]}
+                src={items.thumbnails["336x366"]}
                 alt={items.name}
                 fill
               />
@@ -202,11 +202,11 @@ export const SubscribeVideoAssets = async ({
               id={items.id}
               key={items.id}
               author={{
-                name: items.asset.user.username,
-                picture: items.asset.user.image_url,
+                name: items.user.username,
+                picture: items.user.image_url,
               }}
               description={items.description}
-              image={items.asset.thumbnails["336x366"]}
+              image={items.thumbnails["336x366"]}
               time={items.length}
               title={items.name}
             />
@@ -259,11 +259,11 @@ export const SubscribeAudioAssets = async ({
               id={items.id}
               key={items.id}
               author={{
-                name: items.asset.user.username,
-                picture: items.asset.user.image_url,
+                name: items.user.username,
+                picture: items.user.image_url,
               }}
               description={items.description}
-              image={items.asset.thumbnails["336x366"]}
+              image={items.thumbnails["336x366"]}
               time={items.length}
               title={items.name}
             />

@@ -110,7 +110,7 @@ const BuyAsset = async ({
     getUserData(token),
   ]);
   // console.log(profile, "profile");
-  if (assetData.asset.plan === 1) redirect("/explore?section=explore");
+  if (assetData.plan === 1) redirect("/explore?section=explore");
   const userBalance = await getUserBalacneData(token);
   // const account = await getUserStripeAccountData(token);
   // console.log(account, "account");
@@ -125,9 +125,9 @@ const BuyAsset = async ({
             <div className="p-6 bg-[rgba(78,78,97,0.50)] backdrop-blur-sm flex flex-col items-stretch gap-4 rounded-2xl">
               <div className="flex items-start h-[88px] gap-6">
                 <div className="relative h-full aspect-square min-w-[88px] max-w-[88px] rounded-lg overflow-hidden">
-                  {assetData.asset.thumbnails["336x366"] ? (
+                  {assetData.thumbnails["336x366"] ? (
                     <Image
-                      src={`${assetData.asset.thumbnails["336x366"]}`}
+                      src={`${assetData.thumbnails["336x366"]}`}
                       alt=""
                       fill
                     />
@@ -144,10 +144,10 @@ const BuyAsset = async ({
               </div>
               <div className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md rounded-2xl text-center space-x-2 py-4">
                 <span className="text-[#CCCCFF] leading-4 capitalize">
-                  {AssetPurchasePlan[assetData.asset.plan]}
+                  {AssetPurchasePlan[assetData.plan]}
                 </span>
                 <span className="leading-4 text-white">
-                  {(assetData.asset.price / 100).toFixed(2)} €
+                  {(assetData.price / 100).toFixed(2)} €
                 </span>
               </div>
             </div>

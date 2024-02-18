@@ -65,7 +65,7 @@ const SongSlider = () => {
                 >
                   <div className="relative w-full aspect-square">
                     <Image
-                      src={item.asset.thumbnails["226x226"]}
+                      src={item.thumbnails["226x226"]}
                       className="rounded-xl"
                       alt="Music Cover"
                       fill
@@ -81,7 +81,7 @@ const SongSlider = () => {
                       quality={100}
                     />
                     <p className="text-xs text-gray-500">
-                      {item.asset.user.username}
+                      {item.user.username}
                     </p>
                   </div>
                 </Link>

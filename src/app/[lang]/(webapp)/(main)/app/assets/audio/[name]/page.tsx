@@ -73,7 +73,7 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
               <Image
                 className="object-cover"
                 src={`${
-                  singleAudioData?.data?.asset.thumbnails["336x366"] ||
+                  singleAudioData?.data?.thumbnails["336x366"] ||
                   "/images/no-cover.png"
                 }`}
                 alt=""
@@ -103,14 +103,14 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
               <Image
                 className="object-cover"
                 src={`${
-                  singleAudioData?.data?.asset.thumbnails["336x366"] ||
+                  singleAudioData?.data?.thumbnails["336x366"] ||
                   "/images/no-cover.png"
                 }`}
                 alt=""
                 fill
               />
 
-              {singleAudioData?.data?.asset.thumbnails["336x366"] ? null : (
+              {singleAudioData?.data?.thumbnails["336x366"] ? null : (
                 <div className="absolute z-30 inset-0 m-auto flex items-center justify-center">
                   <AUDIO_ICON
                     style={{
@@ -127,7 +127,7 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
         <div className="absolute z-30 left-5 lg:left-10 top-5 lg:top-10">
           <BackButton fill="#597AFF" />
         </div>
-        {singleAudioData?.data?.asset.thumbnails["336x366"] ? (
+        {singleAudioData?.data?.thumbnails["336x366"] ? (
           <div className="absolute z-30 left-5 lg:left-10 bottom-5 lg:bottom-10">
             <AUDIO_ICON />
           </div>
@@ -152,7 +152,7 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
               <div className="text-white font-semibold">Files</div>
               <div className="flex flex-col items-stretch gap-2">
                 <Link
-                  href={singleAudioData?.data?.asset.file.url}
+                  href={singleAudioData?.data?.file.url}
                   className="flex items-center rounded-lg bg-[rgba(78,78,97,0.30)] backdrop-blur-md px-6 py-4"
                 >
                   <div className="text-white mr-auto">{singleAudioData.name}</div>
@@ -173,7 +173,7 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
               <Link
-                href={`${webAppDeepLink}?page=single&type=${singleAudioData?.data.asset.type}&id=${singleAudioData?.data.id}`}
+                href={`${webAppDeepLink}?page=single&type=${singleAudioData?.data.type}&id=${singleAudioData?.data.id}`}
               >
                 View in App
               </Link>
@@ -189,13 +189,13 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
         />
       </div>
       {/* buy */}
-      {singleAudioData?.data?.asset.plan !== 1 ? (
-        singleAudioData?.data?.asset.user_id !== session?.user.id ? (
+      {singleAudioData?.data?.plan !== 1 ? (
+        singleAudioData?.data?.user_id !== session?.user.id ? (
           <BuySection
             asset={singleAudioData?.data.id}
-            type={singleAudioData?.data?.asset.type}
-            plan={singleAudioData?.data?.asset.plan}
-            price={singleAudioData?.data?.asset.price}
+            type={singleAudioData?.data?.type}
+            plan={singleAudioData?.data?.plan}
+            price={singleAudioData?.data?.price}
           />
         ) : null
       ) : null}

@@ -61,11 +61,11 @@ const WebAppExploreVideoAssets = async ({
                     id={item.id}
                     key={item.id}
                     type="video"
-                    cover={item.asset.thumbnails["336x366"]}
+                    cover={item.thumbnails["336x366"]}
                     title={item.name}
                     author={{
-                      name: item.asset.user.username,
-                      picture: item.asset.user.image_url,
+                      name: item.user.username,
+                      picture: item.user.image_url,
                     }}
                   />
                 ))}
@@ -107,11 +107,11 @@ const RecentlyVideos = async ({ lang }: { lang: Locale }) => {
             id={items.id}
             key={items.id}
             author={{
-              name: items.asset.user.username,
-              picture: items.asset.user.image_url,
+              name: items.user.username,
+              picture: items.user.image_url,
             }}
             description={items.description}
-            image={items.asset.thumbnails["336x366"]}
+            image={items.thumbnails["336x366"]}
             time={items.length}
             title={items.name}
           />

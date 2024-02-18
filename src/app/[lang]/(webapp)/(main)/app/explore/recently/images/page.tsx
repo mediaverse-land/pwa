@@ -34,7 +34,7 @@ const WebAppRecentlyImages = async ({
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
               <Image
-                src={items.asset.thumbnails["336x366"]}
+                src={items.thumbnails["336x366"]}
                 alt={items.name}
                 fill
               />

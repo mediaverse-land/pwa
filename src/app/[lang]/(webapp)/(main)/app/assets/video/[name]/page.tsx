@@ -105,7 +105,7 @@ const WebAppSingleVideoAsset = async (params: any) => {
             />
           ) : (
             <Image
-              src={`${singleVideoData?.data?.asset.thumbnails["1234x1234"]}`}
+              src={`${singleVideoData?.data?.thumbnails["1234x1234"]}`}
               alt=""
               fill
             />
@@ -177,7 +177,7 @@ const WebAppSingleVideoAsset = async (params: any) => {
             <div className="text-white font-semibold">Files</div>
             <div className="flex flex-col items-stretch gap-2">
               <Link
-                href={singleVideoData?.data?.asset.file.url}
+                href={singleVideoData?.data?.file.url}
                 className="flex items-center rounded-lg bg-[rgba(78,78,97,0.30)] backdrop-blur-md px-6 py-4"
               >
                 <div className="text-white mr-auto">{singleVideoData?.data?.name}</div>
@@ -201,7 +201,7 @@ const WebAppSingleVideoAsset = async (params: any) => {
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
               <Link
-                href={`${webAppDeepLink}?page=single&type=${singleVideoData?.data.asset.type}&id=${singleVideoData?.data.id}`}
+                href={`${webAppDeepLink}?page=single&type=${singleVideoData?.data.type}&id=${singleVideoData?.data.id}`}
               >
                 View in App
               </Link>
@@ -217,12 +217,12 @@ const WebAppSingleVideoAsset = async (params: any) => {
         />
       </div>
       {/* buy */}
-      {singleVideoData?.data?.asset.plan !== 1 && (
+      {singleVideoData?.data?.plan !== 1 && (
         <BuySection
-          type={singleVideoData?.data?.asset.type}
+          type={singleVideoData?.data?.type}
           asset={singleVideoData?.data?.id}
-          plan={singleVideoData?.data?.asset.plan}
-          price={singleVideoData?.data?.asset.price}
+          plan={singleVideoData?.data?.plan}
+          price={singleVideoData?.data?.price}
         />
       )}
     </div>

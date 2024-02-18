@@ -67,7 +67,7 @@ const VideoSlider = () => {
                 >
                   <div className="relative w-[194px] lg:w-full aspect-square">
                     <Image
-                      src={item.asset.thumbnails["226x226"]}
+                      src={item.thumbnails["226x226"]}
                       className="rounded-xl object-cover"
                       alt="video cover"
                       fill
@@ -85,7 +85,7 @@ const VideoSlider = () => {
                       quality={100}
                     />
                     <p className="text-xs text-gray-500">
-                      {item.asset.user.username}
+                      {item.user.username}
                     </p>
                   </div>
                 </Link>
