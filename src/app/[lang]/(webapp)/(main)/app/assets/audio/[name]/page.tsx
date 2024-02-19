@@ -22,7 +22,7 @@ const getSingleAudioData = async ({
   try {
     const req = await getSingleAudio({ id, token });
     return {
-      data: await req.json(),
+      data: (await req.json())?.data,
       status: req.status,
     };
   } catch (error) {
@@ -67,7 +67,37 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
     <div className="flex flex-col items-stretch h-full overflow-y-auto">
       {/* top section */}
       <div className="rounded-b-2xl h-[450px] min-h-[450px] bg-[rgba(78,78,97,0.30)] backdrop-blur-md relative overflow-hidden">
-        {singleAudioData?.data?.asset?.file ? (
+        <>
+          <div
+            style={{
+              background: `linear-gradient(0deg, rgba(11, 11, 49, 0.70) -19.12%, rgba(11, 11, 50, 0.00) 83.82%)`,
+            }}
+            className="absolute w-full h-full z-20"
+          ></div>
+          <div className="absolute w-[316px] h-[316px] overflow-hidden z-10 inset-0 m-auto rounded-2xl">
+            <Image
+              className="object-cover"
+              src={`${
+                singleAudioData?.data?.thumbnails["336x366"] ||
+                "/images/no-cover.png"
+              }`}
+              alt=""
+              fill
+            />
+
+            {singleAudioData?.data?.thumbnails["336x366"] ? null : (
+              <div className="absolute z-30 inset-0 m-auto flex items-center justify-center">
+                <AUDIO_ICON
+                  style={{
+                    width: "24px",
+                    height: "24px",
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        </>
+        {/* {singleAudioData?.data?.asset?.file ? (
           <div className="flex flex-col items-center justify-center h-full gap-10">
             <div className="relative w-[216px] h-[216px] overflow-hidden z-10 rounded-2xl">
               <Image
@@ -91,14 +121,12 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
           </div>
         ) : (
           <>
-            {/* overlay */}
             <div
               style={{
                 background: `linear-gradient(0deg, rgba(11, 11, 49, 0.70) -19.12%, rgba(11, 11, 50, 0.00) 83.82%)`,
               }}
               className="absolute w-full h-full z-20"
             ></div>
-            {/* asset */}
             <div className="absolute w-[316px] h-[316px] overflow-hidden z-10 inset-0 m-auto rounded-2xl">
               <Image
                 className="object-cover"
@@ -122,7 +150,7 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
               )}
             </div>
           </>
-        )}
+        )} */}
         {/* back */}
         <div className="absolute z-30 left-5 lg:left-10 top-5 lg:top-10">
           <BackButton fill="#597AFF" />

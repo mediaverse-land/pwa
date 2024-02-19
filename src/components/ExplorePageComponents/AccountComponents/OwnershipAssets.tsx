@@ -70,7 +70,7 @@ export const OwnershipAllAssets = async ({
       {concatData().length > 0 ? (
         concatData().map((item) => {
           const dataType = () => {
-            switch (item.type) {
+            switch (item.asset.plan) {
               case 1:
                 return "text";
               case 2:
@@ -91,10 +91,10 @@ export const OwnershipAllAssets = async ({
               key={item.id}
               id={item.id}
               author={{
-                name: item.user?.username,
-                picture: item.user?.image_url,
+                name: item?.asset?.user?.username,
+                picture: item?.asset?.user?.image_url,
               }}
-              cover={item.thumbnails["336x366"]}
+              cover={item?.asset?.thumbnails["336x366"]}
               title={item.name}
               type={dataType()}
             />
@@ -147,7 +147,7 @@ export const OwnershipImageAssets = async ({
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
               <Image
-                src={items.thumbnails["336x366"]}
+                src={items.asset.thumbnails["336x366"]}
                 alt={items.name}
                 fill
               />
@@ -201,7 +201,7 @@ export const OwnershipVideoAssets = async ({
                 picture: session?.user?.image,
               }}
               description={items.description}
-              image={items.thumbnails["336x366"]}
+              image={items?.asset.thumbnails["336x366"]}
               time={items.length}
               title={items.name}
             />
@@ -254,7 +254,7 @@ export const OwnershipAudioAssets = async ({
                 picture: session?.user?.image,
               }}
               description={items.description}
-              image={items.thumbnails["336x366"]}
+              image={items.asset.thumbnails["336x366"]}
               time={items.length}
               title={items.name}
             />

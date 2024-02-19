@@ -22,7 +22,7 @@ const getSingleTextData = async ({
   try {
     const req = await getSingleText({ id, token });
     return {
-      data: await req.json(),
+      data: (await req.json())?.data,
       status: req.status,
     };
   } catch (error) {
@@ -106,7 +106,7 @@ const WebAppTextAssetSinglePage = async (params: any) => {
               image: singleTextData?.data?.asset?.user.image_url,
               name: singleTextData?.data?.asset?.user.username,
             }}
-            description={singleTextData?.data.description}
+            description={singleTextData?.data.description.slice(0, 30)}
             title={singleTextData?.data.name}
           />
         </div>

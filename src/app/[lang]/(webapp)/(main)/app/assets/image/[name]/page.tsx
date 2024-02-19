@@ -37,13 +37,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const assetID = searchParams.id || "0";
   const singleImageData = await getSingleImageData({ id: assetID, token: "" });
+  console.log(singleImageData?.data, "immmmmmmmmmmmmmm");
 
   return {
-    title: singleImageData?.data.name,
-    description: singleImageData?.data.description,
+    title: singleImageData?.data?.data?.name,
+    description: singleImageData?.data?.data?.description,
     openGraph: {
-      title: singleImageData?.data.name,
-      description: singleImageData?.data.description,
+      title: singleImageData?.data?.data?.name,
+      description: singleImageData?.data?.data?.description,
       images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
     },
   };
@@ -79,11 +80,7 @@ const ImageSinglePage = async (params: any) => {
         <div className="relative w-full h-full overflow-hidden z-10">
           <Image
             className="object-cover"
-            src={`${
-              singleImageData?.data?.asset?.file
-                ? singleImageData?.data.file?.url || "/"
-                : singleImageData?.data?.thumbnails["523x304"] || "/"
-            }`}
+            src={`${singleImageData?.data?.data?.thumbnails["523x304"] || "/"}`}
             alt=""
             fill
           />
@@ -103,11 +100,11 @@ const ImageSinglePage = async (params: any) => {
         <div className="flex flex-col items-stretch gap-2">
           <AssetSinglePageTitleAndDescription
             author={{
-              image: singleImageData?.data?.asset?.user.image_url,
-              name: singleImageData?.data?.asset?.user.username,
+              image: singleImageData?.data?.data?.user.image_url,
+              name: singleImageData?.data?.data?.user.username,
             }}
-            description={singleImageData?.data?.description}
-            title={singleImageData?.data.name}
+            description={singleImageData?.data?.data?.description}
+            title={singleImageData?.data?.data?.name}
           />
         </div>
         {/* files */}
@@ -130,15 +127,15 @@ const ImageSinglePage = async (params: any) => {
           <ShareButton
             url={`${process.env.NEXTAUTH_URL}/${
               params.params.lang
-            }/app/assets/image/${singleImageData?.data.name.replaceAll(
+            }/app/assets/image/${singleImageData?.data?.data?.name.replaceAll(
               " ",
               "-"
-            )}?id=${singleImageData?.data.id}`}
+            )}?id=${singleImageData?.data?.data?.id}`}
           />
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
               <Link
-                href={`${webAppDeepLink}?page=single&type=${singleImageData?.data.type}&id=${singleImageData?.data.id}`}
+                href={`${webAppDeepLink}?page=single&type=${singleImageData?.data?.data?.class}&id=${singleImageData?.data?.data?.id}`}
               >
                 View in App
               </Link>
@@ -146,14 +143,14 @@ const ImageSinglePage = async (params: any) => {
           </div>
         </div>
         <SingleAssetComments
-          assetID={singleImageData?.data?.asset_id}
+          assetID={singleImageData?.data?.data?.asset_id}
           userImage={session?.user?.image}
           username={session?.user?.name}
           token={token}
         />
       </div>
       {/* buy */}
-      {singleImageData?.data?.plan !== 1 && (
+      {singleImageData?.data?.data?.plan !== 1 && (
         <BuySection
           asset={singleImageData?.data?.id}
           type={singleImageData?.data?.type}

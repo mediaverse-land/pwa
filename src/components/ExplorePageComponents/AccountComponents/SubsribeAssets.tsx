@@ -61,14 +61,16 @@ export const SubscribeAllAssets = async ({
       ...searchResults?.data.texts,
       ...searchResults?.data.audios,
     ];
+    console.log(data, "daaaaaaaaa");
     return data;
   };
+
   return (
     <div className="py-7 xl:px-6 grid grid-cols-2 lg:grid-cols-3 grid-flow-row gap-4">
       {concatData().length > 0 ? (
         concatData().map((item) => {
           const dataType = () => {
-            switch (item.type) {
+            switch (item.asset.class) {
               case 1:
                 return "text";
               case 2:
@@ -88,10 +90,10 @@ export const SubscribeAllAssets = async ({
               id={item.id}
               key={item.id}
               author={{
-                name: item.user.username,
-                picture: item.user.image_url,
+                name: item?.asset?.user.username,
+                picture: item?.asset?.user.image_url,
               }}
-              cover={item.thumbnails["336x366"]}
+              cover={item.asset?.thumbnails["336x366"]}
               title={item.name}
               type={dataType()}
             />
@@ -140,7 +142,7 @@ export const SubscribeImageAssets = async ({
         searchResults?.data.data.map((items: any, index: number) => {
           return (
             <Link
-              href={`/${params.lang}/app/assets/image/${items.replaceAll(
+              href={`/${params.lang}/app/assets/image/${items.name.replaceAll(
                 " ",
                 "-"
               )}?id=${items.id}`}
@@ -148,7 +150,7 @@ export const SubscribeImageAssets = async ({
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
               <Image
-                src={items.thumbnails["336x366"]}
+                src={items?.asset.thumbnails["336x366"]}
                 alt={items.name}
                 fill
               />
@@ -202,11 +204,11 @@ export const SubscribeVideoAssets = async ({
               id={items.id}
               key={items.id}
               author={{
-                name: items.user.username,
-                picture: items.user.image_url,
+                name: items?.asset.user.username,
+                picture: items?.asset.user.image_url,
               }}
               description={items.description}
-              image={items.thumbnails["336x366"]}
+              image={items.asset.thumbnails["336x366"]}
               time={items.length}
               title={items.name}
             />
@@ -259,11 +261,11 @@ export const SubscribeAudioAssets = async ({
               id={items.id}
               key={items.id}
               author={{
-                name: items.user.username,
-                picture: items.user.image_url,
+                name: items?.asset.user.username,
+                picture: items?.asset.user.image_url,
               }}
               description={items.description}
-              image={items.thumbnails["336x366"]}
+              image={items?.asset.thumbnails["336x366"]}
               time={items.length}
               title={items.name}
             />

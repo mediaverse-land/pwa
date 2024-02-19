@@ -52,7 +52,7 @@ const WebAppExploreTextsAssets = async ({
           <div>
             <div className="overflow-x-hidden">
               <div className="flex items-stretch gap-4 overflow-x-auto">
-                {mostViewedTexts.slice(0, 10).map((item: any) => (
+                {mostViewedTexts?.data?.slice(0, 10).map((item: any) => (
                   <div key={item.id} className="min-w-[190px] max-w-[190px]">
                     <ExploreTextCard lang={lang} data={item} />
                   </div>
@@ -88,7 +88,7 @@ const RecentlyTexts = async ({ lang }: { lang: Locale }) => {
   const rececentlyTextsData = await getRecentlyTextsData();
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-4">
-      {rececentlyTextsData.map((item: any) => (
+      {rececentlyTextsData?.data?.map((item: any) => (
         <div key={item.id} className="lg:max-w-[220px]">
           <ExploreTextCard lang={lang} data={item} />
         </div>

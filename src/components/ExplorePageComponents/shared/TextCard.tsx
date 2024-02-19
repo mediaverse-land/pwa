@@ -58,7 +58,7 @@ const ExploreTextCard = async ({ data, lang }: { data: any; lang: Locale }) => {
             {authorImage()}
           </div>
           <div className="line-clamp-1">
-            {data.user?.username || session?.user?.name || ""}
+            {data?.asset.user?.username || session?.user?.name || ""}
           </div>
         </div>
       </div>

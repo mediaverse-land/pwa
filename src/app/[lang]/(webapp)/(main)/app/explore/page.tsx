@@ -53,20 +53,20 @@ const WebAppExploreAssets = async ({
       <ExploreSearchAndNavSection dic={dic} lang={lang} activeTab={"All"} />
       <div className="flex flex-col items-stretch gap-6 py-8 px-4 lg:px-10">
         {/* live chanel */}
-        <ExploreLiveChannel dic={dic} lang={lang} liveData={liveData} />
+        <ExploreLiveChannel dic={dic} lang={lang} liveData={liveData.data} />
         {/* daily recommended */}
         <ExploreDailyRecommended dic={dic} lang={lang} />
         {/* Most viewed Images */}
         <ExploreMostViewd
           dic={dic}
           lang={lang}
-          mostViewedImages={mostViewedImages}
+          mostViewedImages={mostViewedImages.data}
         />
         {/* Top 10 texts */}
         <ExploreTopTexts
           dic={dic}
           lang={lang}
-          topTextsData={topTextsData?.slice(0, 10)?.map((item: any) => (
+          topTextsData={topTextsData?.data?.slice(0, 10)?.map((item: any) => (
             <div key={item.id} className="min-w-[190px] max-w-[190px]">
               <ExploreTextCard lang={lang} data={item} />
             </div>

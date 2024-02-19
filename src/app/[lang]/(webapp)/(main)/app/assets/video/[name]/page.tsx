@@ -25,7 +25,7 @@ const getSingleVideoData = async ({
   try {
     const req = await getSingleVideo({ id, token });
     return {
-      data: await req.json(),
+      data: (await req.json())?.data,
       status: req.status,
     };
   } catch (error) {
@@ -96,7 +96,13 @@ const WebAppSingleVideoAsset = async (params: any) => {
       <div className="rounded-b-2xl aspect-video lg:h-[450px] lg:min-h-[450px] relative overflow-hidden">
         {/* asset */}
         <div className="relative w-full h-full overflow-hidden z-10">
-          {singleVideoData?.data?.asset?.file ? (
+          <Image
+            src={`${singleVideoData?.data?.thumbnails["1234x1234"]}`}
+            alt=""
+            fill
+          />
+
+          {/* {singleVideoData?.data?.asset?.file ? (
             <video
               src={singleVideoData?.data?.asset?.file.url}
               controls
@@ -109,7 +115,7 @@ const WebAppSingleVideoAsset = async (params: any) => {
               alt=""
               fill
             />
-          )}
+          )} */}
         </div>
         {/* back */}
         <div className="absolute z-30 left-5 lg:left-10 top-5 lg:top-10">

@@ -57,20 +57,22 @@ const WebAppImageAssets = async ({
             <div className="overflow-x-hidden">
               <div className="flex items-stretch gap-4 overflow-x-auto">
                 <ShowAssetSlider
-                  data={mostViewedImages?.slice(0, 10)?.map((item: any) => (
-                    <ExploreAssetsCard
-                      lang={lang}
-                      key={item.id}
-                      id={item.id}
-                      type="image"
-                      cover={item.thumbnails["336x366"]}
-                      title={item.name}
-                      author={{
-                        name: item.user.username,
-                        picture: item.user.image_url,
-                      }}
-                    />
-                  ))}
+                  data={mostViewedImages.data
+                    ?.slice(0, 10)
+                    ?.map((item: any) => (
+                      <ExploreAssetsCard
+                        lang={lang}
+                        key={item.id}
+                        id={item.id}
+                        type="image"
+                        cover={item.thumbnails["336x366"]}
+                        title={item.name}
+                        author={{
+                          name: item.user.username,
+                          picture: item.user.image_url,
+                        }}
+                      />
+                    ))}
                 />
               </div>
             </div>
@@ -102,7 +104,7 @@ const RecentlyImages = async ({ lang }: { lang: Locale }) => {
   const data = await getRecentlyImagesData();
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2">
-      {data?.map((items: any, index: number) => {
+      {data.data?.map((items: any, index: number) => {
         return (
           <Link
             href={`/${lang}/app/assets/image/${items.name.replaceAll(
@@ -112,11 +114,7 @@ const RecentlyImages = async ({ lang }: { lang: Locale }) => {
             key={items.id}
             className={`relative overflow-hidden rounded-lg w-full aspect-square `}
           >
-            <Image
-              src={items.thumbnails["336x366"]}
-              alt={items.name}
-              fill
-            />
+            <Image src={items.thumbnails["336x366"]} alt={items.name} fill />
           </Link>
         );
       })}

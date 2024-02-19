@@ -55,7 +55,7 @@ const WebAppExploreVideoAssets = async ({
           <div>
             <div className="overflow-x-hidden">
               <div className="flex items-stretch gap-4 overflow-x-auto">
-                {mostViewedVideos?.slice(0, 10)?.map((item: any) => (
+                {mostViewedVideos.data?.slice(0, 10)?.map((item: any) => (
                   <ExploreAssetsCard
                     lang={lang}
                     id={item.id}
@@ -100,7 +100,7 @@ const RecentlyVideos = async ({ lang }: { lang: Locale }) => {
   const rececentlyVideosData = await getRecentlyVideosData();
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-x-4 gap-y-6">
-      {rececentlyVideosData?.map((items: any, index: number) => {
+      {rececentlyVideosData.data?.map((items: any, index: number) => {
         return (
           <ExploreVideoCard
             lang={lang}
