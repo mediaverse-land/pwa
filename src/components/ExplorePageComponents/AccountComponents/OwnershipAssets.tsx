@@ -167,6 +167,7 @@ export const OwnershipVideoAssets = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
+  // console.log(token);
   const searchResults = await getOwnership({
     params: "/videos",
     token: token,

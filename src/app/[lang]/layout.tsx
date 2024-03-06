@@ -10,6 +10,7 @@ import { getDictionary } from "@/dictionary";
 import { FullLocaleNames, Locale } from "@/types/dictionary-types";
 import { locales } from "@/middleware";
 import { getHome } from "@/services/contactService";
+import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 // export async function generateStaticParams() {
@@ -50,7 +51,7 @@ export default async function RootLayout({
   const dic = await getDictionary(
     locales.find((item) => item === lang) ?? locales[0]
   );
-  const GTM_ID = 'GTM-WPLNXH7D';
+  const GTM_ID = "GTM-WPLNXH7D";
 
   return (
     <html lang={`${lang}`}>
@@ -73,10 +74,11 @@ export default async function RootLayout({
           <Footer title={dic.footer.haveNotTriedTheAppYet} />
         </NextAuthSessionProvider>
         <noscript
-            dangerouslySetInnerHTML={{
-              __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
-            }}
+          dangerouslySetInnerHTML={{
+            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
+          }}
         />
+        <Toaster />
       </body>
     </html>
   );

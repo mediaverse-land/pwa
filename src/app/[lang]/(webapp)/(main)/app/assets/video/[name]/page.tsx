@@ -62,7 +62,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const assetID = searchParams.id || "0";
   const singleVideoData = await getSingleVideoData({ id: assetID, token: "" });
-  // console.log(singleVideoData?.data);
+  console.log(singleVideoData?.data);
 
   return {
     title: singleVideoData?.data?.name,
