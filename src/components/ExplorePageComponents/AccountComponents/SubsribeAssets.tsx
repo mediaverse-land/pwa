@@ -41,8 +41,8 @@ export const SubscribeAllAssets = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
-  const searchResults = await getSubscribeData({ params: "", token });
-  if (searchResults?.status === 406) {
+  const subscribeAllAssetsData = await getSubscribeData({ params: "", token });
+  if (subscribeAllAssetsData?.status === 406) {
     return (
       <Link
         href={`/${params.lang}/sign-up/info`}
@@ -51,26 +51,27 @@ export const SubscribeAllAssets = async ({
         Please Complete Your Information To See This Section
       </Link>
     );
-  } else if (searchResults?.status === 401) {
+  } else if (subscribeAllAssetsData?.status === 401) {
     return <LogoutNoUser />;
   }
-  const concatData = () => {
-    const data = [
-      ...searchResults?.data.images,
-      ...searchResults?.data.videos,
-      ...searchResults?.data.texts,
-      ...searchResults?.data.audios,
-    ];
-    console.log(data, "daaaaaaaaa");
-    return data;
-  };
+  // console.log(subscribeAllAssetsData?.data.data, "subsribe data");
+  // const concatData = () => {
+  //   const data = [
+  //     ...(subscribeAllAssetsData?.data?.data?.images || []),
+  //     ...(subscribeAllAssetsData?.data?.data?.videos || []),
+  //     ...(subscribeAllAssetsData?.data?.data?.texts || []),
+  //     ...(subscribeAllAssetsData?.data?.data?.audios || []),
+  //   ];
+  //   // console.log(data, "daaaaaaaaa");
+  //   return data;
+  // };
 
   return (
     <div className="py-7 xl:px-6 grid grid-cols-2 lg:grid-cols-3 grid-flow-row gap-4">
-      {concatData().length > 0 ? (
-        concatData().map((item) => {
+      {subscribeAllAssetsData?.data?.data?.length > 0 ? (
+        subscribeAllAssetsData?.data?.data?.map((item: any) => {
           const dataType = () => {
-            switch (item.asset.class) {
+            switch (item.class) {
               case 1:
                 return "text";
               case 2:
@@ -90,10 +91,10 @@ export const SubscribeAllAssets = async ({
               id={item.id}
               key={item.id}
               author={{
-                name: item?.asset?.user.username,
-                picture: item?.asset?.user.image_url,
+                name: item?.user.username,
+                picture: item?.user.image_url,
               }}
-              cover={item.asset?.thumbnails["336x366"]}
+              cover={item.thumbnails["336x366"]}
               title={item.name}
               type={dataType()}
             />
@@ -120,11 +121,11 @@ export const SubscribeImageAssets = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
-  const searchResults = await getSubscribeData({
+  const subscribeImageData = await getSubscribeData({
     params: "/images",
     token,
   });
-  if (searchResults?.status === 406) {
+  if (subscribeImageData?.status === 406) {
     return (
       <Link
         href={`/${params.lang}/sign-up/info`}
@@ -133,13 +134,13 @@ export const SubscribeImageAssets = async ({
         Please Complete Your Information To See This Section
       </Link>
     );
-  } else if (searchResults?.status === 401) {
+  } else if (subscribeImageData?.status === 401) {
     return <LogoutNoUser />;
   }
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2 xl:px-6 py-7 h-full overflow-y-auto">
-      {searchResults?.data.data.length > 0 ? (
-        searchResults?.data.data.map((items: any, index: number) => {
+      {subscribeImageData?.data.data.length > 0 ? (
+        subscribeImageData?.data.data.map((items: any, index: number) => {
           return (
             <Link
               href={`/${params.lang}/app/assets/image/${items.name.replaceAll(
@@ -149,11 +150,7 @@ export const SubscribeImageAssets = async ({
               key={items.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
-              <Image
-                src={items?.asset.thumbnails["336x366"]}
-                alt={items.name}
-                fill
-              />
+              <Image src={items?.thumbnails["336x366"]} alt={items.name} fill />
             </Link>
           );
         })
@@ -178,11 +175,11 @@ export const SubscribeVideoAssets = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
-  const searchResults = await getSubscribeData({
+  const subscribeVideosData = await getSubscribeData({
     params: "/videos",
     token,
   });
-  if (searchResults?.status === 406) {
+  if (subscribeVideosData?.status === 406) {
     return (
       <Link
         href={`/${params.lang}/sign-up/info`}
@@ -191,24 +188,24 @@ export const SubscribeVideoAssets = async ({
         Please Complete Your Information To See This Section
       </Link>
     );
-  } else if (searchResults?.status === 401) {
+  } else if (subscribeVideosData?.status === 401) {
     return <LogoutNoUser />;
   }
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 xl:px-6 py-7 h-full overflow-y-auto">
-      {searchResults?.data.data.length > 0 ? (
-        searchResults?.data.data.map((items: any, index: number) => {
+      {subscribeVideosData?.data.data.length > 0 ? (
+        subscribeVideosData?.data.data.map((items: any, index: number) => {
           return (
             <ExploreVideoCard
               lang={params.lang}
               id={items.id}
               key={items.id}
               author={{
-                name: items?.asset.user.username,
-                picture: items?.asset.user.image_url,
+                name: items?.user.username,
+                picture: items?.user.image_url,
               }}
               description={items.description}
-              image={items.asset.thumbnails["336x366"]}
+              image={items.thumbnails["336x366"]}
               time={items.length}
               title={items.name}
             />
@@ -235,11 +232,11 @@ export const SubscribeAudioAssets = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
-  const searchResults = await getSubscribeData({
+  const subscribeAudioData = await getSubscribeData({
     params: "/audios",
     token,
   });
-  if (searchResults?.status === 406) {
+  if (subscribeAudioData?.status === 406) {
     return (
       <Link
         href={`/${params.lang}/sign-up/info`}
@@ -248,24 +245,24 @@ export const SubscribeAudioAssets = async ({
         Please Complete Your Information To See This Section
       </Link>
     );
-  } else if (searchResults?.status === 401) {
+  } else if (subscribeAudioData?.status === 401) {
     return <LogoutNoUser />;
   }
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 xl:px-6 py-7 h-full overflow-y-auto">
-      {searchResults?.data.data.length > 0 ? (
-        searchResults?.data.data.map((items: any, index: number) => {
+      {subscribeAudioData?.data.data.length > 0 ? (
+        subscribeAudioData?.data.data.map((items: any, index: number) => {
           return (
             <ExploreAudioCard
               lang={params.lang}
               id={items.id}
               key={items.id}
               author={{
-                name: items?.asset.user.username,
-                picture: items?.asset.user.image_url,
+                name: items?.user.username,
+                picture: items?.user.image_url,
               }}
               description={items.description}
-              image={items?.asset.thumbnails["336x366"]}
+              image={items?.thumbnails["336x366"]}
               time={items.length}
               title={items.name}
             />
@@ -292,11 +289,11 @@ export const SubscribeTextAssets = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
-  const searchResults = await getSubscribeData({
+  const subscribeTextsData = await getSubscribeData({
     params: "/texts",
     token,
   });
-  if (searchResults?.status === 406) {
+  if (subscribeTextsData?.status === 406) {
     return (
       <Link
         href={`/${params.lang}/sign-up/info`}
@@ -305,13 +302,13 @@ export const SubscribeTextAssets = async ({
         Please Complete Your Information To See This Section
       </Link>
     );
-  } else if (searchResults?.status === 401) {
+  } else if (subscribeTextsData?.status === 401) {
     return <LogoutNoUser />;
   }
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 xl:px-6 py-7 h-full overflow-y-auto">
-      {searchResults?.data.data.length > 0 ? (
-        searchResults?.data.data.map((item: any) => (
+      {subscribeTextsData?.data.data.length > 0 ? (
+        subscribeTextsData?.data.data.map((item: any) => (
           <ExploreTextCard lang={params.lang} key={item.id} data={item} />
         ))
       ) : (

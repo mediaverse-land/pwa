@@ -38,12 +38,12 @@ export const OwnershipAllAssets = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
-  const searchResults = await getOwnership({
+  const ownershipAllAssetsData = await getOwnership({
     params: "/assets",
     token: `${token}`,
   });
 
-  if (searchResults?.status === 406) {
+  if (ownershipAllAssetsData?.status === 406) {
     return (
       <Link
         href={`/${params.lang}/sign-up/info`}
@@ -52,25 +52,25 @@ export const OwnershipAllAssets = async ({
         Please Complete Your Information To See This Section
       </Link>
     );
-  } else if (searchResults?.status === 401) {
+  } else if (ownershipAllAssetsData?.status === 401) {
     return <LogoutNoUser />;
   }
-  const concatData = () => {
-    const data = [
-      ...searchResults?.data?.images,
-      ...searchResults?.data?.videos,
-      ...searchResults?.data?.texts,
-      ...searchResults?.data?.audios,
-    ];
-    return data;
-  };
+  // const concatData = () => {
+  //   const data = [
+  //     ...(searchResults?.data?.data?.images || []),
+  //     ...(searchResults?.data?.data?.videos || []),
+  //     ...(searchResults?.data?.data?.texts || []),
+  //     ...(searchResults?.data?.data?.audios || []),
+  //   ];
+  //   return data;
+  // };
 
   return (
     <div className="py-7 xl:px-6 grid grid-cols-2 lg:grid-cols-3 grid-flow-row gap-4">
-      {concatData().length > 0 ? (
-        concatData().map((item) => {
+      {ownershipAllAssetsData?.data?.data?.length > 0 ? (
+        ownershipAllAssetsData?.data?.data.map((item: any) => {
           const dataType = () => {
-            switch (item.asset.plan) {
+            switch (item.class) {
               case 1:
                 return "text";
               case 2:
@@ -91,10 +91,10 @@ export const OwnershipAllAssets = async ({
               key={item.id}
               id={item.id}
               author={{
-                name: item?.asset?.user?.username,
-                picture: item?.asset?.user?.image_url,
+                name: item?.user?.username,
+                picture: item?.user?.image_url,
               }}
-              cover={item?.asset?.thumbnails["336x366"]}
+              cover={item?.thumbnails["336x366"]}
               title={item.name}
               type={dataType()}
             />
@@ -146,11 +146,7 @@ export const OwnershipImageAssets = async ({
               key={items.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
-              <Image
-                src={items.asset.thumbnails["336x366"]}
-                alt={items.name}
-                fill
-              />
+              <Image src={items.thumbnails["336x366"]} alt={items.name} fill />
             </Link>
           );
         })
@@ -201,7 +197,7 @@ export const OwnershipVideoAssets = async ({
                 picture: session?.user?.image,
               }}
               description={items.description}
-              image={items?.asset.thumbnails["336x366"]}
+              image={items?.thumbnails["336x366"]}
               time={items.length}
               title={items.name}
             />
@@ -254,7 +250,7 @@ export const OwnershipAudioAssets = async ({
                 picture: session?.user?.image,
               }}
               description={items.description}
-              image={items.asset.thumbnails["336x366"]}
+              image={items.thumbnails["336x366"]}
               time={items.length}
               title={items.name}
             />

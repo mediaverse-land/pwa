@@ -32,6 +32,7 @@ export const SearchForAll = async ({
       searchParams.plan ? `&plan=${searchParams.plan}` : ""
     }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
+  console.log(searchResults);
   const concatData = () => {
     const data = [
       ...searchResults.images,
