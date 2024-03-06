@@ -62,13 +62,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const assetID = searchParams.id || "0";
   const singleVideoData = await getSingleVideoData({ id: assetID, token: "" });
+  // console.log(singleVideoData?.data);
 
   return {
-    title: singleVideoData?.data.name,
-    description: singleVideoData?.data.description,
+    title: singleVideoData?.data?.name,
+    description: singleVideoData?.data?.description,
     openGraph: {
-      title: singleVideoData?.data.name,
-      description: singleVideoData?.data.description,
+      title: singleVideoData?.data?.name,
+      description: singleVideoData?.data?.description,
       images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
     },
   };

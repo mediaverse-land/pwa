@@ -39,11 +39,11 @@ export async function generateMetadata({
   const singleTextData = await getSingleTextData({ id: assetID, token: "" });
 
   return {
-    title: singleTextData?.data.name,
-    description: singleTextData?.data.description,
+    title: singleTextData?.data?.name,
+    description: singleTextData?.data?.description,
     openGraph: {
-      title: singleTextData?.data.name,
-      description: singleTextData?.data.description,
+      title: singleTextData?.data?.name,
+      description: singleTextData?.data?.description,
       images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
     },
   };

@@ -37,13 +37,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const assetID = searchParams.id || "0";
   const singleAudioData = await getSingleAudioData({ id: assetID, token: "" });
+  // console.log(singleAudioData?.data, "audio");
 
   return {
-    title: singleAudioData?.data.name,
-    description: singleAudioData?.data.description,
+    title: singleAudioData?.data?.name,
+    description: singleAudioData?.data?.description,
     openGraph: {
-      title: singleAudioData?.data.name,
-      description: singleAudioData?.data.description,
+      title: singleAudioData?.data?.name,
+      description: singleAudioData?.data?.description,
       images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
     },
   };
