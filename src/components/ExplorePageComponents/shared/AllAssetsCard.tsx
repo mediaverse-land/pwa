@@ -84,13 +84,13 @@ const ExploreAssetsCard = async ({
         {cover ? (
           <Image
             className="z-10 object-cover"
-            src={`${cover || "/images/car.png"}`}
+            src={`${cover || "/images/No-Image.png"}`}
             alt=""
             fill
           />
         ) : (
           <div className="w-full h-full bg-slate-400 relative">
-            <Image src={`/images/no.png`} alt="no image" fill />
+            <Image src={`/images/No-Image.png`} alt="no image" fill />
           </div>
         )}
         <div className="overlay-bg absolute w-full h-full top-0 left-0 z-20"></div>

@@ -22,9 +22,9 @@ const ExploreMostViewd = ({
             {dic.homepage.mostViewedImages}
           </p>
         </div>
-        <div className="text-[14px] text-[#597AFF]">
+        {/* <div className="text-[14px] text-[#597AFF]">
           {dic.generalApp.viewAll}
-        </div>
+        </div> */}
       </div>
       <div className="grid grid-rows-3 grid-cols-3 grid-flow-row gap-2">
         {mostViewedImages?.slice(0, 6)?.map((items: any, index: number) => {

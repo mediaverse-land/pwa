@@ -1,6 +1,7 @@
 import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
 import ExploreAssetsCard from "@/components/ExplorePageComponents/shared/AllAssetsCard";
 import ExploreVideoCard from "@/components/ExplorePageComponents/shared/VideoCard";
+import ExploreChillSongsSlider from "@/components/shared/ExploreChillSongsSldier";
 import { getDictionary } from "@/dictionary";
 import {
   getMostViewedVideos,
@@ -48,20 +49,42 @@ const WebAppExploreVideoAssets = async ({
                 {dic.generalApp.bestInMonth}
               </p>
             </div>
-            <div className="text-[14px] text-[#597AFF]">
+            {/* <div className="text-[14px] text-[#597AFF]">
               {dic.generalApp.viewAll}
-            </div>
+            </div> */}
           </div>
           <div>
             <div className="overflow-x-hidden">
-              <div className="flex items-stretch gap-4 overflow-x-auto">
+              <div>
+                <ExploreChillSongsSlider
+                  data={mostViewedVideos.data
+                    ?.slice(0, 10)
+                    ?.map((item: any) => (
+                      <ExploreAssetsCard
+                        lang={lang}
+                        id={item.id}
+                        key={item.id}
+                        type="video"
+                        cover={
+                          item.thumbnails["336x366"] || "/images/No-Video.png"
+                        }
+                        title={item.name}
+                        author={{
+                          name: item.user.username,
+                          picture: item.user.image_url,
+                        }}
+                      />
+                    ))}
+                />
+              </div>
+              {/* <div className="flex items-stretch gap-4 overflow-x-auto">
                 {mostViewedVideos.data?.slice(0, 10)?.map((item: any) => (
                   <ExploreAssetsCard
                     lang={lang}
                     id={item.id}
                     key={item.id}
                     type="video"
-                    cover={item.thumbnails["336x366"]}
+                    cover={item.thumbnails["336x366"] || "/images/No-Video.png"}
                     title={item.name}
                     author={{
                       name: item.user.username,
@@ -69,7 +92,7 @@ const WebAppExploreVideoAssets = async ({
                     }}
                   />
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -111,7 +134,7 @@ const RecentlyVideos = async ({ lang }: { lang: Locale }) => {
               picture: items.user.image_url,
             }}
             description={items.description}
-            image={items.thumbnails["336x366"]}
+            image={items.thumbnails["336x366"] || "/images/No-Video.png"}
             time={items.length}
             title={items.name}
           />

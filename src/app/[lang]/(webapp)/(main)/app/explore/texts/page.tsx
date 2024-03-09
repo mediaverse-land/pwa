@@ -1,5 +1,6 @@
 import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
 import ExploreTextCard from "@/components/ExplorePageComponents/shared/TextCard";
+import ExploreChillSongsSlider from "@/components/shared/ExploreChillSongsSldier";
 import { getDictionary } from "@/dictionary";
 import { getMostViewedText, getRecentlyTexts } from "@/services/contactService";
 import {
@@ -45,19 +46,28 @@ const WebAppExploreTextsAssets = async ({
                 {dic.generalApp.bestInMonth}
               </p>
             </div>
-            <div className="text-[14px] text-[#597AFF]">
+            {/* <div className="text-[14px] text-[#597AFF]">
               {dic.generalApp.viewAll}
-            </div>
+            </div> */}
           </div>
           <div>
             <div className="overflow-x-hidden">
-              <div className="flex items-stretch gap-4 overflow-x-auto">
+              <div>
+                <ExploreChillSongsSlider
+                  data={mostViewedTexts?.data?.slice(0, 10).map((item: any) => (
+                    <div key={item.id} className="min-w-[190px] max-w-[190px]">
+                      <ExploreTextCard lang={lang} data={item} />
+                    </div>
+                  ))}
+                />
+              </div>
+              {/* <div className="flex items-stretch gap-4 overflow-x-auto">
                 {mostViewedTexts?.data?.slice(0, 10).map((item: any) => (
                   <div key={item.id} className="min-w-[190px] max-w-[190px]">
                     <ExploreTextCard lang={lang} data={item} />
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

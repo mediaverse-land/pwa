@@ -24,9 +24,9 @@ const ExploreTopTexts = ({
             {dic.homepage.topTexts}
           </p>
         </div>
-        <div className="text-[14px] text-[#597AFF]">
+        {/* <div className="text-[14px] text-[#597AFF]">
           {dic.generalApp.viewAll}
-        </div>
+        </div> */}
       </div>
       <div>
         <div className="overflow-x-hidden">

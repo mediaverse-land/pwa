@@ -37,7 +37,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const assetID = searchParams.id || "0";
   const singleImageData = await getSingleImageData({ id: assetID, token: "" });
-  console.log(singleImageData?.data, "immmmmmmmmmmmmmm");
+  // console.log(singleImageData?.data, "immmmmmmmmmmmmmm");
 
   return {
     title: singleImageData?.data?.data?.name,

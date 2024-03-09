@@ -27,7 +27,7 @@ const WebAppRecentlyAudios = async ({
     <div className="w-full h-full p-10 overflow-y-auto">
       <SubSectionHeader name={dic.generalApp.recently} />
       <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 mt-8">
-        {rececentlySongsData?.data.map((items: any, index: number) => {
+        {rececentlySongsData?.data?.data?.map((items: any, index: number) => {
           return (
             <ExploreAudioCard
               lang={lang}
@@ -38,7 +38,7 @@ const WebAppRecentlyAudios = async ({
                 picture: items.user.image_url,
               }}
               description={items.description}
-              image={items.thumbnails["336x366"]}
+              image={items.thumbnails["336x366"] || "/images/No-Sound.png"}
               time={items.length}
               title={items.name}
             />

@@ -89,13 +89,14 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
           });
           if (req.status === 200) {
             const res = await req.json();
+
             setInputValues({
               ...inputValues,
-              username: res.username,
-              email: res.email || "",
-              cellphone: res.cellphone || "",
-              first_name: res.first_name || "",
-              last_name: res.last_name || "",
+              username: res.data?.username,
+              email: res.data?.email || "",
+              cellphone: res.data?.cellphone || "",
+              first_name: res.data?.first_name || "",
+              last_name: res.data?.last_name || "",
             });
             setLoading(false);
           } else if (req.status === 406) {

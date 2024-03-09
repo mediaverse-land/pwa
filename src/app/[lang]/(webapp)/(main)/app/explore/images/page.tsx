@@ -49,9 +49,9 @@ const WebAppImageAssets = async ({
                 {dic.generalApp.bestInMonth}
               </p>
             </div>
-            <div className="text-[14px] text-[#597AFF]">
+            {/* <div className="text-[14px] text-[#597AFF]">
               {dic.generalApp.viewAll}
-            </div>
+            </div> */}
           </div>
           <div>
             <div className="overflow-x-hidden">
@@ -102,6 +102,7 @@ const WebAppImageAssets = async ({
 export default WebAppImageAssets;
 const RecentlyImages = async ({ lang }: { lang: Locale }) => {
   const data = await getRecentlyImagesData();
+  // console.log(data);
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2">
       {data.data?.map((items: any, index: number) => {
@@ -114,7 +115,11 @@ const RecentlyImages = async ({ lang }: { lang: Locale }) => {
             key={items.id}
             className={`relative overflow-hidden rounded-lg w-full aspect-square `}
           >
-            <Image src={items.thumbnails["336x366"]} alt={items.name} fill />
+            <Image
+              src={`${items.thumbnails["336x366"] || "/images/No-Image.png"}`}
+              alt={items.name}
+              fill
+            />
           </Link>
         );
       })}

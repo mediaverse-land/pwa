@@ -26,12 +26,12 @@ const WebAppSettingSessions = async ({
   const dic = await getDictionary(lang);
   const token = session?.user?.token || "";
   const sessionsData = await getSessionsData(token);
-  //   console.log(sessionsData?.data[0].details);
+  // console.log(sessionsData?.data.data);
   return (
     <div className="flex flex-col items-stretch gap-10 p-10 w-full h-full overflow-y-auto">
       <SubSectionHeader name={dic.setting.sessions} />
       <div className="flex flex-col items-stretch gap-2">
-        {sessionsData?.data.map((item: any) => (
+        {sessionsData?.data.data.map((item: any) => (
           <div
             key={item.id}
             className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md rounded-2xl p-6 flex flex-col items-stretch gap-4 leading-none"

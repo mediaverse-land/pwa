@@ -27,7 +27,7 @@ const WebAppRecentlyVideos = async ({
     <div className="h-full w-full p-10 overflow-y-auto">
       <SubSectionHeader name={dic.generalApp.recently} />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 mt-8">
-        {rececentlyVideosData?.data.map((items: any, index: number) => {
+        {rececentlyVideosData?.data?.data?.map((items: any, index: number) => {
           return (
             <ExploreVideoCard
               lang={lang}
@@ -38,7 +38,7 @@ const WebAppRecentlyVideos = async ({
                 picture: items.user.image_url,
               }}
               description={items.description}
-              image={items.thumbnails["336x366"]}
+              image={items.thumbnails["336x366"] || "/images/No-Video.png"}
               time={items.length}
               title={items.name}
             />

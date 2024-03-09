@@ -35,7 +35,7 @@ const ExploreVideoCard = ({
       >
         {/* overlay */}
         <div className="absolute left-0 top-0 w-full h-full video-overlay-bg z-20"></div>
-        <Image className="z-10" src={image} alt={title} fill />
+        <Image className="z-10 object-cover" src={image} alt={title} fill />
         <div className="flex items-center justify-center absolute inset-0 m-auto z-30">
           <CIRCLE_VIDEO_ICON
             fill="#8A8AE5"

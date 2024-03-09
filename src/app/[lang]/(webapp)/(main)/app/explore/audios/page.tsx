@@ -1,6 +1,7 @@
 import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
 import ExploreAssetsCard from "@/components/ExplorePageComponents/shared/AllAssetsCard";
 import ExploreAudioCard from "@/components/ExplorePageComponents/shared/AudioCard";
+import ExploreChillSongsSlider from "@/components/shared/ExploreChillSongsSldier";
 import { getDictionary } from "@/dictionary";
 import {
   getMostViewedSongs,
@@ -85,13 +86,35 @@ const WebAppExploreAudioAssets = async ({
                 {dic.generalApp.bestInMonth}
               </p>
             </div>
-            <div className="text-[14px] text-[#597AFF]">
+            {/* <div className="text-[14px] text-[#597AFF]">
               {dic.generalApp.viewAll}
-            </div>
+            </div> */}
           </div>
           <div>
             <div className="overflow-x-hidden">
-              <div className="flex items-stretch gap-4 overflow-x-auto [&_>_*]:w-[200px]">
+              <div>
+                <ExploreChillSongsSlider
+                  data={mostViewedSongs?.data
+                    ?.slice(0, 10)
+                    ?.map((item: any) => (
+                      <ExploreAssetsCard
+                        lang={lang}
+                        id={item.id}
+                        key={item.id}
+                        type="audio"
+                        cover={
+                          item.thumbnails["336x366"] || "/images/No-Soung.png"
+                        }
+                        title={item.name}
+                        author={{
+                          name: item.user.username,
+                          picture: item.user.image_url,
+                        }}
+                      />
+                    ))}
+                />
+              </div>
+              {/* <div className="flex items-stretch gap-4 overflow-x-auto [&_>_*]:w-[200px]">
                 {mostViewedSongs?.data?.slice(0, 10)?.map((item: any) => (
                   <ExploreAssetsCard
                     lang={lang}
@@ -106,7 +129,7 @@ const WebAppExploreAudioAssets = async ({
                     }}
                   />
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

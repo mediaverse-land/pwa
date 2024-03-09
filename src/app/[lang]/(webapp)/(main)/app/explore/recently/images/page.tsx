@@ -23,7 +23,7 @@ const WebAppRecentlyImages = async ({
     <div className="h-full w-full p-4 lg:p-10 overflow-y-auto">
       <SubSectionHeader name={dic.generalApp.recently} />
       <div className="grid grid-cols-3 grid-flow-row gap-2 mt-8 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2">
-        {data?.data.map((items: any, index: number) => {
+        {data?.data?.data?.map((items: any, index: number) => {
           return (
             <Link
               href={`/${lang}/app/assets/image/${items.name.replaceAll(
@@ -34,7 +34,8 @@ const WebAppRecentlyImages = async ({
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
               <Image
-                src={items.thumbnails["336x366"]}
+                className="object-cover"
+                src={items.thumbnails["336x366"] || "/images/No-Image.png"}
                 alt={items.name}
                 fill
               />
