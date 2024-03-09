@@ -37,7 +37,6 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const assetID = searchParams.id || "0";
   const singleImageData = await getSingleImageData({ id: assetID, token: "" });
-  // console.log(singleImageData?.data, "immmmmmmmmmmmmmm");
 
   return {
     title: singleImageData?.data?.data?.name,
@@ -152,10 +151,10 @@ const ImageSinglePage = async (params: any) => {
       {/* buy */}
       {singleImageData?.data?.data?.plan !== 1 && (
         <BuySection
-          asset={singleImageData?.data?.id}
-          type={singleImageData?.data?.type}
-          plan={singleImageData?.data?.plan}
-          price={singleImageData?.data?.price}
+          asset={singleImageData?.data?.data?.id}
+          type={singleImageData?.data?.data?.class}
+          plan={singleImageData?.data?.data?.plan}
+          price={singleImageData?.data?.data?.price}
         />
       )}
     </div>

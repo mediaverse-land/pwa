@@ -96,7 +96,7 @@ const BuyAsset = async ({
     getUserData(token),
   ]);
   //   console.log(assetData?.data.asset);
-  if (assetData?.data?.plan === 1)
+  if (assetData?.data?.data?.plan === 1)
     redirect(`/${params.lang}/app/explore`);
   const userBalance = await getUserBalacneData(token);
   return (
@@ -108,9 +108,9 @@ const BuyAsset = async ({
             <div className="p-6 bg-[rgba(78,78,97,0.50)] backdrop-blur-sm flex flex-col items-stretch gap-4 rounded-2xl">
               <div className="flex items-start h-[88px] gap-6">
                 <div className="relative h-full aspect-square min-w-[88px] max-w-[88px] rounded-lg overflow-hidden">
-                  {assetData?.data?.thumbnails["336x366"] ? (
+                  {assetData?.data?.data?.thumbnails["336x366"] ? (
                     <Image
-                      src={`${assetData?.data?.thumbnails["336x366"]}`}
+                      src={`${assetData?.data?.data?.thumbnails["336x366"]}`}
                       alt=""
                       fill
                     />
@@ -120,7 +120,7 @@ const BuyAsset = async ({
                 </div>
                 <div className="flex flex-col gap-4">
                   <div className="text-white leading-5">
-                    {assetData?.data?.name}
+                    {assetData?.data?.data?.name}
                   </div>
                   <div>
                     <PLAY_NO_BORDER />
@@ -129,10 +129,10 @@ const BuyAsset = async ({
               </div>
               <div className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md rounded-2xl text-center space-x-2 py-4">
                 <span className="text-[#CCCCFF] leading-4 capitalize">
-                  {AssetPurchasePlan[assetData?.data?.plan]}
+                  {AssetPurchasePlan[assetData?.data?.data?.plan]}
                 </span>
                 <span className="leading-4 text-white">
-                  {(assetData?.data?.price / 100).toFixed(2)} €
+                  {(assetData?.data?.data?.price / 100).toFixed(2)} €
                 </span>
               </div>
             </div>
@@ -181,8 +181,8 @@ const BuyAsset = async ({
           </div>
           {
             <BuyAssetComponent
-              assetData={assetData?.data}
-              id={assetData?.data?.asset_id}
+              assetData={assetData?.data?.data}
+              id={assetData?.data?.data?.asset_id}
               token={token}
               disableed={userBalance?.status === 404 ? true : false}
             />

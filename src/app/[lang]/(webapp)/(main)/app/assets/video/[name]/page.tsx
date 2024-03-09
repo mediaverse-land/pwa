@@ -62,7 +62,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const assetID = searchParams.id || "0";
   const singleVideoData = await getSingleVideoData({ id: assetID, token: "" });
-  console.log(singleVideoData?.data);
+  // console.log(singleVideoData?.data);
 
   return {
     title: singleVideoData?.data?.name,
@@ -226,10 +226,10 @@ const WebAppSingleVideoAsset = async (params: any) => {
       {/* buy */}
       {singleVideoData?.data?.plan !== 1 && (
         <BuySection
-          type={singleVideoData?.data?.type}
-          asset={singleVideoData?.data?.id}
-          plan={singleVideoData?.data?.plan}
-          price={singleVideoData?.data?.price}
+          type={singleVideoData?.data?.data?.class}
+          asset={singleVideoData?.data?.data?.id}
+          plan={singleVideoData?.data?.data?.plan}
+          price={singleVideoData?.data?.data?.price}
         />
       )}
     </div>

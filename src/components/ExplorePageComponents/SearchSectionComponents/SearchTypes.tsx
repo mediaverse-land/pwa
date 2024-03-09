@@ -69,7 +69,7 @@ export const SearchForAll = async ({
               name: item?.asset?.user?.username,
               picture: item?.asset?.user?.image_url,
             }}
-            cover={item?.asset?.thumbnails["336x366"]}
+            cover={item?.asset?.thumbnails["336x366"] || "/images/No-Image.png"}
             title={item?.name}
             type={dataType()}
           />
@@ -93,7 +93,7 @@ export const SearchForImages = async ({
     }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2 px-6 py-7 h-full overflow-y-auto">
+    <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(3n+1)]:col-span-2 [&_>_*:nth-child(3n+1)]:row-span-2 lg:[&_>_*:nth-child(3n+1)]:col-span-2 lg:[&_>_*:nth-child(3n+1)]:row-span-2 px-6 py-7 h-full overflow-y-auto">
       {searchResults.data
         .filter((item: any) => item.class === 2)
         .map((items: any, index: number) => {
@@ -107,7 +107,53 @@ export const SearchForImages = async ({
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
               <Image
-                src={items?.asset?.thumbnails["336x366"]}
+                src={
+                  items?.asset?.thumbnails["336x366"] || "/images/No-Image.png"
+                }
+                alt={items?.name}
+                fill
+              />
+            </Link>
+          );
+        })}
+      {searchResults.data
+        .filter((item: any) => item.class === 2)
+        .map((items: any, index: number) => {
+          return (
+            <Link
+              href={`/${params.lang}/app/assets/image/${items?.name.replaceAll(
+                " ",
+                "-"
+              )}?id=${items?.id}`}
+              key={items?.id}
+              className={`relative overflow-hidden rounded-lg w-full aspect-square `}
+            >
+              <Image
+                src={
+                  items?.asset?.thumbnails["336x366"] || "/images/No-Image.png"
+                }
+                alt={items?.name}
+                fill
+              />
+            </Link>
+          );
+        })}
+      {searchResults.data
+        .filter((item: any) => item.class === 2)
+        .map((items: any, index: number) => {
+          return (
+            <Link
+              href={`/${params.lang}/app/assets/image/${items?.name.replaceAll(
+                " ",
+                "-"
+              )}?id=${items?.id}`}
+              key={items?.id}
+              className={`relative overflow-hidden rounded-lg w-full aspect-square `}
+            >
+              <Image
+                src={
+                  items?.asset?.thumbnails["336x366"] || "/images/No-Image.png"
+                }
                 alt={items?.name}
                 fill
               />
@@ -146,7 +192,9 @@ export const SearchForVideos = async ({
                 picture: items?.asset?.user?.image_url,
               }}
               description={items.description}
-              image={items?.asset?.thumbnails["336x366"]}
+              image={
+                items?.asset?.thumbnails["336x366"] || "/images/No-Video.png"
+              }
               time={items.length}
               title={items.name}
             />
@@ -185,7 +233,9 @@ export const SearchForAudios = async ({
                 picture: items?.asset?.user?.image_url,
               }}
               description={items.description}
-              image={items?.asset?.thumbnails["336x366"]}
+              image={
+                items?.asset?.thumbnails["336x366"] || "/images/No-Sound.png"
+              }
               time={items.length}
               title={items.name}
             />

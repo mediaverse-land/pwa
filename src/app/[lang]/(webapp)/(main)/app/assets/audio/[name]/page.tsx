@@ -221,10 +221,10 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
       {singleAudioData?.data?.plan !== 1 ? (
         singleAudioData?.data?.user_id !== session?.user.id ? (
           <BuySection
-            asset={singleAudioData?.data.id}
-            type={singleAudioData?.data?.type}
-            plan={singleAudioData?.data?.plan}
-            price={singleAudioData?.data?.price}
+            asset={singleAudioData?.data?.data?.id}
+            type={singleAudioData?.data?.data?.class}
+            plan={singleAudioData?.data?.data?.plan}
+            price={singleAudioData?.data?.data?.price}
           />
         ) : null
       ) : null}

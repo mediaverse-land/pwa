@@ -155,10 +155,10 @@ const WebAppTextAssetSinglePage = async (params: any) => {
       {/* buy */}
       {singleTextData?.data?.plan !== 1 && (
         <BuySection
-          asset={singleTextData?.data.id}
-          type={singleTextData?.data?.type}
-          plan={singleTextData?.data?.plan}
-          price={singleTextData?.data?.price}
+          asset={singleTextData?.data?.data?.id}
+          type={singleTextData?.data?.data?.class}
+          plan={singleTextData?.data?.data?.plan}
+          price={singleTextData?.data?.data?.price}
         />
       )}
     </div>
