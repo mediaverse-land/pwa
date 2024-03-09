@@ -1,7 +1,8 @@
 import { PostCommentData } from "@/types";
 import { TFullLocales } from "@/types/dictionary-types";
 
-export const URL = process.env.BASE_URL ?? "https://api.mediaverse.land/v2";
+export const URL =
+  process.env.BASE_URL ?? ("https://api.mediaverse.land/v2" as const);
 
 const fetchInstance = (url: string, lang?: TFullLocales) => {
   if (process.env.NODE_ENV === "production")
@@ -210,6 +211,18 @@ export const getUserMessages = (token: string) => {
   const url = `${URL}/notifications`;
   return fetch(url, {
     next: { revalidate: process.env.NODE_ENV === "production" ? 10 : 0 },
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const getUserApiTokens = ({ token }: { token: string }) => {
+  const url = `${URL}/api-tokens`;
+  return fetch(url, {
+    next: { revalidate: 0 },
     headers: {
       "Accept-Language": "en-US",
       accept: "application/json",
