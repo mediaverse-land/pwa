@@ -1,16 +1,17 @@
 import { Footer, Navbar } from "@/components";
-import "./globals.scss";
-import "./globalCSS.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { NextAuthSessionProvider } from "@/components/nextauthProvider";
-import Script from "next/script";
-import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "@/components/ui/toaster";
 import { getDictionary } from "@/dictionary";
-import { FullLocaleNames, Locale } from "@/types/dictionary-types";
 import { locales } from "@/middleware";
 import { getHome } from "@/services/contactService";
-import { Toaster } from "@/components/ui/toaster";
+import { FullLocaleNames, Locale } from "@/types/dictionary-types";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
+import "./globalCSS.css";
+import "./globals.scss";
+import { GTM_ID } from "@/data";
+import GTMConsent from "@/components/shared/GTMConsent";
 const inter = Inter({ subsets: ["latin"] });
 
 // export async function generateStaticParams() {
@@ -51,11 +52,10 @@ export default async function RootLayout({
   const dic = await getDictionary(
     locales.find((item) => item === lang) ?? locales[0]
   );
-  const GTM_ID = "GTM-WPLNXH7D";
 
   return (
     <html lang={`${lang}`}>
-      <Script id="google-tag-manager" strategy="afterInteractive">
+      {/* <Script id="google-tag-manager" strategy="afterInteractive">
         {`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -63,7 +63,7 @@ export default async function RootLayout({
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','${GTM_ID}');
           `}
-      </Script>
+      </Script> */}
       <body
         className={`${inter.className} min-h-screen flex flex-col justify-between [&_>_*:nth-child(2)]:grow`}
       >
@@ -79,6 +79,7 @@ export default async function RootLayout({
           }}
         />
         <Toaster />
+        <GTMConsent />
       </body>
     </html>
   );
