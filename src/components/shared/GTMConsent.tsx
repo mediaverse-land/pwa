@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+import { cookies } from "next/headers";
 
 const GTMConsent = () => {
   const params = useParams();
+
   const [isShowable, setIsShowAble] = useState(true);
   // (function (w: Window, d: Document, s: string, l: string, i: string) {
   //   // @ts-ignore
@@ -43,7 +45,7 @@ const GTMConsent = () => {
                 }}
                 className="flex-1 px-6 py-1 border rounded-md order-2 lg:order-1"
               >
-                Decline
+                Reject all
               </button>
               <button
                 onClick={() => {
@@ -51,7 +53,7 @@ const GTMConsent = () => {
                 }}
                 className="flex-1 px-6 py-1 border rounded-md order-1 lg:order-2 bg-blue-500"
               >
-                Accept
+                Accept all
               </button>
             </div>
           </div>
