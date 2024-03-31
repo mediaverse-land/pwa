@@ -10,7 +10,7 @@ import { Loader2 } from "lucide-react";
 const DeleteAccountButton = ({
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement>) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const session = useSession();
   const { toast } = useToast();
   const params = useParams();
