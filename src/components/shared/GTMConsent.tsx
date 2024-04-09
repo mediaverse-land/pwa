@@ -1,27 +1,52 @@
 "use client";
 
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useState } from "react";
-import { cookies } from "next/headers";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const GTMConsent = () => {
   const params = useParams();
-
-  const [isShowable, setIsShowAble] = useState(true);
-  // (function (w: Window, d: Document, s: string, l: string, i: string) {
-  //   // @ts-ignore
-  //   w[l] = w[l] || [];
-  //   // @ts-ignore
-  //   w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-  //   // @ts-ignore
-  //   let f: HTMLScriptElement | null = d.getElementsByTagName(s)[0];
-  //   let j: HTMLScriptElement = d.createElement(s) as HTMLScriptElement;
-  //   let dl: string = l !== "dataLayer" ? "&l=" + l : "";
-  //   j.async = true;
-  //   j.src = `https://www.googletagmanager.com/gtm.js?id=${i}${dl}`;
-  //   f?.parentNode?.insertBefore(j, f);
-  // })(window, document, "script", "dataLayer", GTM_ID);
+  const router = useRouter();
+  const [isShowable, setIsShowAble] = useState(false);
+  useEffect(() => {
+    const consent = localStorage.getItem("GTM_CONSENT");
+    if (consent) {
+      const consentData = JSON.parse(consent);
+      // @ts-ignore
+      if (!window.gtag) return;
+      if (consentData.access === "granted") {
+        // @ts-ignore
+        window.gtag("consent", "update", {
+          ad_storage: "granted",
+          analytics_storage: "granted",
+          functionality_storage: "granted",
+          personalization_storage: "granted",
+          security_storage: "granted",
+        });
+      } else {
+        // @ts-ignore
+        window.gtag("consent", "default", {
+          ad_storage: "denied",
+          analytics_storage: "denied",
+          functionality_storage: "denied",
+          personalization_storage: "denied",
+          security_storage: "denied",
+        });
+      }
+    }
+  }, [isShowable]);
+  useEffect(() => {
+    const consent = localStorage.getItem("GTM_CONSENT");
+    if (consent) {
+      const consentData = JSON.parse(consent);
+      // if (consentData?.expired_time > new Date().getTime()) {
+      //   setIsShowAble(true);
+      // }
+      setIsShowAble(false);
+    } else {
+      setIsShowAble(true);
+    }
+  }, []);
   return (
     <>
       {isShowable && (
@@ -41,7 +66,15 @@ const GTMConsent = () => {
             <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-stretch gap-4 grow">
               <button
                 onClick={() => {
+                  localStorage.setItem(
+                    "GTM_CONSENT",
+                    JSON.stringify({
+                      access: "denied",
+                    })
+                  );
+
                   setIsShowAble(false);
+                  router.refresh();
                 }}
                 className="flex-1 px-6 py-1 border rounded-md order-2 lg:order-1"
               >
@@ -49,7 +82,14 @@ const GTMConsent = () => {
               </button>
               <button
                 onClick={() => {
+                  localStorage.setItem(
+                    "GTM_CONSENT",
+                    JSON.stringify({
+                      access: "granted",
+                    })
+                  );
                   setIsShowAble(false);
+                  router.refresh();
                 }}
                 className="flex-1 px-6 py-1 border rounded-md order-1 lg:order-2 bg-blue-500"
               >

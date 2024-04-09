@@ -12,6 +12,7 @@ import "./globalCSS.css";
 import "./globals.scss";
 import { GTM_ID } from "@/data";
 import GTMConsent from "@/components/shared/GTMConsent";
+import GoogleTagManager from "@/components/GoogleAnalytics";
 const inter = Inter({ subsets: ["latin"] });
 
 // export async function generateStaticParams() {
@@ -78,8 +79,9 @@ export default async function RootLayout({
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
           }}
         />
+        <GoogleTagManager />
         <Toaster />
-        {/* <GTMConsent /> */}
+        <GTMConsent />
       </body>
     </html>
   );
