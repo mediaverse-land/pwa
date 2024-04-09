@@ -13,6 +13,7 @@ import "./globals.scss";
 import { GTM_ID } from "@/data";
 import GTMConsent from "@/components/shared/GTMConsent";
 import GoogleTagManager from "@/components/GoogleAnalytics";
+import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 // export async function generateStaticParams() {
@@ -56,7 +57,7 @@ export default async function RootLayout({
 
   return (
     <html lang={`${lang}`}>
-      {/* <Script id="google-tag-manager" strategy="afterInteractive">
+      <Script id="google-tag-manager" strategy="afterInteractive">
         {`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -64,7 +65,7 @@ export default async function RootLayout({
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','${GTM_ID}');
           `}
-      </Script> */}
+      </Script>
       <body
         className={`${inter.className} min-h-screen flex flex-col justify-between [&_>_*:nth-child(2)]:grow`}
       >
