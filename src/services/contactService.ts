@@ -1,8 +1,6 @@
+import { baseURL } from "@/configs/base";
 import { PostCommentData } from "@/types";
 import { TFullLocales } from "@/types/dictionary-types";
-
-export const URL =
-  process.env.BASE_URL ?? ("https://api.mediaverse.land/v2" as const);
 
 const fetchInstance = (url: string, lang?: TFullLocales) => {
   if (process.env.NODE_ENV === "production")
@@ -26,15 +24,15 @@ const fetchInstance = (url: string, lang?: TFullLocales) => {
 };
 
 export const getMostViewedImages = async (lang: TFullLocales) => {
-  const url = `${URL}/images/most-viewed`;
+  const url = `${baseURL}/images/most-viewed`;
   return fetchInstance(url, lang);
 };
 export const getRecentlyImages = async () => {
-  const url = `${URL}/images/newest`;
+  const url = `${baseURL}/images/newest`;
   return fetchInstance(url);
 };
 export const getRecommendedImages = async () => {
-  const url = `${URL}/images/daily-recommended`;
+  const url = `${baseURL}/images/daily-recommended`;
   return fetchInstance(url);
 };
 export const getSingleImage = async ({
@@ -44,7 +42,7 @@ export const getSingleImage = async ({
   id: string;
   token?: string;
 }) => {
-  const url = `${URL}/images/${id}`;
+  const url = `${baseURL}/images/${id}`;
   return token
     ? fetch(url, {
         next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
@@ -71,7 +69,7 @@ export const getSingleVideo = async ({
   id: string;
   token?: string;
 }) => {
-  const url = `${URL}/videos/${id}`;
+  const url = `${baseURL}/videos/${id}`;
   return token
     ? fetch(url, {
         next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
@@ -98,7 +96,7 @@ export const getSingleText = async ({
   id: string;
   token?: string;
 }) => {
-  const url = `${URL}/texts/${id}`;
+  const url = `${baseURL}/texts/${id}`;
   return token
     ? fetch(url, {
         next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
@@ -125,7 +123,7 @@ export const getSingleAudio = async ({
   id: string;
   token?: string;
 }) => {
-  const url = `${URL}/audios/${id}`;
+  const url = `${baseURL}/audios/${id}`;
   return token
     ? fetch(url, {
         next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
@@ -146,45 +144,45 @@ export const getSingleAudio = async ({
       });
 };
 export const getMostViewedText = async (lang: TFullLocales) => {
-  const url = `${URL}/texts/most-viewed`;
+  const url = `${baseURL}/texts/most-viewed`;
   return fetchInstance(url, lang);
 };
 export const getRecentlyTexts = async () => {
-  const url = `${URL}/texts/newest`;
+  const url = `${baseURL}/texts/newest`;
   return fetchInstance(url);
 };
 export const getRecommendedTexts = async () => {
-  const url = `${URL}/texts/daily-recommended`;
+  const url = `${baseURL}/texts/daily-recommended`;
   return fetchInstance(url);
 };
 
 export const getMostViewedVideos = (lang: TFullLocales) => {
-  const url = `${URL}/videos/most-viewed`;
+  const url = `${baseURL}/videos/most-viewed`;
   return fetchInstance(url, lang);
 };
 export const getRecentlyVideos = () => {
-  const url = `${URL}/videos/newest`;
+  const url = `${baseURL}/videos/newest`;
   return fetchInstance(url);
 };
 export const getRecommendedVideos = () => {
-  const url = `${URL}/videos/daily-recommended`;
+  const url = `${baseURL}/videos/daily-recommended`;
   return fetchInstance(url);
 };
 
 export const getMostViewedSongs = (lang: TFullLocales) => {
-  const url = `${URL}/audios/most-viewed`;
+  const url = `${baseURL}/audios/most-viewed`;
   return fetchInstance(url, lang);
 };
 export const getRecentlySongs = () => {
-  const url = `${URL}/audios/newest`;
+  const url = `${baseURL}/audios/newest`;
   return fetchInstance(url);
 };
 export const getRecommendedSongs = () => {
-  const url = `${URL}/audios/daily-recommended`;
+  const url = `${baseURL}/audios/daily-recommended`;
   return fetchInstance(url);
 };
 export const getProfileStatics = (token: string) => {
-  const url = `${URL}/profile/statics`;
+  const url = `${baseURL}/profile/statics`;
   return fetch(url, {
     next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
     headers: {
@@ -196,7 +194,7 @@ export const getProfileStatics = (token: string) => {
   });
 };
 export const getUserWallets = (token: string) => {
-  const url = `${URL}/wallets`;
+  const url = `${baseURL}/wallets`;
   return fetch(url, {
     next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
     headers: {
@@ -208,7 +206,7 @@ export const getUserWallets = (token: string) => {
   });
 };
 export const getUserMessages = (token: string) => {
-  const url = `${URL}/notifications`;
+  const url = `${baseURL}/notifications`;
   return fetch(url, {
     next: { revalidate: process.env.NODE_ENV === "production" ? 10 : 0 },
     headers: {
@@ -220,7 +218,7 @@ export const getUserMessages = (token: string) => {
   });
 };
 export const getUserApiTokens = ({ token }: { token: string }) => {
-  const url = `${URL}/api-tokens`;
+  const url = `${baseURL}/api-tokens`;
   return fetch(url, {
     next: { revalidate: 0 },
     headers: {
@@ -238,7 +236,7 @@ export const getUserSingleMessage = ({
   token: string;
   id: string;
 }) => {
-  const url = `${URL}/notifications/${id}`;
+  const url = `${baseURL}/notifications/${id}`;
   return fetch(url, {
     next: { revalidate: process.env.NODE_ENV === "production" ? 10 : 0 },
     headers: {
@@ -251,12 +249,12 @@ export const getUserSingleMessage = ({
 };
 
 export const getTerms = ({ lang }: { lang: TFullLocales }) => {
-  const url = `${URL}/terms`;
+  const url = `${baseURL}/terms`;
   return fetchInstance(url, lang);
 };
 
 export const getPrivacy = (lang: TFullLocales) => {
-  const url = `${URL}/privacy`;
+  const url = `${baseURL}/privacy`;
   return fetchInstance(url, lang);
 };
 export const getLives = async ({
@@ -266,23 +264,23 @@ export const getLives = async ({
   params?: string;
   lang: TFullLocales;
 }) => {
-  const url = `${URL}/channels${params}`;
+  const url = `${baseURL}/channels${params}`;
   return fetchInstance(url, lang);
 };
 export const getFAQ = (lang: TFullLocales) => {
-  const url = `${URL}/faq`;
+  const url = `${baseURL}/faq`;
   return fetchInstance(url, lang);
 };
 export const getHome = (lang: TFullLocales) => {
-  const url = `${URL}/home`;
+  const url = `${baseURL}/home`;
   return fetchInstance(url, lang);
 };
 export const getAboutUs = (lang: TFullLocales) => {
-  const url = `${URL}/about-us`;
+  const url = `${baseURL}/about-us`;
   return fetchInstance(url, lang);
 };
 export const getSearch = (params: string) => {
-  const url = `${URL}/search?${params}`;
+  const url = `${baseURL}/search?${params}`;
   return fetchInstance(url);
 };
 export const getSubscribeAssets = ({
@@ -292,7 +290,7 @@ export const getSubscribeAssets = ({
   params: string;
   token: string;
 }) => {
-  const url = `${URL}/profile/subscriptions${params}`;
+  const url = `${baseURL}/profile/subscriptions${params}`;
   return fetch(url, {
     next: {
       revalidate: process.env.NODE_ENV === "production" ? 2 : 50,
@@ -313,7 +311,7 @@ export const getOwnershipAssets = ({
   params: string;
   token: string;
 }) => {
-  const url = `${URL}/profile${params}`;
+  const url = `${baseURL}/profile${params}`;
   return fetch(url, {
     next: {
       revalidate: process.env.NODE_ENV === "production" ? 2 : 60,
@@ -329,7 +327,7 @@ export const getOwnershipAssets = ({
   });
 };
 export const getUserBalance = ({ token }: { token: string }) => {
-  const url = `${URL}/stripe/balance`;
+  const url = `${baseURL}/stripe/balance`;
   return fetch(url, {
     next: { revalidate: 0, tags: ["getUserBalance"] },
     // cache: "no-store",
@@ -343,7 +341,7 @@ export const getUserBalance = ({ token }: { token: string }) => {
   });
 };
 export const getUserStripeAccount = ({ token }: { token: string }) => {
-  const url = `${URL}/stripe/account`;
+  const url = `${baseURL}/stripe/account`;
   return fetch(url, {
     next: { revalidate: 0 },
     method: "GET",
@@ -356,7 +354,7 @@ export const getUserStripeAccount = ({ token }: { token: string }) => {
   });
 };
 export const getUserProfile = ({ token }: { token: string }) => {
-  const url = `${URL}/profile`;
+  const url = `${baseURL}/profile`;
   return fetch(url, {
     // next: {
     //   revalidate: process.env.NODE_ENV === "production" ? 0 : 0,
@@ -379,7 +377,7 @@ export const buyAsset_Fetch = ({
   token: string;
   id: string;
 }) => {
-  const url = `${URL}/assets/${id}/buy`;
+  const url = `${baseURL}/assets/${id}/buy`;
   return fetch(url, {
     next: { revalidate: 0 },
     method: "PATCH",
@@ -392,7 +390,7 @@ export const buyAsset_Fetch = ({
   });
 };
 export const connetToStripe_Fetch = async ({ token }: { token: string }) => {
-  const url = `${URL}/stripe/connect`;
+  const url = `${baseURL}/stripe/connect`;
   return fetch(url, {
     next: { revalidate: 0, tags: ["connetStripe"] },
     method: "POST",
@@ -406,7 +404,7 @@ export const connetToStripe_Fetch = async ({ token }: { token: string }) => {
   });
 };
 export const getStripeGateway = async ({ token }: { token: string }) => {
-  const url = `${URL}/stripe/gateway`;
+  const url = `${baseURL}/stripe/gateway`;
   return fetch(url, {
     next: { revalidate: 0, tags: ["getStripeGateway"] },
     method: "GET",
@@ -426,7 +424,7 @@ export const putUserProfile = ({
   token: string;
   data: any;
 }) => {
-  const url = `${URL}/profile`;
+  const url = `${baseURL}/profile`;
   return fetch(url, {
     next: { revalidate: process.env.NODE_ENV === "production" ? 10 : 0 },
     method: "PUT",
@@ -448,7 +446,7 @@ export const getComments = async ({
   id: string;
   token: string;
 }) => {
-  const url = `${URL}/assets/${id}/comments`;
+  const url = `${baseURL}/assets/${id}/comments`;
   return fetch(url, {
     next: {
       revalidate: 0,
@@ -468,7 +466,7 @@ export const postComment = async ({
   body: PostCommentData;
   token: string;
 }) => {
-  const url = `${URL}/assets/comments`;
+  const url = `${baseURL}/assets/comments`;
   return fetch(url, {
     next: { revalidate: 0 },
     method: "POST",
@@ -484,7 +482,7 @@ export const postComment = async ({
 };
 
 export const getSignIns = async ({ token }: { token: string }) => {
-  const url = `${URL}/sign-ins`;
+  const url = `${baseURL}/sign-ins`;
   return fetch(url, {
     next: {
       revalidate: process.env.NODE_ENV === "production" ? 10 : 0,
@@ -498,7 +496,7 @@ export const getSignIns = async ({ token }: { token: string }) => {
   });
 };
 export const getSessions = async ({ token }: { token: string }) => {
-  const url = `${URL}/sessions`;
+  const url = `${baseURL}/sessions`;
   return fetch(url, {
     next: {
       revalidate: process.env.NODE_ENV === "production" ? 10 : 0,
@@ -529,7 +527,7 @@ export const getBlog = ({ id, lang }: { id: string; lang: TFullLocales }) => {
 };
 
 export const requestOTP = async (data: any) => {
-  const url = `${URL}/auth/otp/request`;
+  const url = `${baseURL}/auth/otp/request`;
   if (process.env.NODE_ENV === "production") {
     const req = await fetch(url, {
       next: { revalidate: 60 },
@@ -560,7 +558,7 @@ export const requestOTP = async (data: any) => {
   }
 };
 export const submitOTP = async (data: any) => {
-  const url = `${URL}/auth/otp/submit`;
+  const url = `${baseURL}/auth/otp/submit`;
   if (process.env.NODE_ENV === "production") {
     const req = await fetch(url, {
       next: { revalidate: 60 },
@@ -591,7 +589,7 @@ export const submitOTP = async (data: any) => {
   }
 };
 export const signUpCompletion = async ({ data, token }: any) => {
-  const url = `${URL}/auth/sign-up-completion`;
+  const url = `${baseURL}/auth/sign-up-completion`;
   if (process.env.NODE_ENV === "production") {
     const req = await fetch(url, {
       next: { revalidate: 60 },
@@ -624,7 +622,7 @@ export const signUpCompletion = async ({ data, token }: any) => {
   }
 };
 export const signInWithUsername = async (data: any) => {
-  const url = `${URL}/auth/sign-in`;
+  const url = `${baseURL}/auth/sign-in`;
   if (process.env.NODE_ENV === "production") {
     const req = await fetch(url, {
       next: { revalidate: 60 },

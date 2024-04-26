@@ -5,7 +5,7 @@ import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponen
 import { AUDIO_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
 import ShareButton from "@/components/shared/ShareButton";
-import { webAppDeepLink } from "@/data";
+import { logoURL, webAppDeepLink } from "@/configs/base";
 import { getSingleAudio } from "@/services/contactService";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
@@ -45,7 +45,7 @@ export async function generateMetadata({
     openGraph: {
       title: singleAudioData?.data?.name,
       description: singleAudioData?.data?.description,
-      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+      images: `${process.env.NEXTAUTH_URL}${logoURL}`,
     },
   };
 }

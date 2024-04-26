@@ -1,4 +1,3 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import {
   SubscribeAllAssets,
   SubscribeAudioAssets,
@@ -6,7 +5,6 @@ import {
   SubscribeTextAssets,
   SubscribeVideoAssets,
 } from "@/components/ExplorePageComponents/AccountComponents/SubsribeAssets";
-import UserStatics from "@/components/ExplorePageComponents/AccountComponents/UserStatics";
 import {
   AUDIO_ICON,
   PICTURE_ICON,
@@ -14,11 +12,9 @@ import {
   VIDEO_ICON,
 } from "@/components/SVG/svgs";
 import WebAppAccountTopSection from "@/components/WebApp/Account/TopSection";
-import { webAppDeepLink } from "@/data";
+import { webAppDeepLink } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import { Locale } from "@/types/dictionary-types";
-import { getServerSession } from "next-auth";
-import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 type IExploreSectionNavs = {

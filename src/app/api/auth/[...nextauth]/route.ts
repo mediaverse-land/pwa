@@ -1,10 +1,10 @@
-import { URL } from "@/services/contactService";
 import NextAuth, { AuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import TwitterProvider from "next-auth/providers/twitter";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { baseURL } from "@/configs/base";
 
 export const authOptions: AuthOptions = {
   pages: {
@@ -48,7 +48,7 @@ export const authOptions: AuthOptions = {
 
       switch (data.account.provider) {
         case "google": {
-          const req = await fetch(`${URL}/auth/google`, {
+          const req = await fetch(`${baseURL}/auth/google`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -72,7 +72,7 @@ export const authOptions: AuthOptions = {
         }
 
         case "facebook": {
-          const req = await fetch(`${URL}/auth/facebook`, {
+          const req = await fetch(`${baseURL}/auth/facebook`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

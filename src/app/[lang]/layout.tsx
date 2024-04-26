@@ -14,6 +14,7 @@ import { GTM_ID } from "@/data";
 import GTMConsent from "@/components/shared/GTMConsent";
 import GoogleTagManager from "@/components/GoogleAnalytics";
 import Script from "next/script";
+import { logoURL, websiteTitle } from "@/configs/base";
 const inter = Inter({ subsets: ["latin"] });
 
 // export async function generateStaticParams() {
@@ -34,12 +35,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const homeData = await getHomeData(lang);
   return {
-    title: "MediaVerse",
+    title: websiteTitle,
     description: homeData.description,
     keywords: homeData.keywords,
     openGraph: {
       description: homeData.description,
-      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+      images: `${process.env.NEXTAUTH_URL}${logoURL}`,
     },
   };
 }

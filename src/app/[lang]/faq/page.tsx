@@ -1,5 +1,6 @@
 import Accordion from "@/components/Accordion";
 import Motion from "@/components/motion";
+import { logoURL } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import { getFAQ } from "@/services/contactService";
 import {
@@ -34,7 +35,7 @@ export async function generateMetadata({
     // description: faqData.description,
     openGraph: {
       title: dic.header.faq,
-      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+      images: `${process.env.NEXTAUTH_URL}${logoURL}`,
     },
   };
 }

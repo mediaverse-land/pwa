@@ -8,6 +8,7 @@ import { DicProperties, Locale } from "@/types/dictionary-types";
 import { CLOSE_ICON, HAMBURGER_ICON } from "./SVG/svgs";
 import { useEffect, useState } from "react";
 import MobileMenu from "./MobileViewMenu";
+import { logoURL, websiteTitle } from "@/configs/base";
 
 const Navbar = ({ dic }: { dic: DicProperties }) => {
   const pathname = usePathname();
@@ -31,16 +32,16 @@ const Navbar = ({ dic }: { dic: DicProperties }) => {
           className="flex items-center"
         >
           <Image
-            src="/images/media-verse-logo.png"
+            src={`${logoURL}`}
             quality={100}
             width={30}
             height={40}
             className="mr-3"
-            alt="MediaVerse Logo"
+            alt={`${websiteTitle} Logo`}
           />
           <div className="flex flex-col">
             <span className="self-center text-[16px] font-bold lg:text-lg lg:font-semibold whitespace-nowrap text-white">
-              MediaVerse
+              {websiteTitle}
             </span>
             <span className="self-center text-xs top-0 text-gray-500 whitespace-nowrap">
               {dic?.header.slogan}

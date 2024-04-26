@@ -2,6 +2,7 @@ import { SongSlider, VideoSlider } from "@/components";
 import BorderGradient from "@/components/BorderGradient";
 import ScrollToBottomBtn from "@/components/Buttons/ScrollToBottom";
 import Motion from "@/components/motion";
+import { logoURL } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import { locales } from "@/middleware";
 import {
@@ -36,7 +37,7 @@ export async function generateMetadata({
     keywords: homeData.keywords,
     openGraph: {
       description: homeData.description,
-      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+      images: `${process.env.NEXTAUTH_URL}${logoURL}`,
     },
   };
 }

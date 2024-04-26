@@ -6,7 +6,8 @@ import HLSPlayer from "@/components/ExplorePageComponents/shared/HLSPlayer";
 import { PLAY, VIDEO_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
 import ShareButton from "@/components/shared/ShareButton";
-import { VideoType, webAppDeepLink } from "@/data";
+import { logoURL, webAppDeepLink } from "@/configs/base";
+import { VideoType } from "@/data";
 import { DeleteUserSession } from "@/lib/test";
 import { getComments, getSingleVideo } from "@/services/contactService";
 import { FullLocaleNames, Locale } from "@/types/dictionary-types";
@@ -70,7 +71,7 @@ export async function generateMetadata({
     openGraph: {
       title: singleVideoData?.data?.name,
       description: singleVideoData?.data?.description,
-      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+      images: `${process.env.NEXTAUTH_URL}${logoURL}`,
     },
   };
 }

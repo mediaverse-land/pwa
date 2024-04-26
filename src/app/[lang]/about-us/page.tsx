@@ -1,4 +1,5 @@
 import Motion from "@/components/motion";
+import { logoURL } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import { getAboutUs } from "@/services/contactService";
 import {
@@ -34,7 +35,7 @@ export async function generateMetadata({
     openGraph: {
       title: dic.header.about,
       description: aboutUsData.description,
-      images: `${process.env.NEXTAUTH_URL}/images/media-verse-logo.png`,
+      images: `${process.env.NEXTAUTH_URL}${logoURL}`,
     },
   };
 }

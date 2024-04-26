@@ -3,7 +3,7 @@
 import { signOut, useSession } from "next-auth/react";
 import { useToast } from "../ui/use-toast";
 import { ButtonHTMLAttributes, useState } from "react";
-import { URL } from "@/services/contactService";
+import { baseURL } from "@/configs/base";
 import { useParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
@@ -19,7 +19,7 @@ const DeleteAccountButton = ({
       onClick={async () => {
         setIsLoading(true);
         try {
-          const req = await fetch(`${URL}/account`, {
+          const req = await fetch(`${baseURL}/account`, {
             method: "DELETE",
             headers: {
               Authorization: `Bearer ${session.data?.user.token}`,

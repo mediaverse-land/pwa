@@ -7,7 +7,7 @@ import {
   MESSAGE_ICON,
   SHARE_ICON,
 } from "@/components/SVG/svgs";
-import { webAppDeepLink } from "@/data";
+import { webAppDeepLink } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import { getUserMessages, getUserWallets } from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";

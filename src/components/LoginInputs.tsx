@@ -1,6 +1,6 @@
 "use client";
 
-import { URL, requestOTP, signInWithUsername } from "@/services/contactService";
+import { requestOTP, signInWithUsername } from "@/services/contactService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
@@ -12,6 +12,7 @@ import { useSearchParams } from "next/navigation";
 import { convertSecondsForTimer } from "@/lib/convertSecondToTimer";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import { baseURL } from "@/configs/base";
 
 const loginWithPhoneSchema = z.object({
   cellphone: z.string().min(1, { message: "*This field is required" }),
@@ -85,7 +86,7 @@ const LoginWithPhone = () => {
         setIsLoading(false);
         return;
       }
-      const res = await fetch(`${URL}/auth/otp/submit`, {
+      const res = await fetch(`${baseURL}/auth/otp/submit`, {
         method: "POST",
         body: JSON.stringify({
           cellphone: data.cellphone,

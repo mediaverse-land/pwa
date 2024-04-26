@@ -1,3 +1,4 @@
+import { websiteTitle } from "@/configs/base";
 import { Locale } from "@/types/dictionary-types";
 import Link from "next/link";
 
@@ -15,8 +16,8 @@ const StripeRetrun = ({
       <div className="flex flex-col items-stretch gap-6 bg-[rgba(78,78,97,0.50)] border rounded-2xl py-14 px-8 text-[14px] max-w-[286px] lg:px-16 lg:py-16 text-white lg:text-[18px] font-semibold  md:max-w-[568px] md:text-[16px] lg:max-w-[768px] mx-auto text-center">
         <p className="">
           Congratulations! Your Account is Ready! Your account creation was
-          successful, and you're all set to explore everything MediaVerse has to
-          offer. Get ready for an amazing experience!
+          successful, and you're all set to explore everything{" "}
+          {`${websiteTitle}`} has to offer. Get ready for an amazing experience!
         </p>
         <Link href={`/${params.lang}/app/wallet`} className="flex mx-auto">
           <div

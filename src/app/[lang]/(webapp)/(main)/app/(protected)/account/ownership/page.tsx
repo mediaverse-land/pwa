@@ -12,7 +12,7 @@ import {
   VIDEO_ICON,
 } from "@/components/SVG/svgs";
 import WebAppAccountTopSection from "@/components/WebApp/Account/TopSection";
-import { webAppDeepLink } from "@/data";
+import { webAppDeepLink } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import { Locale } from "@/types/dictionary-types";
 import Link from "next/link";

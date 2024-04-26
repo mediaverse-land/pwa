@@ -1,6 +1,5 @@
 import { socialMediaLinks } from "@/types";
 
-export const webAppDeepLink = "mediaverse://media.verse";
 export const GTM_ID = "GTM-WPLNXH7D";
 
 export const navbar: {

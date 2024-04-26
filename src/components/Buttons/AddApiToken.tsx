@@ -1,6 +1,6 @@
 "use client";
 
-import { URL } from "@/services/contactService";
+import { baseURL } from "@/configs/base";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -30,7 +30,7 @@ const AddApiTokenButton = () => {
 
   const handleSubmitForm = handleSubmit(async (data) => {
     try {
-      const req = await fetch(`${URL}/api-tokens`, {
+      const req = await fetch(`${baseURL}/api-tokens`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
