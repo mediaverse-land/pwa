@@ -9,22 +9,12 @@ import {
 } from "@/components/SVG/svgs";
 import { webAppDeepLink } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
-import { getUserMessages, getUserWallets } from "@/services/contactService";
+import { getUserMessages } from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-const getUserWalletData = async (token: string) => {
-  try {
-    const req = await getUserWallets(token);
-    return {
-      data: await req.json(),
-      status: req.status,
-    };
-  } catch (error) {
-    console.error(error);
-  }
-};
+
 const getUserMessagesData = async (token: string) => {
   try {
     const req = await getUserMessages(token);
@@ -49,13 +39,8 @@ const WebAppSessting = async ({
   const session = await getServerSession(authOptions);
   const dic = await getDictionary(lang);
   const token = session?.user?.token || "";
-  const [wallets, messagesData] = await Promise.all([
-    getUserWalletData(token),
-    getUserMessagesData(token),
-  ]);
-  if (wallets?.status === 401 || messagesData?.status === 401) {
-    return <LogoutNoUser />;
-  }
+  const [messagesData] = await Promise.all([getUserMessagesData(token)]);
+
   return (
     <div
       key={searchParams.content || "all"}
@@ -161,9 +146,6 @@ const WebAppSessting = async ({
                 {dic.appSidebar.wallet}
               </div>
             </div>
-            <div className="text-[12px] text-[#A2A2B5]">
-              {wallets?.data[0].balance} {wallets?.data[0].type}
-            </div>
           </Link>
         </div>
         {/* second section  */}
@@ -209,7 +191,7 @@ const WebAppSessting = async ({
         </div>
       </div>
       <div className="lg:hidden mx-auto">
-        <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
+        <button className="text-[14px] rounded-full px-4 sm:px-6 py-1 text-center bg-blue-600">
           <Link href={`${webAppDeepLink}?page=setting`}>View in App</Link>
         </button>
       </div>

@@ -193,18 +193,7 @@ export const getProfileStatics = (token: string) => {
     },
   });
 };
-export const getUserWallets = (token: string) => {
-  const url = `${baseURL}/wallets`;
-  return fetch(url, {
-    next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
-    headers: {
-      "Accept-Language": "en-US",
-      accept: "application/json",
-      "x-app": "_Web",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-};
+
 export const getUserMessages = (token: string) => {
   const url = `${baseURL}/notifications`;
   return fetch(url, {
