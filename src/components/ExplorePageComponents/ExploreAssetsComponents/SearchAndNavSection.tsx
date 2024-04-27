@@ -63,7 +63,7 @@ const ExploreSearchAndNavSection = ({
   dic: DicProperties;
 }) => {
   return (
-    <div className="flex flex-col items-stretch gap-2 lg:gap-6 sticky top-0 left-0 w-full z-50">
+    <div className="flex flex-col items-stretch gap-2 lg:gap-6 sticky top-0 left-0 w-full z-30">
       {/* search section */}
       <Link
         href={`/${lang}/app/explore/search-form`}

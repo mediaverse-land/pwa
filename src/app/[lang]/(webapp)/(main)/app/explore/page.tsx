@@ -47,7 +47,6 @@ const WebAppExploreAssets = async ({
   ]);
   const topTextsData = await getTopTextsData(FullLocaleNames[lang]);
   const dic = await getDictionary(lang);
-
   return (
     <div className="h-full overflow-y-auto">
       <ExploreSearchAndNavSection dic={dic} lang={lang} activeTab={"All"} />
