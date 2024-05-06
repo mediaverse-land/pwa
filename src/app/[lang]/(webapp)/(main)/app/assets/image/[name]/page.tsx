@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import BuySection from "@/components/ExplorePageComponents/SingleAssetPages/shared/BuySection";
 import SingleAssetComments from "@/components/ExplorePageComponents/SingleAssetPages/shared/Comments";
 import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponents/SingleAssetPages/shared/TitleAndDescription";
@@ -9,8 +9,9 @@ import { logoURL, webAppDeepLink } from "@/configs/base";
 import { getSingleImage } from "@/services/contactService";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
-import Image from "next/image";
+
 import Link from "next/link";
+import Image from "next/image";
 
 const getSingleImageData = async ({
   id,
@@ -55,8 +56,6 @@ const ImageSinglePage = async (params: any) => {
   const session = await getServerSession(authOptions);
   const token = session?.user?.token || "";
   const singleImageData = await getSingleImageData({ id: assetID, token });
-  // console.log(singleImageData?.data);
-
   if (singleImageData?.data?.status === 404) {
     return (
       <div className="w-full h-full flex items-center justify-center">
@@ -79,7 +78,10 @@ const ImageSinglePage = async (params: any) => {
         <div className="relative w-full h-full overflow-hidden z-10">
           <Image
             className="object-cover"
-            src={`${singleImageData?.data?.data?.thumbnails["523x304"] || "/"}`}
+            src={`${
+              singleImageData?.data?.data.thumbnails["523x304"] ||
+              "/images/No-Image.png"
+            }`}
             alt=""
             fill
           />

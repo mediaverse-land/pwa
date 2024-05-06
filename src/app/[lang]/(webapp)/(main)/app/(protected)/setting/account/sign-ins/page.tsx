@@ -1,6 +1,6 @@
 import { getSignIns } from "@/services/contactService";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import { convertISOToDateAndTime } from "@/lib/convertISOToDateAndTime";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import { Locale } from "@/types/dictionary-types";

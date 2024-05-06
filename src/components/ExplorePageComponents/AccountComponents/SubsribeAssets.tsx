@@ -6,7 +6,7 @@ import ExploreTextCard from "../shared/TextCard";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import LogoutNoUser from "./Logout";
 import { DicProperties, Locale } from "@/types/dictionary-types";
 

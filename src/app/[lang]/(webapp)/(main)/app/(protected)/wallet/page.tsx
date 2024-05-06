@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import AddInventoryButton from "@/components/ExplorePageComponents/WalletComponents/AddInventoryButton";
 import ConnetToStripeButton from "@/components/ExplorePageComponents/WalletComponents/ConnetToStripeButton";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";

@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import { INACTIVE_PLUS } from "@/components/SVG/svgs";
 import { getStripeGateway } from "@/services/contactService";
 import { DicProperties, Locale } from "@/types/dictionary-types";

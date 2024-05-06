@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import { connetToStripe_Fetch } from "@/services/contactService";
 import { DicProperties, Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";

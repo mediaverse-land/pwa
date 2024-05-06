@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import SocialLoginBtn from "@/components/Buttons/SocialLoginBtn";
 import { LoginWithPhone, LoginWithUsername } from "@/components/LoginInputs";
 import Motion from "@/components/motion";

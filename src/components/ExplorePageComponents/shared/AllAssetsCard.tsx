@@ -8,7 +8,7 @@ import Image from "next/image";
 import "./styles.css";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import { Locale } from "@/types/dictionary-types";
 
 const icons: { [key: string]: JSX.Element } = {

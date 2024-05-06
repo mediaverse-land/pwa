@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import SubSectionHeader from "../shared/SubSectionHeader";

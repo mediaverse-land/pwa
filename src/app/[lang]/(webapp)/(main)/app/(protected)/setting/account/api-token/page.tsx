@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import AddApiTokenButton from "@/components/Buttons/AddApiToken";
 import ShowUserTokenButton from "@/components/Buttons/ShowUserToken";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";

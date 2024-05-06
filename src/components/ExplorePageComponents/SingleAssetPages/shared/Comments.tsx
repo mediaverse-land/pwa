@@ -4,10 +4,9 @@ import { convertISOToRelative } from "@/lib/convertISOToRelative";
 import { getComments, postComment } from "@/services/contactService";
 import { PostCommentData } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { revalidateTag } from "next/cache";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const schema = z.object({
@@ -54,6 +53,7 @@ const SingleAssetComments = ({
   const [modalStatus, setModalStatus] = useState({
     isOpen: false,
   });
+
   const {
     handleSubmit,
     register,
@@ -103,23 +103,22 @@ const SingleAssetComments = ({
       },
       token,
     });
-    // console.log(res);
+    console.log(res?.data);
     if (res?.status === 200 && res.data.status === 1) {
-      reset();
       setRefetchComment((prev) => {
         return !prev;
       });
       setMessage("Your comment will be displayed after approval");
     } else if (res?.status === 200 && res.data.status === 2) {
       // console.log("set");
-      reset();
+
       setRefetchComment((prev) => {
         return !prev;
       });
     } else if (res?.status === 200 && res.data.status === 3) {
-      reset();
       setMessage("Your comment rejected");
     }
+    reset();
   });
   return (
     <>
@@ -144,7 +143,7 @@ const SingleAssetComments = ({
           <div className="flex items-center gap-4">
             <div className="relative w-[40px] h-[40px] aspect-square overflow-hidden rounded-full">
               {userImage ? (
-                <Image src={`${userImage}`} alt={`${username}`} fill />
+                <Image src={`${userImage || "/"}`} alt={`${username}`} fill />
               ) : (
                 <div className="w-full h-full bg-white"></div>
               )}
@@ -187,7 +186,7 @@ const SingleAssetComments = ({
           <div className="flex items-center gap-2 lg:gap-4">
             <div className="relative w-[40px] h-[40px] aspect-square overflow-hidden rounded-full">
               {userImage ? (
-                <Image src={`${userImage}`} alt={`${username}`} fill />
+                <Image src={`${userImage || "/"}`} alt={`${username}`} fill />
               ) : (
                 <div className="w-full h-full bg-white"></div>
               )}
@@ -211,7 +210,11 @@ const SingleAssetComments = ({
                 <div className="flex items-center gap-2 mr-auto">
                   <div className="relative w-[18px] h-[18px] aspect-square overflow-hidden rounded-full">
                     {item.user.image_url ? (
-                      <Image src={`${item.user.image_url}`} alt={``} fill />
+                      <Image
+                        src={`${item.user.image_url || "/"}`}
+                        alt={``}
+                        fill
+                      />
                     ) : (
                       <div className="w-full h-full bg-white"></div>
                     )}

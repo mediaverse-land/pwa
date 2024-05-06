@@ -130,12 +130,13 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
             </Link>
           </div>
           <div className="flex space-x-4 mt-8 sm:mt-0 animate-container">
-            <div className="relative phone-animate-2 z-20 w-[111px] h-[286px] lg:w-[200px] lg:h-[550px]">
+            <div className="relative phone-animate-2 z-20 w-[111px] h-[286px] lg:w-[200px] lg:h-[480px]">
               <Image
-                src="/images/phone-image-1.png"
+                src="/images/phone-image-1-1.png"
                 fill
                 quality={100}
                 alt="phone photo"
+                className=""
               />
             </div>
             <div className="phone-animate-1 relative z-20 w-[111px] h-[286px] lg:w-[170px] lg:h-[500px]">

@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import { getDictionary } from "@/dictionary";
 import { convertISOToDateAndTime } from "@/lib/convertISOToDateAndTime";

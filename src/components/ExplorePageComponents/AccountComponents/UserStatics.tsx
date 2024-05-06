@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import { getProfileStatics } from "@/services/contactService";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";

@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import BuySection from "@/components/ExplorePageComponents/SingleAssetPages/shared/BuySection";
 import SingleAssetComments from "@/components/ExplorePageComponents/SingleAssetPages/shared/Comments";
 import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponents/SingleAssetPages/shared/TitleAndDescription";

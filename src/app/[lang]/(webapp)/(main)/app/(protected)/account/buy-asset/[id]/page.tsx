@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import BuyAssetComponent from "@/components/ExplorePageComponents/WalletComponents/BuyAssetButton";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import { INACTIVE_WALLET, PLAY_NO_BORDER } from "@/components/SVG/svgs";

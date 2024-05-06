@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/data/Auth";
 import LogoutNoUser from "@/components/ExplorePageComponents/AccountComponents/Logout";
 import { convertISOToDateAndTime } from "@/lib/convertISOToDateAndTime";
 import { getUserSingleMessage } from "@/services/contactService";
