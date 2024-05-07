@@ -2,6 +2,7 @@
 
 import { baseURL } from "@/configs/base";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2Icon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -39,6 +40,7 @@ const AddApiTokenButton = () => {
         body: JSON.stringify({
           name: data.name,
           app: data.app,
+          scopes: ["asset_view"],
         }),
       });
       if (req.ok) {
@@ -46,6 +48,7 @@ const AddApiTokenButton = () => {
         setIsFormOpen(false);
         reset();
       } else {
+        console.log(await req.json());
       }
     } catch (error) {}
   });
@@ -105,11 +108,15 @@ const AddApiTokenButton = () => {
             Cancel
           </button> */}
           <button
-            className="border-white border px-6 py-1 rounded-xl"
+            className="border-white border px-6 py-1 rounded-xl min-w-[150px]"
             disabled={isSubmitting}
             type="submit"
           >
-            Generate
+            {isSubmitting ? (
+              <Loader2Icon className="animate-spin duration-1000 text-white mx-auto" />
+            ) : (
+              "Generate"
+            )}
           </button>
         </div>
       </div>

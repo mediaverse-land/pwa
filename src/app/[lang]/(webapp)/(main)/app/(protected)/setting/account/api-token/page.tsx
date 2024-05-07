@@ -20,7 +20,7 @@ const reqUserApiTokens = async (token: string) => {
 const API_Token_Page = async () => {
   const session = await getServerSession(authOptions);
   const userApiTokens = await reqUserApiTokens(session?.user.token as string);
-  // console.log(userApiTokens.data);
+  // console.log(userApiTokens.data[0].token);
   return (
     <div
       className={`h-full w-full flex flex-col items-stretch justify-start gap-10 p-10`}

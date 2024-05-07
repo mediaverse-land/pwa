@@ -4,7 +4,7 @@ import { convertISOToDateAndTime } from "@/lib/convertISOToDateAndTime";
 import { getUserSingleMessage } from "@/services/contactService";
 import { getServerSession } from "next-auth";
 
-const getSingleMessageDate = async ({
+const getSingleMessageData = async ({
   id,
   token,
 }: {
@@ -12,20 +12,26 @@ const getSingleMessageDate = async ({
   id: string;
 }) => {
   try {
-    const req = await getUserSingleMessage({ token, id });
-    return {
-      data: await req.json(),
-      status: req.status,
-    };
-  } catch (error) {
-    console.error(error);
-  }
+    const req = await getUserSingleMessage({ token, id, status: 2 });
+    if (req.ok) {
+      const res = await req.json();
+      return {
+        status: req.status,
+        data: res.data,
+      };
+    } else {
+      return {
+        status: req.status,
+        data: null,
+      };
+    }
+  } catch (error) {}
 };
 const WebAppSettingSingleMessage = async (params: any) => {
   const session = await getServerSession(authOptions);
   const token = session?.user?.token || "";
   const [messagesData] = await Promise.all([
-    getSingleMessageDate({ token, id: `${params.params.id}` }),
+    getSingleMessageData({ token, id: `${params.params.id}` }),
   ]);
   if (messagesData?.status === 401) {
     return <LogoutNoUser />;
@@ -38,7 +44,7 @@ const WebAppSettingSingleMessage = async (params: any) => {
     );
   }
   return (
-    <div className="flex flex-col items-stretch gap-4 h-full overflow-y-auto pb-10">
+    <div className="flex flex-col items-stretch gap-4 h-full overflow-y-auto pb-10 px-8 py-6 lg:px-10 lg:py-8">
       <div className="flex items-center justify-between">
         <div className="text-white leading-[19px]">New Message</div>
         <div className="text-[14px] text-[#666680] leading-4">

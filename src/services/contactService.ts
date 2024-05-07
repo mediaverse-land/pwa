@@ -221,19 +221,26 @@ export const getUserApiTokens = ({ token }: { token: string }) => {
 export const getUserSingleMessage = ({
   id,
   token,
+  status,
 }: {
   token: string;
   id: string;
+  status: 2 | 3;
 }) => {
   const url = `${baseURL}/notifications/${id}`;
   return fetch(url, {
     next: { revalidate: process.env.NODE_ENV === "production" ? 10 : 0 },
+    method: "PATCH",
     headers: {
       "Accept-Language": "en-US",
       accept: "application/json",
+      "Content-Type": "application/json",
       "x-app": "_Web",
       Authorization: `Bearer ${token}`,
     },
+    body: JSON.stringify({
+      status,
+    }),
   });
 };
 

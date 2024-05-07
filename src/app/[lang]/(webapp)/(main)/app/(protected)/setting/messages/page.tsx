@@ -41,7 +41,7 @@ const WebAppSettingAllMessages = async ({
     );
   }
   return (
-    <div className="flex flex-col items-stretch gap-2 h-full overflow-y-auto pb-10">
+    <div className="flex flex-col items-stretch gap-2 h-full overflow-y-auto pb-14 px-6 mt-8">
       {messagesData?.data.data.map((item: any) => (
         <Link
           key={item.id}
