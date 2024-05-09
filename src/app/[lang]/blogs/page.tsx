@@ -110,7 +110,7 @@ const Blogs = async ({
       <div className="mt-28 flex flex-col items-center lg:w-[80rem] max-w-screen-lg mx-auto">
         <div className="w-full flex flex-col items-center justify-center">
           <h1 className="text-2xl font-semibold  text-white">
-            {dic.blogSection.mediaverseNews}
+            {dic.blogSection.appNews}
           </h1>
           <div className=" flex items-center justify-center space-x-2 w-full mt-4">
             <span className="border-b-2 border-blue-600 w-6"></span>

@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   app:
-    image: mediaverse_pwa
+    image: ${APP_NAME:-0}_pwa
     build:
       context: ./
       dockerfile: Dockerfile

@@ -10,7 +10,7 @@
     "about": "About Us"
   },
   "homepage": {
-    "whatIsMediaverse": "What is Mediaverse?",
+    "whatIs": "What is Mediaverse?",
     "description": "Mediaverse Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.",
     "exploreLimitless": "Explore limitless!",
     "liveTvChannels": "Live TV Channels",
@@ -23,7 +23,7 @@
     "haveNotTriedTheAppYet": "Haven't tried the app yet?"
   },
   "blogSection": {
-    "mediaverseNews": "MediaVerse News",
+    "appNews": "MediaVerse News",
     "alwaysBeUpdate": "Always be update!"
   },
   "faqSection": {

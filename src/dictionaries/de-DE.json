@@ -10,7 +10,7 @@
     "about": "Über uns"
   },
   "homepage": {
-    "whatIsMediaverse": "Was ist Mediaverse?",
+    "whatIs": "Was ist Mediaverse?",
     "description": "Die Mediaverse-Plattform ist die nächste Generation von Media-Asset-Management-Tools für Social TVs (oder soziale Medien), die Benutzern hilft, den Inhaltszyklus von der Beschaffung (oder Produktion) bis zur Verteilung zu verwalten.",
     "exploreLimitless": "Entdecken Sie grenzenlos!",
     "liveTvChannels": "Live-TV-Kanäle",
@@ -23,7 +23,7 @@
     "haveNotTriedTheAppYet": "Sie haben die App noch nicht ausprobiert?"
   },
   "blogSection": {
-    "mediaverseNews": "MediaVerse Nachrichten",
+    "appNews": "MediaVerse Nachrichten",
     "alwaysBeUpdate": "Seien Sie immer auf dem Laufenden!"
   },
   "faqSection": {

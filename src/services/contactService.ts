@@ -1,4 +1,4 @@
-import { baseURL } from "@/configs/base";
+import {baseURL, blogURL} from "@/configs/base";
 import { PostCommentData } from "@/types";
 import { TFullLocales } from "@/types/dictionary-types";
 
@@ -513,12 +513,12 @@ export const getBlogs = ({
   page: number;
   lang: TFullLocales;
 }) => {
-  const url = `https://blog.mediaverse.land/api/posts?page=${page}`;
+  const url = `${blogURL}/posts?page=${page}`;
   return fetchInstance(url, lang);
 };
 
 export const getBlog = ({ id, lang }: { id: string; lang: TFullLocales }) => {
-  const url = `https://blog.mediaverse.land/api/posts/${id}`;
+  const url = `${blogURL}/posts/${id}`;
   return fetchInstance(url, lang);
 };
 
@@ -649,10 +649,10 @@ export const signInWithUsername = async (data: any) => {
   }
 };
 export const getSitemap = () => {
-  const url = `https://api.mediaverse.land/v2/sitemap`;
+  const url = `${baseURL}/sitemap`;
   return fetchInstance(url);
 };
 export const getBlogsSitemap = () => {
-  const url = `https://blog.mediaverse.land/api/sitemap`;
+  const url = `${blogURL}/sitemap`;
   return fetchInstance(url);
 };

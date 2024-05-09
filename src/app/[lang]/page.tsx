@@ -92,7 +92,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
         <div className="lg:max-w-screen-2xl mx-auto flex justify-evenly flex-wrap-reverse lg:flex-wrap px-8 lg:px-4">
           <div className="flex flex-col t-10">
             <h1 className="text-[25px] lg:text-3xl font-bold lg:font-semibold whitespace-nowrap text-white mt-16 text-center lg:text-start">
-              {dic.homepage.whatIsMediaverse}
+              {dic.homepage.whatIs}
             </h1>
             <p className="text-gray-500 mt-4 self-center text-start">
               {dic.homepage.description}

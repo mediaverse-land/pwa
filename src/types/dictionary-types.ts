@@ -20,7 +20,7 @@ export type DicProperties = {
     about: string;
   };
   homepage: {
-    whatIsMediaverse: string;
+    whatIs: string;
     description: string;
     exploreLimitless: string;
     liveTvChannels: string;
@@ -33,7 +33,7 @@ export type DicProperties = {
     haveNotTriedTheAppYet: string;
   };
   blogSection: {
-    mediaverseNews: string;
+    appNews: string;
     alwaysBeUpdate: string;
   };
   faqSection: {

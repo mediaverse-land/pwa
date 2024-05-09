@@ -1,4 +1,6 @@
 export const baseURL = "https://api.mediaverse.land/v2";
+export const blogURL = "https://blog.mediaverse.land/api";
+export const swaggerURL = "https://swagger.mediaverse.land";
 export const websiteTitle = "MediaVerse";
 // logo url relative to public folder
 export const logoURL = "/images/media-verse-logo.png";
