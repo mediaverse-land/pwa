@@ -10,8 +10,8 @@
     "about": "Über uns"
   },
   "homepage": {
-    "whatIs": "Was ist Mediaverse?",
-    "description": "Die Mediaverse-Plattform ist die nächste Generation von Media-Asset-Management-Tools für Social TVs (oder soziale Medien), die Benutzern hilft, den Inhaltszyklus von der Beschaffung (oder Produktion) bis zur Verteilung zu verwalten.",
+    "whatIs": "Was ist GiBiCal?",
+    "description": "Die GiBiCal-Plattform ist die nächste Generation von Media-Asset-Management-Tools für Social TVs (oder soziale Medien), die Benutzern hilft, den Inhaltszyklus von der Beschaffung (oder Produktion) bis zur Verteilung zu verwalten.",
     "exploreLimitless": "Entdecken Sie grenzenlos!",
     "liveTvChannels": "Live-TV-Kanäle",
     "bestVideos": "Die besten Videos",
@@ -23,11 +23,11 @@
     "haveNotTriedTheAppYet": "Sie haben die App noch nicht ausprobiert?"
   },
   "blogSection": {
-    "appNews": "MediaVerse Nachrichten",
+    "appNews": "GiBiCal Nachrichten",
     "alwaysBeUpdate": "Seien Sie immer auf dem Laufenden!"
   },
   "faqSection": {
-    "title": "MediaVers-Funktionen"
+    "title": "gibical-Funktionen"
   },
   "aboutUs": {
     "office": "Büro",

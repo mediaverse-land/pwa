@@ -10,8 +10,8 @@
     "about": "À propos de nous"
   },
   "homepage": {
-    "whatIs": "Qu’est-ce que Mediaverse ?",
-    "description": "Mediaverse Platform est la nouvelle génération d'outils de gestion d'actifs multimédias pour les télévisions sociales (ou médias sociaux) qui aide les utilisateurs à gérer le cycle de contenu depuis l'approvisionnement (ou la production) jusqu'à la distribution.",
+    "whatIs": "Qu’est-ce que GiBiCal ?",
+    "description": "GiBiCal Platform est la nouvelle génération d'outils de gestion d'actifs multimédias pour les télévisions sociales (ou médias sociaux) qui aide les utilisateurs à gérer le cycle de contenu depuis l'approvisionnement (ou la production) jusqu'à la distribution.",
     "exploreLimitless": "Explorez sans limites !",
     "liveTvChannels": "Chaînes de télévision en direct",
     "bestVideos": "Meilleures vidéos",
@@ -23,11 +23,11 @@
     "haveNotTriedTheAppYet": "Vous n'avez pas encore essayé l'application ?"
   },
   "blogSection": {
-    "appNews": "Actualités MediaVerse",
+    "appNews": "Actualités GiBiCal",
     "alwaysBeUpdate": "Soyez toujours à jour !"
   },
   "faqSection": {
-    "title": "Fonctionnalités de MediaVers"
+    "title": "Fonctionnalités de gibical"
   },
   "aboutUs": {
     "office": "Bureau",

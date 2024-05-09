@@ -47,25 +47,25 @@ export const navbar: {
 export const socialMedia: socialMediaLinks[] = [
   {
     id: 1,
-    link: "https://x.com/MediaverseLand",
+    link: "https://x.com/GiBiCal",
     name: "X",
     icon: "/icons/x-social-media-black-icon.svg",
   },
   {
     id: 2,
-    link: "https://instagram.com/mediaverse.land",
+    link: "https://instagram.com/gibical.app",
     name: "Instagram",
     icon: "/icons/black-instagram-icon.svg",
   },
   {
     id: 3,
-    link: "https://www.facebook.com/mediaverse.profile",
+    link: "https://www.facebook.com/gibical.profile",
     name: "Facebook",
     icon: "/icons/meta-black-icon.svg",
   },
   {
     id: 4,
-    link: "https://www.linkedin.com/in/mediaverse-land-profile",
+    link: "https://www.linkedin.com/in/gibical-app-profile",
     name: "LinkedIn",
     icon: "/icons/linkedin-square-icon.svg",
   },

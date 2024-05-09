@@ -34,13 +34,13 @@ const Navbar = ({ dic }: { dic: DicProperties }) => {
           <Image
             src={`${logoURL}`}
             quality={100}
-            width={30}
-            height={40}
+            width={75}
+            height={100}
             className="mr-3"
             alt={`${websiteTitle} Logo`}
           />
           <div className="flex flex-col">
-            <span className="self-center text-[16px] font-bold lg:text-lg lg:font-semibold whitespace-nowrap text-white">
+            <span className="text-[16px] font-bold lg:text-lg lg:font-semibold whitespace-nowrap text-white">
               {websiteTitle}
             </span>
             <span className="self-center text-xs top-0 text-gray-500 whitespace-nowrap">
