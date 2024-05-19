@@ -81,7 +81,7 @@ const WebAppExploreAudioAssets = async ({
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}
           <div className="w-full flex items-center justify-between">
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-1 rtl:space-x-reverse">
               <p className="text-white text-sm ">
                 {dic.generalApp.bestInMonth}
               </p>
@@ -137,7 +137,7 @@ const WebAppExploreAudioAssets = async ({
         <div className="flex items-stretch flex-col gap-4">
           {/* header */}
           <div className="w-full flex items-center justify-between">
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-1 rtl:space-x-reverse">
               <p className="text-white text-sm ">{dic.generalApp.recently}</p>
             </div>
             <Link

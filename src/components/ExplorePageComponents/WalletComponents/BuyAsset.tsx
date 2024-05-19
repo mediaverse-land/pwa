@@ -142,7 +142,7 @@ const BuyAsset = async ({
                   </div>
                 </div>
               </div>
-              <div className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md rounded-2xl text-center space-x-2 py-4">
+              <div className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md rounded-2xl text-center space-x-2 rtl:space-x-reverse py-4">
                 <span className="text-[#CCCCFF] leading-4 capitalize">
                   {AssetPurchasePlan[assetData.plan]}
                 </span>

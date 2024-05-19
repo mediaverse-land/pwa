@@ -178,7 +178,7 @@ const EditUserInfoForm = () => {
               {errors.last_name?.message?.toString() || inputErrors.last_name}
             </p>
           </div>
-          <div className="mr-auto space-x-2">
+          <div className="mr-auto space-x-2 rtl:space-x-reverse">
             <span>
               <input
                 type="checkbox"

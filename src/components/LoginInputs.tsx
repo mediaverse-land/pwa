@@ -151,6 +151,7 @@ const LoginWithPhone = () => {
             className="h-[48px] rounded-lg border border-[#353542] flex gap-4 px-4 py-[0.6rem] text-white"
             style={{
               background: `rgba(14, 14, 18, 0.50)`,
+              direction: 'ltr',
             }}
           >
             <Controller

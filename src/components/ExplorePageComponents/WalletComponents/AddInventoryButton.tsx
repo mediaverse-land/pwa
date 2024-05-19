@@ -28,7 +28,7 @@ const AddInventoryButton = async ({
   // check to see user info is complete or not
   if (!session?.user.name || !session.user.email) {
     return (
-      <div className="w-full text-center bg-[#666680] rounded-2xl py-2 space-x-2">
+      <div className="w-full text-center bg-[#666680] rounded-2xl py-2 space-x-2 rtl:space-x-reverse">
         <span className="text-white">{dic.appWallet.completeInfo}</span>
         <Link
           href={`/${lang}/app/setting/account/general-info`}
@@ -53,7 +53,7 @@ const AddInventoryButton = async ({
       </span>
     </Link>
   ) : (
-    <div className="w-full text-center bg-[#666680] rounded-2xl py-2 space-x-2">
+    <div className="w-full text-center bg-[#666680] rounded-2xl py-2 space-x-2 rtl:space-x-reverse">
       {dic.appWallet.notConnetToStripe}
     </div>
   );

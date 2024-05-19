@@ -30,7 +30,7 @@ const VideoSlider = () => {
     swiperRef?.slideNext();
   }, [swiperRef]);
   return (
-    <div className=" flex space-x-0 sm:space-x-4 justify-center items-center mt-10 ">
+    <div className=" flex space-x-0 sm:space-x-4 rtl:space-x-reverse justify-center items-center mt-10 ">
       <button className=" hidden sm:block " onClick={handleNext}>
         <Image
           src="/icons/prev.png"
@@ -76,7 +76,7 @@ const VideoSlider = () => {
                   <p className="mt-2 ml-1 text-gray-600 text-[16px] lg:text-sm line-clamp-1 ">
                     {item.name}
                   </p>
-                  <div className="flex ml-1 mt-1 space-x-2">
+                  <div className="flex ml-1 mt-1 space-x-2 rtl:space-x-reverse">
                     <Image
                       src="/images/mini-avatar.png"
                       alt="avatar"

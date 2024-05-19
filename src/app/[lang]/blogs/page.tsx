@@ -112,7 +112,7 @@ const Blogs = async ({
           <h1 className="text-2xl font-semibold  text-white">
             {dic.blogSection.appNews}
           </h1>
-          <div className=" flex items-center justify-center space-x-2 w-full mt-4">
+          <div className=" flex items-center justify-center space-x-2 rtl:space-x-reverse w-full mt-4">
             <span className="border-b-2 border-blue-600 w-6"></span>
             <p className="text-gray-500 text-xs">
               {dic.blogSection.alwaysBeUpdate}
@@ -151,7 +151,7 @@ const Blogs = async ({
                         }}
                       ></div>
                       <div className="flex justify-between w-full mt-4 text-[#666680] px-2 pb-2">
-                        <div className="flex space-x-1">
+                        <div className="flex space-x-1 rtl:space-x-reverse">
                           <Image
                             src="/images/mini-avatar.png"
                             alt="avatar"

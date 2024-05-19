@@ -57,7 +57,7 @@ export default async function RootLayout({
   );
 
   return (
-    <html lang={`${lang}`}>
+    <html lang={`${lang}`} dir={lang=== 'fa' ? 'rtl' : 'ltr'}>
       <Script id="google-tag-manager" strategy="afterInteractive">
         {`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

@@ -16,7 +16,7 @@ const ExploreMostViewd = ({
     <div className="flex items-stretch flex-col gap-4">
       {/* header */}
       <div className="w-full flex items-center justify-between">
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 rtl:space-x-reverse">
           <PICTURE_ICON />
           <p className="text-white font-semibold lg:font-normal lg:text-sm">
             {dic.homepage.mostViewedImages}
