@@ -28,7 +28,7 @@ const ConnetToStripeButton = async ({
   // console.log(stripe?.data);
   if (stripe?.status === 406) {
     return (
-      <div className="w-full text-center bg-[#666680] rounded-xl py-2 space-x-2 px-4">
+      <div className="w-full text-center bg-[#666680] rounded-xl py-2 space-x-2 rtl:space-x-reverse px-4">
         <span className="text-white">{dic.appWallet.completeInfo}</span>
         <Link
           href={`/${lang}/app/setting/account/general-info`}
@@ -47,7 +47,7 @@ const ConnetToStripeButton = async ({
       <span>{dic.appWallet.connectToStripe}</span>
     </Link>
   ) : (
-    <div className="w-full text-center bg-[#666680] rounded-2xl py-2 space-x-2 px-4">
+    <div className="w-full text-center bg-[#666680] rounded-2xl py-2 space-x-2 rtl:space-x-reverse px-4">
       {dic.appWallet.notConnetToStripe}
     </div>
   );

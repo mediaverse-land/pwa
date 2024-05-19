@@ -129,7 +129,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
               Web App
             </Link>
           </div>
-          <div className="flex space-x-4 mt-8 sm:mt-0 animate-container">
+          <div className="flex space-x-4 rtl:space-x-reverse mt-8 sm:mt-0 animate-container">
             <div className="relative phone-animate-2 z-20 w-[111px] h-[286px] lg:w-[200px] lg:h-[480px]">
               <Image
                 src="/images/phone-image-1-1.png"
@@ -154,7 +154,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
           <ScrollToBottomBtn title={dic.homepage.exploreLimitless} />
         </div>
         {/* live channels */}
-        <div className="w-full flex items-center justify-center mt-10 space-x-2">
+        <div className="w-full flex items-center justify-center mt-10 space-x-2 rtl:space-x-reverse">
           <div className="w-[24px] lg:w-[20px] lg:h-[20px] h-[24px] relative">
             <Image
               src="/icons/live-icon.png"
@@ -194,7 +194,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
           </div>
         </div>
         {/* videos */}
-        <div className="w-full flex items-center justify-center mt-10 space-x-2">
+        <div className="w-full flex items-center justify-center mt-10 space-x-2 rtl:space-x-reverse">
           <div className="w-[21px] lg:w-[20px] h-[16px] lg:h-[18px] relative">
             <Image
               src="/icons/video-icon.png"
@@ -212,7 +212,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
         <div className="flex w-full max-w-[700px] xl:w-[80rem] lg:max-w-screen-2xl mx-auto mt-16 justify-between gap-10 flex-col items-start lg:flex-row sm:px-0 px-2">
           {/* images */}
           <div className="flex flex-col w-full lg:w-[33%] h-full">
-            <div className="flex space-x-2 ml-1 w-full items-center justify-center">
+            <div className="flex space-x-2 rtl:space-x-reverse ml-1 w-full items-center justify-center">
               <Image
                 src="/icons/gallery.png"
                 quality={100}
@@ -251,7 +251,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
           </div>
           {/* texts */}
           <div className="flex flex-col w-full lg:w-[60%] h-full md:pr-4 xl:pr-0">
-            <div className="flex w-full items-center justify-center space-x-2 ml-1 sm:mt-0">
+            <div className="flex w-full items-center justify-center space-x-2 rtl:space-x-reverse ml-1 sm:mt-0">
               <Image
                 src="/icons/text.png"
                 quality={100}
@@ -289,7 +289,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                             ? items.description?.slice(0, 62)
                             : items.description}
                         </p>
-                        <div className="flex mt-auto space-x-2">
+                        <div className="flex mt-auto space-x-2 rtl:space-x-reverse">
                           <Image
                             src="/images/mini-avatar.png"
                             alt="avatar"
@@ -310,7 +310,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
           </div>
         </div>
         {/* songs */}
-        <div className="w-full flex items-center justify-center mt-16 space-x-2">
+        <div className="w-full flex items-center justify-center mt-16 space-x-2 rtl:space-x-reverse">
           <Image
             src="/icons/songs.png"
             quality={100}

@@ -19,7 +19,7 @@ const LiveSlider = async ({
   const liveData = await getData({ lang: FullLocaleNames[lang] });
 
   return (
-    <div className="flex space-x-0 sm:space-x-4 justify-center items-center mt-10 marquee w-full">
+    <div className="flex space-x-0 sm:space-x-4 rtl:space-x-reverse justify-center items-center mt-10 marquee w-full">
       <div className="item ">
         {liveData.map((item: any, index: any) => {
           return (

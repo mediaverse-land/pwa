@@ -1,0 +1,97 @@
+{
+  "header": {
+    "slogan": "محتوا ثروت است",
+    "home": "خانه",
+    "blog": "وبلاگ",
+    "terms": "شرایط",
+    "privacy": "حریم خصوصی",
+    "api": "API",
+    "faq": "سوالات متداول",
+    "about": "درباره ما"
+  },
+  "homepage": {
+    "whatIs": "مدیاورس چیست؟",
+    "description": "پلتفرم مدیاورس نسل بعدی ابزارهای مدیریت رسانه برای تلویزیون های اجتماعی (یا رسانه های اجتماعی) است که به کاربران کمک می کند چرخه محتوا را از تهیه (یا تولید) تا توزیع مدیریت کنند.",
+    "exploreLimitless": "بدون محدودیت کاوش کنید!",
+    "liveTvChannels": "کانال های تلویزیونی زنده",
+    "bestVideos": "بهترین ویدیوها",
+    "mostViewedImages": "پربیننده ترین تصاویر",
+    "topTexts": "بهترین متون",
+    "bestSongs": "بهترین آهنگ ها"
+  },
+  "footer": {
+    "haveNotTriedTheAppYet": "هنوز اپلیکیشن را امتحان نکرده اید؟"
+  },
+  "blogSection": {
+    "appNews": "اخبار مدیاورس",
+    "alwaysBeUpdate": "همیشه به‌روز باشید!"
+  },
+  "faqSection": {
+    "title": "ویژگی‌های مدیاورس"
+  },
+  "aboutUs": {
+    "office": "دفتر",
+    "phone": "تلفن",
+    "email": "ایمیل"
+  },
+  "appSidebar": {
+    "explore": "کاوش",
+    "account": "حساب کاربری",
+    "wallet": "کیف پول",
+    "settings": "تنظیمات",
+    "logout": "خروج"
+  },
+  "appAccounts": {
+    "assets": "دارایی ها",
+    "sales": "فروش",
+    "volume": "حجم",
+    "subscribes": "اشتراک",
+    "myAssets": "مالکیت من",
+    "all": "همه",
+    "noContentToShow": "محتوایی برای نمایش وجود ندارد"
+  },
+  "appWallet": {
+    "inventory": "موجودی",
+    "addInventory": "اضافه کردن موجودی",
+    "notConnetToStripe": "در حال حاضر نمی‌توان به Stripe متصل شد. لطفاً بعداً دوباره تلاش کنید.",
+    "completeInfo": "لطفاً ابتدا اطلاعات خود را کامل کنید:",
+    "clickHere": "اینجا کلیک کنید",
+    "connectToStripe": "اتصال به Stripe"
+  },
+  "generalApp": {
+    "viewAll": "مشاهده همه",
+    "dailyRecommended": "پیشنهاد روزانه",
+    "recently": "اخیراً",
+    "bestInMonth": "بهترین در ماه",
+    "search": "جستجو",
+    "login": "ورود",
+    "logout": "خروج",
+    "webApp": "وب اپلیکیشن",
+    "tag": "برچسب",
+    "searchIn": "جستجو در",
+    "searchInMore": "جستجو در بیش از ۲٫۰۰۰٫۰۰۰ محتوا"
+  },
+  "setting": {
+    "account": "حساب کاربری",
+    "message": "پیام",
+    "wallet": "کیف پول",
+    "analytics": "تحلیل‌ها",
+    "shareAccount": "اشتراک‌گذاری حساب",
+    "messages": "پیام‌ها",
+    "noMessage": "شما هیچ پیامی ندارید",
+    "generalInforamtion": "اطلاعات عمومی",
+    "signIns": "ورودها",
+    "sessions": "جلسات"
+  },
+  "auth": {
+    "firstName": "نام",
+    "lastName": "نام خانوادگی",
+    "email": "ایمیل",
+    "password": "رمز عبور",
+    "cellPhone": "تلفن همراه",
+    "edit": "ویرایش",
+    "confirmLogout": "آیا مطمئن هستید که می‌خواهید خارج شوید؟",
+    "yes": "بله",
+    "no": "خیر"
+  }
+}

@@ -16,7 +16,7 @@ export const ExploreLiveChannel = ({
   return (
     <div className="flex items-stretch flex-col gap-4">
       <div className="w-full flex items-center justify-between">
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 rtl:space-x-reverse">
           <div className="relative overflow-hidden w-[30px] h-[26px] lg:w-[20px] lg:h-[20px]">
             <Image
               src="/icons/live-icon.png"

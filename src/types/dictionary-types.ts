@@ -1,11 +1,12 @@
-export type Locale = "en" | "fr" | "de";
-export type TFullLocales = "en-US" | "fr-FR" | "de-DE";
+export type Locale = "en" | "fr" | "de" | "fa";
+export type TFullLocales = "en-US" | "fr-FR" | "de-DE" | "fa-IR";
 export const FullLocaleNames: {
   [key in Locale]: TFullLocales;
 } = {
   en: "en-US",
   fr: "fr-FR",
   de: "de-DE",
+  fa: "fa-IR"
 };
 
 export type DicProperties = {

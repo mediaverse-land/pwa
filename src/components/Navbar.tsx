@@ -36,7 +36,7 @@ const Navbar = ({ dic }: { dic: DicProperties }) => {
             quality={100}
             width={30}
             height={40}
-            className="mr-3"
+            className="mr-3 rtl:mr-0 rtl:ml-3"
             alt={`${websiteTitle} Logo`}
           />
           <div className="flex flex-col">
@@ -69,7 +69,7 @@ const Navbar = ({ dic }: { dic: DicProperties }) => {
           className="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1"
           id="navbar-cta"
         >
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
+          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse rtl:space-x-reverse md:mt-0 md:border-0">
             {navbar.map((item, index) => (
               <li key={index}>
                 <Link

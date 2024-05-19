@@ -37,7 +37,7 @@ const Blog = async ({
 
   return (
     <Motion>
-      <div className="w-full flex justify-center flex-col items-center lg:items-start lg:flex-row mt-36 space-x-0 px-6 lg:px-4 lg:space-x-10 mb-10 max-w-screen-lg lg:mx-auto">
+      <div className="w-full flex justify-center flex-col items-center lg:items-start lg:flex-row mt-36 space-x-0 rtl:space-x-reverse px-6 lg:px-4 lg:space-x-10 mb-10 max-w-screen-lg lg:mx-auto">
         <div className="flex flex-col w-full">
           {/* <div className="w-80 h-80 bg-cover bg-[url('/images/image-room.png')]">
          </div> */}
@@ -67,7 +67,7 @@ const Blog = async ({
           </div>
           <Link
             href={`./`}
-            className="hidden lg:flex items-center justify-center py-2 rounded-3xl w-80 bg-card mt-6 space-x-2"
+            className="hidden lg:flex items-center justify-center py-2 rounded-3xl w-80 bg-card mt-6 space-x-2 rtl:space-x-reverse"
           >
             <Image
               src="/icons/back.png"
