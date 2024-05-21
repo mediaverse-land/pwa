@@ -27,12 +27,12 @@ const languages: {
     code: "de",
     icon: <span></span>,
   },
-  {
-    id: 4,
-    name: "پارسی",
-    code: "fa",
-    icon: <span></span>,
-  },
+  // {
+  //   id: 4,
+  //   name: "پارسی",
+  //   code: "fa",
+  //   icon: <span></span>,
+  // },
 ];
 
 const SelectLanguage = () => {
