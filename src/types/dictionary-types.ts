@@ -1,12 +1,13 @@
-export type Locale = "en" | "fr" | "de" | "fa";
-export type TFullLocales = "en-US" | "fr-FR" | "de-DE" | "fa-IR";
+export type Locale = "en" | "fr" | "de" | "fa" | "ar";
+export type TFullLocales = "en-US" | "fr-FR" | "de-DE" | "fa-IR" | "ar-SA";
 export const FullLocaleNames: {
   [key in Locale]: TFullLocales;
 } = {
   en: "en-US",
   fr: "fr-FR",
   de: "de-DE",
-  fa: "fa-IR"
+  fa: "fa-IR",
+  ar: "ar-SA"
 };
 
 export type DicProperties = {
@@ -113,7 +114,6 @@ export type DicProperties = {
     signUpWithX: string,
     or: string,
     noAccount: string,
-    signUp: string,
     signInWithPassQ: string,
     signInWithOtpQ: string,
   }

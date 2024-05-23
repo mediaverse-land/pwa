@@ -2,51 +2,46 @@
 
 import { Locale } from "@/types/dictionary-types";
 import Link from "next/link";
+import {activeLocales} from "@/configs/base";
 
-const languages: {
-  id: number;
-  name: string;
-  code: Locale;
-  icon: JSX.Element;
-}[] = [
-  {
-    id: 1,
+const languages: { [key: Locale]: {
+    name: string;
+    icon: JSX.Element;
+  } } = {
+  "en" :{
     name: "English",
-    code: "en",
     icon: <span></span>,
   },
-  {
-    id: 2,
+  "fr":{
     name: "Français",
-    code: "fr",
     icon: <span></span>,
   },
-  {
-    id: 3,
+  "de": {
     name: "Deutsch",
-    code: "de",
     icon: <span></span>,
   },
-  // {
-  //   id: 4,
-  //   name: "پارسی",
-  //   code: "fa",
-  //   icon: <span></span>,
-  // },
-];
+  "fa": {
+    name: "پارسی",
+    icon: <span></span>,
+  },
+  "ar" :{
+    name: "اَلْعَرَبِيَّةُ",
+    icon: <span></span>,
+  },
+};
 
 const SelectLanguage = () => {
   return (
     <div>
       <ul className="flex items-center gap-4">
-        {languages.map((lang) => (
-          <li key={lang.id} className="">
+        {activeLocales.map((lang) => (
+          <li key={lang} className="">
             <Link
               className="bg-white flex items-center justify-center p-2 rounded-md leading-none w-[35px] aspect-square"
-              title={lang.name}
-              href={`/${lang.code}`}
+              title={languages[lang].name}
+              href={`/${lang}`}
             >
-              {lang.code}
+              {lang}
             </Link>
           </li>
         ))}
