@@ -1,10 +1,9 @@
 "use client";
 
-import { Locale } from "@/types/dictionary-types";
 import Link from "next/link";
 import {activeLocales} from "@/configs/base";
 
-const languages: { [key: Locale]: {
+const languages: { [key: string]: {
     name: string;
     icon: JSX.Element;
   } } = {
@@ -38,7 +37,7 @@ const SelectLanguage = () => {
           <li key={lang} className="">
             <Link
               className="bg-white flex items-center justify-center p-2 rounded-md leading-none w-[35px] aspect-square"
-              title={languages[lang].name}
+              title={languages[String(lang)].name}
               href={`/${lang}`}
             >
               {lang}

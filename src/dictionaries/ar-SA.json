@@ -1,0 +1,109 @@
+{
+  "header": {
+    "slogan": "Content is Wealth",
+    "home": "Home",
+    "blog": "Blog",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "api": "API",
+    "faq": "FAQ",
+    "about": "About Us"
+  },
+  "homepage": {
+    "whatIs": "What is Mediaverse?",
+    "description": "Mediaverse Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.",
+    "exploreLimitless": "Explore limitless!",
+    "liveTvChannels": "Live TV Channels",
+    "bestVideos": "Best Videos",
+    "mostViewedImages": "Most Viewed Images",
+    "topTexts": "Top Texts",
+    "bestSongs": "Best Songs"
+  },
+  "footer": {
+    "haveNotTriedTheAppYet": "Haven't tried the app yet?"
+  },
+  "blogSection": {
+    "appNews": "MediaVerse News",
+    "alwaysBeUpdate": "Always be update!"
+  },
+  "faqSection": {
+    "title": "MediaVers Features"
+  },
+  "aboutUs": {
+    "office": "Office",
+    "phone": "Phone",
+    "email": "Email"
+  },
+  "appSidebar": {
+    "explore": "Explore",
+    "account": "Account",
+    "wallet": "Wallet",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "appAccounts": {
+    "assets": "Assets",
+    "sales": "Sales",
+    "volume": "Volume",
+    "subscribes": "Subscribe",
+    "myAssets": "Ownership",
+    "all": "All",
+    "noContentToShow": "No Content To Show"
+  },
+  "appWallet": {
+    "inventory": "Inventory",
+    "addInventory": "Add Inventory",
+    "notConnetToStripe": "Can not connet to Stripe at this moment. Please try again later.",
+    "completeInfo": "Please complete your informatoin first:",
+    "clickHere": "Click here",
+    "connectToStripe": "Connect To Stripe"
+  },
+  "generalApp": {
+    "viewAll": "View All",
+    "dailyRecommended": "Daily Recommended",
+    "recently": "Recently",
+    "bestInMonth": "Best In Month",
+    "search": "Search",
+    "signUp": "Sign up",
+    "login": "Login",
+    "logout": "Logout",
+    "webApp": "Web App",
+    "tag": "Tag",
+    "searchIn": "Search in",
+    "searchInMore": "Search in More than 2.000.000 Content"
+  },
+  "setting": {
+    "account": "Account",
+    "message": "Message",
+    "wallet": "Wallet",
+    "analytics": "Analytics",
+    "shareAccount": "Share Account",
+    "messages": "Messages",
+    "noMessage": "You Have No Messages",
+    "generalInforamtion": "General Information",
+    "signIns": "Sign Ins",
+    "sessions": "Sessions"
+  },
+  "auth": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "cellPhone": "Cell Phone",
+    "edit": "Edit",
+    "confirmLogout": "Are you sure you want to logout?",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "login": {
+    "signUpWithApple": "Sign up with Apple",
+    "signUpWithGoogle": "Sign up with Google",
+    "signUpWithFacebook": "Sign up with Facebook",
+    "signUpWithX": "Sign up with X",
+    "or": "Or",
+    "noAccount": "Dont have an account?",
+    "signInWithPassQ": "Log in with password?",
+    "signInWithOtpQ": "Log in with code?",
+    "sendCode": "send code"
+  }
+}
