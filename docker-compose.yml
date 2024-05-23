@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   app:
-    image: ${APP_NAME:-0}_pwa
+    image: pwa
     build:
       context: ./
       dockerfile: Dockerfile

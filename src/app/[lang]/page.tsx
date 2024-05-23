@@ -83,7 +83,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
       <div className="mt-16 lg:mt-28 w-full overflow-x-hidden">
         <div className="absolute top-28 left-[24px] right-[24px] lg:right-auto lg:-left-[200px] lg:top-4 -z-[10] h-[420px] lg:w-[740px] lg:h-[625px]">
           <Image
-            src="/images/media-verse-background-image.svg"
+            src="/images/app-background-image.svg"
             alt="background Image"
             quality={100}
             fill

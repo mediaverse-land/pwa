@@ -75,6 +75,7 @@ export type DicProperties = {
     recently: string;
     bestInMonth: string;
     search: string;
+    signUp: string;
     login: string;
     logout: string;
     webApp: string;
@@ -105,4 +106,15 @@ export type DicProperties = {
     yes: string;
     no: string;
   };
+  login: {
+    signUpWithApple: string,
+    signUpWithGoogle: string,
+    signUpWithFacebook: string,
+    signUpWithX: string,
+    or: string,
+    noAccount: string,
+    signUp: string,
+    signInWithPassQ: string,
+    signInWithOtpQ: string,
+  }
 };

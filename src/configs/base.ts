@@ -1,4 +1,4 @@
-export const baseURL = "https://api.mediaverse.land/v2";
+export const baseURL = process.env.BASE_URL;
 export const blogURL = "https://blog.mediaverse.land/api";
 export const swaggerURL = "https://swagger.mediaverse.land";
 export const websiteTitle = "MediaVerse";

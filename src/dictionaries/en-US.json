@@ -64,6 +64,7 @@
     "recently": "Recently",
     "bestInMonth": "Best In Month",
     "search": "Search",
+    "signUp": "Sign up",
     "login": "Login",
     "logout": "Logout",
     "webApp": "Web App",
@@ -93,5 +94,16 @@
     "confirmLogout": "Are you sure you want to logout?",
     "yes": "Yes",
     "no": "No"
+  },
+  "login": {
+    "signUpWithApple": "Sign up with Apple",
+    "signUpWithGoogle": "Sign up with Google",
+    "signUpWithFacebook": "Sign up with Facebook",
+    "signUpWithX": "Sign up with X",
+    "or": "Or",
+    "noAccount": "Dont have an account?",
+    "signInWithPassQ": "Log in with password?",
+    "signInWithOtpQ": "Log in with code?",
+    "sendCode": "send code"
   }
 }

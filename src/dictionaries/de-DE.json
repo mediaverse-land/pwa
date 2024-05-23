@@ -64,9 +64,10 @@
     "recently": "Onlangs",
     "bestInMonth": "Beste in maand",
     "search": "Zoekopdracht",
-    "login": "Login",
-    "logout": "Logout",
-    "webApp": "Web App",
+    "signUp": "Registrieren",
+    "login": "Einloggen",
+    "logout": "Ausloggen",
+    "webApp": "Web-App",
     "tag": "Tag",
     "searchIn": "Zoek in",
     "searchInMore": "Zoek in meer dan 2.000.000 inhoud"
@@ -93,5 +94,16 @@
     "confirmLogout": "Weet u zeker dat u wilt uitloggen?",
     "yes": "Ja",
     "no": "Nee"
+  },
+  "login": {
+    "signUpWithApple": "Mit Apple registrieren",
+    "signUpWithGoogle": "Mit Google registrieren",
+    "signUpWithFacebook": "Mit Facebook registrieren",
+    "signUpWithX": "Mit X registrieren",
+    "or": "Oder",
+    "noAccount": "Kein Konto?",
+    "signInWithPassQ": "Mit Passwort einloggen?",
+    "signInWithOtpQ": "Mit Code einloggen?",
+    "sendCode": "Code senden"
   }
 }
