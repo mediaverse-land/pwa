@@ -6,6 +6,8 @@ import { Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { getDictionary } from "@/dictionary";
+import { locales } from "@/middleware";
 
 const Login = async ({
   searchParams,
@@ -16,6 +18,10 @@ const Login = async ({
   };
   params: { lang: Locale };
 }) => {
+  const dic = await getDictionary(
+      locales.find((item) => item === lang) ?? locales[0]
+  );
+
   let loginType = searchParams.type || "phone";
   let refer = searchParams.refer;
 
@@ -37,7 +43,7 @@ const Login = async ({
               <SocialLoginBtn variant="facebook" /> */}
             </div>
             <div className="text-[#83839C] text-[12px] leading-3 uppercase">
-              or
+              {dic.login.or}
             </div>
             {/* inputs */}
             <div className="flex flex-col items-stretch grow gap-8">
@@ -50,13 +56,13 @@ const Login = async ({
                 <div className="flex items-center justify-around">
                   <div>
                     <span className="text-[12px] text-[#83839C]">
-                      Dont have an account?
+                      {dic.login.noAccount}
                     </span>
                     <Link
                       href={`/${lang}/sign-up`}
                       className="text-[#597AFF] font-semibold text-[14px]"
                     >
-                      Sign up
+                      {dic.generalApp.signUp}
                     </Link>
                   </div>
                   {loginType === "phone" ? (
@@ -67,7 +73,7 @@ const Login = async ({
                       }}
                       className="text-[12px] leading-3 text-[#597AFF]"
                     >
-                      Log in with password?
+                      {dic.login.signInWithPassQ}
                     </Link>
                   ) : (
                     <Link
@@ -77,7 +83,7 @@ const Login = async ({
                       }}
                       className="text-[12px] leading-3 text-[#597AFF]"
                     >
-                      Log in with code?
+                      {dic.login.signInWithOtpQ}
                     </Link>
                   )}
                 </div>

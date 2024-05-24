@@ -64,10 +64,11 @@
     "recently": "Récemment",
     "bestInMonth": "Meilleur du mois",
     "search": "Recherche",
-    "login": "Login",
-    "logout": "Logout",
-    "webApp": "Web App",
-    "tag": "Tag",
+    "signUp": "S'inscrire",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "webApp": "Application Web",
+    "tag": "Étiquette",
     "searchIn": "Rechercher dans",
     "searchInMore": "Recherchez dans plus de 2 000 000 de contenus"
   },
@@ -93,5 +94,16 @@
     "confirmLogout": "Êtes-vous sûr de vouloir vous déconnecter?",
     "yes": "Oui",
     "no": "Non"
+  },
+  "login":{
+    "signUpWithApple": "S'inscrire avec Apple",
+    "signUpWithGoogle": "S'inscrire avec Google",
+    "signUpWithFacebook": "S'inscrire avec Facebook",
+    "signUpWithX": "S'inscrire avec X",
+    "or": "Ou",
+    "noAccount": "Pas de compte?",
+    "signInWithPassQ": "Se connecter avec un mot de passe?",
+    "signInWithOtpQ": "Se connecter avec un code?",
+    "sendCode": "Envoyer le code"
   }
 }

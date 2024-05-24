@@ -1,12 +1,13 @@
-export type Locale = "en" | "fr" | "de" | "fa";
-export type TFullLocales = "en-US" | "fr-FR" | "de-DE" | "fa-IR";
+export type Locale = "en" | "fr" | "de" | "fa" | "ar";
+export type TFullLocales = "en-US" | "fr-FR" | "de-DE" | "fa-IR" | "ar-SA";
 export const FullLocaleNames: {
   [key in Locale]: TFullLocales;
 } = {
   en: "en-US",
   fr: "fr-FR",
   de: "de-DE",
-  fa: "fa-IR"
+  fa: "fa-IR",
+  ar: "ar-SA"
 };
 
 export type DicProperties = {
@@ -75,6 +76,7 @@ export type DicProperties = {
     recently: string;
     bestInMonth: string;
     search: string;
+    signUp: string;
     login: string;
     logout: string;
     webApp: string;
@@ -105,4 +107,14 @@ export type DicProperties = {
     yes: string;
     no: string;
   };
+  login: {
+    signUpWithApple: string,
+    signUpWithGoogle: string,
+    signUpWithFacebook: string,
+    signUpWithX: string,
+    or: string,
+    noAccount: string,
+    signInWithPassQ: string,
+    signInWithOtpQ: string,
+  }
 };

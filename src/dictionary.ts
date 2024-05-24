@@ -6,6 +6,7 @@ export type Dictionary = {
   fr: () => Promise<DicProperties>;
   de: () => Promise<DicProperties>;
   fa: () => Promise<DicProperties>;
+  ar: () => Promise<DicProperties>;
 };
 const dictionaries: Dictionary = {
   en: () =>
@@ -16,6 +17,8 @@ const dictionaries: Dictionary = {
     import("@/dictionaries/de-DE.json").then((module) => module.default),
   fa: () =>
     import("@/dictionaries/fa-IR.json").then((module) => module.default),
+  ar: () =>
+    import("@/dictionaries/ar-SA.json").then((module) => module.default),
 };
 
 export const getDictionary = async (locale: Locale) => dictionaries[locale]();

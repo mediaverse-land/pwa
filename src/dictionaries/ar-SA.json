@@ -10,8 +10,8 @@
     "about": "About Us"
   },
   "homepage": {
-    "whatIs": "What is GiBiCal?",
-    "description": "GiBiCal Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.",
+    "whatIs": "What is Mediaverse?",
+    "description": "Mediaverse Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.",
     "exploreLimitless": "Explore limitless!",
     "liveTvChannels": "Live TV Channels",
     "bestVideos": "Best Videos",
@@ -23,11 +23,11 @@
     "haveNotTriedTheAppYet": "Haven't tried the app yet?"
   },
   "blogSection": {
-    "appNews": "GiBiCal News",
+    "appNews": "MediaVerse News",
     "alwaysBeUpdate": "Always be update!"
   },
   "faqSection": {
-    "title": "gibical Features"
+    "title": "MediaVers Features"
   },
   "aboutUs": {
     "office": "Office",

@@ -64,6 +64,7 @@
     "recently": "اخیراً",
     "bestInMonth": "بهترین در ماه",
     "search": "جستجو",
+    "signUp": "ثبت‌نام",
     "login": "ورود",
     "logout": "خروج",
     "webApp": "وب اپلیکیشن",
@@ -93,5 +94,16 @@
     "confirmLogout": "آیا مطمئن هستید که می‌خواهید خارج شوید؟",
     "yes": "بله",
     "no": "خیر"
+  },
+  "login": {
+    "signUpWithApple": "ثبت‌نام با اپل",
+    "signUpWithGoogle": "ثبت‌نام با گوگل",
+    "signUpWithFacebook": "ثبت‌نام با فیسبوک",
+    "signUpWithX": "ثبت‌نام با X",
+    "or": "یا",
+    "noAccount": "حساب کاربری ندارید؟",
+    "signInWithPassQ": "ورود با رمز عبور؟",
+    "signInWithOtpQ": "ورود با کد؟",
+    "sendCode": "ارسال کد"
   }
 }
