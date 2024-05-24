@@ -8,4 +8,4 @@ export const websiteTitle = "MediaVerse";
 export const logoURL = "/images/media-verse-logo.png";
 export const webAppDeepLink = "mediaverse://media.verse";
 
-export const activeLocales = ["en", "fr", "de", "fa"] as Locale[];
+export const activeLocales = ["en", "fr", "de"] as Locale[];
