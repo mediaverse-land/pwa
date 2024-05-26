@@ -10,6 +10,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/data/Auth";
 import { Locale } from "@/types/dictionary-types";
+import { imagePlaceHolders } from "@/configs/base";
 
 const icons: { [key: string]: JSX.Element } = {
   video: <VIDEO_ICON fill="#83839C" />,
@@ -84,13 +85,13 @@ const ExploreAssetsCard = async ({
         {cover ? (
           <Image
             className="z-10 object-cover"
-            src={`${cover || "/images/No-Image.png"}`}
+            src={`${cover || imagePlaceHolders.image}`}
             alt=""
             fill
           />
         ) : (
           <div className="w-full h-full bg-slate-400 relative">
-            <Image src={`/images/No-Image.png`} alt="no image" fill />
+            <Image src={imagePlaceHolders.image} alt="no image" fill />
           </div>
         )}
         <div className="overlay-bg absolute w-full h-full top-0 left-0 z-20"></div>

@@ -1,29 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import {activeLocales} from "@/configs/base";
+import { activeLocales } from "@/configs/base";
 
-const languages: { [key: string]: {
+const languages: {
+  [key: string]: {
     name: string;
     icon: JSX.Element;
-  } } = {
-  "en" :{
+  };
+} = {
+  en: {
     name: "English",
     icon: <span></span>,
   },
-  "fr":{
+  fr: {
     name: "Français",
     icon: <span></span>,
   },
-  "de": {
+  de: {
     name: "Deutsch",
     icon: <span></span>,
   },
-  "fa": {
+  fa: {
     name: "پارسی",
     icon: <span></span>,
   },
-  "ar" :{
+  ar: {
     name: "اَلْعَرَبِيَّةُ",
     icon: <span></span>,
   },

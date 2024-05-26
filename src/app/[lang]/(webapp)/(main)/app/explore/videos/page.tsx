@@ -2,6 +2,7 @@ import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/Explo
 import ExploreAssetsCard from "@/components/ExplorePageComponents/shared/AllAssetsCard";
 import ExploreVideoCard from "@/components/ExplorePageComponents/shared/VideoCard";
 import ExploreChillSongsSlider from "@/components/shared/ExploreChillSongsSldier";
+import { imagePlaceHolders } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import {
   getMostViewedVideos,
@@ -66,7 +67,7 @@ const WebAppExploreVideoAssets = async ({
                         key={item.id}
                         type="video"
                         cover={
-                          item.thumbnails["336x366"] || "/images/No-Video.png"
+                          item.thumbnails["336x366"] || imagePlaceHolders.video
                         }
                         title={item.name}
                         author={{
@@ -84,7 +85,7 @@ const WebAppExploreVideoAssets = async ({
                     id={item.id}
                     key={item.id}
                     type="video"
-                    cover={item.thumbnails["336x366"] || "/images/No-Video.png"}
+                    cover={item.thumbnails["336x366"] || "/images/.png"}
                     title={item.name}
                     author={{
                       name: item.user.username,
@@ -134,7 +135,7 @@ const RecentlyVideos = async ({ lang }: { lang: Locale }) => {
               picture: items.user.image_url,
             }}
             description={items.description}
-            image={items.thumbnails["336x366"] || "/images/No-Video.png"}
+            image={items.thumbnails["336x366"] || imagePlaceHolders.video}
             time={items.length}
             title={items.name}
           />

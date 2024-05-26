@@ -6,6 +6,7 @@ import ExploreTextCard from "../shared/TextCard";
 import ExploreAssetsCard from "../shared/AllAssetsCard";
 import Link from "next/link";
 import { Locale } from "@/types/dictionary-types";
+import { imagePlaceHolders } from "@/configs/base";
 
 const getSearchResults = async (params: string) => {
   try {
@@ -69,7 +70,9 @@ export const SearchForAll = async ({
               name: item?.asset?.user?.username,
               picture: item?.asset?.user?.image_url,
             }}
-            cover={item?.asset?.thumbnails["336x366"] || "/images/No-Image.png"}
+            cover={
+              item?.asset?.thumbnails["336x366"] || imagePlaceHolders.image
+            }
             title={item?.name}
             type={dataType()}
           />
@@ -108,7 +111,7 @@ export const SearchForImages = async ({
             >
               <Image
                 src={
-                  items?.asset?.thumbnails["336x366"] || "/images/No-Image.png"
+                  items?.asset?.thumbnails["336x366"] || imagePlaceHolders.image
                 }
                 alt={items?.name}
                 fill
@@ -130,7 +133,7 @@ export const SearchForImages = async ({
             >
               <Image
                 src={
-                  items?.asset?.thumbnails["336x366"] || "/images/No-Image.png"
+                  items?.asset?.thumbnails["336x366"] || imagePlaceHolders.image
                 }
                 alt={items?.name}
                 fill
@@ -152,7 +155,7 @@ export const SearchForImages = async ({
             >
               <Image
                 src={
-                  items?.asset?.thumbnails["336x366"] || "/images/No-Image.png"
+                  items?.asset?.thumbnails["336x366"] || imagePlaceHolders.image
                 }
                 alt={items?.name}
                 fill
@@ -193,7 +196,7 @@ export const SearchForVideos = async ({
               }}
               description={items.description}
               image={
-                items?.asset?.thumbnails["336x366"] || "/images/No-Video.png"
+                items?.asset?.thumbnails["336x366"] || imagePlaceHolders.video
               }
               time={items.length}
               title={items.name}
@@ -234,7 +237,7 @@ export const SearchForAudios = async ({
               }}
               description={items.description}
               image={
-                items?.asset?.thumbnails["336x366"] || "/images/No-Sound.png"
+                items?.asset?.thumbnails["336x366"] || imagePlaceHolders.audio
               }
               time={items.length}
               title={items.name}

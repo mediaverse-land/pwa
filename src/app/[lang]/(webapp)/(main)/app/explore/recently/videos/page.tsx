@@ -1,5 +1,6 @@
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import ExploreVideoCard from "@/components/ExplorePageComponents/shared/VideoCard";
+import { imagePlaceHolders } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import { getRecentlyVideos } from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";
@@ -38,7 +39,7 @@ const WebAppRecentlyVideos = async ({
                 picture: items.user.image_url,
               }}
               description={items.description}
-              image={items.thumbnails["336x366"] || "/images/No-Video.png"}
+              image={items.thumbnails["336x366"] || imagePlaceHolders.video}
               time={items.length}
               title={items.name}
             />

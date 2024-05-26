@@ -5,7 +5,7 @@ import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponen
 import { PICTURE_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
 import ShareButton from "@/components/shared/ShareButton";
-import { logoURL, webAppDeepLink } from "@/configs/base";
+import { imagePlaceHolders, logoURL, webAppDeepLink } from "@/configs/base";
 import { getSingleImage } from "@/services/contactService";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
@@ -80,7 +80,7 @@ const ImageSinglePage = async (params: any) => {
             className="object-cover"
             src={`${
               singleImageData?.data?.data.thumbnails["523x304"] ||
-              "/images/No-Image.png"
+              imagePlaceHolders.image
             }`}
             alt=""
             fill
