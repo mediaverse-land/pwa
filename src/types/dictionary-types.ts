@@ -33,6 +33,7 @@ export type DicProperties = {
   };
   footer: {
     haveNotTriedTheAppYet: string;
+    copyright: string
   };
   blogSection: {
     appNews: string;

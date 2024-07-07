@@ -20,7 +20,8 @@
     "bestSongs": "Beste Lieder"
   },
   "footer": {
-    "haveNotTriedTheAppYet": "Sie haben die App noch nicht ausprobiert?"
+    "haveNotTriedTheAppYet": "Sie haben die App noch nicht ausprobiert?",
+    "copyright": "Copyright (c) 2024 Mediaverse Global GmbH"
   },
   "blogSection": {
     "appNews": "GiBiCal Nachrichten",

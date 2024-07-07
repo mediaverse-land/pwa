@@ -20,7 +20,8 @@
     "bestSongs": "بهترین آهنگ ها"
   },
   "footer": {
-    "haveNotTriedTheAppYet": "هنوز اپلیکیشن را امتحان نکرده اید؟"
+    "haveNotTriedTheAppYet": "هنوز اپلیکیشن را امتحان نکرده اید؟",
+    "copyright": "Copyright (c) 2024 Mediaverse Global GmbH"
   },
   "blogSection": {
     "appNews": "اخبار",

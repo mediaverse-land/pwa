@@ -20,7 +20,8 @@
     "bestSongs": "أفضل الأغاني"
   },
   "footer": {
-    "haveNotTriedTheAppYet": "لم تجرب التطبيق بعد؟"
+    "haveNotTriedTheAppYet": "لم تجرب التطبيق بعد؟",
+    "copyright": "Copyright (c) 2024 Mediaverse Global GmbH"
   },
   "blogSection": {
     "appNews": "أخبار GiBiCal",
