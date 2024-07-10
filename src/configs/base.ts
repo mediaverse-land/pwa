@@ -6,6 +6,6 @@ export const swaggerURL = "https://swagger.gibical.app";
 export const websiteTitle = "Gibical";
 // logo url relative to public folder
 export const logoURL = "/images/logo.png";
-export const webAppDeepLink = "gibical://media.verse";
+export const webAppDeepLink = "gibical://gibical.app";
 
 export const activeLocales = ["de", "en", "fr"] as Locale[];
