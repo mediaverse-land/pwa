@@ -56,7 +56,7 @@ export const authOptions: AuthOptions = {
               "x-app": "_Web",
             },
             body: JSON.stringify({
-              id_token: `${data.account.access_token}`,
+              access_token: `${data.account.access_token}`,
             }),
           });
           const res = await req.json();
