@@ -1,4 +1,5 @@
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
+import { imagePlaceHolders } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import { getRecentlyImages } from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";
@@ -35,7 +36,7 @@ const WebAppRecentlyImages = async ({
             >
               <Image
                 className="object-cover"
-                src={items.thumbnails["336x366"] || "/images/No-Image.png"}
+                src={items.thumbnails["336x366"] || imagePlaceHolders.image}
                 alt={items.name}
                 fill
               />

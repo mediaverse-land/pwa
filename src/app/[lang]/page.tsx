@@ -2,7 +2,7 @@ import { SongSlider, VideoSlider } from "@/components";
 import BorderGradient from "@/components/BorderGradient";
 import ScrollToBottomBtn from "@/components/Buttons/ScrollToBottom";
 import Motion from "@/components/motion";
-import { logoURL } from "@/configs/base";
+import { imagePlaceHolders, logoURL, playStoreLink } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import { locales } from "@/middleware";
 import {
@@ -109,7 +109,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                 </div>
               </div>
               <Link
-                href={`https://play.google.com/store/apps/dev?id=9075123475680600566`}
+                href={playStoreLink}
                 className="app-store-container cursor-pointer py-[4px] px-[12px] flex items-center"
               >
                 <div className="relative w-full aspect-[135/48]">
@@ -174,7 +174,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                 <Link href={`/${lang}/app/channels/${item.id}`} key={item.id}>
                   <img
                     className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
-                    src={item.thumbnail}
+                    src={item.thumbnail || imagePlaceHolders.image}
                     alt=""
                   />
                 </Link>
@@ -186,7 +186,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                 <img
                   key={i}
                   className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
-                  src={item.thumbnail}
+                  src={item.thumbnail || imagePlaceHolders.image}
                   alt=""
                 />
               ))}
@@ -240,7 +240,9 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                     }`}
                   >
                     <Image
-                      src={items.thumbnails["336x366"]}
+                      src={
+                        items.thumbnails["336x366"] || imagePlaceHolders.image
+                      }
                       alt={items.name}
                       fill
                     />

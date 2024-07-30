@@ -1,6 +1,7 @@
 import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/ExploreAssetsComponents/SearchAndNavSection";
 import ExploreAssetsCard from "@/components/ExplorePageComponents/shared/AllAssetsCard";
 import ShowAssetSlider from "@/components/shared/DailyRecommendedSlider";
+import { imagePlaceHolders } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import {
   getMostViewedImages,
@@ -116,7 +117,7 @@ const RecentlyImages = async ({ lang }: { lang: Locale }) => {
             className={`relative overflow-hidden rounded-lg w-full aspect-square `}
           >
             <Image
-              src={`${items.thumbnails["336x366"] || "/images/No-Image.png"}`}
+              src={`${items.thumbnails["336x366"] || imagePlaceHolders.image}`}
               alt={items.name}
               fill
             />

@@ -7,6 +7,7 @@ import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { FullLocaleNames, Locale } from "@/types/dictionary-types";
+import { imagePlaceHolders } from "@/configs/base";
 
 const VideoSlider = () => {
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
@@ -17,7 +18,7 @@ const VideoSlider = () => {
     const getData = async () => {
       const videoData = await getMostViewedVideos(FullLocaleNames[lang]);
       const data = await videoData.json();
-      setVideoData(data['data']);
+      setVideoData(data["data"]);
     };
     getData();
   }, []);
@@ -67,7 +68,9 @@ const VideoSlider = () => {
                 >
                   <div className="relative w-[194px] lg:w-full aspect-square">
                     <Image
-                      src={item.thumbnails["226x226"]}
+                      src={
+                        item.thumbnails["226x226"] || imagePlaceHolders.video
+                      }
                       className="rounded-xl object-cover"
                       alt="video cover"
                       fill

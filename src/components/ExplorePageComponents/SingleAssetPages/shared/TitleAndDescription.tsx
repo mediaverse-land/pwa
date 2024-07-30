@@ -1,3 +1,4 @@
+import { imagePlaceHolders } from "@/configs/base";
 import { secondsToHMS } from "@/lib/convertSecondsToHMS";
 import Image from "next/image";
 
@@ -27,7 +28,7 @@ const AssetSinglePageTitleAndDescription = ({
             <div className="relative w-[18px] h-[18px] aspect-square overflow-hidden rounded-full">
               {author.image ? (
                 <Image
-                  src={`${author?.image || "/images/No-Image.png"}`}
+                  src={`${author?.image || imagePlaceHolders.image}`}
                   alt={`${author.name}`}
                   fill
                 />

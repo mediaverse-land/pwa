@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { FullLocaleNames, Locale } from "@/types/dictionary-types";
+import { imagePlaceHolders } from "@/configs/base";
 const SongSlider = () => {
   const [swiperRef, setSwiperRef] = useState<SwiperClass>();
   const [songoData, setSongData] = useState([]);
@@ -17,7 +18,7 @@ const SongSlider = () => {
     const getData = async () => {
       const songData = await getMostViewedSongs(FullLocaleNames[lang]);
       const data = await songData.json();
-      setSongData(data['data']);
+      setSongData(data["data"]);
     };
     getData();
   }, []);
@@ -65,7 +66,9 @@ const SongSlider = () => {
                 >
                   <div className="relative w-full aspect-square">
                     <Image
-                      src={item.thumbnails["226x226"]}
+                      src={
+                        item.thumbnails["226x226"] || imagePlaceHolders.audio
+                      }
                       className="rounded-xl"
                       alt="Music Cover"
                       fill

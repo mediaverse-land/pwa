@@ -1,5 +1,6 @@
 import ExploreAudioCard from "@/components/ExplorePageComponents/shared/AudioCard";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
+import { imagePlaceHolders } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import { getRecentlySongs } from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";
@@ -38,7 +39,7 @@ const WebAppRecentlyAudios = async ({
                 picture: items.user.image_url,
               }}
               description={items.description}
-              image={items.thumbnails["336x366"] || "/images/No-Sound.png"}
+              image={items.thumbnails["336x366"] || imagePlaceHolders.audio}
               time={items.length}
               title={items.name}
             />
