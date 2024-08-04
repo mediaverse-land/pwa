@@ -53,7 +53,7 @@ const ShareAccountForm = () => {
       </div>
       {/* Drawer */}
       <div
-        className={`absolute bottom-0 left-0 w-full z-50 rounded-t-2xl bg-[rgba(78,78,97,0.75)] backdrop-blur-md overflow-hidden duration-500 transition-[max-height] ${
+        className={`absolute bottom-0 left-0 w-full z-50 rounded-t-2xl bg-[rgba(78,78,97,0.75)] backdrop-blur-md overflow-hidden duration-700 transition-[max-height] ${
           drawerStatus.isOpen ? "max-h-[400px]" : "max-h-[0px]"
         }`}
       >

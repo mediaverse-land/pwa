@@ -18,7 +18,7 @@ export default function Accordion({ item }: any) {
         </p>
       </div>
       <div
-        className={`text-[14px] text-[#C1C1CC] transition-all duration-500 overflow-hidden mb-4 ${
+        className={`text-[14px] text-[#C1C1CC] transition-all duration-700 overflow-hidden mb-4 ${
           collapsed ? "max-h-0" : "max-h-[500px]"
         }`}
       >

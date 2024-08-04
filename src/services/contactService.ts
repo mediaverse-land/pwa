@@ -1,4 +1,4 @@
-import {baseURL, blogURL} from "@/configs/base";
+import { baseURL, blogURL } from "@/configs/base";
 import { PostCommentData } from "@/types";
 import { TFullLocales } from "@/types/dictionary-types";
 
@@ -426,12 +426,10 @@ export const putUserProfile = ({
     method: "PUT",
     headers: {
       "Accept-Language": "en-US",
-      accept: "application/json",
       "x-app": "_Web",
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(data),
+    body: data,
   });
 };
 
@@ -522,7 +520,10 @@ export const getBlog = ({ id, lang }: { id: string; lang: TFullLocales }) => {
   return fetchInstance(url, lang);
 };
 
-export const requestOTP = async (data: any) => {
+export const requestOTP = async (data: {
+  cellphone: string;
+  captcha: string;
+}) => {
   const url = `${baseURL}/auth/otp/request`;
   if (process.env.NODE_ENV === "production") {
     const req = await fetch(url, {
@@ -553,7 +554,7 @@ export const requestOTP = async (data: any) => {
     return req;
   }
 };
-export const submitOTP = async (data: any) => {
+export const submitOTP = async (data: { cellphone: string; otp: string }) => {
   const url = `${baseURL}/auth/otp/submit`;
   if (process.env.NODE_ENV === "production") {
     const req = await fetch(url, {

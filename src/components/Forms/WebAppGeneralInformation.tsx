@@ -48,11 +48,15 @@ const schema = z.object({
   cellphone: z.string().min(1, {
     message: "*Please enter your Cellphone",
   }),
+  image: z.any(),
 
   // address: z.string().min(1, {
   //   message: "*Please enter your Username",
   // }),
 });
+
+type formData = z.infer<typeof schema>;
+
 const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
   const session = useSession();
   const params = useParams();
@@ -114,7 +118,8 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
     reset,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm({ resolver: zodResolver(schema) });
+  } = useForm<formData>({ resolver: zodResolver(schema) });
+
   const handleEditUserInfo = handleSubmit(async (data) => {
     // console.log(data);
     setInputErrors({
@@ -128,18 +133,21 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
     });
     setServerErrors("");
     setMessage("");
-    const res = await putUserProfileData({ data, token });
+
+    const formData = new FormData();
+    formData.append("first_name", "mahdi");
+    const res = await putUserProfileData({ data: formData, token });
     console.log(res, "edit info");
     if (res?.status === 200) {
       // revalidatePath("/explore?section=wallet");
 
       router.refresh();
       setRefetch(!refetch);
-      await session.update({
-        name: `${res.data.first_name} ${res.data.last_name}`,
-        email: res.data.email,
-        cellphone: res.data.cellphone,
-      });
+      // await session.update({
+      //   name: `${res.data.first_name} ${res.data.last_name}`,
+      //   email: res.data.email,
+      //   cellphone: res.data.cellphone,
+      // });
       setInputValues({
         ...inputValues,
         email: res.data.email || "",
@@ -339,6 +347,27 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
                         }));
                       },
                     })}
+                  />
+                </div>
+                <p className="text-[12px] text-red-400 text-start">
+                  {errors.email?.message?.toString() || inputErrors.email}
+                </p>
+              </div>
+              <div className="flex flex-col items-stretch">
+                <div
+                  className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
+                  style={{
+                    background: `rgba(14, 14, 18, 0.50)`,
+                  }}
+                >
+                  <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
+                    {"image"}
+                  </div>
+                  <div className="h-full w-[1px] bg-white mx-1"></div>
+                  <input
+                    className="bg-transparent grow placeholder:text-[#353542] outline-none"
+                    type="file"
+                    {...register("image")}
                   />
                 </div>
                 <p className="text-[12px] text-red-400 text-start">

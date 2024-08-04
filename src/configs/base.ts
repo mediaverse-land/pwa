@@ -16,4 +16,5 @@ export const imagePlaceHolders = {
   video: "/images/No-Video.png",
   audio: "/images/No-Sound.png",
   text: "/images/No-Text.png",
-};
+  account: "/images/no-account-image.png",
+} as const;
