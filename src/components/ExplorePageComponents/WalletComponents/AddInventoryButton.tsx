@@ -24,9 +24,13 @@ const AddInventoryButton = async ({
   lang: Locale;
 }) => {
   const session = await getServerSession(authOptions);
-  console.log(session?.user.token);
+  // console.log(session?.user.token);
   // check to see user info is complete or not
-  if (!session?.user.name || !session.user.email) {
+  if (
+    !session?.user.firstName ||
+    !session.user.lastName ||
+    !session.user.email
+  ) {
     return (
       <div className="w-full text-center bg-[#666680] rounded-2xl py-2 space-x-2 rtl:space-x-reverse">
         <span className="text-white">{dic.appWallet.completeInfo}</span>
