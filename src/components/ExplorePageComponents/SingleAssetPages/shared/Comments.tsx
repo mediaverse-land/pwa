@@ -1,5 +1,6 @@
 "use client";
 
+import { imagePlaceHolders } from "@/configs/base";
 import { convertISOToRelative } from "@/lib/convertISOToRelative";
 import { getComments, postComment } from "@/services/contactService";
 import { PostCommentData } from "@/types";
@@ -46,13 +47,15 @@ const SingleAssetComments = ({
   username: string | null | undefined;
   token: string;
 }) => {
-  const [comments, setComments] = useState<any[]>();
+  const [comments, setComments] = useState<any[]>([]);
   const [commentsNumber, setCommentsNumber] = useState(0);
   const [message, setMessage] = useState("");
   const [refetchComments, setRefetchComment] = useState(false);
   const [modalStatus, setModalStatus] = useState({
     isOpen: false,
   });
+
+  console.log(comments);
 
   const {
     handleSubmit,
@@ -103,7 +106,6 @@ const SingleAssetComments = ({
       },
       token,
     });
-    console.log(res?.data);
     if (res?.status === 200 && res.data.status === 1) {
       setRefetchComment((prev) => {
         return !prev;
@@ -209,18 +211,26 @@ const SingleAssetComments = ({
               <div className="flex items-center">
                 <div className="flex items-center gap-2 mr-auto">
                   <div className="relative w-[18px] h-[18px] aspect-square overflow-hidden rounded-full">
-                    {item.user.image_url ? (
+                    {item.user ? (
                       <Image
-                        src={`${item.user.image_url || "/"}`}
+                        src={`${
+                          item?.user?.image_url || imagePlaceHolders.account
+                        }`}
                         alt={``}
                         fill
                       />
                     ) : (
-                      <div className="w-full h-full bg-white"></div>
+                      <div className="w-full h-full relative">
+                        <Image
+                          src={`${imagePlaceHolders.account}`}
+                          alt={``}
+                          fill
+                        />
+                      </div>
                     )}
                   </div>
                   <div className="text-[#A2A2B5] text-[12px] leading-3">
-                    {item.user.username}
+                    {item?.user?.username || ""}
                   </div>
                 </div>
                 <div className="text-[12px] leading-3 text-[#666680]">

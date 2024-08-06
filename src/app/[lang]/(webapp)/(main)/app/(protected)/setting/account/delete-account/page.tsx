@@ -27,7 +27,7 @@ const DeleteAccountPage = async ({
         </h2>
         <div className="flex items-center justify-center gap-6 [&_>_*]:flex-1 max-w-[80%] mx-auto flex-col lg:flex-row">
           <Link
-            href={`/setting`}
+            href={`/${lang}/app/setting`}
             className="border text-center rounded-2xl py-1 w-full"
           >
             No
