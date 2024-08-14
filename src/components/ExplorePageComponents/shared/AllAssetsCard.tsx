@@ -91,7 +91,7 @@ const ExploreAssetsCard = async ({
           />
         ) : (
           <div className="w-full h-full bg-slate-400 relative">
-            <Image src={imagePlaceHolders.image} alt="no image" fill />
+            <Image src={imagePlaceHolders.image || ''} alt="no image" fill />
           </div>
         )}
         <div className="overlay-bg absolute w-full h-full top-0 left-0 z-20"></div>
