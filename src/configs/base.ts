@@ -10,12 +10,13 @@ export const playStoreLink = process.env.NEXT_PUBLIC_PLAY_STORE_LINK;
 
 export const activeLocales = (process.env.NEXT_PUBLIC_ACTIVE_LOCALES?.split(',') || ["en"]) as Locale[];
 
-export const logoURL = "/images/logo.png";
+export const logoURL =  process.env.NEXT_PUBLIC_APP_LOGO;
+export const backgroundImageURL =  process.env.NEXT_PUBLIC_BACKGROUND_IMAGE_URL;
 
 export const imagePlaceHolders = {
-  image: "/images/No-Image.png",
-  video: "/images/No-Video.png",
-  audio: "/images/No-Sound.png",
-  text: "/images/No-Text.png",
+  text: process.env.NEXT_PUBLIC_NO_TEXT_LINK,
+  image: process.env.NEXT_PUBLIC_NO_IMAGE_LINK,
+  audio: process.env.NEXT_PUBLIC_NO_AUDIO_LINK,
+  video: process.env.NEXT_PUBLIC_NO_VIDEO_LINK,
   account: "/images/no-account-image.png",
 } as const;
