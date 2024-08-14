@@ -10,8 +10,8 @@
     "about": "À propos de nous"
   },
   "homepage": {
-    "whatIs": "Qu’est-ce que GiBiCal ?",
-    "description": "GiBiCal Platform est la nouvelle génération d'outils de gestion d'actifs multimédias pour les télévisions sociales (ou médias sociaux) qui aide les utilisateurs à gérer le cycle de contenu depuis l'approvisionnement (ou la production) jusqu'à la distribution.",
+    "whatIs": "Qu’est-ce que Gibical ?",
+    "description": "Gibical Platform est la nouvelle génération d'outils de gestion d'actifs multimédias pour les télévisions sociales (ou médias sociaux) qui aide les utilisateurs à gérer le cycle de contenu depuis l'approvisionnement (ou la production) jusqu'à la distribution.",
     "exploreLimitless": "Explorez sans limites !",
     "liveTvChannels": "Chaînes de télévision en direct",
     "bestVideos": "Meilleures vidéos",
@@ -24,7 +24,7 @@
     "copyright": "Copyright (c) 2024 Mediaverse"
   },
   "blogSection": {
-    "appNews": "Actualités GiBiCal",
+    "appNews": "Actualités Gibical",
     "alwaysBeUpdate": "Soyez toujours à jour !"
   },
   "faqSection": {
