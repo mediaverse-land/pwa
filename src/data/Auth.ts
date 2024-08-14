@@ -1,5 +1,5 @@
-import { baseURL } from "@/configs/base";
-import { AuthOptions } from "next-auth";
+import { baseURL, imagePlaceHolders } from "@/configs/base";
+import { AdapterUser, AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
 import GithubProvider from "next-auth/providers/github";
@@ -17,35 +17,48 @@ export const authOptions: AuthOptions = {
     //   console.log(params);
     // },
     async redirect(params: { url: string; baseUrl: string }) {
-      if (params.url.startsWith("http") || params.url.startsWith("/")) {
+      if (params.url.startsWith("https") || params.url.startsWith("/")) {
         return params.url;
       } else {
         return params.baseUrl;
       }
-    },
-    async session({ session, token, user, trigger }) {
-      session.user.token = token.token;
-      session.user.id = token.id;
-      session.user.cellphone = token.cellphone;
-      return session;
     },
     async jwt({ account, token, user, profile, session, trigger }) {
       if (user) {
         token.token = user.token;
         token.id = user.id;
         token.cellphone = user.cellphone;
+        token.firstName = user.firstName;
+        token.lastName = user.lastName;
+        token.email = user.email;
+        token.image = user.image;
+        token.username = user.username;
       }
       if (trigger === "update") {
-        token.name = session.name;
-        token.email = session.email;
-        token.picture = session.picture;
-        token.id = session.id;
+        token.cellphone = session?.cellphone || token.cellphone;
+        token.firstName = session?.firstName || token.firstName;
+        token.lastName = session?.lastName || token.lastName;
+        token.email = session?.email || token.email;
+        token.image = session?.image || token.image;
+        token.username = session?.username || token.username;
+        token.token = session?.token || token.token;
       }
       return token;
     },
+    async session({ session, token, user, trigger }) {
+      session.user.token = token.token;
+      session.user.id = token.id;
+      session.user.cellphone = token.cellphone;
+      session.user.firstName = token.firstName;
+      session.user.lastName = token.lastName;
+      session.user.image = token.image;
+      session.user.email = token.email;
+      session.user.username = token.username;
+      return session;
+    },
+
     async signIn(data: any) {
       // console.log(data, "data");
-
       switch (data.account.provider) {
         case "google": {
           const req = await fetch(`${baseURL}/auth/google`, {
@@ -91,18 +104,8 @@ export const authOptions: AuthOptions = {
             throw new Error("Failed to login");
           }
         }
-        case "loginWithUsername": {
-          // console.log(data, "username login");
-          return data;
-        }
-        case "loginWithOTP": {
-          return data;
-        }
-        case "signUpWithOTP": {
-          return data;
-        }
         default:
-          return false;
+          return data;
       }
     },
   },
@@ -125,9 +128,9 @@ export const authOptions: AuthOptions = {
     }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
-      id: "loginWithUsername",
+      id: "customLogin",
       type: "credentials",
-      name: "Login With Username",
+      name: "customLogin",
       credentials: {
         username: { label: "Username", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
@@ -135,97 +138,17 @@ export const authOptions: AuthOptions = {
       async authorize(credentials, req) {
         // If no error and we have user data, return it
         if (req.query) {
-          // console.log("success");
-          const userInfo = JSON.parse(req.query.user);
-          // console.log(userInfo);
-          // const user = {
-          //   cellphone: reqInfo.user.cellphone,
-          //   code: reqInfo.user.status,
-          //   id: reqInfo.user.id,
-          // };
+          const userInfo = JSON.parse(req.query.user) as AdapterUser;
           const user = {
-            id: userInfo.user.id,
-            name: `${userInfo.user.first_name || ""} ${
-              userInfo.user.last_name || ""
-            }`,
-            image: userInfo.user.image?.url || "/",
-            email: userInfo.user.email,
-            cellphone: userInfo.user.cellphone,
+            id: userInfo.id,
+            firstName: userInfo.firstName || "",
+            lastName: userInfo.lastName || "",
+            image: userInfo.image,
+            email: userInfo.email || "",
+            cellphone: userInfo.cellphone || "",
             token: userInfo.token,
+            username: userInfo.username,
           };
-          // console.log(user, "user in auth");
-          return user;
-        } else {
-          throw new Error(`User Not Found`);
-        }
-      },
-    }),
-    CredentialsProvider({
-      // The name to display on the sign in form (e.g. 'Sign in with...')
-      id: "loginWithOTP",
-      type: "credentials",
-      name: "Login With OTP",
-      credentials: {
-        cellphone: { label: "Cellphone", type: "text" },
-        code: { label: "Code", type: "text" },
-      },
-      async authorize(credentials, req) {
-        // If no error and we have user data, return it
-        if (req.query) {
-          // console.log("success");
-          const userInfo = JSON.parse(req.query.user);
-          // const user = {
-          //   cellphone: reqInfo.user.cellphone,
-          //   code: reqInfo.user.status,
-          //   id: reqInfo.user.id,
-          // };
-          const user = {
-            id: userInfo.user.id,
-            token: userInfo.token,
-            name: `${userInfo.user.first_name || ""} ${
-              userInfo.user.last_name || ""
-            }`,
-            image: userInfo.user.image?.url || "/",
-            email: userInfo.user.email,
-            cellphone: userInfo.user.cellphone,
-          };
-          // console.log(user, "user in auth");
-          return user;
-        } else {
-          throw new Error(`User Not Found`);
-        }
-      },
-    }),
-    CredentialsProvider({
-      // The name to display on the sign in form (e.g. 'Sign in with...')
-      id: "signUpWithOTP",
-      type: "credentials",
-      name: "Sign up With OTP",
-      credentials: {
-        cellphone: { label: "Cellphone", type: "text" },
-        code: { label: "Code", type: "text" },
-      },
-      async authorize(credentials, req) {
-        // If no error and we have user data, return it
-        if (req.query) {
-          // console.log("success");
-          const userInfo = JSON.parse(req.query.user);
-          // const user = {
-          //   cellphone: reqInfo.user.cellphone,
-          //   code: reqInfo.user.status,
-          //   id: reqInfo.user.id,
-          // };
-          const user = {
-            id: userInfo.user.id,
-            token: userInfo.token,
-            name: `${userInfo.user.first_name || ""} ${
-              userInfo.user.last_name || ""
-            }`,
-            image: userInfo.user.image?.url || "/",
-            email: userInfo.user.email,
-            cellphone: userInfo.user.cellphone,
-          };
-          // console.log(user, "user in auth");
           return user;
         } else {
           throw new Error(`User Not Found`);

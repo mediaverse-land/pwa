@@ -213,7 +213,7 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
         <SingleAssetComments
           assetID={singleAudioData?.data?.asset_id}
           userImage={session?.user?.image}
-          username={session?.user?.name}
+          username={`${session?.user?.firstName} ${session?.user?.lastName}`}
           token={token}
         />
       </div>

@@ -1,14 +1,14 @@
+import { authOptions } from "@/data/Auth";
 import { getOwnershipAssets } from "@/services/contactService";
+import { DicProperties, Locale } from "@/types/dictionary-types";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
-import ExploreVideoCard from "../shared/VideoCard";
+import Link from "next/link";
+import ExploreAssetsCard from "../shared/AllAssetsCard";
 import ExploreAudioCard from "../shared/AudioCard";
 import ExploreTextCard from "../shared/TextCard";
-import ExploreAssetsCard from "../shared/AllAssetsCard";
-import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/data/Auth";
+import ExploreVideoCard from "../shared/VideoCard";
 import LogoutNoUser from "./Logout";
-import { DicProperties, Locale } from "@/types/dictionary-types";
 
 const getOwnership = async ({
   params,
@@ -194,7 +194,7 @@ export const OwnershipVideoAssets = async ({
               id={items.id}
               key={items.id}
               author={{
-                name: session?.user?.name,
+                name: `${session?.user?.firstName} ${session?.user?.lastName}`,
                 picture: session?.user?.image,
               }}
               description={items.description}
@@ -247,7 +247,7 @@ export const OwnershipAudioAssets = async ({
               id={items.id}
               key={items.id}
               author={{
-                name: session?.user?.name,
+                name: `${session?.user?.firstName} ${session?.user?.lastName}`,
                 picture: session?.user?.image,
               }}
               description={items.description}

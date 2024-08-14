@@ -15,7 +15,7 @@ const ExploreTextCard = async ({ data, lang }: { data: any; lang: Locale }) => {
           <Image
             className="object-cover"
             src={`${session?.user?.image}`}
-            alt={`${session?.user?.name}`}
+            alt={`${session?.user?.lastName}`}
             fill
           />
         );
@@ -60,7 +60,7 @@ const ExploreTextCard = async ({ data, lang }: { data: any; lang: Locale }) => {
           <div className="line-clamp-1">
             {data?.asset?.user?.username ||
               data?.user?.username ||
-              session?.user?.name ||
+              `${session?.user?.firstName} ${session?.user?.lastName}` ||
               ""}
           </div>
         </div>

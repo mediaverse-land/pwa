@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 const SignUpInfo = async () => {
   const session = await getServerSession(authOptions);
-  if (!session || !session.user?.name) {
+  if (!session) {
     redirect("/sign-up");
   }
   return (

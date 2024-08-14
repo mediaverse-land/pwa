@@ -7,7 +7,7 @@ import {
   MESSAGE_ICON,
   SHARE_ICON,
 } from "@/components/SVG/svgs";
-import { webAppDeepLink } from "@/configs/base";
+import { imagePlaceHolders, webAppDeepLink } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import { getUserMessages } from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";
@@ -18,10 +18,17 @@ import Link from "next/link";
 const getUserMessagesData = async (token: string) => {
   try {
     const req = await getUserMessages(token);
-    return {
-      data: await req.json(),
-      status: req.status,
-    };
+    if (req.ok) {
+      return {
+        data: await req.json(),
+        status: req.status,
+      };
+    } else {
+      return {
+        data: null,
+        status: req.status,
+      };
+    }
   } catch (error) {
     console.error(error);
   }
@@ -37,6 +44,7 @@ const WebAppSessting = async ({
   params: { lang: Locale };
 }) => {
   const session = await getServerSession(authOptions);
+  console.log(session);
   const dic = await getDictionary(lang);
   const token = session?.user?.token || "";
   const [messagesData] = await Promise.all([getUserMessagesData(token)]);
@@ -59,22 +67,18 @@ const WebAppSessting = async ({
           {/* user image */}
           <div className="w-[80px] absolute aspect-square rounded-full p-3 flex items-center bg-[#161653] justify-center z-20 top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="relative w-full h-full rounded-full overflow-hidden">
-              {session?.user?.image ? (
-                <Image
-                  src={session?.user?.image || "/images/no.png"}
-                  alt="user"
-                  fill
-                />
-              ) : (
-                <div className="w-full aspect-square bg-white overflow-hidden rounded-full"></div>
-              )}
+              <Image
+                src={session?.user?.image || imagePlaceHolders.account}
+                alt="user"
+                fill
+              />
             </div>
           </div>
           {/* user name and email */}
           <div className="flex flex-col justify-center items-center py-1 mt-[38px] max-w-[90%] mx-auto">
             <div className="line-clamp-1 font-semibold text-white">
-              {session?.user?.name && session?.user?.name?.trim().length > 0
-                ? session?.user?.name
+              {`${session?.user.firstName} ${session?.user.lastName}`.trim()
+                ? `${session?.user.firstName} ${session?.user.lastName}`.trim()
                 : "Unknown"}
             </div>
             <div className="line-clamp-1 text-[12px] text-[#83839C] leading-4">
@@ -106,7 +110,7 @@ const WebAppSessting = async ({
               </div>
             </div>
             <div className="text-[12px] text-[#A2A2B5]">
-              {session?.user?.name}
+              {session?.user?.firstName} {session?.user?.lastName}
             </div>
           </Link>
           <Link
@@ -128,7 +132,7 @@ const WebAppSessting = async ({
               </div>
             </div>
             <div className="text-[12px] text-black flex items-center justify-center leading-none w-[18px] aspect-square rounded-full bg-white">
-              {messagesData?.data.data.length}
+              {messagesData?.data?.data?.length || 0}
             </div>
           </Link>
           <Link href={`/${lang}/app/wallet`} className="flex items-center">

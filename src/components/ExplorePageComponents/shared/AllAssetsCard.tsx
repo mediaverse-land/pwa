@@ -47,7 +47,7 @@ const ExploreAssetsCard = async ({
           <Image
             className="object-cover"
             src={`${session?.user?.image}`}
-            alt={`${session?.user?.name}`}
+            alt={`${session?.user?.lastName}`}
             fill
           />
         );
@@ -111,7 +111,9 @@ const ExploreAssetsCard = async ({
             {authorImage()}
           </div>
           <div className="text-[12px] text-[#666680] line-clamp-1 leading-3">
-            {ownershipcard ? session?.user?.name : author?.name}
+            {ownershipcard
+              ? `${session?.user?.firstName} ${session?.user?.lastName}`
+              : author?.name || ""}
           </div>
         </div>
       </div>

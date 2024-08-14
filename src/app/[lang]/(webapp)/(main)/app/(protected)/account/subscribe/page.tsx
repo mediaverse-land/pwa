@@ -156,7 +156,7 @@ const AccountSubscribeSection = async ({
               className="text-center flex flex-col items-center justify-center cursor-pointer h-full"
             >
               <div
-                className={`py-4 lg:py-2 w-fit h-full flex items-center justify-center px-2 transition-all duration-500 after:content-[''] relative after:absolute after:bg-[#597AFF] after:rounded-full after:left-0 after:bottom-0 ${
+                className={`py-4 lg:py-2 w-fit h-full flex items-center justify-center px-2 transition-all duration-700 after:content-[''] relative after:absolute after:bg-[#597AFF] after:rounded-full after:left-0 after:bottom-0 ${
                   activeTab === tab.name
                     ? "after:w-full after:h-[2px]"
                     : "after:w-[0%] after:h-[0px]"

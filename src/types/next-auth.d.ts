@@ -9,46 +9,48 @@ declare module "next-auth" {
       token?: string;
       id?: string;
       image?: string | null;
-      name?: string | null;
+      firstName: string;
+      lastName: string;
       email?: string | null;
       cellphone?: string | null;
+      username: string | null;
     };
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT extends DefaultJWT {
-    access_token?: string;
-    refresh_token?: string;
     token?: string;
     id?: string;
     image?: string | null;
-    name?: string | null;
+    firstName: string;
+    lastName: string;
     email?: string | null;
     cellphone?: string | null;
+    username: string | null;
   }
 }
 
 declare module "next-auth" {
   interface User {
-    access_token?: string;
-    refresh_token?: string;
     token?: string;
     id?: string;
     image?: string | null;
-    name?: string | null;
+    firstName: string;
+    lastName: string;
     email?: string | null;
     cellphone?: string | null;
+    username: string | null;
   }
 
   interface AdapterUser {
-    access_token?: string;
-    refresh_token?: string;
     token?: string;
     id?: string;
     image?: string | null;
-    name?: string | null;
+    firstName: string;
+    lastName: string;
     email?: string | null;
     cellphone?: string | null;
+    username: string | null;
   }
 }

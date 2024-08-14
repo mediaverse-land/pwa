@@ -1,6 +1,6 @@
 import { authOptions } from "@/data/Auth";
 import SocialLoginBtn from "@/components/Buttons/SocialLoginBtn";
-import { LoginWithPhone, LoginWithUsername } from "@/components/LoginInputs";
+
 import Motion from "@/components/motion";
 import { Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
@@ -8,6 +8,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getDictionary } from "@/dictionary";
 import { locales } from "@/middleware";
+import { LoginWithUsername } from "@/components/Forms/LoginForms";
+import OtpForm from "@/components/Forms/OtpForm";
 
 const Login = async ({
   searchParams,
@@ -19,7 +21,7 @@ const Login = async ({
   params: { lang: Locale };
 }) => {
   const dic = await getDictionary(
-      locales.find((item) => item === lang) ?? locales[0]
+    locales.find((item) => item === lang) ?? locales[0]
   );
 
   let loginType = searchParams.type || "phone";
@@ -47,11 +49,7 @@ const Login = async ({
             </div>
             {/* inputs */}
             <div className="flex flex-col items-stretch grow gap-8">
-              {loginType === "phone" ? (
-                <LoginWithPhone />
-              ) : (
-                <LoginWithUsername />
-              )}
+              {loginType === "phone" ? <OtpForm /> : <LoginWithUsername />}
               <div className="flex flex-col items-stretch gap-5">
                 <div className="flex items-center justify-around">
                   <div>

@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { imagePlaceHolders } from "@/configs/base";
 type TaccountTypes = {
   id: number;
   name: "Subscribe" | "Ownership";
@@ -46,22 +47,20 @@ const WebAppAccountTopSection = async ({
         {/* user image */}
         <div className="w-[80px] absolute aspect-square rounded-full p-3 flex items-center bg-[#13133F] justify-center z-20 top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <div className="relative w-full h-full rounded-full overflow-hidden">
-            {session?.user?.image ? (
-              <Image
-                src={session?.user?.image || "/images/no.png"}
-                alt="user"
-                fill
-              />
-            ) : (
-              <div className="w-full aspect-square bg-white overflow-hidden rounded-full"></div>
-            )}
+            <Image
+              src={session?.user?.image || imagePlaceHolders.account}
+              className="object-cover"
+              alt="user"
+              fill
+            />
           </div>
         </div>
         {/* user name and email */}
         <div className="flex flex-col justify-center items-center py-1 mt-[38px] max-w-[90%] mx-auto">
           <div className="line-clamp-1 font-semibold text-white">
-            {session?.user?.name && session?.user?.name?.trim().length > 0
-              ? session?.user?.name
+            {`${session?.user.firstName}${session?.user.lastName}`.trim()
+              .length > 0
+              ? `${session?.user.firstName} ${session?.user.lastName}`.trim()
               : "Unknown"}
           </div>
           <div className="line-clamp-1 text-[12px] text-[#83839C] leading-4">
