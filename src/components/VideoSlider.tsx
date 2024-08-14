@@ -53,7 +53,7 @@ const VideoSlider = () => {
           // autoplay={{ delay: 5 }}
           className="w-full linear-light-blue-bg"
         >
-          {videoData.map((item: any, index) => {
+          {videoData?.map((item: any, index) => {
             return (
               <SwiperSlide
                 key={item.id}

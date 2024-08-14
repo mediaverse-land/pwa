@@ -52,7 +52,7 @@ const SongSlider = () => {
           loop={true}
           rewind={true}
         >
-          {songoData.map((item: any, index) => {
+          {songoData?.map((item: any, index) => {
             return (
               <SwiperSlide
                 className="min-w-[194px] lg:min-w-[140px] min-h-[194px] lg:min-h-[120px]"

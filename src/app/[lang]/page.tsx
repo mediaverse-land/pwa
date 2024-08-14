@@ -109,7 +109,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                 </div>
               </div>
               <Link
-                href={playStoreLink}
+                href={playStoreLink || ""}
                 className="app-store-container cursor-pointer py-[4px] px-[12px] flex items-center"
               >
                 <div className="relative w-full aspect-[135/48]">

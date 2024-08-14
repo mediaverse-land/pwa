@@ -1,4 +1,4 @@
-import OtpForm from "@/components/Forms/OtpForm";
+import OtpForm from "@/components/Forms/OTPForm";
 import Motion from "@/components/motion";
 import { Locale } from "@/types/dictionary-types";
 import Link from "next/link";
