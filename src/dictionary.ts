@@ -22,3 +22,7 @@ const dictionaries: Dictionary = {
 };
 
 export const getDictionary = async (locale: Locale) => dictionaries[locale]();
+
+export function interpolate(template: string, values: { [x: string]: string; }) {
+  return template.replace(/{(\w+)}/g, (_, key) => values[key] || '');
+}

@@ -2,8 +2,8 @@ import { SongSlider, VideoSlider } from "@/components";
 import BorderGradient from "@/components/BorderGradient";
 import ScrollToBottomBtn from "@/components/Buttons/ScrollToBottom";
 import Motion from "@/components/motion";
-import { imagePlaceHolders, logoURL, playStoreLink, backgroundImageURL } from "@/configs/base";
-import { getDictionary } from "@/dictionary";
+import { imagePlaceHolders, logoURL, playStoreLink, backgroundImageURL, websiteTitle } from "@/configs/base";
+import {getDictionary, interpolate} from "@/dictionary";
 import { locales } from "@/middleware";
 import {
   getHome,
@@ -92,10 +92,11 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
         <div className="lg:max-w-screen-2xl mx-auto flex justify-evenly flex-wrap-reverse lg:flex-wrap px-8 lg:px-4">
           <div className="flex flex-col t-10">
             <h1 className="text-[25px] lg:text-3xl font-bold lg:font-semibold whitespace-nowrap text-white mt-16 text-center lg:text-start">
-              {dic.homepage.whatIs}
+              {interpolate(dic.homepage.whatIs, {'appName' : websiteTitle || ''})}
             </h1>
             <p className="text-gray-500 mt-4 self-center text-start">
-              {dic.homepage.description}
+              {interpolate(dic.homepage.description,
+                  {'appName' : websiteTitle || ''})}
             </p>
             <div className="grid grid-cols-2 mt-[28px] w-[278px] mx-auto lg:mx-0 gap-[8px]">
               <div className="app-store-container cursor-pointer py-[4px] px-[19px] flex items-center">

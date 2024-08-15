@@ -10,8 +10,8 @@
     "about": "About Us"
   },
   "homepage": {
-    "whatIs": "What is Gibical?",
-    "description": "Gibical Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.",
+    "whatIs": "What is {appName}?",
+    "description": "{appName} Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.",
     "exploreLimitless": "Explore limitless!",
     "liveTvChannels": "Live TV Channels",
     "bestVideos": "Best Videos",
@@ -24,7 +24,7 @@
     "copyright": "Copyright (c) 2024 Mediaverse"
   },
   "blogSection": {
-    "appNews": "Gibical News",
+    "appNews": "{appName} News",
     "alwaysBeUpdate": "Always be update!"
   },
   "faqSection": {
