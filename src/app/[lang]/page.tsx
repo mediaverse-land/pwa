@@ -229,7 +229,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
               {imageData.data?.slice(0, 9)?.map((items: any, index: number) => {
                 return (
                   <Link
-                    href={`/${lang}/app/assets/image/${items.name.replaceAll(
+                    href={`/${lang}/app/assets/image/${items?.media?.name.replaceAll(
                       " ",
                       "-"
                     )}?id=${items.id}`}
@@ -278,7 +278,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                     tColor="#CFCFFC00"
                   >
                     <Link
-                      href={`/${lang}/app/assets/text/${items.name.replaceAll(
+                      href={`/${lang}/app/assets/text/${items?.media?.name.replaceAll(
                         " ",
                         "-"
                       )}?id=${items.id}`}
@@ -301,7 +301,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                             quality={100}
                           />
                           <p className="text-xs text-gray-500">
-                            {items.user.username}
+                            {/* {items.user.username} */}
                           </p>
                         </div>
                       </div>

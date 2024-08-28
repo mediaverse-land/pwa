@@ -31,26 +31,32 @@ const ExploreTopTexts = ({
       <div>
         <div className="overflow-x-hidden">
           <div className="flex gap-4 overflow-x-auto">
-            <Swiper
-              slidesPerView={1.9}
-              spaceBetween={8}
-              breakpoints={{
-                "500": {
-                  slidesPerView: 2.5,
-                  spaceBetween: 8,
-                },
-                "570": {
-                  slidesPerView: 2.7,
-                },
-                "1200": {
-                  slidesPerView: 3.5,
-                },
-              }}
-            >
-              {topTextsData?.map((item, inded) => (
-                <SwiperSlide key={inded}>{item}</SwiperSlide>
-              ))}
-            </Swiper>
+            {topTextsData.length > 3 ? (
+              <Swiper
+                slidesPerView={1.9}
+                spaceBetween={8}
+                breakpoints={{
+                  "500": {
+                    slidesPerView: 2.5,
+                    spaceBetween: 8,
+                  },
+                  "570": {
+                    slidesPerView: 2.7,
+                  },
+                  "1200": {
+                    slidesPerView: 3.5,
+                  },
+                }}
+              >
+                {topTextsData?.map((item, inded) => (
+                  <SwiperSlide key={inded} className="mr-auto">
+                    {item}
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            ) : (
+              <>{topTextsData}</>
+            )}
           </div>
         </div>
       </div>

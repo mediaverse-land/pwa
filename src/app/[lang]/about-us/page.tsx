@@ -10,7 +10,7 @@ import {
 import { Metadata } from "next";
 import Link from "next/link";
 
-async function getAboutUsData(lang: TFullLocales) {
+export async function getAboutUsData(lang: TFullLocales) {
   const aboutUs = await getAboutUs(lang);
 
   if (!aboutUs.ok) {

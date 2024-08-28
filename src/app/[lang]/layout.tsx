@@ -74,7 +74,7 @@ export default async function RootLayout({
         <NextAuthSessionProvider>
           <Navbar dic={dic} />
           {children}
-          <Footer title={dic.footer.copyright} />
+          <Footer title={dic.footer.copyright} lang={lang}/>
         </NextAuthSessionProvider>
         <noscript
           dangerouslySetInnerHTML={{

@@ -69,7 +69,7 @@ const WebAppImageAssets = async ({
                         cover={item.thumbnails["336x366"]}
                         title={item.name}
                         author={{
-                          name: item.user.username,
+                          name: "",
                           picture: item.user.image_url,
                         }}
                       />
@@ -109,7 +109,7 @@ const RecentlyImages = async ({ lang }: { lang: Locale }) => {
       {data.data?.map((items: any, index: number) => {
         return (
           <Link
-            href={`/${lang}/app/assets/image/${items.name.replaceAll(
+            href={`/${lang}/app/assets/image/${items?.media?.name.replaceAll(
               " ",
               "-"
             )}?id=${items.id}`}
