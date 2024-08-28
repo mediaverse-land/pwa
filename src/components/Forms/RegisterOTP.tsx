@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { submitOTP } from "@/services/contactService";
 import { useLogin } from "@/hooks/Auth";
-import { imagePlaceHolders } from "@/configs/base";
 
 interface Props {
   initialCounter: number;
@@ -54,6 +53,8 @@ const RegisterOTPForm = ({
         const res = await req.json();
         console.log(res);
         loginUser({
+          address: res.user.address,
+          country: res.user.address.country_iso,
           cellphone: res.user.cellphone,
           email: res.user.email,
           firstName: res.user.first_name,
@@ -61,7 +62,7 @@ const RegisterOTPForm = ({
           image: res.user.image,
           id: res.user.id,
           token: res.token,
-          username: res.user.username,
+          username: res.user.username
         });
       } else {
         const res = await req.json();

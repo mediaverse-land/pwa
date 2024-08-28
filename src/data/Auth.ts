@@ -148,6 +148,8 @@ export const authOptions: AuthOptions = {
             cellphone: userInfo.cellphone || "",
             token: userInfo.token,
             username: userInfo.username,
+            country: 'userInfo.address?.country_iso',
+            address: userInfo.address,
           };
           return user;
         } else {
