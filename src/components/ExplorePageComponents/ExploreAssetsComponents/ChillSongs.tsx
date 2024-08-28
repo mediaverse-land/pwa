@@ -4,6 +4,7 @@ import { AUDIO_ICON } from "@/components/SVG/svgs";
 import { getRecentlySongs } from "@/services/contactService";
 import { DicProperties, Locale } from "@/types/dictionary-types";
 import ExploreChillSongsSlider from "@/components/shared/ExploreChillSongsSldier";
+import { imagePlaceHolders } from "@/configs/base";
 
 const getChillSongs = async () => {
   try {
@@ -51,8 +52,8 @@ const ExploreChillSongs = async ({
                   cover={item.thumbnails["336x366"]}
                   title={item.name}
                   author={{
-                    name: item.user.username,
-                    picture: item.user.image_url,
+                    name: "",
+                    picture: item?.user?.image_url || imagePlaceHolders.account,
                   }}
                 />
               ))}

@@ -7,6 +7,7 @@ import {
   getRecommendedTexts,
 } from "@/services/contactService";
 import DailyRecommendedSlider from "@/components/shared/DailyRecommendedSlider";
+import { imagePlaceHolders } from "@/configs/base";
 
 const getDailyRecommendedData = async () => {
   try {
@@ -83,8 +84,9 @@ const ExploreDailyRecommended = async ({
                       key={item.id}
                       id={item.id}
                       author={{
-                        name: item.user.username,
-                        picture: item.user.image_url,
+                        name: "",
+                        picture:
+                          item?.user?.image_url || imagePlaceHolders.account,
                       }}
                       cover={item.thumbnails["336x366"]}
                       title={item.name}

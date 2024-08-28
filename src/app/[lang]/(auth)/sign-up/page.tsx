@@ -1,9 +1,11 @@
 import OtpForm from "@/components/Forms/OtpForm";
 import Motion from "@/components/motion";
+import { getDictionary } from "@/dictionary";
 import { Locale } from "@/types/dictionary-types";
 import Link from "next/link";
 
-const SingUpPage = ({ params }: { params: { lang: Locale } }) => {
+const SingUpPage = async ({ params }: { params: { lang: Locale } }) => {
+  const dic = await getDictionary(params.lang);
   return (
     <Motion>
       <div className="mt-36 lg:mt-28">

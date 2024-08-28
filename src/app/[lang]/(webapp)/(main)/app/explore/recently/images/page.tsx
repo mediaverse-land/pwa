@@ -27,7 +27,7 @@ const WebAppRecentlyImages = async ({
         {data?.data?.data?.map((items: any, index: number) => {
           return (
             <Link
-              href={`/${lang}/app/assets/image/${items.name.replaceAll(
+              href={`/${lang}/app/assets/image/${items?.media?.name.replaceAll(
                 " ",
                 "-"
               )}?id=${items.id}`}

@@ -15,7 +15,9 @@ const CheckUserData = () => {
         !user.firstName ||
         !user.lastName ||
         !user.cellphone ||
-        !user.username
+        !user.username ||
+        !user.country ||
+        !user.address
       ) {
         router.push(`/${params.lang}/sign-up/info`);
       }

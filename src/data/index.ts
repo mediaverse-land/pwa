@@ -66,7 +66,7 @@ export const socialMedia: socialMediaLinks[] = [
   {
     id: 4,
     link: "https://www.linkedin.com/in/mediaverse-land-profile",
-    name: "LinkedIn",
+    name: "Linkedin",
     icon: "/icons/linkedin-square-icon.svg",
   },
 ];

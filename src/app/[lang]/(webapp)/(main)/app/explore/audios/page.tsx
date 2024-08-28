@@ -107,7 +107,7 @@ const WebAppExploreAudioAssets = async ({
                         }
                         title={item.name}
                         author={{
-                          name: item.user.username,
+                          name: "",
                           picture: item.user.image_url,
                         }}
                       />
@@ -124,7 +124,7 @@ const WebAppExploreAudioAssets = async ({
                     cover={item.thumbnails["336x366"]}
                     title={item.name}
                     author={{
-                      name: item.user.username,
+                      name: "",
                       picture: item.user.image_url,
                     }}
                   />

@@ -139,7 +139,9 @@ export const OwnershipImageAssets = async ({
         searchResults?.data.data.map((items: any, index: number) => {
           return (
             <Link
-              href={`/${params.lang}/app/assets/image/${items.name.replaceAll(
+              href={`/${
+                params.lang
+              }/app/assets/image/${items?.media?.name.replaceAll(
                 " ",
                 "-"
               )}?id=${items.id}`}

@@ -14,6 +14,8 @@ declare module "next-auth" {
       email?: string | null;
       cellphone?: string | null;
       username: string | null;
+      address: string | null;
+      country: string | null;
     };
   }
 }
@@ -28,6 +30,8 @@ declare module "next-auth/jwt" {
     email?: string | null;
     cellphone?: string | null;
     username: string | null;
+    address: string | null;
+    country: string | null;
   }
 }
 
@@ -41,6 +45,8 @@ declare module "next-auth" {
     email?: string | null;
     cellphone?: string | null;
     username: string | null;
+    address: string | null;
+    country: string | null;
   }
 
   interface AdapterUser {
@@ -52,5 +58,7 @@ declare module "next-auth" {
     email?: string | null;
     cellphone?: string | null;
     username: string | null;
+    address: string | null;
+    country: string | null;
   }
 }

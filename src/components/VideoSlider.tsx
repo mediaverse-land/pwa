@@ -61,7 +61,7 @@ const VideoSlider = () => {
                 className="w-[200px] max-w-[200px] h-[250px] cursor-pointer rounded-2xl"
               >
                 <Link
-                  href={`/${lang}/app/assets/video/${item.name.replaceAll(
+                  href={`/${lang}/app/assets/video/${item?.media?.name.replaceAll(
                     " ",
                     "-"
                   )}?id=${item.id}`}
@@ -87,9 +87,7 @@ const VideoSlider = () => {
                       height={16}
                       quality={100}
                     />
-                    <p className="text-xs text-gray-500">
-                      {item.user.username}
-                    </p>
+                    <p className="text-xs text-gray-500">{""}</p>
                   </div>
                 </Link>
               </SwiperSlide>

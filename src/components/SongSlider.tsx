@@ -59,7 +59,7 @@ const SongSlider = () => {
                 key={item.id}
               >
                 <Link
-                  href={`/${lang}/app/assets/audio/${item.name.replaceAll(
+                  href={`/${lang}/app/assets/audio/${item?.media?.name.replaceAll(
                     " ",
                     "-"
                   )}?id=${item.id}`}
@@ -83,9 +83,7 @@ const SongSlider = () => {
                       height={16}
                       quality={100}
                     />
-                    <p className="text-xs text-gray-500">
-                      {item.user.username}
-                    </p>
+                    <p className="text-xs text-gray-500">{""}</p>
                   </div>
                 </Link>
               </SwiperSlide>

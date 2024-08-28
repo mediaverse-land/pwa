@@ -1,31 +1,29 @@
 "use client";
 
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
 import { signUpCompletion } from "@/services/contactService";
-import { SPINNER } from "../SVG/svgs";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Cookies from "js-cookie";
-import { redirect, useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { SPINNER } from "../SVG/svgs";
 
 const schema = z.object({
-  username: z
-    .string({
-      errorMap: () => ({ message: "*This field is requeired" }),
-    })
-    .min(1, {
-      message: "*Please enter your Username",
-    }),
-  password: z
-    .string({
-      errorMap: () => ({ message: "*This field is requeired" }),
-    })
-    .min(1, {
-      message: "*Please enter your Password",
-    }),
+  username: z.string({
+    errorMap: () => ({ message: "*This field is requeired" }),
+  }),
+  // .min(1, {
+  //   message: "*Please enter your Username",
+  // })
+  password: z.string({
+    errorMap: () => ({ message: "*This field is requeired" }),
+  }),
+  // .min(1, {
+  //   message: "*Please enter your Password",
+  // }),
   first_name: z
     .string({
       errorMap: () => ({ message: "*This field is requeired" }),
@@ -36,9 +34,18 @@ const schema = z.object({
       errorMap: () => ({ message: "*This field is requeired" }),
     })
     .min(1),
+  address: z
+    .string({
+      errorMap: () => ({ message: "*This field is requeired" }),
+    })
+    .min(1),
+  country: z
+    .string({
+      errorMap: () => ({ message: "*This field is requeired" }),
+    })
+    .min(1),
 });
 const EditUserInfoForm = () => {
-  const [checked, setChecked] = useState(false);
   const params = useParams();
   const session = useSession();
   const [isChecked, setIsChecked] = useState(false);
@@ -66,23 +73,21 @@ const EditUserInfoForm = () => {
       first_name: "",
       last_name: "",
     });
+
     const request = await signUpCompletion({
       data: data,
       token: session.data?.user.token || "",
     });
     const response = await request.json();
-    // console.log(request, "signUpCompletion");
+    console.log(response, "signUpCompletion");
     if (request.ok) {
-      Cookies.set("EditUserInfo", "false", {
-        expires: 1,
-      });
-      await session.update({
-        name: `${response.first_name} ${response.last_name}`,
-        picture: response.image,
-        email: response.email,
-      });
-      router.refresh();
-      router.replace(`/${params.lang}/app/explore/`);
+      // await session.update({
+      //   name: `${response.first_name} ${response.last_name}`,
+      //   picture: response.image,
+      //   email: response.email,
+      // });
+      // router.refresh();
+      // router.replace(`/${params.lang}/app/explore/`);
     } else {
       // console.log("failed");
       setServerErrors(response.error || response.message);
@@ -93,90 +98,126 @@ const EditUserInfoForm = () => {
     <div>
       <form onSubmit={handleEditUserInfo}>
         <div className="flex flex-col items-stretch h-full justify-between gap-3 text-center">
-          <div className="flex flex-col items-stretch gap-2">
-            <div
-              className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
-              style={{
-                background: `rgba(14, 14, 18, 0.50)`,
-              }}
-            >
-              <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
-                Username
+          <div className="flex flex-col xl:flex-row lg:gap-4 justify-stretch items-stretch h-fit">
+            {/* name and password */}
+            <div>
+              <div className="flex flex-col items-stretch">
+                <div
+                  className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 p-[0.6rem] text-white"
+                  style={{
+                    background: `rgba(14, 14, 18, 0.50)`,
+                  }}
+                >
+                  <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
+                    Username
+                  </div>
+                  <div className="h-full w-[1px] bg-white mx-1"></div>
+                  <input
+                    className="bg-transparent grow placeholder:text-[#353542] outline-none"
+                    placeholder="Username"
+                    {...register("username")}
+                  />
+                </div>
+                <p className="text-[12px] text-red-400 text-start py-1">
+                  {errors.username?.message?.toString() || inputErrors.username}
+                </p>
               </div>
-              <div className="h-full w-[1px] bg-white mx-1"></div>
-              <input
-                className="bg-transparent grow placeholder:text-[#353542] outline-none"
-                placeholder="Username"
-                {...register("username")}
-              />
-            </div>
-            <p className="text-[12px] text-red-400 text-start">
-              {errors.username?.message?.toString() || inputErrors.username}
-            </p>
-          </div>
-          <div className="flex flex-col items-stretch gap-2">
-            <div
-              className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
-              style={{
-                background: `rgba(14, 14, 18, 0.50)`,
-              }}
-            >
-              <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
-                Password
+              <div className="flex flex-col items-stretch">
+                <div
+                  className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 p-[0.6rem] text-white"
+                  style={{
+                    background: `rgba(14, 14, 18, 0.50)`,
+                  }}
+                >
+                  <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
+                    Password
+                  </div>
+                  <div className="h-full w-[1px] bg-white mx-1"></div>
+                  <input
+                    type="password"
+                    className="bg-transparent grow placeholder:text-[#353542] outline-none"
+                    placeholder="Password"
+                    {...register("password")}
+                  />
+                </div>
+                <p className="text-[12px] text-red-400 text-start py-1">
+                  {errors.password?.message?.toString() || inputErrors.password}
+                </p>
               </div>
-              <div className="h-full w-[1px] bg-white mx-1"></div>
-              <input
-                type="password"
-                className="bg-transparent grow placeholder:text-[#353542] outline-none"
-                placeholder="Password"
-                {...register("password")}
-              />
-            </div>
-            <p className="text-[12px] text-red-400 text-start">
-              {errors.password?.message?.toString() || inputErrors.password}
-            </p>
-          </div>
-          <div className="flex flex-col items-stretch gap-2">
-            <div
-              className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
-              style={{
-                background: `rgba(14, 14, 18, 0.50)`,
-              }}
-            >
-              <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
-                Firstname
+              <div className="flex flex-col items-stretch">
+                <div
+                  className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 p-[0.6rem] text-white"
+                  style={{
+                    background: `rgba(14, 14, 18, 0.50)`,
+                  }}
+                >
+                  <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
+                    Firstname
+                  </div>
+                  <div className="h-full w-[1px] bg-white mx-1"></div>
+                  <input
+                    className="bg-transparent grow placeholder:text-[#353542] outline-none"
+                    placeholder="Firstname"
+                    {...register("first_name")}
+                  />
+                </div>
+                <p className="text-[12px] text-red-400 text-start py-1">
+                  {errors.first_name?.message?.toString() ||
+                    inputErrors.first_name}
+                </p>
               </div>
-              <div className="h-full w-[1px] bg-white mx-1"></div>
-              <input
-                className="bg-transparent grow placeholder:text-[#353542] outline-none"
-                placeholder="Firstname"
-                {...register("first_name")}
-              />
-            </div>
-            <p className="text-[12px] text-red-400 text-start">
-              {errors.first_name?.message?.toString() || inputErrors.first_name}
-            </p>
-          </div>
-          <div className="flex flex-col items-stretch gap-2">
-            <div
-              className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
-              style={{
-                background: `rgba(14, 14, 18, 0.50)`,
-              }}
-            >
-              <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
-                Lastname
+              <div className="flex flex-col items-stretch">
+                <div
+                  className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 p-[0.6rem] text-white"
+                  style={{
+                    background: `rgba(14, 14, 18, 0.50)`,
+                  }}
+                >
+                  <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
+                    Lastname
+                  </div>
+                  <div className="h-full w-[1px] bg-white mx-1"></div>
+                  <input
+                    className="bg-transparent grow placeholder:text-[#353542] outline-none"
+                    placeholder="Lastname"
+                    {...register("last_name")}
+                  />
+                </div>
+                <p className="text-[12px] text-red-400 text-start py-1">
+                  {errors.last_name?.message?.toString() ||
+                    inputErrors.last_name}
+                </p>
               </div>
-              <div className="h-full w-[1px] bg-white mx-1"></div>
-              <input
-                className="bg-transparent grow placeholder:text-[#353542] outline-none"
-                placeholder="Lastname"
-                {...register("last_name")}
-              />
             </div>
-            <p className="text-[12px] text-red-400 text-start">
-              {errors.last_name?.message?.toString() || inputErrors.last_name}
-            </p>
+            {/* address and country */}
+            <div className="grow flex-1 h-full w-full flex flex-col items-stretch justify-stretch">
+              <div className="flex flex-col items-stretch">
+                <div className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 p-[0.6rem] text-white bg-[rgba(14,14,18,0.50)]">
+                  <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
+                    Country
+                  </div>
+                  <div className="h-full w-[1px] bg-white mx-1"></div>
+                  <input
+                    className="bg-transparent grow placeholder:text-[#353542] outline-none"
+                    placeholder="Country"
+                    {...register("country")}
+                  />
+                </div>
+                <p className="text-[12px] text-red-400 text-start py-1">
+                  {errors.country?.message?.toString() || inputErrors.username}
+                </p>
+              </div>
+              <div className="h-full w-full flex-1 grow">
+                <textarea
+                  placeholder="Address"
+                  {...register("address")}
+                  className="grow flex-1 placeholder:text-[#353542] outline-none w-full h-full min-h-[160px] rounded-lg border border-[#353542] flex gap-2 px-4 p-[0.6rem] text-white bg-[rgba(14,14,18,0.50)]"
+                />
+                <p className="text-[12px] text-red-400 text-start py-1">
+                  {errors.country?.message?.toString() || inputErrors.username}
+                </p>
+              </div>
+            </div>
           </div>
           <div className="mr-auto space-x-2 rtl:space-x-reverse">
             <span>

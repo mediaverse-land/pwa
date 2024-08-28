@@ -71,7 +71,7 @@ const WebAppExploreVideoAssets = async ({
                         }
                         title={item.name}
                         author={{
-                          name: item.user.username,
+                          name: "",
                           picture: item.user.image_url,
                         }}
                       />
@@ -88,7 +88,7 @@ const WebAppExploreVideoAssets = async ({
                     cover={item.thumbnails["336x366"] || "/images/.png"}
                     title={item.name}
                     author={{
-                      name: item.user.username,
+                      name: "",
                       picture: item.user.image_url,
                     }}
                   />
