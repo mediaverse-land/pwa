@@ -14,7 +14,7 @@ import { GTM_ID } from "@/data";
 import GTMConsent from "@/components/shared/GTMConsent";
 import GoogleTagManager from "@/components/GoogleAnalytics";
 import Script from "next/script";
-import { logoURL, websiteTitle } from "@/configs/base";
+import {faviconURL, logoURL, websiteTitle} from "@/configs/base";
 const inter = Inter({ subsets: ["latin"] });
 
 // export async function generateStaticParams() {
@@ -57,7 +57,7 @@ export default async function RootLayout({
   );
 
   return (
-    <html lang={`${lang}`} dir={["fa", "ar"].includes(lang) ? "rtl" : "ltr"}>
+      <html lang={`${lang}`} dir={["fa", "ar"].includes(lang) ? "rtl" : "ltr"}>
       <Script id="google-tag-manager" strategy="afterInteractive">
         {`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -67,24 +67,25 @@ export default async function RootLayout({
           })(window,document,'script','dataLayer','${GTM_ID}');
           `}
       </Script>
+      <link rel="icon" href={`${faviconURL}`}/>
       <body
-        className={`${inter.className} min-h-screen flex flex-col justify-between [&_>_*:nth-child(2)]:grow`}
+          className={`${inter.className} min-h-screen flex flex-col justify-between [&_>_*:nth-child(2)]:grow`}
       >
-        <NextTopLoader showSpinner={false} />
-        <NextAuthSessionProvider>
-          <Navbar dic={dic} />
-          {children}
-          <Footer title={dic.footer.copyright} lang={lang}/>
-        </NextAuthSessionProvider>
-        <noscript
+      <NextTopLoader showSpinner={false}/>
+      <NextAuthSessionProvider>
+        <Navbar dic={dic}/>
+        {children}
+        <Footer title={dic.footer.copyright} lang={lang}/>
+      </NextAuthSessionProvider>
+      <noscript
           dangerouslySetInnerHTML={{
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
           }}
-        />
-        <GoogleTagManager />
-        <Toaster />
-        <GTMConsent />
+      />
+      <GoogleTagManager/>
+      <Toaster/>
+      <GTMConsent/>
       </body>
-    </html>
+      </html>
   );
 }

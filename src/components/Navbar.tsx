@@ -33,8 +33,9 @@ const Navbar = ({ dic }: { dic: DicProperties }) => {
         >
           <Image
             src={`${logoURL}`}
+            layout="responsive"
             quality={100}
-            width={75}
+            width={100}
             height={100}
             className="mr-3 rtl:mr-0 rtl:ml-3"
             alt={`${websiteTitle} Logo`}

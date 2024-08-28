@@ -11,6 +11,7 @@ export const playStoreLink = process.env.NEXT_PUBLIC_PLAY_STORE_LINK;
 export const activeLocales = (process.env.NEXT_PUBLIC_ACTIVE_LOCALES?.split(',') || ["en"]) as Locale[];
 
 export const logoURL =  process.env.NEXT_PUBLIC_APP_LOGO;
+export const faviconURL =  process.env.NEXT_PUBLIC_APP_FAVICON;
 export const backgroundImageURL =  process.env.NEXT_PUBLIC_BACKGROUND_IMAGE_URL;
 
 export const imagePlaceHolders = {
