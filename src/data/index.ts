@@ -1,4 +1,4 @@
-import { socialMediaLinks } from "@/types";
+import { socialMediaIcons } from "@/types";
 
 export const GTM_ID = "GTM-WPLNXH7D";
 
@@ -44,28 +44,20 @@ export const navbar: {
   },
 ];
 
-export const socialMedia: socialMediaLinks[] = [
+export const socialMedia: socialMediaIcons[] = [
   {
-    id: 1,
-    link: "https://x.com/GiBiCal",
     name: "X",
     icon: "/icons/x-social-media-black-icon.svg",
   },
   {
-    id: 2,
-    link: "https://instagram.com/gibical.app",
     name: "Instagram",
     icon: "/icons/black-instagram-icon.svg",
   },
   {
-    id: 3,
-    link: "https://www.facebook.com/gibical.profile",
     name: "Facebook",
     icon: "/icons/meta-black-icon.svg",
   },
   {
-    id: 4,
-    link: "https://www.linkedin.com/in/gibical-app-profile",
     name: "LinkedIn",
     icon: "/icons/linkedin-square-icon.svg",
   },

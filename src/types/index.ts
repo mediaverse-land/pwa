@@ -1,7 +1,5 @@
-export type socialMediaLinks = {
-  id: number;
+export type socialMediaIcons = {
   name: string;
-  link: string;
   icon: string;
 };
 
