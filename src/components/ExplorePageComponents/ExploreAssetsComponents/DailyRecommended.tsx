@@ -44,6 +44,7 @@ const ExploreDailyRecommended = async ({
   dic: DicProperties;
 }) => {
   const data = await getDailyRecommendedData();
+
   return (
     <div className="flex items-stretch flex-col gap-4">
       {/* header */}
@@ -64,7 +65,7 @@ const ExploreDailyRecommended = async ({
               data={
                 data?.map((item) => {
                   const dataType = () => {
-                    switch (item.class) {
+                    switch (item.media_type) {
                       case 1:
                         return "text";
                       case 2:
@@ -82,14 +83,17 @@ const ExploreDailyRecommended = async ({
                     <ExploreAssetsCard
                       lang={lang}
                       key={item.id}
-                      id={item.id}
+                      id={item.media.asset_id}
                       author={{
-                        name: "",
+                        name: item.user.username,
                         picture:
                           item?.user?.image_url || imagePlaceHolders.account,
                       }}
-                      cover={item.thumbnails["336x366"]}
-                      title={item.name}
+                      cover={
+                        item.thumbnails["336x366"] ||
+                        imagePlaceHolders[dataType()]
+                      }
+                      title={item.media.name}
                       type={dataType()}
                     />
                   );

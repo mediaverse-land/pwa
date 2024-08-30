@@ -1,16 +1,16 @@
 "use client";
 
+import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
+import { SPINNER } from "@/components/SVG/svgs";
+import { getUserProfile, putUserProfile } from "@/services/contactService";
+import { DicProperties } from "@/types/dictionary-types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useLayoutEffect, useState } from "react";
-import { set, useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { SPINNER } from "@/components/SVG/svgs";
-import { getUserProfile, putUserProfile } from "@/services/contactService";
-import { revalidatePath, revalidateTag } from "next/cache";
-import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
-import { DicProperties } from "@/types/dictionary-types";
+import SelectCountryDropdown from "../SelectCountryDropdown";
 const putUserProfileData = async ({
   data,
   token,
@@ -42,17 +42,11 @@ const schema = z.object({
   last_name: z.string().min(1, {
     message: "*Please enter your Lastname",
   }),
-  email: z.string().min(1, {
+  email: z.string().min(0, {
     message: "*Please enter your Email",
   }),
-  cellphone: z.string().min(1, {
-    message: "*Please enter your Cellphone",
-  }),
   image: z.any(),
-
-  // address: z.string().min(1, {
-  //   message: "*Please enter your Username",
-  // }),
+  countryISO: z.string().min(1, { message: "*Please Select Your Country" }),
 });
 
 type formData = z.infer<typeof schema>;
@@ -66,22 +60,28 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
   const [refetch, setRefetch] = useState(false);
   const [inputValues, setInputValues] = useState({
     username: "",
-    // password: "",
+
     email: "",
     cellphone: "",
-    // address: data?.address || "",
+
     first_name: "",
     last_name: "",
+    country: {
+      iso: "",
+      name: "",
+    },
   });
   const [message, setMessage] = useState("");
   const [inputErrors, setInputErrors] = useState({
     username: "",
-    // password: "",
+
     email: "",
     cellphone: "",
-    // address: "",
+
     first_name: "",
     last_name: "",
+    image: "",
+    countryISO: "",
   });
   const router = useRouter();
   useEffect(() => {
@@ -93,7 +93,6 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
           });
           if (req.status === 200) {
             const res = await req.json();
-
             setInputValues({
               ...inputValues,
               username: res.data?.username,
@@ -101,6 +100,10 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
               cellphone: res.data?.cellphone || "",
               first_name: res.data?.first_name || "",
               last_name: res.data?.last_name || "",
+              country: {
+                iso: res.data.address.country.iso,
+                name: res.data.address.country.title,
+              },
             });
             setLoading(false);
           } else if (req.status === 406) {
@@ -118,10 +121,11 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
     reset,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setValue,
   } = useForm<formData>({ resolver: zodResolver(schema) });
 
   const handleEditUserInfo = handleSubmit(async (data) => {
-    // console.log(data);
+    console.log(data);
     setInputErrors({
       username: "",
       // password: "",
@@ -130,32 +134,48 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
       // address: "",
       first_name: "",
       last_name: "",
+      image: "",
+      countryISO: "",
     });
     setServerErrors("");
     setMessage("");
-
     const formData = new FormData();
-    formData.append("first_name", "mahdi");
+    formData.append("first_name", data.first_name);
+    formData.append("last_name", data.last_name);
+    formData.append("country_iso", data.countryISO);
+    if (data.email) {
+      formData.append("email", data.email);
+    }
+    if (data.image[0]) {
+      formData.append("image", data.image[0]);
+    }
     const res = await putUserProfileData({ data: formData, token });
     console.log(res, "edit info");
     if (res?.status === 200) {
       // revalidatePath("/explore?section=wallet");
 
-      router.refresh();
-      setRefetch(!refetch);
-      // await session.update({
-      //   name: `${res.data.first_name} ${res.data.last_name}`,
-      //   email: res.data.email,
-      //   cellphone: res.data.cellphone,
-      // });
+      await session.update({
+        firstName: res.data.data.first_name,
+        lastName: res.data.data.last_name,
+        email: res.data.data.email,
+        cellphone: res.data.data.cellphone,
+        image: res.data.data?.image_url || null,
+        address: res.data.data.address,
+      });
       setInputValues({
         ...inputValues,
-        email: res.data.email || "",
-        cellphone: res.data.cellphone || "",
-        first_name: res.data.first_name || "",
-        last_name: res.data.last_name || "",
+        email: res.data.data.email || "",
+        cellphone: res.data.data.cellphone || "",
+        first_name: res.data.data.first_name || "",
+        last_name: res.data.data.last_name || "",
+        country: {
+          iso: res.data.data.address?.country.iso,
+          name: res.data.data.address?.title,
+        },
       });
       // console.log(res);
+      router.refresh();
+      setRefetch(!refetch);
       setMessage("Profile updated successfully");
       setTimeout(() => {
         setMessage("");
@@ -271,7 +291,7 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
                     inputErrors.last_name}
                 </p>
               </div>
-              <div className="flex flex-col items-stretch">
+              {/* <div className="flex flex-col items-stretch">
                 <div
                   className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
                   style={{
@@ -300,7 +320,7 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
                   {errors.cellphone?.message?.toString() ||
                     inputErrors.cellphone}
                 </p>
-              </div>
+              </div> */}
               {/* <div className="flex flex-col items-stretch">
           <div
             className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
@@ -361,7 +381,7 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
                   }}
                 >
                   <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
-                    {"image"}
+                    {"Image"}
                   </div>
                   <div className="h-full w-[1px] bg-white mx-1"></div>
                   <input
@@ -371,7 +391,33 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
                   />
                 </div>
                 <p className="text-[12px] text-red-400 text-start">
-                  {errors.email?.message?.toString() || inputErrors.email}
+                  {errors.image?.message?.toString() || inputErrors.image}
+                </p>
+              </div>
+              <div className="flex flex-col items-stretch">
+                <div
+                  className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
+                  style={{
+                    background: `rgba(14, 14, 18, 0.50)`,
+                  }}
+                >
+                  <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
+                    {"Country"}
+                  </div>
+                  <div className="h-full w-[1px] bg-white mx-1"></div>
+                  <SelectCountryDropdown
+                    defaultValue={{
+                      iso: inputValues.country.iso,
+                      name: inputValues.country.name,
+                    }}
+                    setValue={(value: string) => {
+                      setValue("countryISO", value);
+                    }}
+                  />
+                </div>
+                <p className="text-[12px] text-red-400 text-start">
+                  {errors.countryISO?.message?.toString() ||
+                    inputErrors.countryISO}
                 </p>
               </div>
 

@@ -64,7 +64,7 @@ export const SearchForAll = async ({
         return (
           <ExploreAssetsCard
             lang={params.lang}
-            id={item?.id}
+            id={item?.media?.id}
             key={item?.id}
             author={{
               name: item?.asset?.user?.username,
@@ -73,7 +73,7 @@ export const SearchForAll = async ({
             cover={
               item?.asset?.thumbnails["336x366"] || imagePlaceHolders.image
             }
-            title={item?.name}
+            title={item?.media?.name}
             type={dataType()}
           />
         );
@@ -102,10 +102,12 @@ export const SearchForImages = async ({
         .map((items: any, index: number) => {
           return (
             <Link
-              href={`/${params.lang}/app/assets/image/${items?.name.replaceAll(
+              href={`/${
+                params.lang
+              }/app/assets/image/${items?.media?.name.replaceAll(
                 " ",
                 "-"
-              )}?id=${items?.id}`}
+              )}?id=${items?.media?.id}`}
               key={items?.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
@@ -124,10 +126,12 @@ export const SearchForImages = async ({
         .map((items: any, index: number) => {
           return (
             <Link
-              href={`/${params.lang}/app/assets/image/${items?.name.replaceAll(
+              href={`/${
+                params.lang
+              }/app/assets/image/${items?.media?.name.replaceAll(
                 " ",
                 "-"
-              )}?id=${items?.id}`}
+              )}?id=${items?.media?.id}`}
               key={items?.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
@@ -146,10 +150,12 @@ export const SearchForImages = async ({
         .map((items: any, index: number) => {
           return (
             <Link
-              href={`/${params.lang}/app/assets/image/${items?.name.replaceAll(
+              href={`/${
+                params.lang
+              }/app/assets/image/${items?.media?.name.replaceAll(
                 " ",
                 "-"
-              )}?id=${items?.id}`}
+              )}?id=${items?.media?.id}`}
               key={items?.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
@@ -188,7 +194,7 @@ export const SearchForVideos = async ({
           return (
             <ExploreVideoCard
               lang={params.lang}
-              id={items.id}
+              id={items.media.id}
               key={items.id}
               author={{
                 name: items?.asset?.user?.username,
@@ -198,8 +204,8 @@ export const SearchForVideos = async ({
               image={
                 items?.asset?.thumbnails["336x366"] || imagePlaceHolders.video
               }
-              time={items.length}
-              title={items.name}
+              time={items.media.length}
+              title={items.media.name}
             />
           );
         })}
@@ -229,7 +235,7 @@ export const SearchForAudios = async ({
           return (
             <ExploreAudioCard
               lang={params.lang}
-              key={items.id}
+              key={items.media.id}
               id={items.id}
               author={{
                 name: items?.asset?.user?.username,
@@ -239,8 +245,8 @@ export const SearchForAudios = async ({
               image={
                 items?.asset?.thumbnails["336x366"] || imagePlaceHolders.audio
               }
-              time={items.length}
-              title={items.name}
+              time={items.media.length}
+              title={items.media.name}
             />
           );
         })}

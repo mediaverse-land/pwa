@@ -2,6 +2,7 @@ import ExploreSearchAndNavSection from "@/components/ExplorePageComponents/Explo
 import ExploreAssetsCard from "@/components/ExplorePageComponents/shared/AllAssetsCard";
 import ExploreAudioCard from "@/components/ExplorePageComponents/shared/AudioCard";
 import ExploreChillSongsSlider from "@/components/shared/ExploreChillSongsSldier";
+import { imagePlaceHolders } from "@/configs/base";
 import { getDictionary } from "@/dictionary";
 import {
   getMostViewedSongs,
@@ -99,16 +100,17 @@ const WebAppExploreAudioAssets = async ({
                     ?.map((item: any) => (
                       <ExploreAssetsCard
                         lang={lang}
-                        id={item.id}
+                        id={item.media.id}
                         key={item.id}
                         type="audio"
                         cover={
-                          item.thumbnails["336x366"] || "/images/No-Soung.png"
+                          item.thumbnails["336x366"] || imagePlaceHolders.audio
                         }
-                        title={item.name}
+                        title={item.media.name}
                         author={{
-                          name: "",
-                          picture: item.user.image_url,
+                          name: item.user.username,
+                          picture:
+                            item.user.image_url || imagePlaceHolders.account,
                         }}
                       />
                     ))}
@@ -164,16 +166,16 @@ const RecentlyAudio = async ({ lang }: { lang: Locale }) => {
         return (
           <ExploreAudioCard
             lang={lang}
-            id={items.id}
+            id={items.media.id}
             key={items.id}
             author={{
               name: items.user.username,
-              picture: items.user.image_url,
+              picture: items.user.image_url || imagePlaceHolders.account,
             }}
-            description={items.description}
+            description={items.media.description}
             image={items.thumbnails["336x366"]}
-            time={items.length}
-            title={items.name}
+            time={items.media.length}
+            title={items.media.name}
           />
         );
       })}

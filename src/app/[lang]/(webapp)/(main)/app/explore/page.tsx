@@ -45,6 +45,7 @@ const WebAppExploreAssets = async ({
     getLiveData(FullLocaleNames[lang]),
     getMostViewedImagesData(FullLocaleNames[lang]),
   ]);
+  console.log(mostViewedImages.data);
   const topTextsData = await getTopTextsData(FullLocaleNames[lang]);
   const dic = await getDictionary(lang);
   return (

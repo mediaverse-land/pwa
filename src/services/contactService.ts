@@ -168,6 +168,10 @@ export const getRecommendedVideos = () => {
   const url = `${baseURL}/videos/daily-recommended`;
   return fetchInstance(url);
 };
+export const getCountries = () => {
+  const url = `${baseURL}/countries`;
+  return fetchInstance(url);
+};
 
 export const getMostViewedSongs = (lang: TFullLocales) => {
   const url = `${baseURL}/audios/most-viewed`;

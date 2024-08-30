@@ -132,7 +132,8 @@ const SettingGeneralInformation = () => {
       router.refresh();
       setRefetch(!refetch);
       await session.update({
-        name: `${res.data.first_name} ${res.data.last_name}`,
+        firstName: res.data.first_name,
+        lastName: res.data.last_name,
         email: res.data.email,
         cellphone: res.data.cellphone,
       });

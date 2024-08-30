@@ -1,4 +1,3 @@
-import { imagePlaceHolders } from "@/configs/base";
 import { AdapterUser } from "next-auth";
 import { signIn } from "next-auth/react";
 import { useParams, useSearchParams } from "next/navigation";
@@ -16,6 +15,7 @@ export const useLogin = () => {
     token,
     id,
     username,
+    address,
     callBack = "/app/explore",
   }: AdapterUser & {
     callBack?: string;
@@ -37,6 +37,7 @@ export const useLogin = () => {
           cellphone,
           token,
           username,
+          address,
         }),
       }
     );

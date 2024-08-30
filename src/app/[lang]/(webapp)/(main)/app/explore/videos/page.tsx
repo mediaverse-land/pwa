@@ -63,16 +63,17 @@ const WebAppExploreVideoAssets = async ({
                     ?.map((item: any) => (
                       <ExploreAssetsCard
                         lang={lang}
-                        id={item.id}
+                        id={item.media.id}
                         key={item.id}
                         type="video"
                         cover={
                           item.thumbnails["336x366"] || imagePlaceHolders.video
                         }
-                        title={item.name}
+                        title={item.media.name}
                         author={{
-                          name: "",
-                          picture: item.user.image_url,
+                          name: item.user.username,
+                          picture:
+                            item.user.image_url || imagePlaceHolders.account,
                         }}
                       />
                     ))}
@@ -128,16 +129,16 @@ const RecentlyVideos = async ({ lang }: { lang: Locale }) => {
         return (
           <ExploreVideoCard
             lang={lang}
-            id={items.id}
+            id={items.media.id}
             key={items.id}
             author={{
               name: items.user.username,
-              picture: items.user.image_url,
+              picture: items.user.image_url || imagePlaceHolders.account,
             }}
-            description={items.description}
+            description={items.media.description}
             image={items.thumbnails["336x366"] || imagePlaceHolders.video}
-            time={items.length}
-            title={items.name}
+            time={items.media.length}
+            title={items.media.name}
           />
         );
       })}

@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { submitOTP } from "@/services/contactService";
 import { useLogin } from "@/hooks/Auth";
+import { useParams, useRouter } from "next/navigation";
 
 interface Props {
   initialCounter: number;
@@ -29,6 +30,7 @@ const RegisterOTPForm = ({
   const [counter, setCounter] = useState<number>(initialCounter);
   const [isLoading, setIsLoading] = useState(false);
   const { loginUser } = useLogin();
+  const params = useParams();
 
   const {
     register,
@@ -52,9 +54,38 @@ const RegisterOTPForm = ({
       if (req.ok) {
         const res = await req.json();
         console.log(res);
+        if (!res.user.first_name && !res.user.last_name && !res.user.username) {
+          return loginUser({
+            address: res.user.address,
+
+            cellphone: res.user.cellphone,
+            email: res.user.email,
+            firstName: res.user.first_name,
+            lastName: res.user.last_name,
+            image: res.user.image,
+            id: res.user.id,
+            token: res.token,
+            username: res.user.username,
+            callBack: `/sign-up/info`,
+          });
+        }
+        if (!res.user.username) {
+          return loginUser({
+            address: res.user.address,
+
+            cellphone: res.user.cellphone,
+            email: res.user.email,
+            firstName: res.user.first_name,
+            lastName: res.user.last_name,
+            image: res.user.image,
+            id: res.user.id,
+            token: res.token,
+            username: res.user.username,
+            callBack: `/sign-up/info`,
+          });
+        }
         loginUser({
           address: res.user.address,
-          country: res.user.address.country_iso,
           cellphone: res.user.cellphone,
           email: res.user.email,
           firstName: res.user.first_name,
@@ -62,7 +93,7 @@ const RegisterOTPForm = ({
           image: res.user.image,
           id: res.user.id,
           token: res.token,
-          username: res.user.username
+          username: res.user.username,
         });
       } else {
         const res = await req.json();

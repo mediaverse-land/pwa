@@ -32,16 +32,16 @@ const WebAppRecentlyVideos = async ({
           return (
             <ExploreVideoCard
               lang={lang}
-              id={items.id}
+              id={items.media.id}
               key={items.id}
               author={{
                 name: items.user.username,
-                picture: items.user.image_url,
+                picture: items.user.image_url || imagePlaceHolders.account,
               }}
               description={items.description}
               image={items.thumbnails["336x366"] || imagePlaceHolders.video}
-              time={items.length}
-              title={items.name}
+              time={items.media.length}
+              title={items.media.name}
             />
           );
         })}

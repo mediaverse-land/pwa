@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import z from "zod";
 import { SPINNER } from "../SVG/svgs";
+import { useLogin } from "@/hooks/Auth";
 
 const loginWithPhoneSchema = z.object({
   cellphone: z.string().min(1, { message: "*This field is required" }),
@@ -23,6 +24,7 @@ const LoginWithUsername = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { loginUser } = useLogin();
   const [error, setError] = useState({
     username: "",
     password: "",
@@ -46,17 +48,19 @@ const LoginWithUsername = () => {
       username: data.username,
     }).finally(() => setIsLoading(false));
     const res = await req.json();
-    // console.log(res);
+    console.log(res);
     if (req.ok && res) {
-      signIn(
-        "loginWithUsername",
-        {
-          callbackUrl: params.get("refer")
-            ? params.get("refer") + "?token=" + res.token
-            : "/app/explore/",
-        },
-        { user: JSON.stringify(res) }
-      );
+      loginUser({
+        address: res.user.address,
+        firstName: res.user.first_name,
+        lastName: res.user.last_name,
+        username: res.user.username,
+        cellphone: res.user.cellphone,
+        email: res.user.email,
+        image: res.user?.image_url || null,
+        token: res.token,
+        id: res.user.id,
+      });
     } else {
       setError({
         ...error,

@@ -11,6 +11,7 @@ const Layout = async ({
   params: { lang: Locale };
 }) => {
   const session = await getServerSession(authOptions);
+
   if (!session?.user) {
     return (
       <div className="w-full h-full">

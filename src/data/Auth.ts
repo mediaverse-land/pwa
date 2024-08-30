@@ -33,6 +33,7 @@ export const authOptions: AuthOptions = {
         token.email = user.email;
         token.image = user.image;
         token.username = user.username;
+        token.address = user.address;
       }
       if (trigger === "update") {
         token.cellphone = session?.cellphone || token.cellphone;
@@ -42,6 +43,7 @@ export const authOptions: AuthOptions = {
         token.image = session?.image || token.image;
         token.username = session?.username || token.username;
         token.token = session?.token || token.token;
+        token.address = session?.address || token.address;
       }
       return token;
     },
@@ -54,6 +56,7 @@ export const authOptions: AuthOptions = {
       session.user.image = token.image;
       session.user.email = token.email;
       session.user.username = token.username;
+      session.user.address = token.address;
       return session;
     },
 
@@ -148,7 +151,6 @@ export const authOptions: AuthOptions = {
             cellphone: userInfo.cellphone || "",
             token: userInfo.token,
             username: userInfo.username,
-            country: 'userInfo.address?.country_iso',
             address: userInfo.address,
           };
           return user;

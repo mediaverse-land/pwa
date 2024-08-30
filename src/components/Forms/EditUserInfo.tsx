@@ -8,46 +8,35 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { set, z } from "zod";
 import { SPINNER } from "../SVG/svgs";
+import SelectCountryDropdown from "../SelectCountryDropdown";
 
 const schema = z.object({
-  username: z.string({
-    errorMap: () => ({ message: "*This field is requeired" }),
-  }),
-  // .min(1, {
-  //   message: "*Please enter your Username",
-  // })
-  password: z.string({
-    errorMap: () => ({ message: "*This field is requeired" }),
-  }),
-  // .min(1, {
-  //   message: "*Please enter your Password",
-  // }),
-  first_name: z
+  username: z
     .string({
       errorMap: () => ({ message: "*This field is requeired" }),
     })
-    .min(1),
-  last_name: z
+    .min(1, {
+      message: "*Please enter your Username",
+    }),
+  password: z
     .string({
       errorMap: () => ({ message: "*This field is requeired" }),
     })
-    .min(1),
-  address: z
-    .string({
-      errorMap: () => ({ message: "*This field is requeired" }),
-    })
-    .min(1),
-  country: z
-    .string({
-      errorMap: () => ({ message: "*This field is requeired" }),
-    })
-    .min(1),
+    .min(1, {
+      message: "*Please enter your Password",
+    }),
+  first_name: z.string(),
+  last_name: z.string(),
+  countryISO: z.string().min(1, { message: "*Please Select Your Country" }),
 });
+
+type FormData = z.infer<typeof schema>;
 const EditUserInfoForm = () => {
   const params = useParams();
   const session = useSession();
+  console.log(session, "session");
   const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState("");
@@ -56,6 +45,7 @@ const EditUserInfoForm = () => {
     password: "",
     first_name: "",
     last_name: "",
+    countryISO: "",
   });
   const router = useRouter();
   const {
@@ -63,7 +53,17 @@ const EditUserInfoForm = () => {
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(schema) });
+    setValue,
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      username: session.data?.user.username || "",
+      first_name: session.data?.user.firstName || "",
+      last_name: session.data?.user.lastName,
+      password: "",
+      countryISO: "",
+    },
+  });
   const handleEditUserInfo = handleSubmit(async (data) => {
     setLoading(true);
     setServerErrors("");
@@ -72,22 +72,32 @@ const EditUserInfoForm = () => {
       password: "",
       first_name: "",
       last_name: "",
+      countryISO: "",
     });
 
     const request = await signUpCompletion({
-      data: data,
+      data: { ...data, country_iso: data.countryISO },
       token: session.data?.user.token || "",
     });
     const response = await request.json();
-    console.log(response, "signUpCompletion");
+    // console.log(response, "signUpCompletion");
     if (request.ok) {
-      // await session.update({
-      //   name: `${response.first_name} ${response.last_name}`,
-      //   picture: response.image,
-      //   email: response.email,
-      // });
-      // router.refresh();
-      // router.replace(`/${params.lang}/app/explore/`);
+      await session.update({
+        username: response.username,
+        firstName: response.first_name,
+        lastName: response.last_name,
+        address: {
+          city_id: response.address.city_id,
+          country_iso: response.address.country_iso,
+          id: response.address.id,
+          line1: response.address.line1,
+          line2: response.address.line2,
+          postal_code: response.address.postal_code,
+          user_id: response.address.user_id,
+        },
+      });
+      router.refresh();
+      router.replace(`/${params.lang}/app/explore/`);
     } else {
       // console.log("failed");
       setServerErrors(response.error || response.message);
@@ -98,7 +108,7 @@ const EditUserInfoForm = () => {
     <div>
       <form onSubmit={handleEditUserInfo}>
         <div className="flex flex-col items-stretch h-full justify-between gap-3 text-center">
-          <div className="flex flex-col xl:flex-row lg:gap-4 justify-stretch items-stretch h-fit">
+          <div className="lg:min-w-[470px]">
             {/* name and password */}
             <div>
               <div className="flex flex-col items-stretch">
@@ -188,33 +198,25 @@ const EditUserInfoForm = () => {
                     inputErrors.last_name}
                 </p>
               </div>
-            </div>
-            {/* address and country */}
-            <div className="grow flex-1 h-full w-full flex flex-col items-stretch justify-stretch">
               <div className="flex flex-col items-stretch">
-                <div className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 p-[0.6rem] text-white bg-[rgba(14,14,18,0.50)]">
+                <div
+                  className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 p-[0.6rem] text-white"
+                  style={{
+                    background: `rgba(14, 14, 18, 0.50)`,
+                  }}
+                >
                   <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
                     Country
                   </div>
                   <div className="h-full w-[1px] bg-white mx-1"></div>
-                  <input
-                    className="bg-transparent grow placeholder:text-[#353542] outline-none"
-                    placeholder="Country"
-                    {...register("country")}
+                  <SelectCountryDropdown
+                    setValue={(value: string) => {
+                      setValue("countryISO", value);
+                    }}
                   />
                 </div>
                 <p className="text-[12px] text-red-400 text-start py-1">
-                  {errors.country?.message?.toString() || inputErrors.username}
-                </p>
-              </div>
-              <div className="h-full w-full flex-1 grow">
-                <textarea
-                  placeholder="Address"
-                  {...register("address")}
-                  className="grow flex-1 placeholder:text-[#353542] outline-none w-full h-full min-h-[160px] rounded-lg border border-[#353542] flex gap-2 px-4 p-[0.6rem] text-white bg-[rgba(14,14,18,0.50)]"
-                />
-                <p className="text-[12px] text-red-400 text-start py-1">
-                  {errors.country?.message?.toString() || inputErrors.username}
+                  {errors.password?.message?.toString() || inputErrors.password}
                 </p>
               </div>
             </div>

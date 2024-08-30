@@ -58,7 +58,7 @@ export const socialMedia: socialMediaIcons[] = [
     icon: "/icons/meta-black-icon.svg",
   },
   {
-    name: "LinkedIn",
+    name: "Linkedin",
     icon: "/icons/linkedin-square-icon.svg",
   },
 ];

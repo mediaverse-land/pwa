@@ -14,8 +14,21 @@ declare module "next-auth" {
       email?: string | null;
       cellphone?: string | null;
       username: string | null;
-      address: string | null;
-      country: string | null;
+      address: {
+        city_id: string | null;
+        country_iso: string;
+        id: string;
+        line1: string | null;
+        line2: string | null;
+        postal_code: string | null;
+        user_id: string;
+        country?: {
+          iso: string;
+          name: string;
+          title: string;
+          calling_code: string;
+        };
+      };
     };
   }
 }
@@ -30,8 +43,15 @@ declare module "next-auth/jwt" {
     email?: string | null;
     cellphone?: string | null;
     username: string | null;
-    address: string | null;
-    country: string | null;
+    address: {
+      city_id: string | null;
+      country_iso: string;
+      id: string;
+      line1: string | null;
+      line2: string | null;
+      postal_code: string | null;
+      user_id: string;
+    };
   }
 }
 
@@ -45,8 +65,15 @@ declare module "next-auth" {
     email?: string | null;
     cellphone?: string | null;
     username: string | null;
-    address: string | null;
-    country: string | null;
+    address: {
+      city_id: string | null;
+      country_iso: string;
+      id: string;
+      line1: string | null;
+      line2: string | null;
+      postal_code: string | null;
+      user_id: string;
+    };
   }
 
   interface AdapterUser {
@@ -58,7 +85,14 @@ declare module "next-auth" {
     email?: string | null;
     cellphone?: string | null;
     username: string | null;
-    address: string | null;
-    country: string | null;
+    address: {
+      city_id: string | null;
+      country_iso: string;
+      id: string;
+      line1: string | null;
+      line2: string | null;
+      postal_code: string | null;
+      user_id: string;
+    };
   }
 }

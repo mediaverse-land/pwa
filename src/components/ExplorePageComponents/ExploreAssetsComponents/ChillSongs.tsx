@@ -46,13 +46,13 @@ const ExploreChillSongs = async ({
               data={chillSongs?.data?.slice(0, 10)?.map((item: any) => (
                 <ExploreAssetsCard
                   lang={lang}
-                  key={item.id}
+                  key={item.media.id}
                   id={item.id}
                   type="audio"
-                  cover={item.thumbnails["336x366"]}
-                  title={item.name}
+                  cover={item.thumbnails["336x366"] || imagePlaceHolders.audio}
+                  title={item.media.name}
                   author={{
-                    name: "",
+                    name: item?.user?.username,
                     picture: item?.user?.image_url || imagePlaceHolders.account,
                   }}
                 />

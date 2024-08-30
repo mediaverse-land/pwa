@@ -1,4 +1,5 @@
 import { PICTURE_ICON } from "@/components/SVG/svgs";
+import { imagePlaceHolders } from "@/configs/base";
 import { DicProperties, Locale } from "@/types/dictionary-types";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,7 +42,7 @@ const ExploreMostViewd = ({
             >
               <Image
                 className="object-cover"
-                src={items.thumbnails["336x366"]}
+                src={items.thumbnails["336x366"] || imagePlaceHolders.image}
                 alt={items.name}
                 fill
               />
