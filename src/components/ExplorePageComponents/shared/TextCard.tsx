@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/data/Auth";
 import { Locale } from "@/types/dictionary-types";
+import { imagePlaceHolders } from "@/configs/base";
 
 const ExploreTextCard = async ({ data, lang }: { data: any; lang: Locale }) => {
   const session = await getServerSession(authOptions);
@@ -21,30 +22,28 @@ const ExploreTextCard = async ({ data, lang }: { data: any; lang: Locale }) => {
         );
       } else {
         return (
-          <div className="bg-white w-full aspect-square overflow-hidden rounded-full"></div>
+          <Image
+            className="object-cover"
+            src={`${imagePlaceHolders.account}`}
+            alt={``}
+            fill
+          />
         );
       }
     } else {
-      if (data.user?.image_url) {
+      return (
         <Image
           className="object-cover"
           src={`${data.user?.image_url}`}
           alt={`${data.user?.username}`}
           fill
-        />;
-      } else {
-        return (
-          <div className="bg-white w-full aspect-square overflow-hidden rounded-full"></div>
-        );
-      }
+        />
+      );
     }
   };
   return (
     <Link
-      href={`/${lang}/app/assets/text/${data?.media?.name.replaceAll(
-        " ",
-        "-"
-      )}?id=${data.id}`}
+      href={`/${lang}/app/assets/text/${data?.media?.slug}?id=${data.id}`}
       className="max-w-full min-w-full w-full aspect-square block max-h-[154px] lg:max-h-[190px]"
     >
       <div className="text-card w-full h-full px-4 py-6 flex flex-col items-stretch leading-none">

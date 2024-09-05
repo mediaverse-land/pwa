@@ -26,15 +26,11 @@ const AssetSinglePageTitleAndDescription = ({
         <div className="flex items-center gap-2 mt-1">
           <div className="flex items-center gap-2 mr-auto">
             <div className="relative w-[18px] h-[18px] aspect-square overflow-hidden rounded-full">
-              {author.image ? (
-                <Image
-                  src={`${author?.image || imagePlaceHolders.image}`}
-                  alt={`${author.name}`}
-                  fill
-                />
-              ) : (
-                <div className="w-full h-full bg-white"></div>
-              )}
+              <Image
+                src={`${author?.image || imagePlaceHolders.account}`}
+                alt={`${author.name}`}
+                fill
+              />
             </div>
             <div>{author.name}</div>
           </div>

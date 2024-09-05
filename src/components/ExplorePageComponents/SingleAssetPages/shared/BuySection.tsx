@@ -36,7 +36,7 @@ const BuySection = async ({
           <div className="flex items-center gap-4 mr-auto leading-4">
             <div className="text-[#CCCCFF]">{AssetPurchasePlan[plan]}</div>
             <div className="text-white font-semibold">
-              {(price / 100).toFixed(2)} €
+              {price > 0 ? (price / 100).toFixed(2) : 0} €
             </div>
           </div>
           <div

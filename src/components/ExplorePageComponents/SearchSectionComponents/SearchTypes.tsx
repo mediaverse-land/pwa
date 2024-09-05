@@ -33,21 +33,12 @@ export const SearchForAll = async ({
       searchParams.plan ? `&plan=${searchParams.plan}` : ""
     }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
-  // console.log(searchResults);
-  // const concatData = () => {
-  //   const data = [
-  //     ...searchResults.images,
-  //     ...searchResults.videos,
-  //     ...searchResults.texts,
-  //     ...searchResults.audios,
-  //   ];
-  //   return data;
-  // };
+
   return (
     <div className="py-7 px-6 grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-4">
       {searchResults.data.map((item: any) => {
         const dataType = () => {
-          switch (item?.class) {
+          switch (item?.media_type) {
             case 1:
               return "text";
             case 2:
@@ -64,15 +55,13 @@ export const SearchForAll = async ({
         return (
           <ExploreAssetsCard
             lang={params.lang}
-            id={item?.media?.id}
+            id={item?.id}
             key={item?.id}
             author={{
-              name: item?.asset?.user?.username,
-              picture: item?.asset?.user?.image_url,
+              name: item?.user?.username,
+              picture: item?.user?.image_url,
             }}
-            cover={
-              item?.asset?.thumbnails["336x366"] || imagePlaceHolders.image
-            }
+            cover={item?.thumbnails["336x366"]}
             title={item?.media?.name}
             type={dataType()}
           />
@@ -95,80 +84,60 @@ export const SearchForImages = async ({
       searchParams.plan ? `&plan=${searchParams.plan}` : ""
     }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
+  console.log(searchResults);
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(3n+1)]:col-span-2 [&_>_*:nth-child(3n+1)]:row-span-2 lg:[&_>_*:nth-child(3n+1)]:col-span-2 lg:[&_>_*:nth-child(3n+1)]:row-span-2 px-6 py-7 h-full overflow-y-auto">
       {searchResults.data
-        .filter((item: any) => item.class === 2)
+        .filter((item: any) => item.media_type === 2)
         .map((items: any, index: number) => {
           return (
             <Link
-              href={`/${
-                params.lang
-              }/app/assets/image/${items?.media?.name.replaceAll(
-                " ",
-                "-"
-              )}?id=${items?.media?.id}`}
+              href={`/${params.lang}/app/assets/image/${items?.media?.slug}?id=${items?.id}`}
               key={items?.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
               <Image
-                src={
-                  items?.asset?.thumbnails["336x366"] || imagePlaceHolders.image
-                }
-                alt={items?.name}
+                src={items?.thumbnails["336x366"] || imagePlaceHolders.image}
+                alt={items?.media?.name}
+                fill
+              />
+            </Link>
+          );
+        })}
+      {/* {searchResults.data
+        .filter((item: any) => item.media_type === 2)
+        .map((items: any, index: number) => {
+          return (
+            <Link
+              href={`/${params.lang}/app/assets/image/${items?.media?.slug}?id=${items?.id}`}
+              key={items?.id}
+              className={`relative overflow-hidden rounded-lg w-full aspect-square `}
+            >
+              <Image
+                src={items?.thumbnails["336x366"] || imagePlaceHolders.image}
+                alt={items?.media?.name}
                 fill
               />
             </Link>
           );
         })}
       {searchResults.data
-        .filter((item: any) => item.class === 2)
+        .filter((item: any) => item.media_type === 2)
         .map((items: any, index: number) => {
           return (
             <Link
-              href={`/${
-                params.lang
-              }/app/assets/image/${items?.media?.name.replaceAll(
-                " ",
-                "-"
-              )}?id=${items?.media?.id}`}
+              href={`/${params.lang}/app/assets/image/${items?.media?.slug}?id=${items?.media?.id}`}
               key={items?.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
               <Image
-                src={
-                  items?.asset?.thumbnails["336x366"] || imagePlaceHolders.image
-                }
-                alt={items?.name}
+                src={items?.thumbnails["336x366"] || imagePlaceHolders.image}
+                alt={items?.media?.name}
                 fill
               />
             </Link>
           );
-        })}
-      {searchResults.data
-        .filter((item: any) => item.class === 2)
-        .map((items: any, index: number) => {
-          return (
-            <Link
-              href={`/${
-                params.lang
-              }/app/assets/image/${items?.media?.name.replaceAll(
-                " ",
-                "-"
-              )}?id=${items?.media?.id}`}
-              key={items?.id}
-              className={`relative overflow-hidden rounded-lg w-full aspect-square `}
-            >
-              <Image
-                src={
-                  items?.asset?.thumbnails["336x366"] || imagePlaceHolders.image
-                }
-                alt={items?.name}
-                fill
-              />
-            </Link>
-          );
-        })}
+        })} */}
     </div>
   );
 };
@@ -189,21 +158,19 @@ export const SearchForVideos = async ({
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
       {searchResults.data
-        .filter((item: any) => item.class === 4)
+        .filter((item: any) => item.media_type === 4)
         .map((items: any, index: number) => {
           return (
             <ExploreVideoCard
               lang={params.lang}
-              id={items.media.id}
+              id={items.id}
               key={items.id}
               author={{
-                name: items?.asset?.user?.username,
-                picture: items?.asset?.user?.image_url,
+                name: items?.user?.username,
+                picture: items?.user?.image_url,
               }}
-              description={items.description}
-              image={
-                items?.asset?.thumbnails["336x366"] || imagePlaceHolders.video
-              }
+              description={items?.media?.description}
+              image={items?.thumbnails["336x366"] || imagePlaceHolders.video}
               time={items.media.length}
               title={items.media.name}
             />
@@ -230,23 +197,21 @@ export const SearchForAudios = async ({
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
       {searchResults.data
-        .filter((item: any) => item.class === 3)
+        .filter((item: any) => item.media_type === 3)
         .map((items: any, index: number) => {
           return (
             <ExploreAudioCard
               lang={params.lang}
-              key={items.media.id}
+              key={items.id}
               id={items.id}
               author={{
-                name: items?.asset?.user?.username,
-                picture: items?.asset?.user?.image_url,
+                name: items?.user?.username,
+                picture: items?.user?.image_url,
               }}
-              description={items.description}
-              image={
-                items?.asset?.thumbnails["336x366"] || imagePlaceHolders.audio
-              }
-              time={items.media.length}
-              title={items.media.name}
+              description={items.media?.description}
+              image={items?.thumbnails["336x366"] || imagePlaceHolders.audio}
+              time={items.media?.length}
+              title={items.media?.name}
             />
           );
         })}
@@ -267,11 +232,11 @@ export const SearchForTexts = async ({
       searchParams.plan ? `&plan=${searchParams.plan}` : ""
     }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
-  // console.log(searchResults.data.filter((item: any) => item.class === 1));
+  // console.log(searchResults.data.filter((item: any) => item.media_type === 1));
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-4 p-4">
       {searchResults.data
-        .filter((item: any) => item.class === 1)
+        .filter((item: any) => item.media_type === 1)
         .map((item: any) => (
           <ExploreTextCard lang={params.lang} key={item?.id} data={item} />
         ))}

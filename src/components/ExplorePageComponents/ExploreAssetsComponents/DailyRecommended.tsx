@@ -83,17 +83,17 @@ const ExploreDailyRecommended = async ({
                     <ExploreAssetsCard
                       lang={lang}
                       key={item.id}
-                      id={item.media.asset_id}
+                      id={item.id}
                       author={{
-                        name: item.user.username,
+                        name: item?.user?.username,
                         picture:
                           item?.user?.image_url || imagePlaceHolders.account,
                       }}
                       cover={
-                        item.thumbnails["336x366"] ||
+                        item?.thumbnails["336x366"] ||
                         imagePlaceHolders[dataType()]
                       }
-                      title={item.media.name}
+                      title={item?.media?.name}
                       type={dataType()}
                     />
                   );

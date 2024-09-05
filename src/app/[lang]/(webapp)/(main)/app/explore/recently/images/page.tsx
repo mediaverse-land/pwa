@@ -27,10 +27,7 @@ const WebAppRecentlyImages = async ({
         {data?.data?.data?.map((items: any, index: number) => {
           return (
             <Link
-              href={`/${lang}/app/assets/image/${items?.media?.name.replaceAll(
-                " ",
-                "-"
-              )}?id=${items.id}`}
+              href={`/${lang}/app/assets/image/${items?.media?.slug}?id=${items.id}`}
               key={items.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >

@@ -1,9 +1,10 @@
-import { CIRCLE_VIDEO_ICON, VIDEO_ICON } from "@/components/SVG/svgs";
-import Image from "next/image";
-import "./styles.css";
+import { CIRCLE_VIDEO_ICON } from "@/components/SVG/svgs";
+import { imagePlaceHolders } from "@/configs/base";
 import { secondsToHMS } from "@/lib/convertSecondsToHMS";
-import Link from "next/link";
 import { Locale } from "@/types/dictionary-types";
+import Image from "next/image";
+import Link from "next/link";
+import "./styles.css";
 
 const ExploreVideoCard = ({
   author,
@@ -54,16 +55,12 @@ const ExploreVideoCard = ({
         <div className="flex justify-between text-[12px] text-[#666680] mt-auto">
           <div className="flex items-center gap-2">
             <div className="relative w-[16px] h-[16px] rounded-full overflow-hidden">
-              {author?.picture ? (
-                <Image
-                  className="object-cover"
-                  src={`${author?.picture}`}
-                  alt={`${author?.name}`}
-                  fill
-                />
-              ) : (
-                <div className="bg-white w-full aspect-square overflow-hidden rounded-full"></div>
-              )}
+              <Image
+                className="object-cover"
+                src={`${author?.picture || imagePlaceHolders.account}`}
+                alt={`${author?.name}`}
+                fill
+              />
             </div>
             <div className="text-[12px] text-[#666680] line-clamp-1 leading-3">
               {author?.name}

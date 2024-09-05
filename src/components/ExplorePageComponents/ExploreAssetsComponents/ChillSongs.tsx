@@ -46,7 +46,7 @@ const ExploreChillSongs = async ({
               data={chillSongs?.data?.slice(0, 10)?.map((item: any) => (
                 <ExploreAssetsCard
                   lang={lang}
-                  key={item.media.id}
+                  key={item.id}
                   id={item.id}
                   type="audio"
                   cover={item.thumbnails["336x366"] || imagePlaceHolders.audio}

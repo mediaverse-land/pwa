@@ -6,7 +6,7 @@ import HLSPlayer from "@/components/ExplorePageComponents/shared/HLSPlayer";
 import { PLAY, VIDEO_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
 import ShareButton from "@/components/shared/ShareButton";
-import { logoURL, webAppDeepLink } from "@/configs/base";
+import { imagePlaceHolders, logoURL, webAppDeepLink } from "@/configs/base";
 import { VideoType } from "@/data";
 import { DeleteUserSession } from "@/lib/test";
 import { getComments, getSingleVideo } from "@/services/contactService";
@@ -84,6 +84,7 @@ const WebAppSingleVideoAsset = async (params: any) => {
     getSingleVideoData({ id: assetID, token }),
   ]);
   const languageName = new Intl.DisplayNames(["en"], { type: "language" });
+
   if (singleVideoData?.status === 404) {
     return (
       <div className="w-full h-full flex items-center justify-center">
@@ -99,7 +100,11 @@ const WebAppSingleVideoAsset = async (params: any) => {
         {/* asset */}
         <div className="relative w-full h-full overflow-hidden z-10">
           <Image
-            src={`${singleVideoData?.data?.thumbnails["1234x1234"]}`}
+            className="object-cover"
+            src={`${
+              singleVideoData?.data?.thumbnails["1234x1234"] ||
+              imagePlaceHolders.video
+            }`}
             alt=""
             fill
           />
@@ -134,7 +139,7 @@ const WebAppSingleVideoAsset = async (params: any) => {
           <VIDEO_ICON />
         </div>
         {/* play */}
-        {singleVideoData?.data?.asset?.file ? null : (
+        {singleVideoData?.data?.file ? null : (
           <div className="absolute z-40 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
             <PLAY fill="#597AFF" />
           </div>
@@ -146,12 +151,12 @@ const WebAppSingleVideoAsset = async (params: any) => {
         <div className="flex flex-col items-stretch gap-2">
           <AssetSinglePageTitleAndDescription
             author={{
-              image: singleVideoData?.data?.asset?.user.image_url,
-              name: singleVideoData?.data?.asset?.user.username,
+              image: singleVideoData?.data?.user?.image_url,
+              name: singleVideoData?.data?.user?.username,
             }}
-            description={singleVideoData?.data?.description}
-            title={singleVideoData?.data?.name}
-            time={singleVideoData?.data?.length}
+            description={singleVideoData?.data?.media?.description}
+            title={singleVideoData?.data?.media?.name}
+            time={singleVideoData?.data?.media?.length}
           />
           {/* genrel info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-1 gap-4 mt-2">
@@ -159,22 +164,22 @@ const WebAppSingleVideoAsset = async (params: any) => {
               <div className="text-[12px] text-[#666680]">Genre</div>
               <div className="h-[70%] w-[1px] bg-[#666680]"></div>
               <div className="text-white text-[14px] grow text-center capitalize">
-                {singleVideoData?.data?.genre}
+                {singleVideoData?.data?.media?.genres[0] || "N/A"}
               </div>
             </div>
             <div className="flex items-center rounded-lg border border-[#666680] px-4 py-1 gap-4">
               <div className="text-[12px] text-[#666680]">Type</div>
               <div className="h-[70%] w-[1px] bg-[#666680]"></div>
               <div className="text-white text-[14px] grow text-center">
-                {VideoType[singleVideoData?.data?.type]}
+                {VideoType[singleVideoData?.data?.media?.type]}
               </div>
             </div>
             <div className="flex items-center rounded-lg border border-[#666680] px-4 py-1 gap-4">
               <div className="text-[12px] text-[#666680]">Language</div>
               <div className="h-[70%] w-[1px] bg-[#666680]"></div>
               <div className="text-white text-[14px] grow text-center">
-                {languageName.of(singleVideoData?.data?.language) ||
-                  singleVideoData?.data?.language}
+                {languageName.of(singleVideoData?.data?.media?.language) ||
+                  singleVideoData?.data?.media?.language}
               </div>
             </div>
           </div>
@@ -199,17 +204,12 @@ const WebAppSingleVideoAsset = async (params: any) => {
         {/* share links */}
         <div className="flex items-center justify-between">
           <ShareButton
-            url={`${process.env.NEXTAUTH_URL}/${
-              params.params.lang
-            }/app/assets/video/${singleVideoData?.data.name.replaceAll(
-              " ",
-              "-"
-            )}?id=${singleVideoData?.data.id}`}
+            url={`${process.env.NEXTAUTH_URL}/${params.params.lang}/app/assets/video/${singleVideoData?.data?.media?.slug}?id=${singleVideoData?.data.id}`}
           />
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
               <Link
-                href={`${webAppDeepLink}?page=single&type=${singleVideoData?.data.type}&id=${singleVideoData?.data.id}`}
+                href={`${webAppDeepLink}?page=single&type=${singleVideoData?.data?.media?.type}&id=${singleVideoData?.data.id}`}
               >
                 View in App
               </Link>
@@ -225,12 +225,12 @@ const WebAppSingleVideoAsset = async (params: any) => {
         />
       </div>
       {/* buy */}
-      {singleVideoData?.data?.plan !== 1 && (
+      {singleVideoData?.data?.license_type !== 1 && (
         <BuySection
-          type={singleVideoData?.data?.data?.class}
-          asset={singleVideoData?.data?.data?.id}
-          plan={singleVideoData?.data?.data?.plan}
-          price={singleVideoData?.data?.data?.price}
+          type={singleVideoData?.data?.media_type}
+          asset={singleVideoData?.data?.id}
+          plan={singleVideoData?.data?.license_type}
+          price={singleVideoData?.data?.price}
         />
       )}
     </div>

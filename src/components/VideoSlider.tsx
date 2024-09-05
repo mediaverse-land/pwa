@@ -54,6 +54,7 @@ const VideoSlider = () => {
           className="w-full linear-light-blue-bg"
         >
           {videoData?.map((item: any, index) => {
+            console.log(item);
             return (
               <SwiperSlide
                 key={item.id}
@@ -61,15 +62,12 @@ const VideoSlider = () => {
                 className="w-[200px] max-w-[200px] h-[250px] cursor-pointer rounded-2xl"
               >
                 <Link
-                  href={`/${lang}/app/assets/video/${item?.media?.name.replaceAll(
-                    " ",
-                    "-"
-                  )}?id=${item.id}`}
+                  href={`/${lang}/app/assets/video/${item?.media?.slug}?id=${item.id}`}
                 >
                   <div className="relative w-[194px] lg:w-full aspect-square">
                     <Image
                       src={
-                        item.thumbnails["226x226"] || imagePlaceHolders.video
+                        item?.thumbnails["226x226"] || imagePlaceHolders.video
                       }
                       className="rounded-xl object-cover"
                       alt="video cover"
@@ -77,17 +75,19 @@ const VideoSlider = () => {
                     />
                   </div>
                   <p className="mt-2 ml-1 text-gray-600 text-[16px] lg:text-sm line-clamp-1 ">
-                    {item.name}
+                    {item?.media?.name}
                   </p>
                   <div className="flex ml-1 mt-1 space-x-2 rtl:space-x-reverse">
                     <Image
-                      src="/images/mini-avatar.png"
+                      src={`${item.user.image_url || imagePlaceHolders.audio}`}
                       alt="avatar"
                       width={16}
                       height={16}
                       quality={100}
                     />
-                    <p className="text-xs text-gray-500">{""}</p>
+                    <p className="text-xs text-gray-500">
+                      {item?.user?.username}
+                    </p>
                   </div>
                 </Link>
               </SwiperSlide>

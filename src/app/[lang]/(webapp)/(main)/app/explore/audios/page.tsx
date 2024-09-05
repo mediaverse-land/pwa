@@ -100,7 +100,7 @@ const WebAppExploreAudioAssets = async ({
                     ?.map((item: any) => (
                       <ExploreAssetsCard
                         lang={lang}
-                        id={item.media.id}
+                        id={item.id}
                         key={item.id}
                         type="audio"
                         cover={
@@ -166,14 +166,14 @@ const RecentlyAudio = async ({ lang }: { lang: Locale }) => {
         return (
           <ExploreAudioCard
             lang={lang}
-            id={items.media.id}
+            id={items.id}
             key={items.id}
             author={{
               name: items.user.username,
               picture: items.user.image_url || imagePlaceHolders.account,
             }}
             description={items.media.description}
-            image={items.thumbnails["336x366"]}
+            image={items?.thumbnails["336x366"]}
             time={items.media.length}
             title={items.media.name}
           />

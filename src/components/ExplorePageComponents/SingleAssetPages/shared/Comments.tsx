@@ -55,8 +55,6 @@ const SingleAssetComments = ({
     isOpen: false,
   });
 
-  console.log(comments);
-
   const {
     handleSubmit,
     register,
@@ -144,11 +142,11 @@ const SingleAssetComments = ({
         {token ? (
           <div className="flex items-center gap-4">
             <div className="relative w-[40px] h-[40px] aspect-square overflow-hidden rounded-full">
-              {userImage ? (
-                <Image src={`${userImage || "/"}`} alt={`${username}`} fill />
-              ) : (
-                <div className="w-full h-full bg-white"></div>
-              )}
+              <Image
+                src={`${userImage || imagePlaceHolders.account}`}
+                alt={`${username}`}
+                fill
+              />
             </div>
             <div className="rounded-lg bg-[rgba(28,28,35,0.75)] text-[#666680] text-[14px] px-4 py-3 grow">
               Add a comment...

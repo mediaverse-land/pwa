@@ -59,31 +59,34 @@ const SongSlider = () => {
                 key={item.id}
               >
                 <Link
-                  href={`/${lang}/app/assets/audio/${item?.media?.name.replaceAll(
-                    " ",
-                    "-"
-                  )}?id=${item.id}`}
+                  href={`/${lang}/app/assets/audio/${item?.media?.slug}?id=${item.id}`}
                 >
                   <div className="relative w-full aspect-square">
                     <Image
                       src={
-                        item.thumbnails["226x226"] || imagePlaceHolders.audio
+                        item?.thumbnails["226x226"] || imagePlaceHolders.audio
                       }
                       className="rounded-xl"
                       alt="Music Cover"
                       fill
                     />
                   </div>
-                  <p className="mt-2 ml-1 text-gray-600 text-sm">{item.name}</p>
+                  <p className="mt-2 ml-1 text-gray-600 text-sm">
+                    {item?.media?.name}
+                  </p>
                   <div className="flex ml-1 mt-1 space-x-2 rtl:space-x-reverse">
                     <Image
-                      src="/images/mini-avatar.png"
+                      src={`${
+                        item?.user?.image_url || imagePlaceHolders.account
+                      }`}
                       alt="avatar"
                       width={16}
                       height={16}
                       quality={100}
                     />
-                    <p className="text-xs text-gray-500">{""}</p>
+                    <p className="text-xs text-gray-500">
+                      {item?.user?.username}
+                    </p>
                   </div>
                 </Link>
               </SwiperSlide>

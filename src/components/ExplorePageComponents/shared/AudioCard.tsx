@@ -8,6 +8,7 @@ import "./styles.css";
 import { secondsToHMS } from "@/lib/convertSecondsToHMS";
 import Link from "next/link";
 import { Locale } from "@/types/dictionary-types";
+import { imagePlaceHolders } from "@/configs/base";
 
 const ExploreAudioCard = ({
   author,
@@ -47,7 +48,7 @@ const ExploreAudioCard = ({
           <div className="absolute left-0 top-0 w-full h-full z-20">
             <Image
               className="z-10 object-cover"
-              src={"/images/no-cover.png"}
+              src={`${imagePlaceHolders.audio}`}
               alt={title}
               fill
             />
@@ -70,16 +71,12 @@ const ExploreAudioCard = ({
         <div className="flex justify-between text-[12px] text-[#666680]">
           <div className="flex items-center gap-2">
             <div className="relative w-[16px] h-[16px] rounded-full overflow-hidden">
-              {author?.picture ? (
-                <Image
-                  className="object-cover"
-                  src={`${author?.picture}`}
-                  alt={`${author?.name}`}
-                  fill
-                />
-              ) : (
-                <div className="bg-white w-full aspect-square overflow-hidden rounded-full"></div>
-              )}
+              <Image
+                className="object-cover"
+                src={`${author?.picture || imagePlaceHolders.account}`}
+                alt={`${author?.name}`}
+                fill
+              />
             </div>
             <div className="text-[12px] text-[#666680] line-clamp-1 leading-3">
               {author?.name}

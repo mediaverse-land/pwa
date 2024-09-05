@@ -104,11 +104,11 @@ const WebAppTextAssetSinglePage = async (params: any) => {
         <div className="flex flex-col items-stretch gap-2">
           <AssetSinglePageTitleAndDescription
             author={{
-              image: singleTextData?.data?.asset?.user.image_url,
-              name: singleTextData?.data?.asset?.user.username,
+              image: singleTextData?.data?.user?.image_url,
+              name: singleTextData?.data?.user?.username,
             }}
-            description={singleTextData?.data.description.slice(0, 30)}
-            title={singleTextData?.data.name}
+            description={singleTextData?.data?.media?.description.slice(0, 30)}
+            title={singleTextData?.data?.media?.name}
           />
         </div>
         {/* files */}
@@ -128,17 +128,12 @@ const WebAppTextAssetSinglePage = async (params: any) => {
         {/* share links */}
         <div className="flex items-center justify-between">
           <ShareButton
-            url={`${process.env.NEXTAUTH_URL}/${
-              params.params.lang
-            }/app/assets/text/${singleTextData?.data.name.replaceAll(
-              " ",
-              "-"
-            )}?id=${singleTextData?.data.id}`}
+            url={`${process.env.NEXTAUTH_URL}/${params.params.lang}/app/assets/text/${singleTextData?.data?.media?.slug}?id=${singleTextData?.data.id}`}
           />
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
               <Link
-                href={`${webAppDeepLink}?page=single&type=${singleTextData?.data.type}&id=${singleTextData?.data.id}`}
+                href={`${webAppDeepLink}?page=single&type=${singleTextData?.data?.media_type}&id=${singleTextData?.data.id}`}
               >
                 View in App
               </Link>
@@ -154,12 +149,12 @@ const WebAppTextAssetSinglePage = async (params: any) => {
         />
       </div>
       {/* buy */}
-      {singleTextData?.data?.plan !== 1 && (
+      {singleTextData?.data?.license_type !== 1 && (
         <BuySection
-          asset={singleTextData?.data?.data?.id}
-          type={singleTextData?.data?.data?.class}
-          plan={singleTextData?.data?.data?.plan}
-          price={singleTextData?.data?.data?.price}
+          asset={singleTextData?.data?.id}
+          type={singleTextData?.data?.media_type}
+          plan={singleTextData?.data?.license_type}
+          price={singleTextData?.data?.price}
         />
       )}
     </div>

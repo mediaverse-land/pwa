@@ -238,10 +238,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
               {imageData.data?.slice(0, 9)?.map((items: any, index: number) => {
                 return (
                   <Link
-                    href={`/${lang}/app/assets/image/${items?.media?.name.replaceAll(
-                      " ",
-                      "-"
-                    )}?id=${items.id}`}
+                    href={`/${lang}/app/assets/image/${items?.media?.slug}?id=${items.id}`}
                     key={items.id}
                     className={`relative overflow-hidden aspect-square ${
                       index === 1
@@ -253,7 +250,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                       src={
                         items.thumbnails["336x366"] || imagePlaceHolders.image
                       }
-                      alt={items.name}
+                      alt={items?.meida?.name}
                       fill
                     />
                   </Link>
@@ -287,30 +284,30 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                     tColor="#CFCFFC00"
                   >
                     <Link
-                      href={`/${lang}/app/assets/text/${items?.media?.name.replaceAll(
-                        " ",
-                        "-"
-                      )}?id=${items.id}`}
+                      href={`/${lang}/app/assets/text/${items?.media?.slug}?id=${items.id}`}
                     >
                       <div key={index} className="h-full flex flex-col">
                         <p className="text-white text-lg lg:text-[16px] xl:text-[20px] line-clamp-2 md:line-clamp-2 lg:line-clamp-1 xl:line-clamp-2">
-                          {items.name}
+                          {items?.media?.name}
                         </p>
                         <p className="text-gray-500 mt-2 lg:mt-0 xl:mt-4 line-clamp-4 md:line-clamp-3 lg:line-clamp-3">
-                          {items.description?.length > 70
-                            ? items.description?.slice(0, 62)
-                            : items.description}
+                          {items?.media?.description?.length > 70
+                            ? items?.media?.description?.slice(0, 62)
+                            : items?.media?.description}
                         </p>
                         <div className="flex mt-auto space-x-2 rtl:space-x-reverse">
                           <Image
-                            src="/images/mini-avatar.png"
+                            src={`${
+                              items?.user?.image_url ||
+                              imagePlaceHolders.account
+                            }`}
                             alt="avatar"
                             width={16}
                             height={16}
                             quality={100}
                           />
                           <p className="text-xs text-gray-500">
-                            {/* {items.user.username} */}
+                            {items?.user?.username}
                           </p>
                         </div>
                       </div>

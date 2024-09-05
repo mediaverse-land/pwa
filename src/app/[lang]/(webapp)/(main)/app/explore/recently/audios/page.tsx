@@ -32,13 +32,13 @@ const WebAppRecentlyAudios = async ({
           return (
             <ExploreAudioCard
               lang={lang}
-              id={items.media.id}
+              id={items.id}
               key={items.id}
               author={{
                 name: items.user.username,
                 picture: items.user.image_url || imagePlaceHolders.account,
               }}
-              description={items.meida.description}
+              description={items.media.description}
               image={items.thumbnails["336x366"] || imagePlaceHolders.audio}
               time={items.media.length}
               title={items.media.name}

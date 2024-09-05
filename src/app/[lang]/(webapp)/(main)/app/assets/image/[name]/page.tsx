@@ -51,12 +51,12 @@ export async function generateMetadata({
 }
 
 const ImageSinglePage = async (params: any) => {
-  // console.log(params);
   const assetID = params.searchParams.id || "0";
   const session = await getServerSession(authOptions);
   const token = session?.user?.token || "";
   const singleImageData = await getSingleImageData({ id: assetID, token });
-  if (singleImageData?.data?.status === 404) {
+
+  if (singleImageData?.status === 404) {
     return (
       <div className="w-full h-full flex items-center justify-center">
         Page Not Found
@@ -79,7 +79,7 @@ const ImageSinglePage = async (params: any) => {
           <Image
             className="object-cover"
             src={`${
-              singleImageData?.data?.data.thumbnails["523x304"] ||
+              singleImageData?.data?.data?.thumbnails["523x304"] ||
               imagePlaceHolders.image
             }`}
             alt=""
@@ -101,8 +101,8 @@ const ImageSinglePage = async (params: any) => {
         <div className="flex flex-col items-stretch gap-2">
           <AssetSinglePageTitleAndDescription
             author={{
-              image: singleImageData?.data?.data?.user.image_url,
-              name: singleImageData?.data?.data?.user.username,
+              image: singleImageData?.data?.data?.user?.image_url,
+              name: singleImageData?.data?.data?.user?.username,
             }}
             description={singleImageData?.data?.data?.description}
             title={singleImageData?.data?.data?.name}
@@ -126,17 +126,12 @@ const ImageSinglePage = async (params: any) => {
         {/* share links */}
         <div className="flex justify-between items-center">
           <ShareButton
-            url={`${process.env.NEXTAUTH_URL}/${
-              params.params.lang
-            }/app/assets/image/${singleImageData?.data?.data?.name.replaceAll(
-              " ",
-              "-"
-            )}?id=${singleImageData?.data?.data?.id}`}
+            url={`${process.env.NEXTAUTH_URL}/${params.params.lang}/app/assets/image/${singleImageData?.data?.data?.media?.slug}?id=${singleImageData?.data?.data?.id}`}
           />
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
               <Link
-                href={`${webAppDeepLink}?page=single&type=${singleImageData?.data?.data?.class}&id=${singleImageData?.data?.data?.id}`}
+                href={`${webAppDeepLink}?page=single&type=${singleImageData?.data?.data?.media_type}&id=${singleImageData?.data?.data?.id}`}
               >
                 View in App
               </Link>
@@ -151,11 +146,11 @@ const ImageSinglePage = async (params: any) => {
         />
       </div>
       {/* buy */}
-      {singleImageData?.data?.data?.plan !== 1 && (
+      {singleImageData?.data?.data?.license_type !== 1 && (
         <BuySection
           asset={singleImageData?.data?.data?.id}
-          type={singleImageData?.data?.data?.class}
-          plan={singleImageData?.data?.data?.plan}
+          type={singleImageData?.data?.data?.media_type}
+          plan={singleImageData?.data?.data?.license_type}
           price={singleImageData?.data?.data?.price}
         />
       )}

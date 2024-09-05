@@ -5,7 +5,7 @@ import AssetSinglePageTitleAndDescription from "@/components/ExplorePageComponen
 import { AUDIO_ICON } from "@/components/SVG/svgs";
 import BackButton from "@/components/shared/BackButton";
 import ShareButton from "@/components/shared/ShareButton";
-import { logoURL, webAppDeepLink } from "@/configs/base";
+import { imagePlaceHolders, logoURL, webAppDeepLink } from "@/configs/base";
 import { getSingleAudio } from "@/services/contactService";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
@@ -55,8 +55,7 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
   const session = await getServerSession(authOptions);
   const token = session?.user?.token || "";
   const singleAudioData = await getSingleAudioData({ id: assetID, token });
-  // console.log(singleAudioData);
-  //   console.log(session?.user.id);
+
   if (singleAudioData?.status === 404) {
     return (
       <div className="w-full h-full flex items-center justify-center">
@@ -80,7 +79,7 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
               className="object-cover"
               src={`${
                 singleAudioData?.data?.thumbnails["336x366"] ||
-                "/images/no-cover.png"
+                imagePlaceHolders.audio
               }`}
               alt=""
               fill
@@ -168,11 +167,11 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
         <div className="flex flex-col items-stretch gap-2">
           <AssetSinglePageTitleAndDescription
             author={{
-              image: singleAudioData?.data?.asset?.user.image_url,
-              name: singleAudioData?.data?.asset?.user.username,
+              image: singleAudioData?.data?.user?.image_url,
+              name: singleAudioData?.data?.user?.username,
             }}
-            description={singleAudioData?.data.description}
-            title={singleAudioData?.data.name}
+            description={singleAudioData?.data?.media?.description}
+            title={singleAudioData?.data?.media?.name}
           />
         </div>
         {/* files */}
@@ -192,17 +191,12 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
         {/* share links */}
         <div className="flex justify-between items-center">
           <ShareButton
-            url={`${process.env.NEXTAUTH_URL}/${
-              params.params.lang
-            }/app/assets/audio/${singleAudioData?.data.name.replaceAll(
-              " ",
-              "-"
-            )}?id=${singleAudioData?.data.id}`}
+            url={`${process.env.NEXTAUTH_URL}/${params.params.lang}/app/assets/audio/${singleAudioData?.data?.media?.slug}?id=${singleAudioData?.data.id}`}
           />
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
               <Link
-                href={`${webAppDeepLink}?page=single&type=${singleAudioData?.data.type}&id=${singleAudioData?.data.id}`}
+                href={`${webAppDeepLink}?page=single&type=${singleAudioData?.data.media_type}&id=${singleAudioData?.data.id}`}
               >
                 View in App
               </Link>
@@ -218,13 +212,13 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
         />
       </div>
       {/* buy */}
-      {singleAudioData?.data?.plan !== 1 ? (
+      {singleAudioData?.data?.license_type !== 1 ? (
         singleAudioData?.data?.user_id !== session?.user.id ? (
           <BuySection
-            asset={singleAudioData?.data?.data?.id}
-            type={singleAudioData?.data?.data?.class}
-            plan={singleAudioData?.data?.data?.plan}
-            price={singleAudioData?.data?.data?.price}
+            asset={singleAudioData?.data?.id}
+            type={singleAudioData?.data?.media_type}
+            plan={singleAudioData?.data?.license_type}
+            price={singleAudioData?.data?.price}
           />
         ) : null
       ) : null}

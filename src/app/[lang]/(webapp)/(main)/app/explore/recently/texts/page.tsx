@@ -23,11 +23,12 @@ const WebAppRecentlyTexts = async ({
 }) => {
   const rececentlyTextsData = await getRecentlyTextsData();
   const dic = await getDictionary(lang);
+  console.log(rececentlyTextsData);
   return (
     <div className="h-full w-full p-10 overflow-y-auto">
       <SubSectionHeader name={dic.generalApp.recently} />
       <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-4 mt-8">
-        {rececentlyTextsData?.data.map((item: any) => (
+        {rececentlyTextsData?.data?.data.map((item: any) => (
           <div key={item.id} className="lg:max-w-[220px]">
             <ExploreTextCard lang={lang} data={item} />
           </div>

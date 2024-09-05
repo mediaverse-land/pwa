@@ -129,7 +129,7 @@ const RecentlyVideos = async ({ lang }: { lang: Locale }) => {
         return (
           <ExploreVideoCard
             lang={lang}
-            id={items.media.id}
+            id={items.id}
             key={items.id}
             author={{
               name: items.user.username,
