@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 import { getDictionary } from "@/dictionary";
 import { locales } from "@/middleware";
 import { LoginWithUsername } from "@/components/Forms/LoginForms";
-import OtpForm from "@/components/Forms/OtpForm";
+import OtpForm from "@/components/Forms/OTPForm";
 
 const Login = async ({
   searchParams,
