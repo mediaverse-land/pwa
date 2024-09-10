@@ -2,7 +2,11 @@
 
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import { SPINNER } from "@/components/SVG/svgs";
-import { getUserProfile, putUserProfile } from "@/services/contactService";
+import {
+  getCities,
+  getUserProfile,
+  putUserProfile,
+} from "@/services/contactService";
 import { DicProperties } from "@/types/dictionary-types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
@@ -11,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import SelectCountryDropdown from "../SelectCountryDropdown";
+import SelectCityDropDown from "../SelectCityDropDown";
 const putUserProfileData = async ({
   data,
   token,
@@ -47,6 +52,9 @@ const schema = z.object({
   }),
   image: z.any(),
   countryISO: z.string().min(1, { message: "*Please Select Your Country" }),
+  cityID: z.number(),
+  line1: z.string(),
+  line2: z.string(),
 });
 
 type formData = z.infer<typeof schema>;
@@ -60,28 +68,33 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
   const [refetch, setRefetch] = useState(false);
   const [inputValues, setInputValues] = useState({
     username: "",
-
     email: "",
     cellphone: "",
-
     first_name: "",
     last_name: "",
     country: {
       iso: "",
       name: "",
     },
+    city: {
+      id: 0,
+      name: "",
+    },
+    line1: "",
+    line2: "",
   });
   const [message, setMessage] = useState("");
   const [inputErrors, setInputErrors] = useState({
     username: "",
-
     email: "",
     cellphone: "",
-
     first_name: "",
     last_name: "",
     image: "",
     countryISO: "",
+    cityID: "",
+    line1: "",
+    line2: "",
   });
   const router = useRouter();
   useEffect(() => {
@@ -93,6 +106,7 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
           });
           if (req.status === 200) {
             const res = await req.json();
+            console.log(res);
             setInputValues({
               ...inputValues,
               username: res.data?.username,
@@ -101,10 +115,20 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
               first_name: res.data?.first_name || "",
               last_name: res.data?.last_name || "",
               country: {
-                iso: res.data.address.country.iso,
-                name: res.data.address.country.title,
+                iso: res.data.address.country.iso || "",
+                name: res.data.address.country.title || "",
               },
+              city: {
+                id: res.data.address.city_id || 0,
+                name: res.data.address.city || "",
+              },
+              line1: res.data.address.line1 || "",
+              line2: res.data.address.line2 || "",
             });
+            setValue("countryISO", res.data.address.country.iso || "");
+            setValue("cityID", res.data.address.city_id || 0);
+            setValue("line1", res.data.address.line1 || "");
+            setValue("line2", res.data.address.line2 || "");
             setLoading(false);
           } else if (req.status === 406) {
             router.push(`/${params.lang}/sign-up/info`);
@@ -128,14 +152,15 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
     console.log(data);
     setInputErrors({
       username: "",
-      // password: "",
       email: "",
       cellphone: "",
-      // address: "",
       first_name: "",
       last_name: "",
       image: "",
       countryISO: "",
+      cityID: "",
+      line1: "",
+      line2: "",
     });
     setServerErrors("");
     setMessage("");
@@ -143,6 +168,9 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
     formData.append("first_name", data.first_name);
     formData.append("last_name", data.last_name);
     formData.append("country_iso", data.countryISO);
+    formData.append("city_id", `${data.cityID}`);
+    formData.append("line_1", data.line1);
+    formData.append("line_2", data.line2);
     if (data.email) {
       formData.append("email", data.email);
     }
@@ -152,8 +180,6 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
     const res = await putUserProfileData({ data: formData, token });
     console.log(res, "edit info");
     if (res?.status === 200) {
-      // revalidatePath("/explore?section=wallet");
-
       await session.update({
         firstName: res.data.data.first_name,
         lastName: res.data.data.last_name,
@@ -169,9 +195,15 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
         first_name: res.data.data.first_name || "",
         last_name: res.data.data.last_name || "",
         country: {
-          iso: res.data.data.address?.country.iso,
-          name: res.data.data.address?.title,
+          iso: res.data.data.address?.country.iso || "",
+          name: res.data.data.address?.title || "",
         },
+        city: {
+          id: res.data.address?.city_id || 0,
+          name: res.data.address?.city || "",
+        },
+        line1: res.data.address?.line1 || "",
+        line2: res.data.address?.line2 || "",
       });
       // console.log(res);
       router.refresh();
@@ -193,6 +225,11 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
           <div className="bg-[rgba(64,64,88,0.5)] animate-pulse h-[40px] rounded-lg"></div>
           <div className="bg-[rgba(64,64,88,0.5)] animate-pulse h-[40px] rounded-lg"></div>
           <div className="bg-[rgba(64,64,88,0.5)] animate-pulse h-[40px] rounded-lg"></div>
+          <div className="flex items-center justify-center gap-4 [&_>_*]:flex-1">
+            <div className="bg-[rgba(64,64,88,0.5)] animate-pulse h-[40px] rounded-lg"></div>
+            <div className="bg-[rgba(64,64,88,0.5)] animate-pulse h-[40px] rounded-lg"></div>
+          </div>
+          <div className="bg-[rgba(64,64,88,0.5)] animate-pulse h-[40px] rounded-lg"></div>
           <div className="bg-[rgba(64,64,88,0.5)] animate-pulse h-[40px] rounded-lg"></div>
         </div>
       ) : (
@@ -202,35 +239,6 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
         >
           <div className="flex flex-col items-stretch h-full justify-between gap-2 text-center">
             <div className="flex flex-col items-stretch h-full gap-2 text-center">
-              {/* <div className="flex flex-col items-stretch">
-          <div
-            className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
-            style={{
-              background: `rgba(14, 14, 18, 0.50)`,
-            }}
-          >
-            <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
-              Username
-            </div>
-            <div className="h-full w-[1px] bg-white mx-1"></div>
-            <input
-              className="bg-transparent grow placeholder:text-[#353542] outline-none"
-              placeholder="Username"
-              {...register("username", {
-                value: inputValues.username,
-                onChange(event) {
-                  setInputValues((prevState) => ({
-                    ...prevState,
-                    username: event.target.value,
-                  }));
-                },
-              })}
-            />
-          </div>
-          <p className="text-[12px] text-red-400 text-start">
-            {errors.username?.message?.toString() || inputErrors.username}
-          </p>
-        </div> */}
               <div className="flex flex-col items-stretch">
                 <div
                   className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
@@ -291,58 +299,6 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
                     inputErrors.last_name}
                 </p>
               </div>
-              {/* <div className="flex flex-col items-stretch">
-                <div
-                  className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
-                  style={{
-                    background: `rgba(14, 14, 18, 0.50)`,
-                  }}
-                >
-                  <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
-                    {dic.auth.cellPhone}
-                  </div>
-                  <div className="h-full w-[1px] bg-white mx-1"></div>
-                  <input
-                    className="bg-transparent grow placeholder:text-[#353542] outline-none"
-                    placeholder={dic.auth.cellPhone}
-                    {...register("cellphone", {
-                      value: inputValues.cellphone,
-                      onChange(event) {
-                        setInputValues((prevState) => ({
-                          ...prevState,
-                          cellphone: event.target.value,
-                        }));
-                      },
-                    })}
-                  />
-                </div>
-                <p className="text-[12px] text-red-400 text-start">
-                  {errors.cellphone?.message?.toString() ||
-                    inputErrors.cellphone}
-                </p>
-              </div> */}
-              {/* <div className="flex flex-col items-stretch">
-          <div
-            className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
-            style={{
-              background: `rgba(14, 14, 18, 0.50)`,
-            }}
-          >
-            <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
-              Password
-            </div>
-            <div className="h-full w-[1px] bg-white mx-1"></div>
-            <input
-              type="password"
-              className="bg-transparent grow placeholder:text-[#353542] outline-none"
-              placeholder="Password"
-              {...register("password")}
-            />
-          </div>
-          <p className="text-[12px] text-red-400 text-start">
-            {errors.password?.message?.toString() || inputErrors.password}
-          </p>
-        </div> */}
 
               <div className="flex flex-col items-stretch">
                 <div
@@ -394,62 +350,135 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
                   {errors.image?.message?.toString() || inputErrors.image}
                 </p>
               </div>
-              <div className="flex flex-col items-stretch">
-                <div
-                  className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
-                  style={{
-                    background: `rgba(14, 14, 18, 0.50)`,
-                  }}
-                >
-                  <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
-                    {"Country"}
+              {/* address section */}
+              <div className="flex flex-col gap-2">
+                {/* country and city */}
+                <div>
+                  <div className="flex items-center justify-center [&_>_*]:flex-1 gap-4">
+                    {/* country */}
+                    <div>
+                      <div className="flex flex-col items-stretch">
+                        <div
+                          className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
+                          style={{
+                            background: `rgba(14, 14, 18, 0.50)`,
+                          }}
+                        >
+                          <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
+                            {"Country"}
+                          </div>
+                          <div className="h-full w-[1px] bg-white mx-1"></div>
+                          <SelectCountryDropdown
+                            defaultValue={{
+                              iso: inputValues.country.iso,
+                              name: inputValues.country.name,
+                            }}
+                            setValue={(value: string) => {
+                              setValue("countryISO", value);
+                            }}
+                          />
+                        </div>
+                        <p className="text-[12px] text-red-400 text-start">
+                          {errors.countryISO?.message?.toString() ||
+                            inputErrors.countryISO}
+                        </p>
+                      </div>
+                    </div>
+                    {/* city */}
+                    <div>
+                      <div className="flex flex-col items-stretch">
+                        <div
+                          className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
+                          style={{
+                            background: `rgba(14, 14, 18, 0.50)`,
+                          }}
+                        >
+                          <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
+                            {"City"}
+                          </div>
+                          <div className="h-full w-[1px] bg-white mx-1"></div>
+                          <SelectCityDropDown
+                            defaultValue={{
+                              id: inputValues.city.id,
+                              name: inputValues.city.name,
+                            }}
+                            setValue={(value: number) => {
+                              setValue("cityID", value);
+                            }}
+                            countryISO={inputValues.country.iso}
+                            disabled={!inputValues.country.iso}
+                          />
+                        </div>
+                        <p className="text-[12px] text-red-400 text-start">
+                          {errors.cityID?.message?.toString() ||
+                            inputErrors.cityID}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="h-full w-[1px] bg-white mx-1"></div>
-                  <SelectCountryDropdown
-                    defaultValue={{
-                      iso: inputValues.country.iso,
-                      name: inputValues.country.name,
-                    }}
-                    setValue={(value: string) => {
-                      setValue("countryISO", value);
-                    }}
-                  />
                 </div>
-                <p className="text-[12px] text-red-400 text-start">
-                  {errors.countryISO?.message?.toString() ||
-                    inputErrors.countryISO}
-                </p>
+                {/* line 1 and line 2 */}
+                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col items-stretch">
+                    <div
+                      className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
+                      style={{
+                        background: `rgba(14, 14, 18, 0.50)`,
+                      }}
+                    >
+                      <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
+                        {"Line 1"}
+                      </div>
+                      <div className="h-full w-[1px] bg-white mx-1"></div>
+                      <input
+                        className="bg-transparent grow placeholder:text-[#353542] outline-none"
+                        placeholder={"Line 1"}
+                        {...register("line1", {
+                          value: inputValues.line1,
+                          onChange(event) {
+                            setInputValues((prevState) => ({
+                              ...prevState,
+                              line1: event.target.value,
+                            }));
+                          },
+                        })}
+                      />
+                    </div>
+                    <p className="text-[12px] text-red-400 text-start">
+                      {errors.line1?.message?.toString() || inputErrors.line1}
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-stretch">
+                    <div
+                      className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
+                      style={{
+                        background: `rgba(14, 14, 18, 0.50)`,
+                      }}
+                    >
+                      <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
+                        {"Line 2"}
+                      </div>
+                      <div className="h-full w-[1px] bg-white mx-1"></div>
+                      <input
+                        className="bg-transparent grow placeholder:text-[#353542] outline-none"
+                        placeholder={"Line 2"}
+                        {...register("line2", {
+                          value: inputValues.line2,
+                          onChange(event) {
+                            setInputValues((prevState) => ({
+                              ...prevState,
+                              line2: event.target.value,
+                            }));
+                          },
+                        })}
+                      />
+                    </div>
+                    <p className="text-[12px] text-red-400 text-start">
+                      {errors.line2?.message?.toString() || inputErrors.line2}
+                    </p>
+                  </div>
+                </div>
               </div>
-
-              {/* <div className="flex flex-col items-stretch">
-          <div
-            className="h-[48px] rounded-lg border border-[#353542] flex gap-2 px-4 py-[0.6rem] text-white"
-            style={{
-              background: `rgba(14, 14, 18, 0.50)`,
-            }}
-          >
-            <div className="flex items-center justify-between gap-2 text-[14px] text-[#666680]">
-              Address
-            </div>
-            <div className="h-full w-[1px] bg-white mx-1"></div>
-            <input
-              className="bg-transparent grow placeholder:text-[#353542] outline-none"
-              placeholder="Address"
-              {...register("address", {
-                value: inputValues.address,
-                onChange(event) {
-                  setInputValues((prevState) => ({
-                    ...prevState,
-                    address: event.target.value,
-                  }));
-                },
-              })}
-            />
-          </div>
-          <p className="text-[12px] text-red-400 text-start">
-            {errors.address?.message?.toString() || inputErrors.address}
-          </p>
-        </div> */}
             </div>
             <div>
               <div>

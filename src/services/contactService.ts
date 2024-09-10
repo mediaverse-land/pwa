@@ -172,6 +172,10 @@ export const getCountries = () => {
   const url = `${baseURL}/countries`;
   return fetchInstance(url);
 };
+export const getCities = ({ countryISO }: { countryISO: string }) => {
+  const url = `${baseURL}/countries/${countryISO}/cities`;
+  return fetchInstance(url);
+};
 
 export const getMostViewedSongs = (lang: TFullLocales) => {
   const url = `${baseURL}/audios/most-viewed`;
