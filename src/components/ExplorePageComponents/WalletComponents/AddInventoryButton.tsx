@@ -24,7 +24,6 @@ const AddInventoryButton = async ({
   lang: Locale;
 }) => {
   const session = await getServerSession(authOptions);
-  // console.log(session?.user.token);
   // check to see user info is complete or not
   if (
     !session?.user.firstName ||
@@ -45,7 +44,6 @@ const AddInventoryButton = async ({
   }
   const token = session?.user.token || "";
   const gateway = await getGatewayData(token);
-  // console.log(gateway, "gateway");
   return gateway?.status === 200 ? (
     <Link
       href={`${gateway?.data.url}`}

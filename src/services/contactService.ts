@@ -547,7 +547,6 @@ export const requestOTP = async (data: {
     });
     return req;
   } else {
-    // console.log(data);
     const req = await fetch(url, {
       cache: "no-store",
       method: "POST",
@@ -578,7 +577,6 @@ export const submitOTP = async (data: { cellphone: string; otp: string }) => {
     });
     return req;
   } else {
-    // console.log(data);
     const req = await fetch(url, {
       cache: "no-store",
       method: "POST",
@@ -610,7 +608,6 @@ export const signUpCompletion = async ({ data, token }: any) => {
     });
     return req;
   } else {
-    // console.log(data);
     const req = await fetch(url, {
       cache: "no-store",
       method: "POST",
@@ -642,7 +639,6 @@ export const signInWithUsername = async (data: any) => {
     });
     return req;
   } else {
-    // console.log(data);
     const req = await fetch(url, {
       cache: "no-store",
       method: "POST",

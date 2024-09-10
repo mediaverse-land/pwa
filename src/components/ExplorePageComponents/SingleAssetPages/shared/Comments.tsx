@@ -70,7 +70,6 @@ const SingleAssetComments = ({
           const req = await getComments({ id: `${assetID}`, token });
           if (req.ok) {
             const res = await req.json();
-            // console.log(res);
             setComments(res.data);
             setCommentsNumber(res.data.length);
             return res;
@@ -94,8 +93,6 @@ const SingleAssetComments = ({
     }
   }, [modalStatus.isOpen]);
   const handleAddComment = handleSubmit(async (data) => {
-    // console.log(data);
-
     const res = await postCommentData({
       body: {
         asset_id: assetID,
@@ -110,8 +107,6 @@ const SingleAssetComments = ({
       });
       setMessage("Your comment will be displayed after approval");
     } else if (res?.status === 200 && res.data.status === 2) {
-      // console.log("set");
-
       setRefetchComment((prev) => {
         return !prev;
       });

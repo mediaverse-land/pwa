@@ -84,7 +84,6 @@ export const SearchForImages = async ({
       searchParams.plan ? `&plan=${searchParams.plan}` : ""
     }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
-  console.log(searchResults);
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(3n+1)]:col-span-2 [&_>_*:nth-child(3n+1)]:row-span-2 lg:[&_>_*:nth-child(3n+1)]:col-span-2 lg:[&_>_*:nth-child(3n+1)]:row-span-2 px-6 py-7 h-full overflow-y-auto">
       {searchResults.data
@@ -232,7 +231,6 @@ export const SearchForTexts = async ({
       searchParams.plan ? `&plan=${searchParams.plan}` : ""
     }${searchParams.tag ? `&tag=${searchParams.tag}` : ""}`
   );
-  // console.log(searchResults.data.filter((item: any) => item.media_type === 1));
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-4 p-4">
       {searchResults.data

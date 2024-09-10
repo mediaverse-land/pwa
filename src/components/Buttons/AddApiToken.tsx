@@ -48,7 +48,6 @@ const AddApiTokenButton = () => {
         setIsFormOpen(false);
         reset();
       } else {
-        console.log(await req.json());
       }
     } catch (error) {}
   });

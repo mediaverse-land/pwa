@@ -95,7 +95,7 @@ const BuyAsset = async ({
     getAssetData({ id, type }),
     getUserData(token),
   ]);
-  //   console.log(assetData?.data.asset);
+
   if (assetData?.data?.data?.plan === 1)
     redirect(`/${params.lang}/app/explore`);
   const userBalance = await getUserBalacneData(token);

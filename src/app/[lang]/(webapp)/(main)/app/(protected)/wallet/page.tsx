@@ -46,12 +46,11 @@ const WebAppWallet = async ({
   const session = await getServerSession(authOptions);
   const dic = await getDictionary(params.lang);
   const token = session?.user.token || "";
-  // console.log(token, "token");
+  // (token, "token");
   const [userBalance, profile] = await Promise.all([
     getUserBalacneData(token),
     getUserData(token),
   ]);
-  // console.log(userBalance?.data, "userBalance");
   return (
     <div
       className={`h-full w-full flex flex-col items-stretch justify-start gap-10 p-10`}

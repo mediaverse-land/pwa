@@ -44,7 +44,7 @@ const WebAppSessting = async ({
   params: { lang: Locale };
 }) => {
   const session = await getServerSession(authOptions);
-  console.log(session);
+
   const dic = await getDictionary(lang);
   const token = session?.user?.token || "";
   const [messagesData] = await Promise.all([getUserMessagesData(token)]);

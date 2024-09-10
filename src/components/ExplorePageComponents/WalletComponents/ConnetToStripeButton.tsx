@@ -25,7 +25,6 @@ const ConnetToStripeButton = async ({
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const stripe = await connectToStripe(token);
-  // console.log(stripe?.data);
   if (stripe?.status === 406) {
     return (
       <div className="w-full text-center bg-[#666680] rounded-xl py-2 space-x-2 rtl:space-x-reverse px-4">

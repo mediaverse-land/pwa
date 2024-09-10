@@ -30,7 +30,6 @@ const RegisterOTPForm = ({
   const [counter, setCounter] = useState<number>(initialCounter);
   const [isLoading, setIsLoading] = useState(false);
   const { loginUser } = useLogin();
-  const params = useParams();
 
   const {
     register,
@@ -53,16 +52,14 @@ const RegisterOTPForm = ({
       });
       if (req.ok) {
         const res = await req.json();
-        console.log(res);
         if (!res.user.first_name && !res.user.last_name && !res.user.username) {
           return loginUser({
             address: res.user.address,
-
             cellphone: res.user.cellphone,
             email: res.user.email,
             firstName: res.user.first_name,
             lastName: res.user.last_name,
-            image: res.user.image,
+            image: res.user.image_url,
             id: res.user.id,
             token: res.token,
             username: res.user.username,
@@ -72,25 +69,24 @@ const RegisterOTPForm = ({
         if (!res.user.username) {
           return loginUser({
             address: res.user.address,
-
             cellphone: res.user.cellphone,
             email: res.user.email,
             firstName: res.user.first_name,
             lastName: res.user.last_name,
-            image: res.user.image,
+            image: res.user.image_url,
             id: res.user.id,
             token: res.token,
             username: res.user.username,
             callBack: `/sign-up/info`,
           });
         }
-        loginUser({
+        return loginUser({
           address: res.user.address,
           cellphone: res.user.cellphone,
           email: res.user.email,
           firstName: res.user.first_name,
           lastName: res.user.last_name,
-          image: res.user.image,
+          image: res.user.image_url,
           id: res.user.id,
           token: res.token,
           username: res.user.username,
@@ -100,7 +96,7 @@ const RegisterOTPForm = ({
         setError("root", { message: res.message });
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }

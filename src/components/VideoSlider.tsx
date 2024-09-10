@@ -22,7 +22,6 @@ const VideoSlider = () => {
     };
     getData();
   }, []);
-  // console.log(videoData, "videodata");
   const handlePrevious = useCallback(() => {
     swiperRef?.slidePrev();
   }, [swiperRef]);
@@ -54,7 +53,6 @@ const VideoSlider = () => {
           className="w-full linear-light-blue-bg"
         >
           {videoData?.map((item: any, index) => {
-            console.log(item);
             return (
               <SwiperSlide
                 key={item.id}

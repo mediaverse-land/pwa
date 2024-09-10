@@ -11,10 +11,11 @@ const CheckUserData = () => {
   useEffect(() => {
     if (session.status === "authenticated") {
       const user = session.data.user;
+
       if (!user.username && !user.firstName && !user.lastName) {
         return router.push(`/${params.lang}/sign-up/info`);
       }
-      if (!user.address.country_iso) {
+      if (!user.address?.country_iso) {
         return router.push(`/${params.lang}/app/setting/account/general-info`);
       }
     }

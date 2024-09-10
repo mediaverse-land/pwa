@@ -28,7 +28,7 @@ const Login = async ({
   let refer = searchParams.refer;
 
   const session = await getServerSession(authOptions);
-  // console.log(session, "server session");
+
   if (session) {
     redirect(
       refer ? `${refer}?token=${session.user.token}` : `/${lang}/app/explore`

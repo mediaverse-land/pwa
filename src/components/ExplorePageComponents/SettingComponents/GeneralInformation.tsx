@@ -111,13 +111,10 @@ const SettingGeneralInformation = () => {
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(schema) });
   const handleEditUserInfo = handleSubmit(async (data) => {
-    // console.log(data);
     setInputErrors({
       username: "",
-      // password: "",
       email: "",
       cellphone: "",
-      // address: "",
       first_name: "",
       last_name: "",
     });
@@ -125,10 +122,7 @@ const SettingGeneralInformation = () => {
     setMessage("");
     const token = session.data?.user.token || "";
     const res = await putUserProfileData({ data, token });
-    // console.log(res, "edit info");
     if (res?.status === 200) {
-      // revalidatePath("/explore?section=wallet");
-
       router.refresh();
       setRefetch(!refetch);
       await session.update({
@@ -144,7 +138,6 @@ const SettingGeneralInformation = () => {
         first_name: res.data.first_name || "",
         last_name: res.data.last_name || "",
       });
-      // console.log(res);
       setMessage("Profile updated successfully");
       setTimeout(() => {
         setMessage("");

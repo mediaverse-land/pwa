@@ -103,7 +103,6 @@ const WebAppImageAssets = async ({
 export default WebAppImageAssets;
 const RecentlyImages = async ({ lang }: { lang: Locale }) => {
   const data = await getRecentlyImagesData();
-  // console.log(data);
   return (
     <div className="grid grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(6n+2)]:col-span-2 [&_>_*:nth-child(6n+2)]:row-span-2">
       {data.data?.map((items: any, index: number) => {

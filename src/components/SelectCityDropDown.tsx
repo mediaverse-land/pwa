@@ -30,7 +30,6 @@ const getCitiesData = async ({ countryISO }: { countryISO: string }) => {
     const req = await getCities({ countryISO });
     if (req.ok) {
       const res = await req.json();
-      console.log(res.data);
       return res.data as City[];
     } else {
       return [];

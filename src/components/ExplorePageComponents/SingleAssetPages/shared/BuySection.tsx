@@ -26,7 +26,6 @@ const BuySection = async ({
   asset: number;
   type: number;
 }) => {
-  // console.log(AssetPurchasePlan[plan], plan);
   return (
     <div className="px-10 py-8 flex flex-col items-stretch justify-between gap-8 rounded-t-2xl bg-[rgba(78,78,97,0.75)] backdrop-blur-md">
       <div className="flex flex-col items-stretch gap-4">

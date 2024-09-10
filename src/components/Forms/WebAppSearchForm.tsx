@@ -27,12 +27,6 @@ const WebAppSearchForm = ({ dic }: { dic: DicProperties }) => {
     resolver: zodResolver(formSchema),
   });
   const handleSubmitForm = handleSubmit((data) => {
-    // console.log(data);
-    // console.log(
-    //   `/explore?section=explore&content=search?q=${data.q}${
-    //     data.searchIn && `&${contentType}=${data.searchIn}`
-    //   }`
-    // );
     router.push(
       `/${params.lang}/app/explore/search-result?q=${data.q}${
         data.searchIn && `&${contentType}=${data.searchIn}`

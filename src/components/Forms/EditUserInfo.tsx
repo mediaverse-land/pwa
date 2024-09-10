@@ -36,7 +36,6 @@ type FormData = z.infer<typeof schema>;
 const EditUserInfoForm = () => {
   const params = useParams();
   const session = useSession();
-  console.log(session, "session");
   const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState("");
@@ -80,7 +79,6 @@ const EditUserInfoForm = () => {
       token: session.data?.user.token || "",
     });
     const response = await request.json();
-    // console.log(response, "signUpCompletion");
     if (request.ok) {
       await session.update({
         username: response.username,
@@ -99,7 +97,6 @@ const EditUserInfoForm = () => {
       router.refresh();
       router.replace(`/${params.lang}/app/explore/`);
     } else {
-      // console.log("failed");
       setServerErrors(response.error || response.message);
     }
     setLoading(false);

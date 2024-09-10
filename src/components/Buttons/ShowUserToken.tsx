@@ -15,7 +15,7 @@ const ShowUserTokenButton = ({ token }: { token: string }) => {
             description: "Token copied to clipboard",
           });
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
       }}
     >

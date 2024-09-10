@@ -26,9 +26,7 @@ const UserStatics = async ({ lang }: { lang: Locale }) => {
   }
 
   const token = session.user.token || "";
-  //   console.log(token);
   const statics = await getStatics(token);
-  // console.log(statics);
   if (statics?.status === 401) {
     return <LogoutNoUser />;
   } else if (statics?.status === 406) {

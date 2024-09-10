@@ -19,13 +19,12 @@ const getOwnership = async ({
 }) => {
   try {
     const req = await getOwnershipAssets({ params, token });
-    // console.log(req);
     return {
       data: await req.json(),
       status: req.status,
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -169,7 +168,6 @@ export const OwnershipVideoAssets = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
-  // console.log(token);
   const searchResults = await getOwnership({
     params: "/videos",
     token: token,

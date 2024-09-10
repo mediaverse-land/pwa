@@ -25,7 +25,6 @@ const WebAppAccountSignIns = async ({
   const dic = await getDictionary(lang);
   const token = session?.user?.token || "";
   const signInsData = await getSignInsData(token);
-  // console.log(signInsData?.data);
   return (
     <div className="flex flex-col items-stretch gap-10 p-10 w-full h-full overflow-y-auto">
       <SubSectionHeader name={dic.setting.signIns} />

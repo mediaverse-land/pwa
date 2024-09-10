@@ -46,7 +46,6 @@ const getCommentsData = async ({
       const res = await req.json();
       return res;
     } else {
-      // console.log(req.status, "Res");
       if (req.status === 404) {
         return "not-found";
       }
@@ -63,7 +62,6 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const assetID = searchParams.id || "0";
   const singleVideoData = await getSingleVideoData({ id: assetID, token: "" });
-  // console.log(singleVideoData?.data);
 
   return {
     title: singleVideoData?.data?.name,
@@ -92,7 +90,6 @@ const WebAppSingleVideoAsset = async (params: any) => {
       </div>
     );
   }
-  // console.log(session, "session");
   return (
     <div className="flex flex-col items-stretch h-full overflow-y-auto">
       {/* top section */}

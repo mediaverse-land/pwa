@@ -36,19 +36,12 @@ const LoginWithUsername = () => {
   } = useForm({ resolver: zodResolver(loginWithUsernameSchema) });
   const handleLoginWithUsername = handleSubmit(async (data) => {
     setIsLoading(true);
-    // console.log(
-    //   {
-    //     password: data.password,
-    //     cellphone: data.username,
-    //   },
-    //   "data"
-    // );
+
     const req = await signInWithUsername({
       password: data.password,
       username: data.username,
     }).finally(() => setIsLoading(false));
     const res = await req.json();
-    console.log(res);
     if (req.ok && res) {
       loginUser({
         address: res.user.address,

@@ -37,7 +37,6 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const assetID = searchParams.id || "0";
   const singleAudioData = await getSingleAudioData({ id: assetID, token: "" });
-  // console.log(singleAudioData?.data, "audio");
 
   return {
     title: singleAudioData?.data?.name,

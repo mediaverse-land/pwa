@@ -33,26 +33,17 @@ const BuyAssetComponent = ({
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const router = useRouter();
-  // console.log(id);
-  // console.log(token);
+
   const handleBuyAsset = async () => {
-    // console.log("onClick");
     setMessage("");
     setLoading(true);
     const req = await buyAsset({ id, token });
-    // console.log(req, "req");
+
     if (req?.status === 200) {
-      // console.log(req, "req");
       router.push(
         `/${params.lang}/app/account/buy-asset/result?type=${assetData.plan}`
       );
-      // if (assetData.plan === 2) {
-      // router.push("/explore?section=account&type=ownership");
-      // } else if (assetData.plan === 3) {
-      //   router.push("/explore?section=account&type=subscribe");
-      // }
     } else {
-      // console.log(req, "error");
       if (req?.status === 403) {
         setMessage(req.data.message);
       } else if (req?.status === 500) {

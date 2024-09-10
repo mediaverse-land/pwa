@@ -11,11 +11,7 @@ export const authOptions: AuthOptions = {
     signIn: "/login",
     error: "/login",
   },
-  // session: { strategy: "jwt" },
   callbacks: {
-    // async session(params) {
-    //   console.log(params);
-    // },
     async redirect(params: { url: string; baseUrl: string }) {
       if (params.url.startsWith("https") || params.url.startsWith("/")) {
         return params.url;
@@ -61,7 +57,6 @@ export const authOptions: AuthOptions = {
     },
 
     async signIn(data: any) {
-      // console.log(data, "data");
       switch (data.account.provider) {
         case "google": {
           const req = await fetch(`${baseURL}/auth/google`, {
@@ -76,7 +71,7 @@ export const authOptions: AuthOptions = {
             }),
           });
           const res = await req.json();
-          // console.log(res, "res");
+
           if (req.ok) {
             data.user.token = res.token;
             data.user.cellphone = res.user.cellphone;
@@ -100,7 +95,7 @@ export const authOptions: AuthOptions = {
             }),
           });
           const res = await req.json();
-          // console.log(res, "res");
+
           if (req.ok) {
             return data;
           } else {

@@ -23,7 +23,6 @@ const WebAppRecentlyTexts = async ({
 }) => {
   const rececentlyTextsData = await getRecentlyTextsData();
   const dic = await getDictionary(lang);
-  console.log(rececentlyTextsData);
   return (
     <div className="h-full w-full p-10 overflow-y-auto">
       <SubSectionHeader name={dic.generalApp.recently} />

@@ -106,7 +106,7 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
           });
           if (req.status === 200) {
             const res = await req.json();
-            console.log(res);
+
             setInputValues({
               ...inputValues,
               username: res.data?.username,
@@ -149,7 +149,6 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
   } = useForm<formData>({ resolver: zodResolver(schema) });
 
   const handleEditUserInfo = handleSubmit(async (data) => {
-    console.log(data);
     setInputErrors({
       username: "",
       email: "",
@@ -178,7 +177,6 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
       formData.append("image", data.image[0]);
     }
     const res = await putUserProfileData({ data: formData, token });
-    console.log(res, "edit info");
     if (res?.status === 200) {
       await session.update({
         firstName: res.data.data.first_name,
@@ -205,7 +203,7 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
         line1: res.data.address?.line1 || "",
         line2: res.data.address?.line2 || "",
       });
-      // console.log(res);
+      //
       router.refresh();
       setRefetch(!refetch);
       setMessage("Profile updated successfully");

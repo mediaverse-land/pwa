@@ -8,7 +8,6 @@ import { imagePlaceHolders } from "@/configs/base";
 
 const ExploreTextCard = async ({ data, lang }: { data: any; lang: Locale }) => {
   const session = await getServerSession(authOptions);
-  // console.log(data);
   const authorImage = () => {
     if (!data.user?.image_url) {
       if (session?.user?.image && data.user_id === session.user.id) {

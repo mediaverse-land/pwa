@@ -54,17 +54,6 @@ export const SubscribeAllAssets = async ({
   } else if (subscribeAllAssetsData?.status === 401) {
     return <LogoutNoUser />;
   }
-  // console.log(subscribeAllAssetsData?.data.data, "subsribe data");
-  // const concatData = () => {
-  //   const data = [
-  //     ...(subscribeAllAssetsData?.data?.data?.images || []),
-  //     ...(subscribeAllAssetsData?.data?.data?.videos || []),
-  //     ...(subscribeAllAssetsData?.data?.data?.texts || []),
-  //     ...(subscribeAllAssetsData?.data?.data?.audios || []),
-  //   ];
-  //   // console.log(data, "daaaaaaaaa");
-  //   return data;
-  // };
 
   return (
     <div className="py-7 xl:px-6 grid grid-cols-2 lg:grid-cols-3 grid-flow-row gap-4">

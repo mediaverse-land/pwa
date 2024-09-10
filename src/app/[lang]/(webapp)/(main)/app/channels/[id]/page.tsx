@@ -37,7 +37,6 @@ const WebAppSingleLiveChannel = async ({
     id: liveID,
     lang: FullLocaleNames[lang],
   });
-  console.log(singleLiveData, "live channel data");
   return (
     <div className="w-full h-full overflow-y-auto px-10 py-6">
       <div className="w-full h-full flex flex-col items-stretch gap-6">
