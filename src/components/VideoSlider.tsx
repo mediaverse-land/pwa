@@ -72,12 +72,13 @@ const VideoSlider = () => {
                       fill
                     />
                   </div>
-                  <p className="mt-2 ml-1 text-gray-600 text-[16px] lg:text-sm line-clamp-1 ">
+                  <p className="mt-2 ml-1 text-gray-600 text-[16px] lg:text-sm line-clamp-1">
                     {item?.media?.name}
                   </p>
                   <div className="flex ml-1 mt-1 space-x-2 rtl:space-x-reverse">
                     <Image
                       src={`${item.user.image_url || imagePlaceHolders.audio}`}
+                      className="rounded-full overflow-hidden"
                       alt="avatar"
                       width={16}
                       height={16}

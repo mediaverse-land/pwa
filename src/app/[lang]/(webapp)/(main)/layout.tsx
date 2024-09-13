@@ -1,3 +1,4 @@
+import CheckUserData from "@/components/CheckUserData";
 import WebAppSideBar from "@/components/WebApp/WebAppSideBar/WebAppSideBar";
 import Motion from "@/components/motion";
 import { Locale } from "@/types/dictionary-types";
@@ -28,7 +29,7 @@ export default function Layout({
           </div>
         </div>
         {/* check user data for complete profile */}
-        {/*<CheckUserData />*/}
+        <CheckUserData />
       </Motion>
     </>
   );

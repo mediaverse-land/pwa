@@ -71,19 +71,21 @@ const SongSlider = () => {
                       fill
                     />
                   </div>
-                  <p className="mt-2 ml-1 text-gray-600 text-sm">
+                  <p className="mt-2 ml-1 text-gray-600 text-sm line-clamp-1">
                     {item?.media?.name}
                   </p>
                   <div className="flex ml-1 mt-1 space-x-2 rtl:space-x-reverse">
-                    <Image
-                      src={`${
-                        item?.user?.image_url || imagePlaceHolders.account
-                      }`}
-                      alt="avatar"
-                      width={16}
-                      height={16}
-                      quality={100}
-                    />
+                    <div className="relative overflow-hidden aspect-square w-[16px] rounded-full">
+                      <Image
+                        src={`${
+                          item?.user?.image_url || imagePlaceHolders.account
+                        }`}
+                        className="object-cover"
+                        alt="avatar"
+                        quality={100}
+                        fill
+                      />
+                    </div>
                     <p className="text-xs text-gray-500">
                       {item?.user?.username}
                     </p>
