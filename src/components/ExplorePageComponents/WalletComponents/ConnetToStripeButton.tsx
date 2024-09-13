@@ -25,6 +25,7 @@ const ConnetToStripeButton = async ({
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const stripe = await connectToStripe(token);
+
   if (stripe?.status === 406) {
     return (
       <div className="w-full text-center bg-[#666680] rounded-xl py-2 space-x-2 rtl:space-x-reverse px-4">
@@ -40,7 +41,7 @@ const ConnetToStripeButton = async ({
   }
   return stripe?.status === 200 ? (
     <Link
-      href={`${stripe?.data.url}`}
+      href={`${stripe?.data.link}`}
       className="rounded-2xl border border-dashed border-[#666680] text-[14px] leading-none capitalize text-center text-[#A2A2B5] flex items-center justify-center gap-2 py-5"
     >
       <span>{dic.appWallet.connectToStripe}</span>

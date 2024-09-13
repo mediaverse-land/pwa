@@ -330,10 +330,10 @@ export const getOwnershipAssets = ({
     },
   });
 };
-export const getUserBalance = ({ token }: { token: string }) => {
-  const url = `${baseURL}/stripe/balance`;
+export const getUserSubscriptionInfo = ({ token }: { token: string }) => {
+  const url = `${baseURL}/stripe/subscription`;
   return fetch(url, {
-    next: { revalidate: 0, tags: ["getUserBalance"] },
+    next: { revalidate: 0, tags: ["getUserSubscriptionInfo"] },
     // cache: "no-store",
     method: "GET",
     headers: {
@@ -394,10 +394,24 @@ export const buyAsset_Fetch = ({
   });
 };
 export const connetToStripe_Fetch = async ({ token }: { token: string }) => {
-  const url = `${baseURL}/stripe/connect`;
+  const url = `${baseURL}/stripe/subscription/link`;
   return fetch(url, {
     next: { revalidate: 0, tags: ["connetStripe"] },
-    method: "POST",
+    method: "GET",
+    headers: {
+      "Accept-Language": "en-US",
+      accept: "application/json",
+      "Content-Type": "application/json",
+      "x-app": "_Web",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const subscriptionPlan = async ({ token }: { token: string }) => {
+  const url = `${baseURL}/stripe/subscrie/plan`;
+  return fetch(url, {
+    next: { revalidate: 0, tags: ["subscriptionPlan"] },
+    method: "GET",
     headers: {
       "Accept-Language": "en-US",
       accept: "application/json",

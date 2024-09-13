@@ -5,7 +5,11 @@ import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSecti
 import { SPINNER } from "@/components/SVG/svgs";
 import { getDictionary } from "@/dictionary";
 import { getCurrencySymbol } from "@/lib/getSymbolForCurrency";
-import { getUserBalance, getUserProfile } from "@/services/contactService";
+import {
+  getUserSubscriptionInfo,
+  getUserProfile,
+  subscriptionPlan,
+} from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
 import { revalidateTag } from "next/cache";
@@ -21,10 +25,10 @@ const getUserData = async (token: string) => {
     console.error(error);
   }
 };
-const getUserBalacneData = async (token: string) => {
-  revalidateTag("getUserBalance");
+const getUserSubscription = async (token: string) => {
+  revalidateTag("getUserSubscriptionInfo");
   try {
-    const req = await getUserBalance({ token });
+    const req = await getUserSubscriptionInfo({ token });
     return {
       data: req.status === 200 ? await req.json() : [],
       status: req.status,
@@ -46,11 +50,12 @@ const WebAppWallet = async ({
   const session = await getServerSession(authOptions);
   const dic = await getDictionary(params.lang);
   const token = session?.user.token || "";
-  // (token, "token");
-  const [userBalance, profile] = await Promise.all([
-    getUserBalacneData(token),
+
+  const [userSubscriptionData, profile] = await Promise.all([
+    getUserSubscription(token),
     getUserData(token),
   ]);
+  console.log(userSubscriptionData);
   return (
     <div
       className={`h-full w-full flex flex-col items-stretch justify-start gap-10 p-10`}
@@ -64,15 +69,12 @@ const WebAppWallet = async ({
           </div>
           <div className="w-[1px] h-full bg-[#83839C]"></div>
           <div className="grow line-clamp-1 font-bold text-[18px] text-white flex items-center">
-            {userBalance?.status === 200
-              ? `${(userBalance?.data.available[0].amount / 100).toFixed(
-                  2
-                )} ${getCurrencySymbol(
-                  `${userBalance?.data.available[0].currency || "eur"}`
-                )}`
-              : "---- €"}
+            {userSubscriptionData?.status === 200 &&
+            userSubscriptionData.data.enabled
+              ? `You Have An Active Plan`
+              : "You Don't have any plans yet"}
           </div>
-          {/* {userBalance?.status === 200 ? (
+          {/* {userSubscriptionData?.status === 200 ? (
             <Link
               href={`/explore?section=wallet&page=history`}
               className="text-[14px] leading-[14px] text-[#D9D9FF]"
@@ -82,7 +84,7 @@ const WebAppWallet = async ({
           ) : null} */}
         </div>
         <div className="flex flex-col items-stretch gap-6">
-          {userBalance?.status === 200 ? null : (
+          {
             <Suspense
               fallback={
                 <div className="flex items-center justify-center">
@@ -97,10 +99,10 @@ const WebAppWallet = async ({
             >
               <ConnetToStripeButton lang={params.lang} dic={dic} />
             </Suspense>
-          )}
-          {userBalance?.status === 200 ? (
+          }
+          {/* {userSubscriptionData?.status === 200 ? (
             <AddInventoryButton lang={params.lang} dic={dic} />
-          ) : null}
+          ) : null} */}
         </div>
       </div>
     </div>

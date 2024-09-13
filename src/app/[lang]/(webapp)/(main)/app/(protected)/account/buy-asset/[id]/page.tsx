@@ -9,7 +9,7 @@ import {
   getSingleImage,
   getSingleText,
   getSingleVideo,
-  getUserBalance,
+  getUserSubscriptionInfo,
   getUserProfile,
   getUserStripeAccount,
 } from "@/services/contactService";
@@ -68,7 +68,7 @@ const getUserData = async (token: string) => {
 };
 const getUserBalacneData = async (token: string) => {
   try {
-    const req = await getUserBalance({ token });
+    const req = await getUserSubscriptionInfo({ token });
     return {
       data: req.status === 200 ? await req.json() : [],
       status: req.status,
