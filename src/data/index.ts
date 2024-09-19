@@ -1,6 +1,6 @@
 import { socialMediaIcons } from "@/types";
 
-export const GTM_ID = "GTM-WPLNXH7D";
+export const GTM_ID = process.env.GTM_ID || '';
 
 export const navbar: {
   title: "home" | "blog" | "terms" | "privacy" | "api" | "faq" | "about";
