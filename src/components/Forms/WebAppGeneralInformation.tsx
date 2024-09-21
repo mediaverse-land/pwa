@@ -380,6 +380,7 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
                                   name: inputValues.country.name,
                                 },
                               });
+
                               setValue("cityID", 0);
                             }}
                           />
