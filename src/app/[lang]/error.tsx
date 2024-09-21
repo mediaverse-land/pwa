@@ -28,8 +28,8 @@ export default function Error({
   return (
     <div className="flex flex-col text-white my-auto items-center justify-center gap-5">
       <h2 className="text-[32px]">Something went wrong!</h2>
-      <div>{error.message}</div>
-      <div>{renderError()}</div>
+      {/* <div>{error.message}</div>
+      <div>{renderError()}</div> */}
       <button
         onClick={
           // Attempt to recover by trying to re-render the segment

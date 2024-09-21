@@ -108,9 +108,9 @@ const WebAppExploreAudioAssets = async ({
                         }
                         title={item.media.name}
                         author={{
-                          name: item.user.username,
+                          name: item.user?.username || "",
                           picture:
-                            item.user.image_url || imagePlaceHolders.account,
+                            item.user?.image_url || imagePlaceHolders.account,
                         }}
                       />
                     ))}

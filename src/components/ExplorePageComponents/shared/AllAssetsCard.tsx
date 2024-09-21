@@ -109,7 +109,7 @@ const ExploreAssetsCard = async ({
       {/* content */}
       <div className="flex flex-col gap-2 items-stretch">
         {/* title */}
-        <div className="line-clamp-1 text-[#666680] leading- max-w-full overflow-hidden">
+        <div className="line-clamp-1 text-[#666680] w-full max-w-full overflow-hidden">
           {title || "Tiger love..."}
         </div>
         {/* author */}

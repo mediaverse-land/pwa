@@ -179,11 +179,15 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
         </div>
         <div className="lg:max-w-screen-2xl mx-auto flex items-center justify-center py-4 w-[80rem]">
           <div className="relative flex overflow-x-hidden w-full animate-marquee-container">
-            <div className="animate-marquee whitespace-nowrap flex flex-row w-full">
+            <div className="animate-marquee whitespace-nowrap flex flex-row w-full select-none">
               {liveData.data?.map((item: any, i: number) => (
-                <Link href={`/${lang}/app/channels/${item.id}`} key={item.id}>
+                <Link
+                  href={`/${lang}/app/channels/${item.id}`}
+                  key={item.id}
+                  className="mr-[8px] ml-[8px] cursor-pointer select-none"
+                >
                   <img
-                    className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
+                    className="rounded-[8px] w-[154px] h-[100px] cursor-pointer select-none"
                     src={item.thumbnail || imagePlaceHolders.image}
                     alt=""
                   />
