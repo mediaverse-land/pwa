@@ -13,6 +13,7 @@ export const pageview = (GA_MEASUREMENT_ID: string, url: string) => {
   }
 };
 
+
 const GoogleTagManager = ({}) => {
   const pagePath = usePathname();
   const searchParams = useSearchParams();
