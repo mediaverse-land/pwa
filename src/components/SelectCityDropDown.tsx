@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getCities, getCountries } from "@/services/contactService";
+import { getCities } from "@/services/contactService";
 import { Loader2Icon } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -46,16 +46,16 @@ const SelectCityDropDown = ({
   disabled,
 }: Props) => {
   const [loading, setLoading] = useState(true);
-  const [countries, setCountries] = useState<City[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
 
   useEffect(() => {
     const request = async () => {
       const data = await getCitiesData({ countryISO });
-      setCountries(data);
+      setCities(data);
     };
     request();
     setLoading(false);
-  }, []);
+  }, [countryISO]);
   return (
     <Select
       defaultValue={`${defaultValue?.id}`}
@@ -74,9 +74,9 @@ const SelectCityDropDown = ({
         {loading ? (
           <Loader2Icon />
         ) : (
-          countries.map((city) => {
+          cities.map((city) => {
             return (
-              <SelectItem value={`${city.id}`} className="">
+              <SelectItem key={city.id} value={`${city.id}`} className="">
                 {city.name}
               </SelectItem>
             );

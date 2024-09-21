@@ -213,7 +213,8 @@ const EditUserInfoForm = () => {
                   />
                 </div>
                 <p className="text-[12px] text-red-400 text-start py-1">
-                  {errors.password?.message?.toString() || inputErrors.password}
+                  {errors.countryISO?.message?.toString() ||
+                    inputErrors.countryISO}
                 </p>
               </div>
             </div>

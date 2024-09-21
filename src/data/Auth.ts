@@ -76,6 +76,12 @@ export const authOptions: AuthOptions = {
             data.user.token = res.token;
             data.user.cellphone = res.user.cellphone;
             data.user.id = res.user.id;
+            data.user.username = res.user.username;
+            data.user.firstName = res.user.first_name || "";
+            data.user.lastName = res.user.last_name || "";
+            data.user.address = res.user.address;
+            data.user.email = res.user.email || "";
+
             return data;
           } else {
             throw new Error("Failed to login");

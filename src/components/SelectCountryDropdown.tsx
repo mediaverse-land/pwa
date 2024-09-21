@@ -70,7 +70,7 @@ const SelectCountryDropdown = ({ setValue, defaultValue }: Props) => {
         ) : (
           countries.map((country) => {
             return (
-              <SelectItem value={country.iso} className="">
+              <SelectItem key={country.iso} value={country.iso} className="">
                 {country.title}
               </SelectItem>
             );

@@ -1,14 +1,11 @@
-import { authOptions } from "@/data/Auth";
-import AddInventoryButton from "@/components/ExplorePageComponents/WalletComponents/AddInventoryButton";
 import ConnetToStripeButton from "@/components/ExplorePageComponents/WalletComponents/ConnetToStripeButton";
 import SubSectionHeader from "@/components/ExplorePageComponents/shared/SubSectionHeader";
 import { SPINNER } from "@/components/SVG/svgs";
+import { authOptions } from "@/data/Auth";
 import { getDictionary } from "@/dictionary";
-import { getCurrencySymbol } from "@/lib/getSymbolForCurrency";
 import {
-  getUserSubscriptionInfo,
   getUserProfile,
-  subscriptionPlan,
+  getUserSubscriptionInfo,
 } from "@/services/contactService";
 import { Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
@@ -55,7 +52,7 @@ const WebAppWallet = async ({
     getUserSubscription(token),
     getUserData(token),
   ]);
-  console.log(userSubscriptionData);
+
   return (
     <div
       className={`h-full w-full flex flex-col items-stretch justify-start gap-10 p-10`}

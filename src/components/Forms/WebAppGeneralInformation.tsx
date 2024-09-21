@@ -373,6 +373,14 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
                             }}
                             setValue={(value: string) => {
                               setValue("countryISO", value);
+                              setInputValues({
+                                ...inputValues,
+                                country: {
+                                  iso: value,
+                                  name: inputValues.country.name,
+                                },
+                              });
+                              setValue("cityID", 0);
                             }}
                           />
                         </div>
