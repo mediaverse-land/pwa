@@ -96,60 +96,6 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
             )}
           </div>
         </>
-        {/* {singleAudioData?.data?.asset?.file ? (
-          <div className="flex flex-col items-center justify-center h-full gap-10">
-            <div className="relative w-[216px] h-[216px] overflow-hidden z-10 rounded-2xl">
-              <Image
-                className="object-cover"
-                src={`${
-                  singleAudioData?.data?.thumbnails["336x366"] ||
-                  "/images/no-cover.png"
-                }`}
-                alt=""
-                fill
-              />
-            </div>
-            <div className="min-w-full">
-              <audio
-                controlsList="nodownload"
-                className="h-[30px] mx-auto w-[350px]"
-                src={singleAudioData?.data?.asset?.file.url}
-                controls
-              ></audio>
-            </div>
-          </div>
-        ) : (
-          <>
-            <div
-              style={{
-                background: `linear-gradient(0deg, rgba(11, 11, 49, 0.70) -19.12%, rgba(11, 11, 50, 0.00) 83.82%)`,
-              }}
-              className="absolute w-full h-full z-20"
-            ></div>
-            <div className="absolute w-[316px] h-[316px] overflow-hidden z-10 inset-0 m-auto rounded-2xl">
-              <Image
-                className="object-cover"
-                src={`${
-                  singleAudioData?.data?.thumbnails["336x366"] ||
-                  "/images/no-cover.png"
-                }`}
-                alt=""
-                fill
-              />
-
-              {singleAudioData?.data?.thumbnails["336x366"] ? null : (
-                <div className="absolute z-30 inset-0 m-auto flex items-center justify-center">
-                  <AUDIO_ICON
-                    style={{
-                      width: "24px",
-                      height: "24px",
-                    }}
-                  />
-                </div>
-              )}
-            </div>
-          </>
-        )} */}
         {/* back */}
         <div className="absolute z-30 left-5 lg:left-10 top-5 lg:top-10">
           <BackButton fill="#597AFF" />
@@ -173,20 +119,6 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
             title={singleAudioData?.data?.media?.name}
           />
         </div>
-        {/* files */}
-        {/* {user ? (
-            <div className="p-8 flex flex-col items-stretch gap-6 bg-[rgba(78,78,97,0.30)] backdrop-blur-sm rounded-2xl">
-              <div className="text-white font-semibold">Files</div>
-              <div className="flex flex-col items-stretch gap-2">
-                <Link
-                  href={singleAudioData?.data?.file.url}
-                  className="flex items-center rounded-lg bg-[rgba(78,78,97,0.30)] backdrop-blur-md px-6 py-4"
-                >
-                  <div className="text-white mr-auto">{singleAudioData.name}</div>
-                </Link>
-              </div>
-            </div>
-          ) : null} */}
         {/* share links */}
         <div className="flex justify-between items-center">
           <ShareButton

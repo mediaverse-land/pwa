@@ -72,6 +72,7 @@ const SingleAssetComments = ({
             const res = await req.json();
             setComments(res.data);
             setCommentsNumber(res.data.length);
+            console.log(res.data);
             return res;
           } else {
             if (req.status === 404) {
@@ -181,7 +182,11 @@ const SingleAssetComments = ({
           <div className="flex items-center gap-2 lg:gap-4">
             <div className="relative w-[40px] h-[40px] aspect-square overflow-hidden rounded-full">
               {userImage ? (
-                <Image src={`${userImage || "/"}`} alt={`${username}`} fill />
+                <Image
+                  src={`${userImage || imagePlaceHolders.account}`}
+                  alt={`${username}`}
+                  fill
+                />
               ) : (
                 <div className="w-full h-full bg-white"></div>
               )}
