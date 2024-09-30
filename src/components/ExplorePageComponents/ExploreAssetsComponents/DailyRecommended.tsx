@@ -54,9 +54,6 @@ const ExploreDailyRecommended = async ({
             {dic.generalApp.dailyRecommended}
           </p>
         </div>
-        {/* <div className="text-[14px] text-[#597AFF]">
-          {dic.generalApp.viewAll}
-        </div> */}
       </div>
       <div>
         <div className="overflow-x-hidden">

@@ -143,7 +143,7 @@ const RegisterOTPForm = ({
                 {...register("otp")}
               />
             </div>
-            <p className="mt-2 text-[12px] text-red-400 text-start line-clamp-1">
+            <p className="mt-2 text-[12px] text-red-400 text-start line-clamp-1 break-words">
               {errors.otp?.message?.toString()}
             </p>
           </div>

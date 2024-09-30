@@ -46,7 +46,7 @@ const ExploreTextCard = async ({ data, lang }: { data: any; lang: Locale }) => {
       className="max-w-full min-w-full w-full aspect-square block max-h-[154px] lg:max-h-[190px]"
     >
       <div className="text-card w-full h-full px-4 py-6 flex flex-col items-stretch leading-none">
-        <div className="text-[#CCCCFF] line-clamp-1 text-[14px] leading-4">
+        <div className="text-[#CCCCFF] line-clamp-1 text-[14px] leading-4 break-words">
           {data.media.name}
         </div>
         <div className="text-[#666680] line-clamp-3 mt-2 mb-3 text-[14px] leading-4">
@@ -56,7 +56,7 @@ const ExploreTextCard = async ({ data, lang }: { data: any; lang: Locale }) => {
           <div className="relative w-[16px] h-[16px] rounded-full overflow-hidden">
             {authorImage()}
           </div>
-          <div className="line-clamp-1">
+          <div className="line-clamp-1 break-words">
             {data?.asset?.user?.username ||
               data?.user?.username ||
               `${session?.user?.firstName} ${session?.user?.lastName}` ||

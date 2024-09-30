@@ -76,12 +76,12 @@ const WebAppSessting = async ({
           </div>
           {/* user name and email */}
           <div className="flex flex-col justify-center items-center py-1 mt-[38px] max-w-[90%] mx-auto">
-            <div className="line-clamp-1 font-semibold text-white">
+            <div className="line-clamp-1 font-semibold text-white break-words">
               {`${session?.user.firstName} ${session?.user.lastName}`.trim()
                 ? `${session?.user.firstName} ${session?.user.lastName}`.trim()
                 : "Unknown"}
             </div>
-            <div className="line-clamp-1 text-[12px] text-[#83839C] leading-4">
+            <div className="line-clamp-1 text-[12px] text-[#83839C] leading-4 break-words">
               {session?.user?.email || ""}
             </div>
           </div>

@@ -291,7 +291,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                       href={`/${lang}/app/assets/text/${items?.media?.slug}?id=${items.id}`}
                     >
                       <div key={index} className="h-full flex flex-col">
-                        <p className="text-white text-lg lg:text-[16px] xl:text-[20px] line-clamp-1 md:line-clamp-2 lg:line-clamp-1 xl:line-clamp-2">
+                        <p className="text-white text-lg lg:text-[16px] xl:text-[20px] line-clamp-1 md:line-clamp-2 lg:line-clamp-1 xl:line-clamp-2 break-words">
                           {items?.media?.name}
                         </p>
                         <p className="text-gray-500 mt-2 lg:mt-0 xl:mt-4 line-clamp-4 md:line-clamp-3 lg:line-clamp-3">

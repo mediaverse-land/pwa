@@ -35,7 +35,7 @@ const WebAppSettingSessions = async ({
             key={item.id}
             className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md rounded-2xl p-6 flex flex-col items-stretch gap-4 leading-none"
           >
-            <div className="text-[14px] text-white line-clamp-1 leading-[17px]">
+            <div className="text-[14px] text-white line-clamp-1 leading-[17px] break-words">
               {item.app}
             </div>
             <div className="flex items-center justify-between">

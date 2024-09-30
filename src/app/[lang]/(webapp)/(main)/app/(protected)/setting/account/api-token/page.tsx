@@ -37,7 +37,7 @@ const API_Token_Page = async () => {
               {item.app}
             </div>
             <div className="w-[1px] h-full bg-[#83839C]"></div>
-            <div className="font-bold text-[14px] text-white flex items-center line-clamp-1">
+            <div className="font-bold text-[14px] text-white flex items-center line-clamp-1 break-words">
               <ShowUserTokenButton token={item.token as string} />
             </div>
           </div>

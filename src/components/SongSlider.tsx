@@ -71,7 +71,7 @@ const SongSlider = () => {
                       fill
                     />
                   </div>
-                  <p className="mt-2 ml-1 text-gray-600 text-sm line-clamp-1">
+                  <p className="mt-2 ml-1 text-gray-600 text-sm line-clamp-1 break-words">
                     {item?.media?.name}
                   </p>
                   <div className="flex ml-1 mt-1 space-x-2 rtl:space-x-reverse">

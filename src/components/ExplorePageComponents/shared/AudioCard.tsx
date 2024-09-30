@@ -78,7 +78,7 @@ const ExploreAudioCard = ({
                 fill
               />
             </div>
-            <div className="text-[12px] text-[#666680] line-clamp-1 leading-3">
+            <div className="text-[12px] text-[#666680] line-clamp-1 leading-3 break-words">
               {author?.name}
             </div>
           </div>

@@ -65,7 +65,7 @@ const WebAppWallet = async ({
             {dic.appWallet.inventory}
           </div>
           <div className="w-[1px] h-full bg-[#83839C]"></div>
-          <div className="grow line-clamp-1 font-bold text-[18px] text-white flex items-center">
+          <div className="grow line-clamp-1 font-bold text-[18px] text-white flex items-center break-words">
             {userSubscriptionData?.status === 200 &&
             userSubscriptionData.data.enabled
               ? `You Have An Active Plan`

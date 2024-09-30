@@ -49,7 +49,7 @@ const ExploreVideoCard = ({
       </div>
       {/* content */}
       <div className="flex flex-col gap-3 leading-none mt-auto">
-        <div className="grow line-clamp-2 text-[12px] text-[#666680] leading-tight">
+        <div className="grow line-clamp-2 text-[12px] text-[#666680] leading-tight break-words">
           {description}
         </div>
         <div className="flex justify-between text-[12px] text-[#666680] mt-auto">
@@ -62,7 +62,7 @@ const ExploreVideoCard = ({
                 fill
               />
             </div>
-            <div className="text-[12px] text-[#666680] line-clamp-1 leading-3">
+            <div className="text-[12px] text-[#666680] line-clamp-1 leading-3 break-words">
               {author?.name}
             </div>
           </div>

@@ -29,13 +29,13 @@ const WebAppSideBar = async ({ lang }: { lang: Locale }) => {
             />
           </div>
           <div className="flex flex-col justify-center leading-none overflow-hidden">
-            <div className="line-clamp-1 font-semibold text-white text-[16px] leading-5">
+            <div className="line-clamp-1 font-semibold text-white text-[16px] leading-5 break-words">
               {`${session?.user.firstName}${session?.user.lastName}`.trim()
                 .length > 0
                 ? `${session?.user.firstName} ${session?.user.lastName}`.trim()
                 : "Unknown"}
             </div>
-            <div className="text-[#83839C] text-[10px] leading-3">
+            <div className="text-[#83839C] text-[10px] leading-3 line-clamp-1 break-words">
               {session?.user?.email || ""}
             </div>
           </div>

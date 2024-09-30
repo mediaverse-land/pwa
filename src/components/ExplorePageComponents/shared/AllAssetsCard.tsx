@@ -109,7 +109,7 @@ const ExploreAssetsCard = async ({
       {/* content */}
       <div className="flex flex-col gap-2 items-stretch">
         {/* title */}
-        <div className="line-clamp-1 text-[#666680] w-full max-w-full overflow-hidden">
+        <div className="line-clamp-1 text-[#666680] w-full max-w-full overflow-hidden break-words">
           {title || "Tiger love..."}
         </div>
         {/* author */}
@@ -117,7 +117,7 @@ const ExploreAssetsCard = async ({
           <div className="relative w-[16px] h-[16px] rounded-full overflow-hidden">
             {authorImage()}
           </div>
-          <div className="text-[12px] text-[#666680] line-clamp-1 leading-3">
+          <div className="text-[12px] text-[#666680] line-clamp-1 leading-3 break-words">
             {ownershipcard
               ? `${session?.user?.firstName} ${session?.user?.lastName}`
               : author?.name || ""}
