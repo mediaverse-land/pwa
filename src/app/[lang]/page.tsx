@@ -1,6 +1,7 @@
 import { SongSlider, VideoSlider } from "@/components";
 import BorderGradient from "@/components/BorderGradient";
 import ScrollToBottomBtn from "@/components/Buttons/ScrollToBottom";
+import LiveChannelsSlider from "@/components/LiveChannelsSlider";
 import Motion from "@/components/motion";
 import {
   imagePlaceHolders,
@@ -177,35 +178,8 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
             {dic.homepage.liveTvChannels}
           </p>
         </div>
-        <div className="lg:max-w-screen-2xl mx-auto flex items-center justify-center py-4 w-[80rem]">
-          <div className="relative flex overflow-x-hidden w-full animate-marquee-container">
-            <div className="animate-marquee whitespace-nowrap flex flex-row w-full select-none">
-              {liveData.data?.map((item: any, i: number) => (
-                <Link
-                  href={`/${lang}/app/channels/${item.id}`}
-                  key={item.id}
-                  className="mr-[8px] ml-[8px] cursor-pointer select-none"
-                >
-                  <img
-                    className="rounded-[8px] w-[154px] h-[100px] cursor-pointer select-none"
-                    src={item.thumbnail || imagePlaceHolders.image}
-                    alt=""
-                  />
-                </Link>
-              ))}
-            </div>
-
-            <div className="absolute top-0 animate-marquee2 whitespace-nowrap flex flex-row w-full ">
-              {liveData.data?.map((item: any, i: number) => (
-                <img
-                  key={i}
-                  className="rounded-[8px] w-[154px] h-[100px] mr-[8px]"
-                  src={item.thumbnail || imagePlaceHolders.image}
-                  alt=""
-                />
-              ))}
-            </div>
-          </div>
+        <div className="lg:max-w-screen-2xl mx-auto flex items-center justify-center py-4 w-screen">
+          <LiveChannelsSlider liveChannelsData={liveData.data} />
         </div>
         {/* videos */}
         <div className="w-full flex items-center justify-center mt-10 space-x-2 rtl:space-x-reverse">

@@ -30,8 +30,8 @@ const VideoSlider = () => {
     swiperRef?.slideNext();
   }, [swiperRef]);
   return (
-    <div className=" flex space-x-0 sm:space-x-4 rtl:space-x-reverse justify-center items-center mt-10 ">
-      <button className=" hidden sm:block " onClick={handleNext}>
+    <div className="flex space-x-0 sm:space-x-4 rtl:space-x-reverse justify-center items-center mt-10">
+      <button className="hidden sm:block" onClick={handleNext}>
         <Image
           src="/icons/prev.png"
           alt="arrow"
@@ -40,29 +40,36 @@ const VideoSlider = () => {
           quality={100}
         />
       </button>
-      <div className="relative w-[80rem] max-w-screen-2xl mx-auto">
+      <div className="relative w-full max-w-screen-2xl mx-auto px-6 lg:px-0">
         <Swiper
           centerInsufficientSlides
-          slidesPerView={5.5}
-          // freeMode={true}
-          spaceBetween={16}
+          slidesPerView={1.6}
+          breakpoints={{
+            "420": {
+              slidesPerView: 2.4,
+            },
+            "640": {
+              slidesPerView: 2.8,
+            },
+            "800": {
+              slidesPerView: 3.5,
+            },
+            "1024": {
+              slidesPerView: 6,
+            },
+          }}
+          spaceBetween={8}
           onSwiper={setSwiperRef}
-          loop={true}
-          rewind={true}
-          // autoplay={{ delay: 5 }}
-          className="w-full linear-light-blue-bg"
+          className="w-full lg:linear-light-blue-bg"
         >
           {videoData?.map((item: any, index) => {
             return (
-              <SwiperSlide
-                key={item.id}
-                style={{}}
-                className="w-[200px] max-w-[200px] h-[250px] cursor-pointer rounded-2xl"
-              >
+              <SwiperSlide key={item.id} className="cursor-pointer rounded-2xl">
                 <Link
                   href={`/${lang}/app/assets/video/${item?.media?.slug}?id=${item.id}`}
+                  className="w-full"
                 >
-                  <div className="relative w-[194px] lg:w-full aspect-square">
+                  <div className="relative w-full aspect-square">
                     <Image
                       src={
                         item?.thumbnails["226x226"] || imagePlaceHolders.video
