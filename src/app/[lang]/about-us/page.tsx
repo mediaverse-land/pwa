@@ -51,7 +51,7 @@ const AboutUs = async ({ params: { lang } }: { params: { lang: Locale } }) => {
           <div className="w-[320px] sm:w-[380px] md:w-[500px] lg:w-80 aspect-square">
             <iframe
               className="w-full h-full rounded-xl"
-              src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.2189364946053!2d2.3144302419797746!3d48.87310274252804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x66ae4097ff6609bd!2sV8F8%2B6M!5e0!3m2!1str!2suk!4v1697876240547!5m2!1str!2suk&center=${aboutUsData.lat},${aboutUsData.lng}`}
+              src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2244.8690613261467!2d${aboutUsData.lng}}!3d${aboutUsData.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b18fcb5753d361%3A0xa8b03ed7477a8ad3!2sHamburg%2C%20Germany!5e0!3m2!1sen!2sus!4v1697876240547`}
               allowFullScreen={false}
               loading="lazy"
             ></iframe>
