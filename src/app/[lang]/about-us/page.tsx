@@ -43,7 +43,6 @@ export async function generateMetadata({
 const AboutUs = async ({ params: { lang } }: { params: { lang: Locale } }) => {
   const dic = await getDictionary(lang);
   const aboutUsData = await getAboutUsData(FullLocaleNames[lang]);
-
   return (
     <Motion>
       <div className="w-full flex flex-col justify-center items-center lg:items-start lg:gap-10 lg:flex-row mt-36 mb-10">
@@ -51,7 +50,7 @@ const AboutUs = async ({ params: { lang } }: { params: { lang: Locale } }) => {
           <div className="w-[320px] sm:w-[380px] md:w-[500px] lg:w-80 aspect-square">
             <iframe
               className="w-full h-full rounded-xl"
-              src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2244.8690613261467!2d${aboutUsData.lng}}!3d${aboutUsData.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b18fcb5753d361%3A0xa8b03ed7477a8ad3!2sHamburg%2C%20Germany!5e0!3m2!1sen!2sus!4v1697876240547`}
+              src={`https://www.google.com/maps?q=${aboutUsData.lat},${aboutUsData.lng}&z=15&output=embed`}
               allowFullScreen={false}
               loading="lazy"
             ></iframe>
