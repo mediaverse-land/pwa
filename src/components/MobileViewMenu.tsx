@@ -127,7 +127,7 @@ const MobileMenu = ({
                     e.stopPropagation();
                     closeMenu(false);
                   }}
-                  href={`/${lang}${item.link}`}
+                  href={`/${item.link}`}
                   className="min-w-full py-3"
                 >
                   {dic.header[item.dicName]}

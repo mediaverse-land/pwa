@@ -74,7 +74,7 @@ const Navbar = ({ dic }: { dic: DicProperties }) => {
             {navbar.map((item, index) => (
               <li key={index}>
                 <Link
-                  href={`/${params.lang}/${item.href}${item.query}`}
+                  href={`/${item.href}${item.query}`}
                   key={index}
                   className={`text-gray-400 flex flex-col hover:text-white md:bg-transparent pb-2 rounded-[2px] ${
                     pathname === `/${params.lang}/${item.href}` ? "active" : ""
