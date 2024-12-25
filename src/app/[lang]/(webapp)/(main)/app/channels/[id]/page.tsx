@@ -8,6 +8,7 @@ import {
   Locale,
   TFullLocales,
 } from "@/types/dictionary-types";
+import {imagePlaceHolders} from "@/configs/base";
 
 const getSingleLiveData = async ({
   id,
@@ -43,17 +44,17 @@ const WebAppSingleLiveChannel = async ({
         <SubSectionHeader name={`Live Channel`} />
         <div className="flex flex-col items-stretch gap-5">
           <div className="w-full aspect-video">
-            <HLSPlayer src={`${singleLiveData?.data.data.link}`} />
+            <HLSPlayer src={`${singleLiveData?.data.data.url}`} />
           </div>
           <div className="flex items-center gap-6">
             <div className="relative rounded-2xl overflow-hidden h-[80px] w-[120px]">
               <Image
-                src={`${singleLiveData?.data.data.thumbnail}`}
+                src={`${singleLiveData?.data.data.thumbnails['226x226'] || imagePlaceHolders.image}`}
                 alt=""
                 fill
               />
             </div>
-            <div>{singleLiveData?.data.data.title}</div>
+            <div>{singleLiveData?.data.data.name}</div>
           </div>
         </div>
       </div>

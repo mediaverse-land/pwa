@@ -46,7 +46,7 @@ export const ExploreLiveChannel = ({
                     href={`/${lang}/app/channels/${item.id}`}
                     className="relative rounded-[8px] w-full aspect-[110/70] xl:aspect-[110/80] mr-[8px] overflow-hidden inline-block"
                   >
-                    <Image className="" src={item.thumbnail} alt="" fill />
+                    <Image className="" src={item.thumbnails['226x226']} alt="" fill />
                   </Link>
                 </SwiperSlide>
               ))}

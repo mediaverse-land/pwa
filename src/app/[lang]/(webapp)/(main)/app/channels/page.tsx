@@ -13,6 +13,7 @@ import {
   TFullLocales,
 } from "@/types/dictionary-types";
 import { getDictionary } from "@/dictionary";
+import {imagePlaceHolders} from "@/configs/base";
 
 const getLiveData = async ({
   lang,
@@ -79,7 +80,7 @@ const WebAppLiveChannelPage = async ({
               <div className="mr-auto flex items-center gap-4">
                 <div className="relative w-[88px] h-[48px] overflow-hidden rounded-lg">
                   <Image
-                    src={item.thumbnail}
+                    src={item.thumbnails['226x226'] || imagePlaceHolders.image}
                     fill
                     alt=""
                     className="object-cover"
@@ -87,10 +88,10 @@ const WebAppLiveChannelPage = async ({
                 </div>
                 <div className="flex flex-col">
                   <div className="uppercase text-white font-semibold">
-                    {item.title}
+                    {item.name}
                   </div>
                   <div className="text-[#666680] text-[12px]">
-                    {item.country}
+                    {item.country_iso}
                   </div>
                 </div>
               </div>

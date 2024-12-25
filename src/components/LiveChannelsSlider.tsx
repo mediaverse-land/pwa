@@ -62,11 +62,11 @@ const LiveChannelsSlider = ({
                 <Link
                   href={`/${lang}/app/channels/${item.id}`}
                   key={index}
-                  className="w-full aspect-[150/100] block"
+                  className="w-full aspect-[120/100] block"
                 >
                   <img
                     className="rounded-[8px] w-full h-full overflow-hidden"
-                    src={item.thumbnail || imagePlaceHolders.image}
+                    src={item.thumbnails['226x226'] || imagePlaceHolders.image}
                     alt=""
                   />
                 </Link>
