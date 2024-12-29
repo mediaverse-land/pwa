@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { logoURL, websiteTitle } from "@/configs/base";
 
 const SocialLoginBtn = ({
   variant,
 }: {
-  variant: "apple" | "google" | "facebook" | "twitter";
+  variant: "apple" | "google" | "facebook" | "twitter" | "pkce-app";
 }) => {
   const params = useSearchParams();
   const callbackUrlParams = params.get("refer");
@@ -81,6 +82,26 @@ const SocialLoginBtn = ({
             />
           </div>
           Sign up with X
+        </div>
+      );
+    case "pkce-app":
+      return (
+        <div
+          onClick={() => handleSignIn()}
+          style={{
+            background: `linear-gradient(0deg, #1771E6, #1771E6),
+    linear-gradient(153.43deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 83.33%)`,
+          }}
+          className="text-white flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <div className="relative w-[16px] h-[16px]">
+            <Image
+              src={logoURL ?? ''}
+              alt="logo"
+              fill
+            />
+          </div>
+          Sign up with {websiteTitle}
         </div>
       );
     default:

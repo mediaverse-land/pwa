@@ -1,5 +1,6 @@
 import { Locale } from "@/types/dictionary-types";
 
+export const authURL = process.env.AUTH_URL;
 export const baseURL = process.env.BASE_URL;
 
 export const websiteTitle = process.env.NEXT_PUBLIC_APP_TITLE;

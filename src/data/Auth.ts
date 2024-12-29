@@ -1,167 +1,230 @@
-import { baseURL, imagePlaceHolders } from "@/configs/base";
-import { AdapterUser, AuthOptions } from "next-auth";
+import { authURL, baseURL } from "@/configs/base";
+import { AdapterUser, AuthOptions, Awaitable, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
+import { OAuthConfig } from "next-auth/providers/oauth";
+
+const PKCEProvider: OAuthConfig<any> = {
+    id: "pkce-app",
+    name: "PKCE App",
+    type: "oauth",
+    clientId: process.env.PKCE_CLIENT_ID!,
+    authorization: {
+        url: `${authURL}/oauth/authorize`,
+        params: {
+            response_type: "code",
+            code_challenge_method: "S256",
+            scope: "*",
+            code_challenge: "your_code_challenge_here",
+        },
+    },
+    token: {
+        url: authURL + "/oauth/token",
+        async request(context: {
+            params: { code: string; code_verifier: string };
+            checks: { state: string };
+            client: { id: string; secret?: string };
+            provider: OAuthConfig<any>;
+            redirect_uri: string;
+        }): Promise<any> {
+            const { params, client, redirect_uri } = context;
+            const response = await fetch(authURL + "/oauth/token", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    grant_type: "authorization_code",
+                    client_id: client.id,
+                    client_secret: client.secret ?? "",
+                    code: params.code,
+                    redirect_uri,
+                    code_verifier: params.code_verifier,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch token: ${response.statusText}`);
+            }
+
+            return await response.json();
+        },
+    },
+    userinfo: {
+        url: `${baseURL}/profile`,
+    },
+    profile(profile: any): Awaitable<User> {
+        return {
+            id: profile.id,
+            name: profile.name,
+            email: profile.email,
+            image: profile.picture,
+            firstName: profile.firstName || "",
+            lastName: profile.lastName || "",
+            username: profile.username || "",
+            address: profile.address || "",
+        };
+    },
+};
 
 export const authOptions: AuthOptions = {
-  pages: {
-    signIn: "/login",
-    error: "/login",
-  },
-  callbacks: {
-    async redirect(params: { url: string; baseUrl: string }) {
-      if (params.url.startsWith("https") || params.url.startsWith("/")) {
-        return params.url;
-      } else {
-        return params.baseUrl;
-      }
+    pages: {
+        signIn: "/login",
+        error: "/login",
     },
-    async jwt({ account, token, user, profile, session, trigger }) {
-      if (user) {
-        token.token = user.token;
-        token.id = user.id;
-        token.cellphone = user.cellphone;
-        token.firstName = user.firstName;
-        token.lastName = user.lastName;
-        token.email = user.email;
-        token.image = user.image;
-        token.username = user.username;
-        token.address = user.address;
-      }
-      if (trigger === "update") {
-        token.cellphone = session?.cellphone || token.cellphone;
-        token.firstName = session?.firstName || token.firstName;
-        token.lastName = session?.lastName || token.lastName;
-        token.email = session?.email || token.email;
-        token.image = session?.image || token.image;
-        token.username = session?.username || token.username;
-        token.token = session?.token || token.token;
-        token.address = session?.address || token.address;
-      }
-      return token;
-    },
-    async session({ session, token, user, trigger }) {
-      session.user.token = token.token;
-      session.user.id = token.id;
-      session.user.cellphone = token.cellphone;
-      session.user.firstName = token.firstName;
-      session.user.lastName = token.lastName;
-      session.user.image = token.image;
-      session.user.email = token.email;
-      session.user.username = token.username;
-      session.user.address = token.address;
-      return session;
-    },
+    callbacks: {
+        async redirect(params: { url: string; baseUrl: string }) {
+            if (params.url.startsWith("https") || params.url.startsWith("/")) {
+                return params.url;
+            } else {
+                return params.baseUrl;
+            }
+        },
+        async jwt({ account, token, user, profile, session, trigger }) {
+            if (user) {
+                token.token = user.token;
+                token.id = user.id;
+                token.cellphone = user.cellphone;
+                token.firstName = user.firstName;
+                token.lastName = user.lastName;
+                token.email = user.email;
+                token.image = user.image;
+                token.username = user.username;
+                token.address = user.address;
+            }
+            if (trigger === "update") {
+                token.cellphone = session?.cellphone || token.cellphone;
+                token.firstName = session?.firstName || token.firstName;
+                token.lastName = session?.lastName || token.lastName;
+                token.email = session?.email || token.email;
+                token.image = session?.image || token.image;
+                token.username = session?.username || token.username;
+                token.token = session?.token || token.token;
+                token.address = session?.address || token.address;
+            }
+            return token;
+        },
+        async session({ session, token, user, trigger }) {
+            session.user.token = token.token;
+            session.user.id = token.id;
+            session.user.cellphone = token.cellphone;
+            session.user.firstName = token.firstName;
+            session.user.lastName = token.lastName;
+            session.user.image = token.image;
+            session.user.email = token.email;
+            session.user.username = token.username;
+            session.user.address = token.address;
+            return session;
+        },
 
-    async signIn(data: any) {
-      switch (data.account.provider) {
-        case "google": {
-          const req = await fetch(`${baseURL}/auth/google`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Accept-Language": "en-US",
-              "x-app": "_Web",
+        async signIn(data: any) {
+            switch (data.account.provider) {
+                case "google": {
+                    const req = await fetch(`${baseURL}/auth/google`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept-Language": "en-US",
+                            "x-app": "_Web",
+                        },
+                        body: JSON.stringify({
+                            access_token: `${data.account.access_token}`,
+                        }),
+                    });
+                    const res = await req.json();
+
+                    if (req.ok) {
+                        data.user.token = res.token;
+                        data.user.cellphone = res.user.cellphone;
+                        data.user.id = res.user.id;
+                        data.user.username = res.user.username;
+                        data.user.firstName = res.user.first_name || "";
+                        data.user.lastName = res.user.last_name || "";
+                        data.user.address = res.user.address;
+                        data.user.email = res.user.email || "";
+
+                        return data;
+                    } else {
+                        throw new Error("Failed to login");
+                    }
+                }
+
+                case "facebook": {
+                    const req = await fetch(`${baseURL}/auth/facebook`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept-Language": "en-US",
+                            "x-app": "_Web",
+                        },
+                        body: JSON.stringify({
+                            access_token: `${data.account.access_token}`,
+                        }),
+                    });
+                    const res = await req.json();
+
+                    if (req.ok) {
+                        return data;
+                    } else {
+                        throw new Error("Failed to login");
+                    }
+                }
+                default:
+                    return data;
+            }
+        },
+    },
+    providers: [
+        GithubProvider({
+            clientId: process.env.GITHUB_ID ?? "",
+            clientSecret: process.env.GITHUB_SECRET ?? "",
+        }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID ?? "",
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+        }),
+        FacebookProvider({
+            clientId: process.env.FACEBOOK_CLIENT_ID ?? "",
+            clientSecret: process.env.FACEBOOK_CLIENT_SECRET ?? "",
+        }),
+        TwitterProvider({
+            clientId: process.env.TWITTER_CLIENT_ID ?? "",
+            clientSecret: process.env.TWITTER_CLIENT_SECRET ?? "",
+        }),
+        CredentialsProvider({
+            id: "customLogin",
+            type: "credentials",
+            name: "customLogin",
+            credentials: {
+                username: { label: "Username", type: "text", placeholder: "jsmith" },
+                password: { label: "Password", type: "password" },
             },
-            body: JSON.stringify({
-              access_token: `${data.account.access_token}`,
-            }),
-          });
-          const res = await req.json();
-
-          if (req.ok) {
-            data.user.token = res.token;
-            data.user.cellphone = res.user.cellphone;
-            data.user.id = res.user.id;
-            data.user.username = res.user.username;
-            data.user.firstName = res.user.first_name || "";
-            data.user.lastName = res.user.last_name || "";
-            data.user.address = res.user.address;
-            data.user.email = res.user.email || "";
-
-            return data;
-          } else {
-            throw new Error("Failed to login");
-          }
-        }
-
-        case "facebook": {
-          const req = await fetch(`${baseURL}/auth/facebook`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Accept-Language": "en-US",
-              "x-app": "_Web",
+            async authorize(credentials, req) {
+                if (req.query) {
+                    const userInfo = JSON.parse(req.query.user) as AdapterUser;
+                    const user = {
+                        id: userInfo.id,
+                        firstName: userInfo.firstName || "",
+                        lastName: userInfo.lastName || "",
+                        image: userInfo.image,
+                        email: userInfo.email || "",
+                        cellphone: userInfo.cellphone || "",
+                        token: userInfo.token,
+                        username: userInfo.username,
+                        address: userInfo.address,
+                    };
+                    return user;
+                } else {
+                    throw new Error(`User Not Found`);
+                }
             },
-            body: JSON.stringify({
-              access_token: `${data.account.access_token}`,
-            }),
-          });
-          const res = await req.json();
-
-          if (req.ok) {
-            return data;
-          } else {
-            throw new Error("Failed to login");
-          }
-        }
-        default:
-          return data;
-      }
+        }),
+        PKCEProvider,
+    ],
+    session: {
+        maxAge: 60 * 60 * 24 * 365 * 100,
     },
-  },
-  providers: [
-    GithubProvider({
-      clientId: process.env.GITHUB_ID ?? "",
-      clientSecret: process.env.GITHUB_SECRET ?? "",
-    }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
-    }),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID ?? "",
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET ?? "",
-    }),
-    TwitterProvider({
-      clientId: process.env.TWITTER_CLIENT_ID ?? "",
-      clientSecret: process.env.TWITTER_CLIENT_SECRET ?? "",
-    }),
-    CredentialsProvider({
-      // The name to display on the sign in form (e.g. 'Sign in with...')
-      id: "customLogin",
-      type: "credentials",
-      name: "customLogin",
-      credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials, req) {
-        // If no error and we have user data, return it
-        if (req.query) {
-          const userInfo = JSON.parse(req.query.user) as AdapterUser;
-          const user = {
-            id: userInfo.id,
-            firstName: userInfo.firstName || "",
-            lastName: userInfo.lastName || "",
-            image: userInfo.image,
-            email: userInfo.email || "",
-            cellphone: userInfo.cellphone || "",
-            token: userInfo.token,
-            username: userInfo.username,
-            address: userInfo.address,
-          };
-          return user;
-        } else {
-          throw new Error(`User Not Found`);
-        }
-      },
-    }),
-  ],
-  session: {
-    maxAge: 60 * 60 * 24 * 365 * 100,
-  },
 };
