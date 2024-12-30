@@ -7,6 +7,28 @@ import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
 import { OAuthConfig } from "next-auth/providers/oauth";
 
+const generatePKCEVerifier = (): string => {
+    const length = 128;
+    const possible =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
+    let verifier = "";
+    for (let i = 0; i < length; i++) {
+        verifier += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return verifier;
+};
+
+const generatePKCEChallenge = async (verifier: string): Promise<string> => {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(verifier);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    return Array.from(new Uint8Array(hashBuffer))
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join("");
+};
+
+let codeVerifier: string | null = null;
+
 const PKCEProvider: OAuthConfig<any> = {
     id: "pkce-app",
     name: "PKCE App",
@@ -14,43 +36,29 @@ const PKCEProvider: OAuthConfig<any> = {
     clientId: process.env.PKCE_CLIENT_ID!,
     authorization: {
         url: `${authURL}/oauth/authorize`,
-        params: {
-            response_type: "code",
-            code_challenge_method: "S256",
-            scope: "*",
-            code_challenge: "your_code_challenge_here",
+        params: async () => {
+            codeVerifier = generatePKCEVerifier();
+            const codeChallenge = await generatePKCEChallenge(codeVerifier);
+
+            console.log("Code Verifier:", codeVerifier);
+            return {
+                response_type: "code",
+                code_challenge_method: "S256",
+                scope: "*",
+                code_challenge: codeChallenge,
+            };
         },
     },
     token: {
         url: authURL + "/oauth/token",
-        async request(context: {
-            params: { code: string; code_verifier: string };
-            checks: { state: string };
-            client: { id: string; secret?: string };
-            provider: OAuthConfig<any>;
-            redirect_uri: string;
-        }): Promise<any> {
-            const { params, client, redirect_uri } = context;
-            const response = await fetch(authURL + "/oauth/token", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: new URLSearchParams({
-                    grant_type: "authorization_code",
-                    client_id: client.id,
-                    client_secret: client.secret ?? "",
-                    code: params.code,
-                    redirect_uri,
-                    code_verifier: params.code_verifier,
-                }),
-            });
-
-            if (!response.ok) {
-                throw new Error(`Failed to fetch token: ${response.statusText}`);
-            }
-
-            return await response.json();
+        params: async ({ code, redirectUri }: { code: string; redirectUri: string }) => {
+            return {
+                grant_type: "authorization_code",
+                client_id: process.env.PKCE_CLIENT_ID,
+                code: code,
+                redirect_uri: redirectUri,
+                code_verifier: codeVerifier
+            };
         },
     },
     userinfo: {
