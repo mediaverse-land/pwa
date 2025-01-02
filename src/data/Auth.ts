@@ -43,15 +43,15 @@ const PKCEProvider: OAuthConfig<any> = {
     },
     profile: async (profile, tokens) => {
         return {
-            id: profile.data.id,
-            firstName: profile.data.first_name || "",
-            lastName: profile.data.last_name || "",
-            image: profile.data.image_url,
-            email: profile.data.email || "",
-            cellphone: profile.data.cellphone || "",
+            id: profile?.data?.id,
+            firstName: profile?.data?.first_name || "",
+            lastName: profile?.data?.last_name || "",
+            image: profile?.data?.image_url || "",
+            email: profile?.data?.email || "",
+            cellphone: profile?.data?.cellphone || "",
             token: tokens.access_token,
-            username: profile.data.username,
-            address: profile.data.address || {},
+            username: profile?.data?.username || "",
+            address: profile?.data?.address || {},
         };
     },
 };
