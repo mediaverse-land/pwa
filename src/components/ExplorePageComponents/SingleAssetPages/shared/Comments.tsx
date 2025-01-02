@@ -72,7 +72,6 @@ const SingleAssetComments = ({
             const res = await req.json();
             setComments(res.data);
             setCommentsNumber(res.data.length);
-            console.log(res.data);
             return res;
           } else {
             if (req.status === 404) {

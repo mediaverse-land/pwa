@@ -41,7 +41,7 @@ const PKCEProvider: OAuthConfig<any> = {
     userinfo: {
         url: `${baseURL}/profile`,
     },
-    profile: async (profile) => {
+    profile: async (profile, tokens) => {
         return {
             id: profile.data.id,
             firstName: profile.data.first_name || "",
@@ -49,7 +49,7 @@ const PKCEProvider: OAuthConfig<any> = {
             image: profile.data.image_url,
             email: profile.data.email || "",
             cellphone: profile.data.cellphone || "",
-            token: profile.data.token,
+            token: tokens.access_token,
             username: profile.data.username,
             address: profile.data.address || {},
         };
@@ -70,11 +70,6 @@ export const authOptions: AuthOptions = {
             }
         },
         async jwt({token, user, session, trigger}) {
-            console.log("+++++++++++++++++++++++++++");
-            console.log(user);
-            console.log(token);
-            console.log("+++++++++++++++++++++++++++");
-
             if (user) {
                 token.token = user.token;
                 token.id = user.id;
@@ -100,9 +95,6 @@ export const authOptions: AuthOptions = {
             return token;
         },
         async session({ session, token }) {
-            console.log("-------------------------");
-            console.log(session);
-            console.log("-------------------------");
             session.user = session.user || {};
             session.user.token = token.token;
             session.user.id = token.id;
