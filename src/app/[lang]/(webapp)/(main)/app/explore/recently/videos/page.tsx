@@ -40,8 +40,8 @@ const WebAppRecentlyVideos = async ({
               }}
               description={items?.media?.description}
               image={items.thumbnails["336x366"] || imagePlaceHolders.video}
-              time={items.media.length}
-              title={items.media.name}
+              time={items.length}
+              title={items.name}
             />
           );
         })}

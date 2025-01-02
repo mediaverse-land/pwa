@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
@@ -98,6 +96,7 @@ const SocialLoginBtn = ({
             <Image
               src={logoURL ?? ''}
               alt="logo"
+              layout="fill"
               fill
             />
           </div>

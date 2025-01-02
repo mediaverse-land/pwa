@@ -1,39 +1,33 @@
-import { authOptions } from "@/data/Auth";
-import SocialLoginBtn from "@/components/Buttons/SocialLoginBtn";
+"use client";
 
+import SocialLoginBtn from "@/components/Buttons/SocialLoginBtn";
 import Motion from "@/components/motion";
 import { Locale } from "@/types/dictionary-types";
-import { getServerSession } from "next-auth";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import { getDictionary } from "@/dictionary";
-import { locales } from "@/middleware";
-import { LoginWithUsername } from "@/components/Forms/LoginForms";
-import OtpForm from "@/components/Forms/OtpForm";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-const Login = async ({
-  searchParams,
-  params: { lang },
+const Login = ({
+     params: { lang },
 }: {
   searchParams: {
     [key: string]: string;
   };
   params: { lang: Locale };
 }) => {
-  const dic = await getDictionary(
-    locales.find((item) => item === lang) ?? locales[0]
-  );
+  const { data: session } = useSession(); // Client-side session hook
+  const router = useRouter();
+  const refer = `/${lang}/app/explore`;
 
-  let loginType = searchParams.type || "phone";
-  let refer = searchParams.refer;
+  useEffect(() => {
+      console.log("Session:", session);
+      console.log("Language:", lang);
+      console.log("Redirect Target:", refer);
+    if (session) {
+      router.push(refer);
+    }
+  }, [session, router, refer]);
 
-  const session = await getServerSession(authOptions);
-
-  if (session) {
-    redirect(
-      refer ? `${refer}?token=${session.user.token}` : `/${lang}/app/explore`
-    );
-  }
   return (
     <Motion>
       <div className="mt-36 lg:mt-28">
@@ -44,7 +38,7 @@ const Login = async ({
                 className="flex flex-col items-stretch gap-4 [&_>_*]:py-[0.7rem] [&_>_*]:text-[14px] [&_>_*]:font-semibold [&_>_*]:leading-4 [&_>_*]:h-[40px] [&_>_*]:rounded-full">
               <SocialLoginBtn variant="pkce-app"/>
               <div className="text-[#83839C] text-[12px] leading-3 uppercase">
-                {dic.login.or}
+                Or
               </div>
               <SocialLoginBtn variant="google"/>
             </div>

@@ -15,6 +15,13 @@ function getLocale(request: NextRequest) {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  if (request.nextUrl.pathname.startsWith("/api/auth")) {
+    console.log("-----------------------------");
+    console.log("Request URL:", request.url);
+    console.log("Request Headers:", JSON.stringify(Object.fromEntries(request.headers.entries()), null, 2));
+    console.log("Request Method:", request.method);
+  }
+
   if (pathname.endsWith("/sitemap.xml")) {
     return NextResponse.rewrite(
       `${request.nextUrl.origin}/${locales[0]}${pathname}`

@@ -1,79 +1,57 @@
 import { authURL, baseURL } from "@/configs/base";
-import { AdapterUser, AuthOptions, Awaitable, User } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import FacebookProvider from "next-auth/providers/facebook";
-import GithubProvider from "next-auth/providers/github";
+import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
 import { OAuthConfig } from "next-auth/providers/oauth";
-
-const generatePKCEVerifier = (): string => {
-    const length = 128;
-    const possible =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
-    let verifier = "";
-    for (let i = 0; i < length; i++) {
-        verifier += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return verifier;
-};
-
-const generatePKCEChallenge = async (verifier: string): Promise<string> => {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(verifier);
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    return Array.from(new Uint8Array(hashBuffer))
-        .map((byte) => byte.toString(16).padStart(2, "0"))
-        .join("");
-};
-
-let codeVerifier: string | null = null;
 
 const PKCEProvider: OAuthConfig<any> = {
     id: "pkce-app",
     name: "PKCE App",
     type: "oauth",
-    clientId: process.env.PKCE_CLIENT_ID!,
+    clientId: process.env.PKCE_CLIENT_ID,
+    clientSecret: undefined,
+    version: "2.0",
+    checks: "pkce",
     authorization: {
         url: `${authURL}/oauth/authorize`,
-        params: async () => {
-            codeVerifier = generatePKCEVerifier();
-            const codeChallenge = await generatePKCEChallenge(codeVerifier);
-
-            console.log("Code Verifier:", codeVerifier);
-            return {
-                response_type: "code",
-                code_challenge_method: "S256",
-                scope: "*",
-                code_challenge: codeChallenge,
-            };
+        params: {
+            response_type: "code",
+            code_challenge_method: "S256",
+            scope: "*",
         },
     },
     token: {
-        url: authURL + "/oauth/token",
-        params: async ({ code, redirectUri }: { code: string; redirectUri: string }) => {
-            return {
-                grant_type: "authorization_code",
-                client_id: process.env.PKCE_CLIENT_ID,
-                code: code,
-                redirect_uri: redirectUri,
-                code_verifier: codeVerifier
-            };
+        url: `${authURL}/oauth/token`,
+        async request({ params, provider, checks }) {
+            let req = await fetch(`${authURL}/oauth/token`, {
+                method: "POST",
+                body: new URLSearchParams({
+                    grant_type: "authorization_code",
+                    client_id: provider.clientId ?? '',
+                    code: params.code ?? '',
+                    redirect_uri: provider.callbackUrl ?? '',
+                    code_verifier: checks.code_verifier ?? ""
+                }),
+            });
+
+            const tokens = await req.json();
+            return {tokens}
         },
     },
     userinfo: {
         url: `${baseURL}/profile`,
     },
-    profile(profile: any): Awaitable<User> {
+    profile: async (profile) => {
         return {
-            id: profile.id,
-            name: profile.name,
-            email: profile.email,
-            image: profile.picture,
-            firstName: profile.firstName || "",
-            lastName: profile.lastName || "",
-            username: profile.username || "",
-            address: profile.address || "",
+            id: profile.data.id,
+            firstName: profile.data.first_name || "",
+            lastName: profile.data.last_name || "",
+            image: profile.data.image_url,
+            email: profile.data.email || "",
+            cellphone: profile.data.cellphone || "",
+            token: profile.data.token,
+            username: profile.data.username,
+            address: profile.data.address || {},
         };
     },
 };
@@ -91,7 +69,12 @@ export const authOptions: AuthOptions = {
                 return params.baseUrl;
             }
         },
-        async jwt({ account, token, user, profile, session, trigger }) {
+        async jwt({token, user, session, trigger}) {
+            console.log("+++++++++++++++++++++++++++");
+            console.log(user);
+            console.log(token);
+            console.log("+++++++++++++++++++++++++++");
+
             if (user) {
                 token.token = user.token;
                 token.id = user.id;
@@ -113,9 +96,14 @@ export const authOptions: AuthOptions = {
                 token.token = session?.token || token.token;
                 token.address = session?.address || token.address;
             }
+
             return token;
         },
-        async session({ session, token, user, trigger }) {
+        async session({ session, token }) {
+            console.log("-------------------------");
+            console.log(session);
+            console.log("-------------------------");
+            session.user = session.user || {};
             session.user.token = token.token;
             session.user.id = token.id;
             session.user.cellphone = token.cellphone;
@@ -159,76 +147,19 @@ export const authOptions: AuthOptions = {
                         throw new Error("Failed to login");
                     }
                 }
-
-                case "facebook": {
-                    const req = await fetch(`${baseURL}/auth/facebook`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Accept-Language": "en-US",
-                            "x-app": "_Web",
-                        },
-                        body: JSON.stringify({
-                            access_token: `${data.account.access_token}`,
-                        }),
-                    });
-                    const res = await req.json();
-
-                    if (req.ok) {
-                        return data;
-                    } else {
-                        throw new Error("Failed to login");
-                    }
-                }
                 default:
                     return data;
             }
         },
     },
     providers: [
-        GithubProvider({
-            clientId: process.env.GITHUB_ID ?? "",
-            clientSecret: process.env.GITHUB_SECRET ?? "",
-        }),
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID ?? "",
             clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
         }),
-        FacebookProvider({
-            clientId: process.env.FACEBOOK_CLIENT_ID ?? "",
-            clientSecret: process.env.FACEBOOK_CLIENT_SECRET ?? "",
-        }),
         TwitterProvider({
             clientId: process.env.TWITTER_CLIENT_ID ?? "",
             clientSecret: process.env.TWITTER_CLIENT_SECRET ?? "",
-        }),
-        CredentialsProvider({
-            id: "customLogin",
-            type: "credentials",
-            name: "customLogin",
-            credentials: {
-                username: { label: "Username", type: "text", placeholder: "jsmith" },
-                password: { label: "Password", type: "password" },
-            },
-            async authorize(credentials, req) {
-                if (req.query) {
-                    const userInfo = JSON.parse(req.query.user) as AdapterUser;
-                    const user = {
-                        id: userInfo.id,
-                        firstName: userInfo.firstName || "",
-                        lastName: userInfo.lastName || "",
-                        image: userInfo.image,
-                        email: userInfo.email || "",
-                        cellphone: userInfo.cellphone || "",
-                        token: userInfo.token,
-                        username: userInfo.username,
-                        address: userInfo.address,
-                    };
-                    return user;
-                } else {
-                    throw new Error(`User Not Found`);
-                }
-            },
         }),
         PKCEProvider,
     ],

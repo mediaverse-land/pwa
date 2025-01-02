@@ -106,7 +106,7 @@ const WebAppExploreAudioAssets = async ({
                         cover={
                           item.thumbnails["336x366"] || imagePlaceHolders.audio
                         }
-                        title={item.media.name}
+                        title={item.name}
                         author={{
                           name: item.user?.username || "",
                           picture:
@@ -172,10 +172,10 @@ const RecentlyAudio = async ({ lang }: { lang: Locale }) => {
               name: items.user.username,
               picture: items.user.image_url || imagePlaceHolders.account,
             }}
-            description={items.media.description}
+            description={items.description}
             image={items?.thumbnails["336x366"]}
-            time={items.media.length}
-            title={items.media.name}
+            time={items?.file?.length ?? 0}
+            title={items.name}
           />
         );
       })}
