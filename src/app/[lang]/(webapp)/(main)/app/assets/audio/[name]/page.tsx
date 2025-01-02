@@ -115,14 +115,14 @@ const WebAppAudioAssetSinglePage = async (params: any) => {
               image: singleAudioData?.data?.user?.image_url,
               name: singleAudioData?.data?.user?.username,
             }}
-            description={singleAudioData?.data?.media?.description}
-            title={singleAudioData?.data?.media?.name}
+            description={singleAudioData?.data?.description}
+            title={singleAudioData?.data?.name}
           />
         </div>
         {/* share links */}
         <div className="flex justify-between items-center">
           <ShareButton
-            url={`${process.env.NEXTAUTH_URL}/${params.params.lang}/app/assets/audio/${singleAudioData?.data?.media?.slug}?id=${singleAudioData?.data.id}`}
+            url={`${process.env.NEXTAUTH_URL}/${params.params.lang}/app/assets/audio/${singleAudioData?.data?.slug}?id=${singleAudioData?.data.id}`}
           />
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">

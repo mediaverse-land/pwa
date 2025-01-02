@@ -42,7 +42,7 @@ const ExploreTextCard = async ({ data, lang }: { data: any; lang: Locale }) => {
   };
   return (
     <Link
-      href={`/${lang}/app/assets/text/${data?.media?.slug}?id=${data.id}`}
+      href={`/${lang}/app/assets/text/${data?.slug}?id=${data.id}`}
       className="max-w-full min-w-full w-full aspect-square block max-h-[154px] lg:max-h-[190px]"
     >
       <div className="text-card w-full h-full px-4 py-6 flex flex-col items-stretch leading-none">

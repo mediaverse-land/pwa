@@ -126,7 +126,7 @@ const ImageSinglePage = async (params: any) => {
         {/* share links */}
         <div className="flex justify-between items-center">
           <ShareButton
-            url={`${process.env.NEXTAUTH_URL}/${params.params.lang}/app/assets/image/${singleImageData?.data?.data?.media?.slug}?id=${singleImageData?.data?.data?.id}`}
+            url={`${process.env.NEXTAUTH_URL}/${params.params.lang}/app/assets/image/${singleImageData?.data?.data?.slug}?id=${singleImageData?.data?.data?.id}`}
           />
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">

@@ -151,9 +151,9 @@ const WebAppSingleVideoAsset = async (params: any) => {
               image: singleVideoData?.data?.user?.image_url,
               name: singleVideoData?.data?.user?.username,
             }}
-            description={singleVideoData?.data?.media?.description}
-            title={singleVideoData?.data?.media?.name}
-            time={singleVideoData?.data?.media?.length}
+            description={singleVideoData?.data?.description}
+            title={singleVideoData?.data?.name}
+            time={singleVideoData?.data?.length}
           />
           {/* genrel info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-1 gap-4 mt-2">
@@ -161,22 +161,22 @@ const WebAppSingleVideoAsset = async (params: any) => {
               <div className="text-[12px] text-[#666680]">Genre</div>
               <div className="h-[70%] w-[1px] bg-[#666680]"></div>
               <div className="text-white text-[14px] grow text-center capitalize">
-                {singleVideoData?.data?.media?.genres[0] || "N/A"}
+                {singleVideoData?.data?.genres[0] || "N/A"}
               </div>
             </div>
             <div className="flex items-center rounded-lg border border-[#666680] px-4 py-1 gap-4">
               <div className="text-[12px] text-[#666680]">Type</div>
               <div className="h-[70%] w-[1px] bg-[#666680]"></div>
               <div className="text-white text-[14px] grow text-center">
-                {VideoType[singleVideoData?.data?.media?.type]}
+                {VideoType[singleVideoData?.data?.type]}
               </div>
             </div>
             <div className="flex items-center rounded-lg border border-[#666680] px-4 py-1 gap-4">
               <div className="text-[12px] text-[#666680]">Language</div>
               <div className="h-[70%] w-[1px] bg-[#666680]"></div>
               <div className="text-white text-[14px] grow text-center">
-                {languageName.of(singleVideoData?.data?.media?.language) ||
-                  singleVideoData?.data?.media?.language}
+                {languageName.of(singleVideoData?.data?.language) ||
+                  singleVideoData?.data?.language}
               </div>
             </div>
           </div>
@@ -201,12 +201,12 @@ const WebAppSingleVideoAsset = async (params: any) => {
         {/* share links */}
         <div className="flex items-center justify-between">
           <ShareButton
-            url={`${process.env.NEXTAUTH_URL}/${params.params.lang}/app/assets/video/${singleVideoData?.data?.media?.slug}?id=${singleVideoData?.data.id}`}
+            url={`${process.env.NEXTAUTH_URL}/${params.params.lang}/app/assets/video/${singleVideoData?.data?.slug}?id=${singleVideoData?.data.id}`}
           />
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">
               <Link
-                href={`${webAppDeepLink}?page=single&type=${singleVideoData?.data?.media?.type}&id=${singleVideoData?.data.id}`}
+                href={`${webAppDeepLink}?page=single&type=${singleVideoData?.data?.type}&id=${singleVideoData?.data.id}`}
               >
                 View in App
               </Link>

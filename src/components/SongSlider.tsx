@@ -59,7 +59,7 @@ const SongSlider = () => {
                 key={item.id}
               >
                 <Link
-                  href={`/${lang}/app/assets/audio/${item?.media?.slug}?id=${item.id}`}
+                  href={`/${lang}/app/assets/audio/${item?.slug}?id=${item.id}`}
                 >
                   <div className="relative w-full aspect-square">
                     <Image
@@ -72,7 +72,7 @@ const SongSlider = () => {
                     />
                   </div>
                   <p className="mt-2 ml-1 text-gray-600 text-sm line-clamp-1 break-words">
-                    {item?.media?.name}
+                    {item?.name}
                   </p>
                   <div className="flex ml-1 mt-1 space-x-2 rtl:space-x-reverse">
                     <div className="relative overflow-hidden aspect-square w-[16px] rounded-full">

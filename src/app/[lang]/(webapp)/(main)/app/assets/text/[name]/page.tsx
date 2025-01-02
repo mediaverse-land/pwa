@@ -107,8 +107,8 @@ const WebAppTextAssetSinglePage = async (params: any) => {
               image: singleTextData?.data?.user?.image_url,
               name: singleTextData?.data?.user?.username,
             }}
-            description={singleTextData?.data?.media?.description.slice(0, 30)}
-            title={singleTextData?.data?.media?.name}
+            description={singleTextData?.data?.description.slice(0, 30)}
+            title={singleTextData?.data?.name}
           />
         </div>
         {/* files */}
@@ -128,7 +128,7 @@ const WebAppTextAssetSinglePage = async (params: any) => {
         {/* share links */}
         <div className="flex items-center justify-between">
           <ShareButton
-            url={`${process.env.NEXTAUTH_URL}/${params.params.lang}/app/assets/text/${singleTextData?.data?.media?.slug}?id=${singleTextData?.data.id}`}
+            url={`${process.env.NEXTAUTH_URL}/${params.params.lang}/app/assets/text/${singleTextData?.data?.slug}?id=${singleTextData?.data.id}`}
           />
           <div className="lg:hidden">
             <button className="text-[14px] rounded-full px-2 sm:px-4 py-1 text-center bg-blue-600">

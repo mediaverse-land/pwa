@@ -61,21 +61,6 @@ const ExploreDailyRecommended = async ({
             <DailyRecommendedSlider
               data={
                 data?.map((item) => {
-                  const dataType = () => {
-                    switch (item.media_type) {
-                      case 1:
-                        return "text";
-                      case 2:
-                        return "image";
-                      case 3:
-                        return "audio";
-                      case 4:
-                        return "video";
-
-                      default:
-                        return "image";
-                    }
-                  };
                   return (
                     <ExploreAssetsCard
                       lang={lang}
@@ -88,10 +73,10 @@ const ExploreDailyRecommended = async ({
                       }}
                       cover={
                         item?.thumbnails["336x366"] ||
-                        imagePlaceHolders[dataType()]
+                        imagePlaceHolders[item.media_type as keyof typeof imagePlaceHolders]
                       }
-                      title={item?.media?.name}
-                      type={dataType()}
+                      title={item?.name}
+                      type={item?.media_type}
                     />
                   );
                 }) || []

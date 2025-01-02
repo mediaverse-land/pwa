@@ -37,21 +37,6 @@ export const SearchForAll = async ({
   return (
     <div className="py-7 px-6 grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-4">
       {searchResults.data.map((item: any) => {
-        const dataType = () => {
-          switch (item?.media_type) {
-            case 1:
-              return "text";
-            case 2:
-              return "image";
-            case 3:
-              return "audio";
-            case 4:
-              return "video";
-
-            default:
-              return "image";
-          }
-        };
         return (
           <ExploreAssetsCard
             lang={params.lang}
@@ -62,8 +47,8 @@ export const SearchForAll = async ({
               picture: item?.user?.image_url,
             }}
             cover={item?.thumbnails["336x366"]}
-            title={item?.media?.name}
-            type={dataType()}
+            title={item?.name}
+            type={item?.media_type}
           />
         );
       })}
@@ -87,51 +72,51 @@ export const SearchForImages = async ({
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-2 [&_>_*:nth-child(3n+1)]:col-span-2 [&_>_*:nth-child(3n+1)]:row-span-2 lg:[&_>_*:nth-child(3n+1)]:col-span-2 lg:[&_>_*:nth-child(3n+1)]:row-span-2 px-6 py-7 h-full overflow-y-auto">
       {searchResults.data
-        .filter((item: any) => item.media_type === 2)
+        .filter((item: any) => item.media_type === 'image')
         .map((items: any, index: number) => {
           return (
             <Link
-              href={`/${params.lang}/app/assets/image/${items?.media?.slug}?id=${items?.id}`}
+              href={`/${params.lang}/app/assets/image/${items?.slug}?id=${items?.id}`}
               key={items?.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
               <Image
                 src={items?.thumbnails["336x366"] || imagePlaceHolders.image}
-                alt={items?.media?.name}
+                alt={items?.name}
                 fill
               />
             </Link>
           );
         })}
       {/* {searchResults.data
-        .filter((item: any) => item.media_type === 2)
+        .filter((item: any) => item.media_type === 'image')
         .map((items: any, index: number) => {
           return (
             <Link
-              href={`/${params.lang}/app/assets/image/${items?.media?.slug}?id=${items?.id}`}
+              href={`/${params.lang}/app/assets/image/${items?.slug}?id=${items?.id}`}
               key={items?.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
               <Image
                 src={items?.thumbnails["336x366"] || imagePlaceHolders.image}
-                alt={items?.media?.name}
+                alt={items?.name}
                 fill
               />
             </Link>
           );
         })}
       {searchResults.data
-        .filter((item: any) => item.media_type === 2)
+        .filter((item: any) => item.media_type === 'image')
         .map((items: any, index: number) => {
           return (
             <Link
-              href={`/${params.lang}/app/assets/image/${items?.media?.slug}?id=${items?.media?.id}`}
+              href={`/${params.lang}/app/assets/image/${items?.slug}?id=${items?.id}`}
               key={items?.id}
               className={`relative overflow-hidden rounded-lg w-full aspect-square `}
             >
               <Image
                 src={items?.thumbnails["336x366"] || imagePlaceHolders.image}
-                alt={items?.media?.name}
+                alt={items?.name}
                 fill
               />
             </Link>
@@ -157,7 +142,7 @@ export const SearchForVideos = async ({
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
       {searchResults.data
-        .filter((item: any) => item.media_type === 4)
+        .filter((item: any) => item.media_type === 'video')
         .map((items: any, index: number) => {
           return (
             <ExploreVideoCard
@@ -168,7 +153,7 @@ export const SearchForVideos = async ({
                 name: items?.user?.username,
                 picture: items?.user?.image_url,
               }}
-              description={items?.media?.description}
+              description={items?.description}
               image={items?.thumbnails["336x366"] || imagePlaceHolders.video}
               time={items.length}
               title={items.name}
@@ -196,7 +181,7 @@ export const SearchForAudios = async ({
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-x-4 gap-y-6 px-6 py-7 h-full overflow-y-auto">
       {searchResults.data
-        .filter((item: any) => item.media_type === 3)
+        .filter((item: any) => item.media_type === 'audio')
         .map((items: any, index: number) => {
           return (
             <ExploreAudioCard
@@ -207,10 +192,10 @@ export const SearchForAudios = async ({
                 name: items?.user?.username,
                 picture: items?.user?.image_url,
               }}
-              description={items.media?.description}
+              description={items.description}
               image={items?.thumbnails["336x366"] || imagePlaceHolders.audio}
-              time={items.media?.length}
-              title={items.media?.name}
+              time={items.length}
+              title={items.name}
             />
           );
         })}
@@ -234,7 +219,7 @@ export const SearchForTexts = async ({
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-4 p-4">
       {searchResults.data
-        .filter((item: any) => item.media_type === 1)
+        .filter((item: any) => item.media_type === 'text')
         .map((item: any) => (
           <ExploreTextCard lang={params.lang} key={item?.id} data={item} />
         ))}

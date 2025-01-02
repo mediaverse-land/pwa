@@ -140,7 +140,7 @@ export const OwnershipImageAssets = async ({
             <Link
               href={`/${
                 params.lang
-              }/app/assets/image/${items?.media?.name.replaceAll(
+              }/app/assets/image/${items?.name.replaceAll(
                 " ",
                 "-"
               )}?id=${items.id}`}

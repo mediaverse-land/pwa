@@ -216,7 +216,7 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
               {imageData.data?.slice(0, 9)?.map((items: any, index: number) => {
                 return (
                   <Link
-                    href={`/${lang}/app/assets/image/${items?.media?.slug}?id=${items.id}`}
+                    href={`/${lang}/app/assets/image/${items?.slug}?id=${items.id}`}
                     key={items.id}
                     className={`relative overflow-hidden aspect-square ${
                       index === 1
@@ -262,16 +262,16 @@ const Home = async ({ params: { lang } }: { params: { lang: Locale } }) => {
                     tColor="#CFCFFC00"
                   >
                     <Link
-                      href={`/${lang}/app/assets/text/${items?.media?.slug}?id=${items.id}`}
+                      href={`/${lang}/app/assets/text/${items?.slug}?id=${items.id}`}
                     >
                       <div key={index} className="h-full flex flex-col">
                         <p className="text-white text-lg lg:text-[16px] xl:text-[20px] line-clamp-1 md:line-clamp-2 lg:line-clamp-1 xl:line-clamp-2 break-words">
-                          {items?.media?.name}
+                          {items?.name}
                         </p>
                         <p className="text-gray-500 mt-2 lg:mt-0 xl:mt-4 line-clamp-4 md:line-clamp-3 lg:line-clamp-3">
-                          {items?.media?.description?.length > 70
-                            ? items?.media?.description?.slice(0, 62)
-                            : items?.media?.description}
+                          {items?.description?.length > 70
+                            ? items?.description?.slice(0, 62)
+                            : items?.description}
                         </p>
                         <div className="flex mt-auto space-x-2 rtl:space-x-reverse">
                           <div className="relative aspect-square w-[16px] overflow-hidden rounded-full">

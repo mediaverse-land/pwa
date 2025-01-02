@@ -66,7 +66,7 @@ const VideoSlider = () => {
             return (
               <SwiperSlide key={item.id} className="cursor-pointer rounded-2xl">
                 <Link
-                  href={`/${lang}/app/assets/video/${item?.media?.slug}?id=${item.id}`}
+                  href={`/${lang}/app/assets/video/${item?.slug}?id=${item.id}`}
                   className="w-full"
                 >
                   <div className="relative w-full aspect-square">
@@ -80,7 +80,7 @@ const VideoSlider = () => {
                     />
                   </div>
                   <p className="mt-2 ml-1 text-gray-600 text-[16px] lg:text-sm line-clamp-1 break-words">
-                    {item?.media?.name}
+                    {item?.name}
                   </p>
                   <div className="flex ml-1 mt-1 space-x-2 rtl:space-x-reverse">
                     <Image
