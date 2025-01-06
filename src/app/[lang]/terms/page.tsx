@@ -15,7 +15,9 @@ async function getTermsData({ lang }: { lang: TFullLocales }) {
       lang,
     });
     if (terms.ok) {
-      return terms.json();
+      const data = await terms.json();
+
+      return data.content;
     } else {
       throw new Error(`Failed to fetch data ${terms.status}`);
     }

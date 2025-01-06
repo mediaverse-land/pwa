@@ -18,7 +18,10 @@ export async function getAboutUsData(lang: TFullLocales) {
       cause: `${aboutUs.status} Error`,
     });
   }
-  return aboutUs.json();
+
+  const data = await aboutUs.json();
+
+  return data.content;
 }
 
 export async function generateMetadata({

@@ -13,7 +13,9 @@ async function getPrivacyData(lang: TFullLocales) {
   try {
     const privacy = await getPrivacy(lang);
     if (privacy.ok) {
-      return privacy.json();
+      const data = await privacy.json();
+
+      return data.content;
     } else {
       throw new Error(`Failed to fetch data ${privacy.status}`);
     }
