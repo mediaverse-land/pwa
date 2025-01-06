@@ -63,13 +63,13 @@ const WebAppExploreVideoAssets = async ({
                     ?.map((item: any) => (
                       <ExploreAssetsCard
                         lang={lang}
-                        id={item.media.id}
+                        id={item.id}
                         key={item.id}
                         type="video"
                         cover={
                           item.thumbnails["336x366"] || imagePlaceHolders.video
                         }
-                        title={item.media.name}
+                        title={item.name}
                         author={{
                           name: item.user.username,
                           picture:
@@ -135,10 +135,10 @@ const RecentlyVideos = async ({ lang }: { lang: Locale }) => {
               name: items.user.username,
               picture: items.user.image_url || imagePlaceHolders.account,
             }}
-            description={items.media.description}
+            description={items.description}
             image={items.thumbnails["336x366"] || imagePlaceHolders.video}
-            time={items.media.length}
-            title={items.media.name}
+            time={items.length}
+            title={items.name}
           />
         );
       })}

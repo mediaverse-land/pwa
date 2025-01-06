@@ -38,10 +38,10 @@ const WebAppRecentlyAudios = async ({
                 name: items.user.username,
                 picture: items.user.image_url || imagePlaceHolders.account,
               }}
-              description={items.media.description}
+              description={items.description}
               image={items.thumbnails["336x366"] || imagePlaceHolders.audio}
-              time={items.media.length}
-              title={items.media.name}
+              time={items.length}
+              title={items.name}
             />
           );
         })}

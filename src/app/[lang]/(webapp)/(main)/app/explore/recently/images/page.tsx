@@ -34,7 +34,7 @@ const WebAppRecentlyImages = async ({
               <Image
                 className="object-cover"
                 src={items.thumbnails["336x366"] || imagePlaceHolders.image}
-                alt={items.media.name}
+                alt={items.name}
                 fill
               />
             </Link>

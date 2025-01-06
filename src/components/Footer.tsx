@@ -17,7 +17,7 @@ const Footer = async ({ title, lang }: { title: string; lang: Locale }) => {
             <SelectLanguage />
           </div>
           <div className="grid grid-cols-4 grid-rows-1 gap-4">
-            {aboutUsData.links.map(
+            {aboutUsData.links?.map(
               (item: { url: string; name: string }, index: number) => (
                 <Link
                   href={item.url}

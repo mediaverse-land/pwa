@@ -50,7 +50,7 @@ const ExploreChillSongs = async ({
                   id={item.id}
                   type="audio"
                   cover={item.thumbnails["336x366"] || imagePlaceHolders.audio}
-                  title={item.media.name}
+                  title={item.name}
                   author={{
                     name: item?.user?.username,
                     picture: item?.user?.image_url || imagePlaceHolders.account,
