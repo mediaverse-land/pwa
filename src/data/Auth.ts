@@ -30,7 +30,8 @@ const PKCEProvider: OAuthConfig<any> = {
                     client_id: provider.clientId ?? '',
                     code: params.code ?? '',
                     redirect_uri: provider.callbackUrl ?? '',
-                    code_verifier: checks.code_verifier ?? ""
+                    code_verifier: checks.code_verifier ?? "",
+                    scope: "*",
                 }),
             });
 
