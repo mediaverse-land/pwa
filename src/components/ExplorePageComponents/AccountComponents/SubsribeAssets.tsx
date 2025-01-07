@@ -42,16 +42,7 @@ export const SubscribeAllAssets = async ({
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const subscribeAllAssetsData = await getSubscribeData({ params: "", token });
-  if (subscribeAllAssetsData?.status === 406) {
-    return (
-      <Link
-        href={`/${params.lang}/sign-up/info`}
-        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
-      >
-        Please Complete Your Information To See This Section
-      </Link>
-    );
-  } else if (subscribeAllAssetsData?.status === 401) {
+  if (subscribeAllAssetsData?.status === 401) {
     return <LogoutNoUser />;
   }
 
@@ -114,16 +105,7 @@ export const SubscribeImageAssets = async ({
     params: "/images",
     token,
   });
-  if (subscribeImageData?.status === 406) {
-    return (
-      <Link
-        href={`/${params.lang}/sign-up/info`}
-        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
-      >
-        Please Complete Your Information To See This Section
-      </Link>
-    );
-  } else if (subscribeImageData?.status === 401) {
+  if (subscribeImageData?.status === 401) {
     return <LogoutNoUser />;
   }
   return (
@@ -170,16 +152,7 @@ export const SubscribeVideoAssets = async ({
     params: "/videos",
     token,
   });
-  if (subscribeVideosData?.status === 406) {
-    return (
-      <Link
-        href={`/${params.lang}/sign-up/info`}
-        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
-      >
-        Please Complete Your Information To See This Section
-      </Link>
-    );
-  } else if (subscribeVideosData?.status === 401) {
+  if (subscribeVideosData?.status === 401) {
     return <LogoutNoUser />;
   }
   return (
@@ -227,16 +200,7 @@ export const SubscribeAudioAssets = async ({
     params: "/audios",
     token,
   });
-  if (subscribeAudioData?.status === 406) {
-    return (
-      <Link
-        href={`/${params.lang}/sign-up/info`}
-        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
-      >
-        Please Complete Your Information To See This Section
-      </Link>
-    );
-  } else if (subscribeAudioData?.status === 401) {
+  if (subscribeAudioData?.status === 401) {
     return <LogoutNoUser />;
   }
   return (
@@ -284,16 +248,7 @@ export const SubscribeTextAssets = async ({
     params: "/texts",
     token,
   });
-  if (subscribeTextsData?.status === 406) {
-    return (
-      <Link
-        href={`/${params.lang}/sign-up/info`}
-        className="w-full flex items-center justify-center text-[28px] font-bold col-span-3 text-center mt-10 underline hover:text-blue-700"
-      >
-        Please Complete Your Information To See This Section
-      </Link>
-    );
-  } else if (subscribeTextsData?.status === 401) {
+  if (subscribeTextsData?.status === 401) {
     return <LogoutNoUser />;
   }
   return (

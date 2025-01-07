@@ -130,8 +130,6 @@ const WebAppSettingGeneralInformation = ({ dic }: { dic: DicProperties }) => {
             setValue("line1", res.data.address.line1 || "");
             setValue("line2", res.data.address.line2 || "");
             setLoading(false);
-          } else if (req.status === 406) {
-            router.push(`/${params.lang}/sign-up/info`);
           }
         } catch (error) {
           console.error(error);

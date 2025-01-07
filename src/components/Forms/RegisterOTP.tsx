@@ -52,20 +52,6 @@ const RegisterOTPForm = ({
       });
       if (req.ok) {
         const res = await req.json();
-        if (!res.user.username) {
-          return loginUser({
-            address: res.user.address,
-            cellphone: res.user.cellphone,
-            email: res.user.email,
-            firstName: res.user.first_name,
-            lastName: res.user.last_name,
-            image: res.user.image_url,
-            id: res.user.id,
-            token: res.token,
-            username: res.user.username,
-            callBack: `/sign-up/info`,
-          });
-        }
         return loginUser({
           address: res.user.address,
           cellphone: res.user.cellphone,

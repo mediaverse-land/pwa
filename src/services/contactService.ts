@@ -606,11 +606,11 @@ export const submitOTP = async (data: { cellphone: string; otp: string }) => {
   }
 };
 export const signUpCompletion = async ({ data, token }: any) => {
-  const url = `${baseURL}/auth/sign-up-completion`;
+  const url = `${baseURL}/profile`;
   if (process.env.NODE_ENV === "production") {
     const req = await fetch(url, {
       next: { revalidate: 60 },
-      method: "POST",
+      method: "PUT",
       body: JSON.stringify(data),
       headers: {
         "Accept-Language": "en-US",
