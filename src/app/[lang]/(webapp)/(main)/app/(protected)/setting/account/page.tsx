@@ -62,20 +62,6 @@ const WebAppSettingAccount = async ({
             </div>
           </Link>
           <Link
-            href={`/${lang}/app/setting/account/api-token`}
-            className="flex items-center justify-between"
-          >
-            <div className="text-white">API-Token</div>
-            <div>
-              <CHEVRON_LEFT
-                style={{
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-            </div>
-          </Link>
-          <Link
             href={`/${lang}/app/setting/account/delete-account`}
             className="flex items-center justify-between"
           >

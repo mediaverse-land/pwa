@@ -36,14 +36,14 @@ const WebAppSettingSessions = async ({
             className="bg-[rgba(78,78,97,0.50)] backdrop-blur-md rounded-2xl p-6 flex flex-col items-stretch gap-4 leading-none"
           >
             <div className="text-[14px] text-white line-clamp-1 leading-[17px] break-words">
-              {item.app}
+              {item.details?.app}
             </div>
             <div className="flex items-center justify-between">
               <div className="text-white leading-[19px]">
                 {convertISOToDateAndTime(`${item.created_at}`)}
               </div>
-              <div className="text-[16px] text-[#666680] leading-[19px]">
-                {item.ip}
+              <div className="text-[16px] text-[#666680] leading-[19px] overflow-hidden">
+                {item.id}
               </div>
             </div>
           </div>
