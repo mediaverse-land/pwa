@@ -161,22 +161,21 @@ const WebAppSingleVideoAsset = async (params: any) => {
               <div className="text-[12px] text-[#666680]">Genre</div>
               <div className="h-[70%] w-[1px] bg-[#666680]"></div>
               <div className="text-white text-[14px] grow text-center capitalize">
-                {singleVideoData?.data?.genres[0] || "N/A"}
+                {singleVideoData?.data?.categories[0] || "---"}
               </div>
             </div>
             <div className="flex items-center rounded-lg border border-[#666680] px-4 py-1 gap-4">
-              <div className="text-[12px] text-[#666680]">Type</div>
+              <div className="text-[12px] text-[#666680]">Country</div>
               <div className="h-[70%] w-[1px] bg-[#666680]"></div>
               <div className="text-white text-[14px] grow text-center">
-                {VideoType[singleVideoData?.data?.type]}
+                {singleVideoData?.data?.country?.name || "---"}
               </div>
             </div>
             <div className="flex items-center rounded-lg border border-[#666680] px-4 py-1 gap-4">
               <div className="text-[12px] text-[#666680]">Language</div>
               <div className="h-[70%] w-[1px] bg-[#666680]"></div>
               <div className="text-white text-[14px] grow text-center">
-                {languageName.of(singleVideoData?.data?.language) ||
-                  singleVideoData?.data?.language}
+                {languageName.of(singleVideoData?.data?.language) || "---"}
               </div>
             </div>
           </div>
