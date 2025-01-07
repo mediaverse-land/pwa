@@ -17,7 +17,7 @@ const PKCEProvider: OAuthConfig<any> = {
         params: {
             response_type: "code",
             code_challenge_method: "S256",
-            scope: "*",
+            scope: "full-access",
         },
     },
     token: {
@@ -31,7 +31,6 @@ const PKCEProvider: OAuthConfig<any> = {
                     code: params.code ?? '',
                     redirect_uri: provider.callbackUrl ?? '',
                     code_verifier: checks.code_verifier ?? "",
-                    scope: "*",
                 }),
             });
 
