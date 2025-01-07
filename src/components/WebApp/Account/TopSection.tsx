@@ -2,21 +2,15 @@ import { authOptions } from "@/data/Auth";
 import UserStatics from "@/components/ExplorePageComponents/AccountComponents/UserStatics";
 import { DicProperties, Locale } from "@/types/dictionary-types";
 import { getServerSession } from "next-auth";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { imagePlaceHolders } from "@/configs/base";
 type TaccountTypes = {
   id: number;
-  name: "Subscribe" | "Ownership";
-  link: "subscribe" | "ownership";
+  name: "Ownership";
+  link: "ownership";
 };
 const accountTypes: TaccountTypes[] = [
-  {
-    id: 1,
-    name: "Subscribe",
-    link: "subscribe",
-  },
   {
     id: 2,
     name: "Ownership",
@@ -29,7 +23,7 @@ const WebAppAccountTopSection = async ({
   lang,
   dic,
 }: {
-  type: "subscribe" | "ownership";
+  type: "ownership";
   dic: DicProperties;
   lang: Locale;
 }) => {
@@ -70,22 +64,7 @@ const WebAppAccountTopSection = async ({
         {/* statistics */}
         <UserStatics lang={lang} />
         {/* tabs */}
-        <div className="flex items-stretch justify-around gap-16 lg:w-[420px] mx-auto">
-          {accountTypes.map((item) => (
-            <Link
-              href={`/${lang}/app/account/${item.link}`}
-              key={item.id}
-              className={`py-4 relative after:content-[''] duration-150 transition-all after:absolute after:bottom-0 after:left-0 after:bg-[#597AFF] ${
-                type === item.link
-                  ? "after:w-full after:h-[1px] text-white"
-                  : "after:w-[0%] after:h-[0px] text-[#666680]"
-              }`}
-            >
-              {item.name === "Subscribe"
-                ? dic.appAccounts.subscribes
-                : dic.appAccounts.myAssets}
-            </Link>
-          ))}
+        <div className="flex items-stretch justify-around gap-16 lg:w-[420px] mx-auto mb-2">
         </div>
       </div>
     </div>

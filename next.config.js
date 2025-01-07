@@ -22,7 +22,7 @@ const nextConfig = {
     return [
       {
         source: "/:lang/app/account",
-        destination: "/:lang/app/account/subscribe",
+        destination: "/:lang/app/account/ownership",
         permanent: false,
       },
     ];

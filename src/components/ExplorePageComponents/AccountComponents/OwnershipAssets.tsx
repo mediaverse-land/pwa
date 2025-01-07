@@ -117,7 +117,7 @@ export const OwnershipImageAssets = async ({
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const searchResults = await getOwnership({
-    params: "/images",
+    params: "/assets?media_type=image",
     token: `${token}`,
   });
   if (searchResults?.status === 406) {
@@ -169,7 +169,7 @@ export const OwnershipVideoAssets = async ({
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const searchResults = await getOwnership({
-    params: "/videos",
+    params: "/assets?media_type=video",
     token: token,
   });
   if (searchResults?.status === 406) {
@@ -222,7 +222,7 @@ export const OwnershipAudioAssets = async ({
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const searchResults = await getOwnership({
-    params: "/audios",
+    params: "/assets?media_type=audio",
     token: token,
   });
   if (searchResults?.status === 406) {
@@ -275,7 +275,7 @@ export const OwnershipTextAssets = async ({
   const session = await getServerSession(authOptions);
   const token = session?.user.token || "";
   const searchResults = await getOwnership({
-    params: "/texts",
+    params: "/assets?media_type=text",
     token: token,
   });
   if (searchResults?.status === 406) {
