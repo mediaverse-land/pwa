@@ -24,15 +24,15 @@ const fetchInstance = (url: string, lang?: TFullLocales) => {
 };
 
 export const getMostViewedImages = async (lang: TFullLocales) => {
-  const url = `${baseURL}/assets/most-viewed`;
+  const url = `${baseURL}/assets?media_type=image&sort=views_count`;
   return fetchInstance(url, lang);
 };
 export const getRecentlyImages = async () => {
-  const url = `${baseURL}/assets/newest`;
+  const url = `${baseURL}/assets?media_type=image`;
   return fetchInstance(url);
 };
 export const getRecommendedImages = async () => {
-  const url = `${baseURL}/assets/daily-recommended`;
+  const url = `${baseURL}/assets?media_type=image&sort=sales_count`;
   return fetchInstance(url);
 };
 export const getSingleImage = async ({
@@ -144,28 +144,28 @@ export const getSingleAudio = async ({
       });
 };
 export const getMostViewedText = async (lang: TFullLocales) => {
-  const url = `${baseURL}/assets/most-viewed`;
+  const url = `${baseURL}/assets?media_type=text&sort=views_count`;
   return fetchInstance(url, lang);
 };
 export const getRecentlyTexts = async () => {
-  const url = `${baseURL}/assets/newest`;
+  const url = `${baseURL}/assets?media_type=text`;
   return fetchInstance(url);
 };
 export const getRecommendedTexts = async () => {
-  const url = `${baseURL}/assets/daily-recommended`;
+  const url = `${baseURL}/assets?media_type=text&sort=sales_count`;
   return fetchInstance(url);
 };
 
 export const getMostViewedVideos = (lang: TFullLocales) => {
-  const url = `${baseURL}/assets/most-viewed`;
+  const url = `${baseURL}/assets?media_type=video&sort=views_count`;
   return fetchInstance(url, lang);
 };
 export const getRecentlyVideos = () => {
-  const url = `${baseURL}/assets/newest`;
+  const url = `${baseURL}/assets?media_type=video`;
   return fetchInstance(url);
 };
 export const getRecommendedVideos = () => {
-  const url = `${baseURL}/assets/daily-recommended`;
+  const url = `${baseURL}/assets?media_type=video&sort=sales_count`;
   return fetchInstance(url);
 };
 export const getCountries = () => {
@@ -178,15 +178,15 @@ export const getCities = ({ countryISO }: { countryISO: string }) => {
 };
 
 export const getMostViewedSongs = (lang: TFullLocales) => {
-  const url = `${baseURL}/assets/most-viewed`;
+  const url = `${baseURL}/assets?media_type=audio&sort=views_count`;
   return fetchInstance(url, lang);
 };
 export const getRecentlySongs = () => {
-  const url = `${baseURL}/assets/newest`;
+  const url = `${baseURL}/assets?media_type=audio`;
   return fetchInstance(url);
 };
 export const getRecommendedSongs = () => {
-  const url = `${baseURL}/assets/daily-recommended`;
+  const url = `${baseURL}/assets?media_type=audio&sort=sales_count`;
   return fetchInstance(url);
 };
 export const getProfileStatics = (token: string) => {
@@ -284,7 +284,7 @@ export const getAboutUs = (lang: TFullLocales) => {
   return fetchInstance(url, lang);
 };
 export const getSearch = (params: string) => {
-  const url = `${baseURL}/search?${params}`;
+  const url = `${baseURL}/assets?${params}`;
   return fetchInstance(url);
 };
 export const getSubscribeAssets = ({
