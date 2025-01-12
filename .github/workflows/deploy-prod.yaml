@@ -1,4 +1,4 @@
-name: Deploy to Production EKS
+name: Deploy Prod
 
 on:
   push:
@@ -7,19 +7,22 @@ on:
 jobs:
   build:
     name: Build Prod
-    uses: gibical/infra/.github/workflows/eks-build.yaml@main
+    uses: gibical/infra/.github/workflows/shared-eks-build.yaml@main
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
     with:
       dockerfile: Dockerfile
       registry_path: ${{ vars.REGISTRY_PATH }}
+      region: ${{ vars.PROD_REGION }}
 
   deploy:
     name: Deploy Prod
-    uses: gibical/infra/.github/workflows/eks-deploy.yaml@main
+    uses: gibical/infra/.github/workflows/shared-eks-deploy.yaml@main
     needs: build
-    secrets: inherit
+    secrets:
+      AWS_ACCESS_KEY_ID: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
     with:
       name:  ${{ github.event.repository.name }}
       cluster: ${{ vars.PROD_CLUSTER }}

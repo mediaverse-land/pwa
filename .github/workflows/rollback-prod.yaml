@@ -1,4 +1,4 @@
-name: Rollback Last Production Deployment
+name: Rollback Prod
 
 on:
   workflow_dispatch:
