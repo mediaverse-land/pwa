@@ -11,5 +11,5 @@ ingress:
 env:
   variables:
     BASE_URL: "https://api.gibical.app/v2"
-    NEXT_PUBLIC_BLOG_URL: "https://blog.gibical.app/api"
-    NEXT_PUBLIC_SWAGGER_URL: "https://swagger.gibical.app"
+    NEXT_PUBLIC_BLOG_URL: "http://blog.gibical.local/api"
+    NEXT_PUBLIC_SWAGGER_URL: "http://swagger.gibical.local"
