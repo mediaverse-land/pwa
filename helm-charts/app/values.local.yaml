@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  app:
+    pullPolicy: "Never"
+
+ingress:
+  controller: nginx
+  host: gibical.local
+
+env:
+  variables:
+    BASE_URL: "https://api.gibical.app/v2"
+    NEXT_PUBLIC_BLOG_URL: "https://blog.gibical.app/api"
+    NEXT_PUBLIC_SWAGGER_URL: "https://swagger.gibical.app"

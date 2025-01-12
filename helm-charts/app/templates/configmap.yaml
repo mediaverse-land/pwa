@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+  labels:
+    app: {{ .Chart.Name }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  BASE_URL: {{ .Values.env.variables.BASE_URL | quote }}
+  NEXT_PUBLIC_BLOG_URL: {{ .Values.env.variables.NEXT_PUBLIC_BLOG_URL | quote }}
+  NEXT_PUBLIC_SWAGGER_URL: {{ .Values.env.variables.NEXT_PUBLIC_SWAGGER_URL | quote }}
+  NEXT_PUBLIC_APP_TITLE: {{ .Values.env.variables.NEXT_PUBLIC_APP_TITLE | quote }}
+  NEXT_PUBLIC_ACTIVE_LOCALES: {{ .Values.env.variables.NEXT_PUBLIC_ACTIVE_LOCALES | quote }}
+  NEXT_PUBLIC_DEEP_LINK: {{ .Values.env.variables.NEXT_PUBLIC_DEEP_LINK | quote }}
+  NEXT_PUBLIC_PLAY_STORE_LINK: {{ .Values.env.variables.NEXT_PUBLIC_PLAY_STORE_LINK | quote }}
+  NEXT_PUBLIC_APP_LOGO: {{ .Values.env.variables.NEXT_PUBLIC_APP_LOGO | quote }}
+  NEXT_PUBLIC_BACKGROUND_IMAGE_URL: {{ .Values.env.variables.NEXT_PUBLIC_BACKGROUND_IMAGE_URL | quote }}
+  NEXT_PUBLIC_NO_TEXT_LINK: {{ .Values.env.variables.NEXT_PUBLIC_NO_TEXT_LINK | quote }}
+  NEXT_PUBLIC_NO_IMAGE_LINK: {{ .Values.env.variables.NEXT_PUBLIC_NO_IMAGE_LINK | quote }}
+  NEXT_PUBLIC_NO_AUDIO_LINK: {{ .Values.env.variables.NEXT_PUBLIC_NO_AUDIO_LINK | quote }}
+  NEXT_PUBLIC_NO_VIDEO_LINK: {{ .Values.env.variables.NEXT_PUBLIC_NO_VIDEO_LINK | quote }}
+  NEXTAUTH_SECRET: {{ .Values.env.variables.NEXTAUTH_SECRET | quote }}
+  NEXTAUTH_URL: {{ .Values.env.variables.NEXTAUTH_URL | quote }}
+  GTM_ID: {{ .Values.env.variables.GTM_ID | quote }}
+  GOOGLE_CLIENT_ID: {{ .Values.env.variables.GOOGLE_CLIENT_ID | quote }}
+  GOOGLE_CLIENT_SECRET: {{ .Values.env.variables.GOOGLE_CLIENT_SECRET | quote }}
+  APPLE_ID: {{ .Values.env.variables.APPLE_ID | quote }}
+  APPLE_SECRET: {{ .Values.env.variables.APPLE_SECRET | quote }}
+  TWITTER_CLIENT_ID: {{ .Values.env.variables.TWITTER_CLIENT_ID | quote }}
+  TWITTER_CLIENT_SECRET: {{ .Values.env.variables.TWITTER_CLIENT_SECRET | quote }}
+  FACEBOOK_CLIENT_ID: {{ .Values.env.variables.FACEBOOK_CLIENT_ID | quote }}
+  FACEBOOK_CONFIG_ID: {{ .Values.env.variables.FACEBOOK_CONFIG_ID | quote }}
+  FACEBOOK_CLIENT_SECRET: {{ .Values.env.variables.FACEBOOK_CLIENT_SECRET | quote }}
