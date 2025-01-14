@@ -70,7 +70,7 @@ const AboutUs = async ({ params: { lang } }: { params: { lang: Locale } }) => {
             <p className="text-gray-400 text-xs">{dic.aboutUs.email}</p>
             <p className="text-white text-xs">{aboutUsData.email}</p>
           </div>
-          {aboutUsData.links.map(
+          {aboutUsData.links?.map(
             (
               item: {
                 url: string;

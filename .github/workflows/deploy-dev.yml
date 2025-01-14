@@ -1,0 +1,28 @@
+name: Deploy to production
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ vars.DEV_SERVER_HOST }}
+        port: ${{ vars.DEV_SERVER_PORT }}
+        username: ${{ vars.DEV_SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        proxy_host: ${{ vars.DEV_PROXY_HOST }}
+        proxy_port: ${{ vars.DEV_PROXY_PORT }}
+        proxy_username: ${{ vars.DEV_PROXY_USER }}
+        proxy_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /srv/pwa
+          git reset --hard HEAD^
+          git pull
+          docker compose build
+          docker compose down
+          docker compose up -d
