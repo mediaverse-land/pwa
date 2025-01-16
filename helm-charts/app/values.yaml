@@ -11,7 +11,7 @@ imagePullSecret:
 ingress:
   controller: "alb"
   certificationArn: "arn:aws:acm:eu-central-1:992382452361:certificate/3ab3bfef-af41-4916-ba63-331b7a760dd4"
-  host:
+  host: ""
 
 resources:
   requests:
@@ -30,30 +30,30 @@ env:
     NEXT_PUBLIC_ACTIVE_LOCALES: "de,en,fr"
     NEXT_PUBLIC_DEEP_LINK: "gibical://gibical.app"
     NEXT_PUBLIC_PLAY_STORE_LINK: "https://play.google.com/store/apps/dev?id: 5496792530233834443"
-    
+
     NEXT_PUBLIC_APP_LOGO: "https://f1.gibical.app/2024/08/14/NJTwCBxgurwvZqejFctaYw15MucGjlXUFNTtaDJj.png"
     NEXT_PUBLIC_BACKGROUND_IMAGE_URL: "https://f1.gibical.app/2024/08/14/SVfbuGqWbxbB6k5SF7sJmuBBBwQLkFjMt1Lozh91.svg"
-    
+
     NEXT_PUBLIC_NO_TEXT_LINK: "https://f1.gibical.app/2024/08/14/a2fPTcuzRrbLVfnA8YhJos3KJnpPzIpf58OtTcsC.png"
     NEXT_PUBLIC_NO_IMAGE_LINK: "https://f1.gibical.app/2024/08/14/g6J3L4j1dsINtgeta5tRkr2Bf66fCoWSvE0KqAGR.png"
     NEXT_PUBLIC_NO_AUDIO_LINK: "https://f1.gibical.app/2024/08/14/hZxlnshi7tnsSVFwqdnQwl61TQWzoamr3dNHIClq.png"
     NEXT_PUBLIC_NO_VIDEO_LINK: "https://f1.gibical.app/2024/08/14/7SggRc4zuzZTrlVuAa8AX34ptNNbbYo65CfhYxnm.png"
-    
-    NEXTAUTH_SECRET: 
+
+    NEXTAUTH_SECRET: ""
     NEXTAUTH_URL: "https://gibical.app"
-    
+
     GTM_ID: "GTM-KQ7F6NCZ"
-    
+
     GOOGLE_CLIENT_ID: "204876365682-kls2ijo3bn48s4trva1r8u8ki7suojsv.apps.googleusercontent.com"
-    GOOGLE_CLIENT_SECRET: 
-    
+    GOOGLE_CLIENT_SECRET:  ""
+
     APPLE_ID: ""
     APPLE_SECRET: ""
-    
+
     TWITTER_CLIENT_ID: ""
     TWITTER_CLIENT_SECRET: ""
-    
+
     FACEBOOK_CLIENT_ID: "1285214262322362"
     FACEBOOK_CONFIG_ID: "1207639007305600"
-    FACEBOOK_CLIENT_SECRET: 
+    FACEBOOK_CLIENT_SECRET: ""
 
